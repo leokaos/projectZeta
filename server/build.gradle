@@ -1,0 +1,65 @@
+buildscript {
+	ext {
+		springBootVersion = '2.1.7.RELEASE'
+	}
+	repositories {
+		mavenCentral()
+	}
+	dependencies {
+		classpath('org.springframework.boot:spring-boot-gradle-plugin:2.1.7.RELEASE')
+	}
+}
+
+apply plugin: 'java'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
+
+group = 'org.leo'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = 1.8
+
+bootJar {
+   archiveFileName = 'RH_SERVER.jar'
+}
+
+dependencies {
+
+	testCompile('org.springframework.boot:spring-boot-starter-test')
+	testCompile('org.springframework.security:spring-security-test')
+	
+	testCompile group: 'org.easymock', name: 'easymock', version: '4.0.2'
+
+	compile('org.springframework.boot:spring-boot-starter-security')
+	compile('org.springframework.boot:spring-boot-starter-web')
+	compile('org.springframework.boot:spring-boot-devtools')
+	compile('org.springframework.data:spring-data-mongodb')
+	compile('org.springframework.data:spring-data-redis')
+	
+	compile('org.springframework.ldap:spring-ldap-core')
+    compile('org.springframework.security:spring-security-ldap')
+    compile('org.springframework:spring-tx')
+    compile('com.unboundid:unboundid-ldapsdk')
+	
+	compile group: 'com.google.guava', name: 'guava', version: '25.1-jre'
+	
+	compile group: 'javax.xml.bind', name: 'jaxb-api', version: '2.4.0-b180830.0359'
+	compile group: 'com.sun.xml.bind', name: 'jaxb-core', version: '2.3.0.1'
+	compile group: 'com.sun.xml.bind', name: 'jaxb-impl', version: '2.4.0-b180830.0438'
+	compile group: 'javax.activation', name: 'activation', version: '1.1.1'
+	compile group: 'io.springfox', name: 'springfox-swagger2', version: '2.9.2'
+	compile group: 'io.springfox', name: 'springfox-swagger-ui', version: '2.9.2'
+	compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.9'
+	
+	compile group: 'com.graphql-java', name: 'graphql-java', version: '2019-08-05T23-30-46-c454ba2'
+	compile group: 'com.graphql-java', name: 'graphql-java-spring-boot-starter-webmvc', version: '2019-06-24T11-47-27-31ab4f9'
+	
+	compile group: 'redis.clients', name: 'jedis', version: '2.10.2'
+	
+	compile group: 'org.springframework.security.oauth', name: 'spring-security-oauth2', version: '2.3.3.RELEASE'
+	compile group: 'org.springframework.kafka', name: 'spring-kafka', version: '2.2.8.RELEASE'
+	compile group: 'org.springframework', name: 'spring-websocket', version: '5.1.9.RELEASE'
+	compile group: 'org.springframework.security', name: 'spring-security-jwt', version: '1.0.10.RELEASE'
+	compile group: 'org.springframework.boot', name: 'spring-boot-starter-aop', version: '2.2.1.RELEASE'
+	compile group: 'commons-io', name: 'commons-io', version: '2.6'
+	
+}

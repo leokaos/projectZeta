@@ -1,0 +1,32 @@
+.card-edit-candidate {
+    margin: 0px auto;
+    width: 80%;
+    min-width: 200px;
+}
+
+.table-experiencias-colunas {
+    padding: 0px 50px 0px 24px !important;
+}
+
+.table-experiencias-coluna-tempo {
+    width: 110px;
+    text-align: center;
+}
+
+.table-experiencias-coluna-tempo mat-form-field {
+    width: 80px;
+}
+
+.table-coluna-delete {
+    width: 30px;
+    padding-right: 0px !important;
+    margin-left: 20px;
+}
+
+.panel-eventos {
+    margin: 20px 0px;
+}
+
+div {
+    border: 1px dashed red;
+}

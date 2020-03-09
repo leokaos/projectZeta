@@ -1,0 +1,39 @@
+.parent {
+    overflow: hidden;
+    padding: 5px;
+}
+
+.wrapper-content {
+    width: fit-content;
+    float: left;
+}
+
+.wrapper-icon-edit {
+    overflow: hidden;
+    width: fit-content;
+    float: left;
+    padding: 4px;
+}
+
+.icon-edit {
+    float: left;
+}
+
+.botoes {
+    margin: 10px 3px 0px 0px;
+    float: right;
+    position: absolute;
+    right: 15px;
+}
+
+.data-text {
+    border: 1px solid #ccc;
+    width: 100%;
+    font-size: 26px;
+    padding: 0px;
+}
+
+::ng-deep .mat-h1 {
+    margin-bottom: 0px;
+    font-size: 34px;
+}

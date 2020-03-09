@@ -1,0 +1,18 @@
+plugins {
+    id 'com.moowork.node' version '1.2.0'
+}
+
+apply plugin: 'com.moowork.node'
+
+node {
+    version = '10.16.0'
+    npmVersion = '6.9.0'
+    download = false
+}
+
+task testUnit(type: NpmTask) {
+    args = ['test']
+
+}
+
+test.dependsOn testUnit

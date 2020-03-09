@@ -1,0 +1,119 @@
+<div class="container">
+
+    <mat-spinner *ngIf="!carregado" style="width: 100%; height: 100%;"></mat-spinner>
+
+    <mat-card class="card-edit-candidate" *ngIf="carregado">
+
+        <mat-card-header>
+
+            <app-edit-inline style="width: 100%" [(data)]="vaga.titulo"></app-edit-inline>
+
+        </mat-card-header>
+
+        <mat-card-content>
+
+            <form style="margin: 0px 20px; padding-top: 40px; overflow: hidden;">
+
+                <div style="width: 65%; float: left;">
+
+                    <mat-form-field class="default-form-field">
+                        <input matInput placeholder="Status" disabled value="{{vaga.status}}">
+                    </mat-form-field>
+
+                    <div>
+
+                        <mat-form-field style="margin-right: 50px;">
+                            <input matInput [matDatepicker]="inicio" placeholder="Inicio" [(ngModel)]="vaga.periodo.dataInicial" name="periodo_dataInicial">
+                            <mat-datepicker-toggle matSuffix [for]="inicio"></mat-datepicker-toggle>
+                            <mat-datepicker #inicio></mat-datepicker>
+                        </mat-form-field>
+
+                        <mat-form-field>
+                            <input matInput [matDatepicker]="fim" placeholder="Fim" [(ngModel)]="vaga.periodo.dataFinal" name="periodo_dataFinal">
+                            <mat-datepicker-toggle matSuffix [for]="fim"></mat-datepicker-toggle>
+                            <mat-datepicker #fim></mat-datepicker>
+                        </mat-form-field>
+                    </div>
+
+                    <mat-form-field class="default-form-field">
+                        <input type="text" placeholder="Empresa" matInput [formControl]="editVagaFormControl" [matAutocomplete]="auto">
+                        <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayEmpresa" (optionSelected)="selectEmpresa()">
+                            <mat-option *ngFor="let empresa of filteredEmpresas | async" [value]="empresa">
+                                {{empresa.nome}}
+                            </mat-option>
+                        </mat-autocomplete>
+                    </mat-form-field>
+
+                    <mat-form-field class="default-form-field">
+                        <mat-chip-list #tags>
+                            <mat-chip *ngFor="let tag of vaga.tags" selectable="true" removable="true" (removed)="removeTag(tag)">
+                                {{tag}}
+                                <mat-icon matChipRemove>cancel</mat-icon>
+                            </mat-chip>
+                            <input placeholder="Tags" [matChipInputFor]="tags" matChipInputAddOnBlur="true" (matChipInputTokenEnd)="addTag($event)" autocomplete="off">
+                        </mat-chip-list>
+                    </mat-form-field>
+
+                    <div style="margin: 15px 0px 20px 0px;">
+                        <ckeditor [(ngModel)]="vaga.descricao" [editor]="editor" name="descricao"></ckeditor>
+                    </div>
+
+                    <mat-form-field>
+                        <mat-label>Telefone</mat-label>
+                        <mat-icon matPrefix>perm_phone_msg</mat-icon>
+                        <input matInput value="{{vaga.contatoTelefone}}" />
+                    </mat-form-field>
+
+                    <mat-form-field style="float: right;">
+                        <mat-label>E-mail</mat-label>
+                        <mat-icon matPrefix>email</mat-icon>
+                        <input matInput value="{{vaga.contatoEmail}}" />
+                    </mat-form-field>
+
+                </div>
+
+                <div style="width: 35%; float: left;">
+                    <div id="podium-box" class="row" style="height: 200px; width: 70%;">
+                        <div class="step-container">
+                            <div>
+                                Text 2
+                            </div>
+                            <div id="second-step" class="bg-blue step podium-number">
+                                2
+                            </div>
+                        </div>
+                        <div class="step-container">
+                            <div>
+                                Text 1
+                            </div>
+                            <div id="first-step" class="bg-blue step podium-number">
+                                1
+                            </div>
+                        </div>
+                        <div class="step-container">
+                            <div>
+                                Text 3
+                            </div>
+                            <div id="third-step" class="bg-blue step podium-number">
+                                3
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </form>
+
+            <mat-divider></mat-divider>
+
+        </mat-card-content>
+
+        <mat-card-actions>
+            <button mat-stroked-button color="primary" [routerLink]="['/vagas/']">Cancelar</button>
+            <div fxFlex></div>
+            <button mat-stroked-button color="primary" (click)="salvar()">Salvar</button>
+        </mat-card-actions>
+
+    </mat-card>
+
+</div>

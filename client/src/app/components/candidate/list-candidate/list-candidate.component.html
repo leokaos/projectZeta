@@ -1,0 +1,28 @@
+<div class="container">
+
+  <h1 class="mat-h1">Candidatos</h1>
+
+  <mat-grid-list #grid rowHeight="1:1" cols="6">
+
+    <mat-grid-tile *ngFor="let candidato of candidatos">
+
+      <mat-card style="position: relative;">
+        <mat-card-header>
+          <div mat-card-avatar class="example-header-image"></div>
+          <mat-card-title>{{candidato.sobrenome}}, {{candidato.nome}}</mat-card-title>
+          <mat-card-subtitle>{{candidato.titulo}}</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+
+        </mat-card-content>
+        <mat-card-actions style="position: absolute;bottom: 24px;right: 24px;">
+          <button mat-button style="float:right;" [routerLink]="['/candidato/',candidato.id]">Edit</button>
+          <div style="clear: both"></div>
+        </mat-card-actions>
+      </mat-card>
+
+    </mat-grid-tile>
+
+  </mat-grid-list>
+
+</div>

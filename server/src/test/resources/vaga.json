@@ -1,0 +1,77 @@
+{
+   "id":"5de79f04a31d82544ca30d03",
+   "empresa":{
+      "id":"5de79ebfa31d82544ca30d01",
+      "nome":"Bozo Inc"
+   },
+   "status":"NOVA",
+   "titulo":"Manager",
+   "descricao":"manager bom",
+   "periodo":{
+      "dataInicial":1567534932414,
+      "dataFinal":1578075732414
+   },
+   "dataEntrada":1564856532414,
+   "contatoTelefone":"+49 1525 234 8042",
+   "contatoEmail":"leokaos@gmail.com",
+   "exigencias":[
+      {
+         "id":"5ddfc6253369794604abedc8",
+         "descricao":"Java",
+         "versao":"7",
+         "tipo":{
+            "id":"5ddfc5f93369794604abedc6",
+            "descricao":"Linguagens de Programacao"
+         },
+         "equivalencias":[
+            {
+               "valor":70,
+               "destino":{
+                  "descricao":"Java",
+                  "id":"5ddfc62b3369794604abedc9",
+                  "versao":"8"
+               }
+            }
+         ]
+      },
+      {
+         "id":"5ddfc62b3369794604abedc9",
+         "descricao":"Java",
+         "versao":"8",
+         "tipo":{
+            "id":"5ddfc5f93369794604abedc6",
+            "descricao":"Linguagens de Programacao"
+         },
+         "equivalencias":[
+            {
+               "valor":100,
+               "destino":{
+                  "descricao":"Java",
+                  "id":"5ddfc6253369794604abedc8",
+                  "versao":"7"
+               }
+            }
+         ]
+      },
+      {
+         "id":"5de6137117eb002468bc2ddf",
+         "descricao":"Jira",
+         "versao":"1",
+         "tipo":{
+            "id":"5ddfc6033369794604abedc7",
+            "descricao":"Ferramentas"
+         },
+         "equivalencias":[
+
+         ]
+      }
+   ],
+   "candidatosSelecionados":{
+
+   },
+   "tags":[
+      "Scrum Master",
+      "Agile",
+      "Jira"
+   ]
+}

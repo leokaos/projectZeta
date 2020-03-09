@@ -1,0 +1,79 @@
+
+scalar Tempo
+
+scalar Date
+
+type Query {
+
+  tipoQualificacaoPorId(id: String): TipoQualificacao
+  
+  todasAsQualificacoes: [Qualificacao]
+
+  todosOsTiposDeQualificacoes: [TipoQualificacao]
+  
+  candidatoPorId(id: String): Candidato
+  
+  todosOsCandidatos: [Candidato]
+  
+  buscarVagaPorId(id: String): Vaga
+  
+  todasAsEmpresas: [Empresa]
+}
+
+type Mutation {
+
+	selecionarCandidatos(id: String): Vaga
+	
+	iniciarEntrevistas(id: String): Vaga
+	
+	iniciar(id: String): Vaga
+	
+	finalizarVaga(id: String): Vaga
+	
+	cancelarVaga(id: String): Vaga
+}
+
+type TipoQualificacao {
+  id: String
+  descricao: String
+}
+
+type Candidato {
+	id: String
+	nome: String
+	sobrenome: String
+	titulo: String
+	email: String
+	experiencias: [Experiencia]
+}
+
+type Qualificacao {
+	descricao: String
+	versao: String
+	id: String
+	tipo: TipoQualificacao
+}
+
+type Experiencia {
+	tempo: Tempo
+	qualificacao: Qualificacao 
+}
+
+type Vaga {
+	id: String
+	titulo: String
+	empresa: Empresa
+	descricao: String
+	status: String
+	periodo: Periodo
+}
+
+type Periodo {
+	dataInicial: Date
+	dataFinal: Date
+}
+
+type Empresa {
+	id: String
+	nome: String
+}

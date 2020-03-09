@@ -1,0 +1,14 @@
+version: 1
+
+dn: ou=users,dc=rh,dc=system,dc=org
+objectClass: top
+objectClass: organizationalUnit
+ou: users
+
+dn: cn=leo,ou=users,dc=rh,dc=system,dc=org
+objectClass: top
+objectClass: person
+cn: leo
+sn: leo
+userPassword: 123
+

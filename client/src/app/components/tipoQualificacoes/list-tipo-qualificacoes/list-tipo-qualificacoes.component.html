@@ -1,0 +1,57 @@
+<div class="container">
+
+    <div style="width: 100%; height: 50px;">
+        <h1 class="mat-h1" style="float: left;">Tipos de Qualificações</h1>
+        <button mat-stroked-button color="primary" style="float: right" (click)="criarTipoQualificacao()" id="adicionarTipoQualificacao">Criar Tipo de Qualificacao...</button>
+    </div>
+
+    <div>
+        <mat-grid-list #grid rowHeight="1:0.56" cols="2" style="width: 75%; margin: 0px auto; padding-bottom: 0px;">
+
+            <mat-grid-tile *ngFor=" let tipo of tipoQualificacoes">
+
+                <mat-card style="position: relative; ">
+
+                    <mat-card-header>
+                        <mat-card-title style="font-size: 20px;">{{tipo.descricao}}</mat-card-title>
+                    </mat-card-header>
+
+                    <mat-card-content>
+
+                        <div style="width: 100%">
+
+                            <div class="lista-qualificacoes">
+                                <mat-list dense>
+                                    <mat-list-item *ngFor="let qualificacao of tipo.qualificacoes">
+                                        <h6 mat-line>{{qualificacao.fullName()}}</h6>
+                                    </mat-list-item>
+                                </mat-list>
+                            </div>
+
+                            <div class="quadro-numeros">
+                                <div>
+                                    <mat-icon class="icon-display">cached</mat-icon>
+                                    <span title="Quantidade de qualificacacoes que tem ao menos 1 equivalencia!">{{tipo.porcentagemEquivalentes() | percent}}</span>
+                                </div>
+                                <div>
+                                    <mat-icon class="icon-display">reorder</mat-icon>
+                                    <span title="Quantidade total de qualificacoes nesta categoria!">{{tipo.qualificacoes.length}}</span>
+                                </div>
+
+                                <button mat-raised-button (click)="delete(tipo.id)" class="btnDelete">Remover</button>
+
+                            </div>
+
+                        </div>
+
+                    </mat-card-content>
+
+                </mat-card>
+
+            </mat-grid-tile>
+
+        </mat-grid-list>
+
+    </div>
+
+</div>
