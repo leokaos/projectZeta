@@ -27,7 +27,8 @@
       "@tipoQualificacoes/*": ["src/app/components/tipoQualificacoes/*"],
       "@vagas/*": ["src/app/components/vagas/*"],
       "@model/*": ["src/app/model/*"],
-      "@services/*": ["src/app/services/*"]
+      "@services/*": ["src/app/services/*"],
+      "@environment/*": ["src/environments/*"]
     }
   },
   "angularCompilerOptions": {

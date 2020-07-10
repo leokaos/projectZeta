@@ -29,7 +29,12 @@ services:
         ports:
           - 8090:8090
         expose: 
-          - 8090      
+          - 8090
+        environment:
+          LDAP_SERVER: ldap://RH_LDAP:389/dc=rh,dc=system,dc=org
+          MONGO_HOST : RH_MONGO
+          SPRING_KAFKA_BOOTSTRAP-SERVERS : RH_KAFKA:9092
+          CACHE_HOSTNAME: RH_REDIS
     ldap:
         image: dinkel/openldap
         container_name: RH_LDAP
@@ -59,4 +64,4 @@ services:
             - zookeeper
         environment:
             KAFKA_ADVERTISED_HOST_NAME: localhost
-            KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+            KAFKA_ZOOKEEPER_CONNECT: RH_ZOOKEEPER:2181

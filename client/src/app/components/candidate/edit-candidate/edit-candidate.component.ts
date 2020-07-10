@@ -93,6 +93,8 @@ query EditCandidate($id: String!) {
     id
     titulo
     email
+    dataComeco
+    dataContato
     experiencias {
       qualificacao {
         descricao

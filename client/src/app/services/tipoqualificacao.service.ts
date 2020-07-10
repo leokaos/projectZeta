@@ -2,8 +2,9 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { TipoQualificacao } from '@app/model/TipoQualificacao';
+import { environment } from '@environment/environment'
 
-const endpoint = 'http://localhost:8090/secured/tipoQualificacao';
+const endpoint = environment.REST_API_URL + '/secured/tipoQualificacao';
 
 @Injectable({
   providedIn: 'root'

@@ -1,83 +1,85 @@
 package org.leo.projectzeta.config.graphql;
 
-import static graphql.schema.idl.TypeRuntimeWiring.newTypeWiring;
-
-import java.io.IOException;
-import java.net.URL;
-
-import javax.annotation.PostConstruct;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Bean;
-import org.springframework.stereotype.Component;
-
 import com.google.common.base.Charsets;
 import com.google.common.io.Resources;
-
 import graphql.GraphQL;
+import graphql.execution.AsyncExecutionStrategy;
 import graphql.schema.GraphQLScalarType;
 import graphql.schema.GraphQLSchema;
 import graphql.schema.idl.RuntimeWiring;
 import graphql.schema.idl.RuntimeWiring.Builder;
 import graphql.schema.idl.SchemaGenerator;
 import graphql.schema.idl.SchemaParser;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Bean;
+import org.springframework.stereotype.Component;
+
+import javax.annotation.PostConstruct;
+import java.io.IOException;
+import java.net.URL;
+
+import static graphql.schema.idl.TypeRuntimeWiring.newTypeWiring;
 
 @Component
 public class GraphQLComponent {
 
-	@Autowired
-	private GraphQLDataFetchers graphQLDataFetchers;
+    @Autowired
+    private GraphQLDataFetchers graphQLDataFetchers;
 
-	@Autowired
-	private TempoCoercing tempoCoercing;
-	
-	@Autowired
-	private DateCoercing dateCoercing;
-	
-	@Value("${schema.resource.name}")
-	private String schemaResourceName;
+    @Autowired
+    private TempoCoercing tempoCoercing;
 
-	private GraphQL graphQL;
-	
-	@Bean
-	public GraphQL graphQL() {
-		return graphQL;
-	}
+    @Autowired
+    private DateCoercing dateCoercing;
 
-	@PostConstruct
-	public void init() throws IOException {
+    @Value("${schema.resource.name}")
+    private String schemaResourceName;
 
-		URL url = Resources.getResource(schemaResourceName);
+    private GraphQL graphQL;
 
-		this.graphQL = GraphQL.newGraphQL(buildSchema(Resources.toString(url, Charsets.UTF_8))).build();
-	}
+    @Bean
+    public GraphQL graphQL() {
+        return graphQL;
+    }
 
-	private GraphQLSchema buildSchema(String sdl) {
-		return new SchemaGenerator().makeExecutableSchema(new SchemaParser().parse(sdl), buildWiring());
-	}
+    @PostConstruct
+    public void init() throws IOException {
 
-	private RuntimeWiring buildWiring() {
+        URL url = Resources.getResource(schemaResourceName);
 
-		Builder builder = RuntimeWiring.newRuntimeWiring();
+        GraphQLSchema schema = buildSchema(Resources.toString(url, Charsets.UTF_8));
 
-		builder.type(newTypeWiring("Query").dataFetcher("tipoQualificacaoPorId", graphQLDataFetchers.getTipoQualificacaoByIdFetcher()));
-		builder.type(newTypeWiring("Query").dataFetcher("todosOsTiposDeQualificacoes", graphQLDataFetchers.getTodosOsTiposDeQualificacoesFetcher()));
-		builder.type(newTypeWiring("Query").dataFetcher("candidatoPorId", graphQLDataFetchers.getCandidatoPorIdFetcher()));
-		builder.type(newTypeWiring("Query").dataFetcher("todasAsQualificacoes", graphQLDataFetchers.getTodasAsQualificacoes()));
-		builder.type(newTypeWiring("Query").dataFetcher("todosOsCandidatos", graphQLDataFetchers.getTodosOsCandidatos()));
-		builder.type(newTypeWiring("Query").dataFetcher("buscarVagaPorId", graphQLDataFetchers.buscarVagaPorId()));
-		builder.type(newTypeWiring("Query").dataFetcher("todasAsEmpresas", graphQLDataFetchers.todasAsEmpresas()));
+        AsyncExecutionStrategy mutationStrategy = new AsyncExecutionStrategy(new CustomGraphqlExceptionHandler());
 
-		builder.type(newTypeWiring("Mutation").dataFetcher("selecionarCandidatos", graphQLDataFetchers.selecionarCandidatos()));
-		builder.type(newTypeWiring("Mutation").dataFetcher("iniciarEntrevistas", graphQLDataFetchers.iniciarEntrevistas()));
-		builder.type(newTypeWiring("Mutation").dataFetcher("iniciar", graphQLDataFetchers.iniciar()));
-		builder.type(newTypeWiring("Mutation").dataFetcher("finalizarVaga", graphQLDataFetchers.finalizarVaga()));
-		builder.type(newTypeWiring("Mutation").dataFetcher("cancelarVaga", graphQLDataFetchers.cancelarVaga()));
+        this.graphQL = GraphQL.newGraphQL(schema).mutationExecutionStrategy(mutationStrategy).build();
+    }
 
-		builder.scalar(GraphQLScalarType.newScalar().name("Tempo").clearDirectives().coercing(tempoCoercing).build());
-		builder.scalar(GraphQLScalarType.newScalar().name("Date").clearDirectives().coercing(dateCoercing).build());
+    private GraphQLSchema buildSchema(String sdl) {
+        return new SchemaGenerator().makeExecutableSchema(new SchemaParser().parse(sdl), buildWiring());
+    }
 
-		return builder.build();
-	}
+    private RuntimeWiring buildWiring() {
+
+        Builder builder = RuntimeWiring.newRuntimeWiring();
+
+        builder.type(newTypeWiring("Query").dataFetcher("tipoQualificacaoPorId", graphQLDataFetchers.getTipoQualificacaoByIdFetcher()));
+        builder.type(newTypeWiring("Query").dataFetcher("todosOsTiposDeQualificacoes", graphQLDataFetchers.getTodosOsTiposDeQualificacoesFetcher()));
+        builder.type(newTypeWiring("Query").dataFetcher("candidatoPorId", graphQLDataFetchers.getCandidatoPorIdFetcher()));
+        builder.type(newTypeWiring("Query").dataFetcher("todasAsQualificacoes", graphQLDataFetchers.getTodasAsQualificacoes()));
+        builder.type(newTypeWiring("Query").dataFetcher("todosOsCandidatos", graphQLDataFetchers.getTodosOsCandidatos()));
+        builder.type(newTypeWiring("Query").dataFetcher("buscarVagaPorId", graphQLDataFetchers.buscarVagaPorId()));
+        builder.type(newTypeWiring("Query").dataFetcher("todasAsEmpresas", graphQLDataFetchers.todasAsEmpresas()));
+
+        builder.type(newTypeWiring("Mutation").dataFetcher("selecionarCandidatos", graphQLDataFetchers.selecionarCandidatos()));
+        builder.type(newTypeWiring("Mutation").dataFetcher("iniciarEntrevistas", graphQLDataFetchers.iniciarEntrevistas()));
+        builder.type(newTypeWiring("Mutation").dataFetcher("iniciar", graphQLDataFetchers.iniciar()));
+        builder.type(newTypeWiring("Mutation").dataFetcher("finalizarVaga", graphQLDataFetchers.finalizarVaga()));
+        builder.type(newTypeWiring("Mutation").dataFetcher("cancelarVaga", graphQLDataFetchers.cancelarVaga()));
+
+        builder.scalar(GraphQLScalarType.newScalar().name("Tempo").clearDirectives().coercing(tempoCoercing).build());
+        builder.scalar(GraphQLScalarType.newScalar().name("Date").clearDirectives().coercing(dateCoercing).build());
+
+        return builder.build();
+    }
 }

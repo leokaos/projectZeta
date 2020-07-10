@@ -9,6 +9,8 @@ export class Candidato implements Deserializable {
     id: string;
     titulo: string;
     experiencias: Experiencia[];
+    dataContato: Date;
+    dataComeco: Date;
 
     constructor() {
         this.experiencias = [];
@@ -31,6 +33,14 @@ export class Candidato implements Deserializable {
 
         if (this.experiencias == null) {
             this.experiencias = [];
+        }
+
+        if (input.dataContato != null) {
+            this.dataContato = new Date(input.dataContato);
+        }
+
+        if (input.dataComeco != null) {
+            this.dataComeco = new Date(input.dataComeco);
         }
 
         return this;

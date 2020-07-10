@@ -1,13 +1,14 @@
 import * as Stomp from 'stompjs';
 import * as SockJS from 'sockjs-client';
 import { Injectable } from '@angular/core';
+import { environment } from '@environment/environment'
 
 @Injectable({
     providedIn: 'root'
 })
 export class WebSocketAPI {
 
-    url: string = 'http://localhost:8090/ws';
+    url: string = environment.REST_API_URL + '/ws';
 
     constructor() { }
 

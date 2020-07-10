@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { Vaga } from '@app/model/Vaga';
 import gql from 'graphql-tag';
 import { Apollo } from 'apollo-angular';
-import { Candidato } from '@app/model/Candidato';
 
 @Injectable({
   providedIn: 'root'
@@ -54,6 +53,7 @@ mutation processar($id: String) {
   }
 }
 `;
+
 export const FINALIZAR_VAGA = gql`
 mutation processar($id: String) {
   finalizarVaga(id: $id) {
@@ -61,6 +61,7 @@ mutation processar($id: String) {
   }
 }
 `;
+
 export const CANCELAR_VAGA = gql`
 mutation processar($id: String) {
   cancelarVaga(id: $id) {

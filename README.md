@@ -29,9 +29,9 @@ Utilize o endpoint:
 
 ####Utilitários
 
-*npm install -g redis-commander -> Redis GUI
+* npm install -g redis-commander -> Redis GUI
 
 Para rodar redis-commander -p <PORTA>
 
-*Docker UI Control
+* Docker UI Control
 docker run -d -p 9000:9000 -v /var/run/docker.sock:/var/run/docker.sock portainer/portainer

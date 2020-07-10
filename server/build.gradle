@@ -61,5 +61,8 @@ dependencies {
 	compile group: 'org.springframework.security', name: 'spring-security-jwt', version: '1.0.10.RELEASE'
 	compile group: 'org.springframework.boot', name: 'spring-boot-starter-aop', version: '2.2.1.RELEASE'
 	compile group: 'commons-io', name: 'commons-io', version: '2.6'
+
+	compile 'org.springframework.metrics:spring-metrics:latest.release'
+	compile 'io.prometheus:simpleclient_common:latest.release'
 	
 }

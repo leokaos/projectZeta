@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rh-client
+  namespace: rh
+  labels:
+    app: rh-client
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: rh-client
+  template:
+    metadata:
+      labels:
+        app: rh-client
+    spec:
+      containers:
+        - name: rh-client
+          image: leokaos/rh_client:1.0
+          ports:
+            - containerPort: 8080

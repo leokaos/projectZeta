@@ -56,18 +56,18 @@ export class ListVagasComponent implements OnInit {
         for (let status in this.listas) {
 
           for (let index = 0; index < this.listas[status].data.length; index++) {
-          
+
             let element = this.listas[status].data[index];
 
             if (element.id === obj.id) {
 
               let vaga = new Vaga().deserialize(obj);
 
-              this.listas[status].data = this.listas[status].data.filter((x:any) => x.id !== obj.id);
-              
+              this.listas[status].data = this.listas[status].data.filter((x: any) => x.id !== obj.id);
+
               this.listas[obj.status].data.push(vaga);
               this.listas[obj.status].data = this.listas[obj.status].data.slice();
-              
+
               this.novasVagas.push(vaga);
             }
           }
@@ -78,9 +78,23 @@ export class ListVagasComponent implements OnInit {
   }
 
   drop(event: CdkDragDrop<string[]>) {
+
     if (event.previousContainer !== event.container) {
+
       transferArrayItem(event.previousContainer.data, event.container.data, event.previousIndex, event.currentIndex)
-      this.workflowVaga.process(event.item.data).subscribe(result => this.snackBar.open('Vaga processada com Sucesso!', 'Fechar'));
+
+      this.workflowVaga.process(event.item.data).subscribe(
+        (result) => {
+          this.snackBar.open('Vaga processada com Sucesso!', 'Fechar')
+        }, (errors) => {
+
+          for (let index = 0; index < errors.graphQLErrors.length; index++) {
+            this.snackBar.open(errors.graphQLErrors[index].message, 'Fechar')
+          }
+
+          transferArrayItem(event.container.data, event.previousContainer.data, event.currentIndex, event.previousIndex)
+        }
+      );
     } else {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
     }

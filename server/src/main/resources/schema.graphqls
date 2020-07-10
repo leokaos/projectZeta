@@ -44,6 +44,8 @@ type Candidato {
 	sobrenome: String
 	titulo: String
 	email: String
+	dataContato: Date
+	dataComeco: Date
 	experiencias: [Experiencia]
 }
 
