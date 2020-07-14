@@ -20,6 +20,6 @@ spec:
           image: leokaos/rh_server:1.0
           envFrom:
           - configMapRef:
-              name: m2m-b2i-auth-service-config   
+              name: configmap-server 
           ports:
             - containerPort: 8080
