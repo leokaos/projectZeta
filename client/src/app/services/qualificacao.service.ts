@@ -34,7 +34,12 @@ export class QualificacaoService {
   }
 
   public salvar(qualificacao: Qualificacao): Observable<Qualificacao> {
-    return this.http.put<Qualificacao>(endpoint + '/' + qualificacao.id, qualificacao);
+
+    if (qualificacao.id != null) {
+      return this.http.put<Qualificacao>(endpoint + '/' + qualificacao.id, qualificacao);
+    } else {
+      return this.http.post<Qualificacao>(endpoint, qualificacao);
+    }
   }
 
   public remover(id: String): Observable<any> {

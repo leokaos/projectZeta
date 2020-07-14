@@ -17,6 +17,7 @@ const routes: Routes = [
   { path: 'candidato/:id', component: EditCandidateComponent },
   { path: 'qualificacoes', component: ListQualificacoesComponent },
   { path: 'qualificacao/:id', component: EditQualificacoesComponent },
+  { path: 'qualificacao', component: EditQualificacoesComponent },
   { path: 'tipoQualificacoes', component: ListTipoQualificacoesComponent },
   { path: 'vagas', component: ListVagasComponent },
   { path: 'vaga/:id', component: EditVagasComponent }

@@ -32,24 +32,45 @@ export class EditQualificacoesComponent implements AfterViewInit {
 
   ngAfterViewInit(): void {
 
-    this.qualificacaoService.buscarPorId(this.route.snapshot.paramMap.get('id')).subscribe(
-      (qualificacao: Qualificacao) => {
-        this.qualificacao = new Qualificacao().deserialize(qualificacao);
-        this.dataSource.data = this.qualificacao.equivalencias;
+    let id = this.route.snapshot.paramMap.get('id');
 
-        this.tipoQualificacaoService.listAll().subscribe(
-          (tipos: TipoQualificacao[]) => {
-            this.tipos = this.tipoQualificacaoService.assemble(tipos);
+    if (id != null) {
 
-            this.qualificacaoService.buscarPorFiltro({ 'tipo.id': this.qualificacao.tipo.id }).subscribe(
-              (qualificacoes: Qualificacao[]) => {
-                this.todasAsQualificacoesDoTipo = this.qualificacaoService.assemble(qualificacoes);
-                this.todasAsQualificacoesDoTipo = this.todasAsQualificacoesDoTipo.filter(q => q.fullName() !== this.qualificacao.fullName());
-              });
-          });
+      this.qualificacaoService.buscarPorId(this.route.snapshot.paramMap.get('id')).subscribe(
+        (qualificacao: Qualificacao) => {
+          this.qualificacao = new Qualificacao().deserialize(qualificacao);
+          this.dataSource.data = this.qualificacao.equivalencias;
+        });
+    }
+    else {
+      this.qualificacao = new Qualificacao();
+    }
 
+    this.buscarTipoQualificacao();
+
+  }
+
+  public buscarQualificacoesPorTipo() {
+
+    this.qualificacaoService.buscarPorFiltro({ 'tipo.id': this.qualificacao.tipo.id }).subscribe(
+      (qualificacoes: Qualificacao[]) => {
+        this.todasAsQualificacoesDoTipo = this.qualificacaoService.assemble(qualificacoes);
+        this.todasAsQualificacoesDoTipo = this.todasAsQualificacoesDoTipo.filter(q => q.fullName() !== this.qualificacao.fullName());
       });
+  }
 
+  public tipoQualificaoCompare = function( option, value ) : boolean {
+    return option.id === value.id;
+  }  
+
+  public buscarTipoQualificacao() {
+
+    this.tipoQualificacaoService.listAll().subscribe(
+      (tipos: TipoQualificacao[]) => {
+        this.tipos = this.tipoQualificacaoService.assemble(tipos);
+
+        this.buscarQualificacoesPorTipo();
+      });
   }
 
   public adicionarEquivalencia(): void {

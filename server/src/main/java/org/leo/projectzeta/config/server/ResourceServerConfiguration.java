@@ -40,5 +40,6 @@ public class ResourceServerConfiguration extends ResourceServerConfigurerAdapter
 //		http.cors().and().authorizeRequests().anyRequest().authenticated().and().authorizeRequests().antMatchers(HttpMethod.OPTIONS).permitAll();
 
         http.cors().and().authorizeRequests().anyRequest().permitAll();
+
     }
 }

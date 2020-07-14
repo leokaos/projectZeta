@@ -42,7 +42,7 @@ describe('EditCandidateComponent', () => {
 
     let expectedData = { "data": { "todasAsQualificacoes": null, "candidatoPorId": null } };
     expectedData.data.todasAsQualificacoes = [{ "descricao": "java", "versao": "7", "id": "ABC" }];
-    expectedData.data.candidatoPorId = { "nome": "Leonardo", "sobrenome": "Otero", "id": "10", "titulo": "bozo", "experiencias": [], "email": "test@test.com" };
+    expectedData.data.candidatoPorId = { "nome": "Leonardo", "sobrenome": "Otero", "id": "10", "titulo": "bozo", "experiencias": [], "email": "test@test.com", "dataContato": new Date(), "dataComeco": new Date() };
 
     controller.expectOne(EDIT_CANDIDATE_QUERY).flush(expectedData);
 
@@ -61,7 +61,7 @@ describe('EditCandidateComponent', () => {
 
     let expectedData = { "data": { "todasAsQualificacoes": null, "candidatoPorId": null } };
     expectedData.data.todasAsQualificacoes = [{ "descricao": "java", "versao": "8", "id": "ABC" }];
-    expectedData.data.candidatoPorId = { "nome": "Leonardo", "sobrenome": "Otero", "id": "10", "titulo": "bozo", "experiencias": [], "email": "teste@test.com" };
+    expectedData.data.candidatoPorId = { "nome": "Leonardo", "sobrenome": "Otero", "id": "10", "titulo": "bozo", "experiencias": [], "email": "teste@test.com", "dataContato": new Date(), "dataComeco": new Date() };
 
     controller.expectOne(EDIT_CANDIDATE_QUERY).flush(expectedData);
 
@@ -78,7 +78,7 @@ describe('EditCandidateComponent', () => {
 
     let expectedData = { "data": { "todasAsQualificacoes": null, "candidatoPorId": null } };
     expectedData.data.todasAsQualificacoes = [{ "descricao": "java", "versao": "7", "id": "10" }, { "descricao": "java", "versao": "8", "id": "11" }];
-    expectedData.data.candidatoPorId = { "nome": "Leonardo", "sobrenome": "Otero", "id": "10", "titulo": "bozo", "experiencias": [], "email": "teste@test.com" };
+    expectedData.data.candidatoPorId = { "nome": "Leonardo", "sobrenome": "Otero", "id": "10", "titulo": "bozo", "experiencias": [], "email": "teste@test.com", "dataContato": new Date(), "dataComeco": new Date() };
 
     component.ngOnInit();
 
