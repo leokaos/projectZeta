@@ -20,7 +20,8 @@ const routes: Routes = [
   { path: 'qualificacao', component: EditQualificacoesComponent },
   { path: 'tipoQualificacoes', component: ListTipoQualificacoesComponent },
   { path: 'vagas', component: ListVagasComponent },
-  { path: 'vaga/:id', component: EditVagasComponent }
+  { path: 'vaga/:id', component: EditVagasComponent },
+  { path: '**', component: DashComponent }
 ];
 
 @NgModule({
