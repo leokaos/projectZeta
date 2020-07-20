@@ -32,13 +32,16 @@ dependencies {
 	compile('org.springframework.boot:spring-boot-starter-security')
 	compile('org.springframework.boot:spring-boot-starter-web')
 	compile('org.springframework.boot:spring-boot-devtools')
+	compile('org.springframework.boot:spring-boot-starter-actuator')
 	compile('org.springframework.data:spring-data-mongodb')
 	compile('org.springframework.data:spring-data-redis')
-	
+
 	compile('org.springframework.ldap:spring-ldap-core')
     compile('org.springframework.security:spring-security-ldap')
     compile('org.springframework:spring-tx')
     compile('com.unboundid:unboundid-ldapsdk')
+
+	compile('io.micrometer:micrometer-registry-prometheus:')
 	
 	compile group: 'com.google.guava', name: 'guava', version: '25.1-jre'
 	
@@ -62,7 +65,4 @@ dependencies {
 	compile group: 'org.springframework.boot', name: 'spring-boot-starter-aop', version: '2.2.1.RELEASE'
 	compile group: 'commons-io', name: 'commons-io', version: '2.6'
 
-	compile 'org.springframework.metrics:spring-metrics:latest.release'
-	compile 'io.prometheus:simpleclient_common:latest.release'
-	
 }

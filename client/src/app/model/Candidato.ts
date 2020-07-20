@@ -11,6 +11,7 @@ export class Candidato implements Deserializable {
     experiencias: Experiencia[];
     dataContato: Date;
     dataComeco: Date;
+    email: String;
 
     constructor() {
         this.experiencias = [];

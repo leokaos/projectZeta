@@ -9,7 +9,7 @@ import { Vaga } from '@app/model/Vaga';
 })
 export class ShowDialogTextoVagaComponent {
 
-  private vaga: Vaga;
+  vaga: Vaga;
 
   constructor(public dialogRef: MatDialogRef<ShowDialogTextoVagaComponent>, @Inject(MAT_DIALOG_DATA) public data: any) {
     this.vaga = data.vaga;

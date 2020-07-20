@@ -2,7 +2,7 @@ version: '2'
 services:
     mongo:
         image: mongo:latest
-        container_name: RH_MONGO
+        container_name: rh-mongo
         volumes:
           - ./data/db
         ports:
@@ -11,33 +11,33 @@ services:
             - 27017
     redis:
         image: redis:latest
-        container_name: RH_REDIS
+        container_name: rh-redis
         ports:
             - 6379:6379
         expose:
             - 6379
     web:
         build: ./client/
-        container_name: RH_WEB
+        container_name: rh-web
         ports:
           - 4200:4200
         expose: 
           - 4200
     server:
         build: ./server/
-        container_name: RH_SERVER
+        container_name: rh-server
         ports:
           - 8090:8090
         expose: 
           - 8090
         environment:
-          LDAP_SERVER: ldap://RH_LDAP:389/dc=rh,dc=system,dc=org
-          MONGO_HOST : RH_MONGO
-          SPRING_KAFKA_BOOTSTRAP-SERVERS : RH_KAFKA:9092
-          CACHE_HOSTNAME: RH_REDIS
+          LDAP_SERVER: ldap://rh-ldap:389/dc=rh,dc=system,dc=org
+          MONGO_HOST : rh-mongo
+          SPRING_KAFKA_BOOTSTRAPSERVERS : rh-kafka:9092
+          CACHE_HOSTNAME: rh-redis
     ldap:
         image: dinkel/openldap
-        container_name: RH_LDAP
+        container_name: rh-ldap
         ports: 
           - 389:389
         expose:
@@ -48,14 +48,14 @@ services:
           - SLAPD_ADDITIONAL_MODULES=memberof
     zookeeper:
         image: wurstmeister/zookeeper
-        container_name: RH_ZOOKEEPER
+        container_name: rh-zookeeper
         ports:
             - "2181:2181"
         expose:
             - 2181
     kafka:
         image: wurstmeister/kafka
-        container_name: RH_KAFKA
+        container_name: rh-kafka
         ports:
             - "9092:9092"
         expose:
@@ -63,5 +63,6 @@ services:
         depends_on:
             - zookeeper
         environment:
-            KAFKA_ADVERTISED_HOST_NAME: localhost
-            KAFKA_ZOOKEEPER_CONNECT: RH_ZOOKEEPER:2181
+            KAFKA_ADVERTISED_HOST_NAME: rh-kafka
+            KAFKA_ADVERTISED_PORT: 9092
+            KAFKA_ZOOKEEPER_CONNECT: rh-zookeeper:2181
