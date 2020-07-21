@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import javax.validation.Valid;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
@@ -47,6 +48,7 @@ public class Vaga implements Entidade {
 	private String descricao;
 
 	@NotNull
+	@Valid
 	private Periodo periodo;
 
 	@NotNull
@@ -176,7 +178,7 @@ public class Vaga implements Entidade {
 
 		for (Candidato candidato : todosOsCandidatos) {
 
-			if (candidato.getDataComeco().before(this.periodo.getDataInicial())) {
+			if (candidato.estaAptoComecarData(this.periodo.getDataInicial())) {
 
 				int pontuacao = 0;
 

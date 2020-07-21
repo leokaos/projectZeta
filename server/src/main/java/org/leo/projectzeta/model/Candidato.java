@@ -145,4 +145,8 @@ public class Candidato implements Entidade {
 		experiencias.add(ExperienciaFactory.criar(qualificacao, tempo));
 	}
 
+	public boolean estaAptoComecarData(Date data){
+		return dataComeco != null && dataComeco.before(data);
+	}
+
 }
