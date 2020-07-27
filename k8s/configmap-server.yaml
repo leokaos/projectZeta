@@ -1,9 +1,0 @@
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: configmap-server
-data:
-    LDAP_SERVER: ldap://RH_LDAP:389/dc=rh,dc=system,dc=org
-    MONGO_HOST : RH_MONGO
-    SPRING_KAFKA_BOOTSTRAP-SERVERS : RH_KAFKA:9092
-    CACHE_HOSTNAME: RH_REDIS

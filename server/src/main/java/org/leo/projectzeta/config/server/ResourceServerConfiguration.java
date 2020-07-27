@@ -20,7 +20,7 @@ public class ResourceServerConfiguration extends ResourceServerConfigurerAdapter
 
         CorsConfiguration configuration = new CorsConfiguration();
 
-        configuration.setAllowedOrigins(Arrays.asList("http://localhost:4200"));
+        configuration.setAllowedOrigins(Arrays.asList("http://localhost:4200", "*"));
         configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"));
         configuration.setAllowedHeaders(Arrays.asList("authorization", "content-type", "x-auth-token"));
         configuration.setExposedHeaders(Arrays.asList("x-auth-token"));
@@ -39,7 +39,9 @@ public class ResourceServerConfiguration extends ResourceServerConfigurerAdapter
 //
 //		http.cors().and().authorizeRequests().anyRequest().authenticated().and().authorizeRequests().antMatchers(HttpMethod.OPTIONS).permitAll();
 
-        http.authorizeRequests().anyRequest().permitAll();
+        http.cors().and().authorizeRequests().anyRequest().permitAll();
 
     }
+
+
 }

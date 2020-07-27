@@ -1,0 +1,30 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: mongo
+  namespace: rh
+  labels:
+    app: mongo
+spec:
+  containers:
+    - name: mongo
+      image: mongo:latest
+      ports:
+        - name: mongo
+          containerPort: 27017
+          protocol: TCP
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: mongo-service
+  namespace: rh  
+spec:
+  selector:
+    app: mongo
+  ports:
+    - protocol: TCP
+      port: 27017
+      targetPort: 27017          
