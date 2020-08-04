@@ -34,7 +34,17 @@ export class EmpresaService {
   }
 
   public salvar(empresa: Empresa): Observable<Empresa> {
-    return this.http.put<Empresa>(endpoint + '/' + empresa.id, empresa);
+
+    if (empresa.id != null) {
+      return this.http.put<Empresa>(endpoint + '/' + empresa.id, empresa);
+    } else {
+      return this.http.post<Empresa>(endpoint, empresa);
+    }
+
+  }
+
+  public remover(id: String): Observable<any> {
+    return this.http.delete(endpoint + '/' + id);
   }
 
 }

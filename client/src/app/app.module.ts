@@ -30,6 +30,8 @@ import { ListVagasComponent } from '@vagas/list-vagas/list-vagas.component';
 import { ShowDialogTextoVagaComponent } from '@vagas/show-dialog-texto-vaga/show-dialog-texto-vaga.component';
 import { EditVagasComponent } from '@vagas/edit-vagas/edit-vagas.component';
 
+import { ListEmpresasComponent } from '@empresas/list-empresas/list-empresas.component';
+
 import { CustomHttpInterceptor } from './auth.interceptor';
 import { EditInlineComponent } from './components/edit-inline/edit-inline.component';
 import { EventoPanelComponent } from './components/evento-panel/evento-panel.component';
@@ -51,7 +53,8 @@ import { MAT_DATE_LOCALE } from '@angular/material';
     ShowDialogTextoVagaComponent,
     EditVagasComponent,
     EditInlineComponent,
-    EventoPanelComponent
+    EventoPanelComponent,
+    ListEmpresasComponent
   ],
   imports: [
     BrowserModule,

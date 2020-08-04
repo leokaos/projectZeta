@@ -26,6 +26,7 @@
       "@qualificacoes/*": ["src/app/components/qualificacoes/*"],
       "@tipoQualificacoes/*": ["src/app/components/tipoQualificacoes/*"],
       "@vagas/*": ["src/app/components/vagas/*"],
+      "@empresas/*": ["src/app/components/empresas/*"],
       "@model/*": ["src/app/model/*"],
       "@services/*": ["src/app/services/*"],
       "@environment/*": ["src/environments/*"]

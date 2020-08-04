@@ -10,6 +10,7 @@ import { EditQualificacoesComponent } from '@qualificacoes/edit-qualificacoes/ed
 import { ListTipoQualificacoesComponent } from '@tipoQualificacoes/list-tipo-qualificacoes/list-tipo-qualificacoes.component';
 import { ListVagasComponent } from '@app/components/vagas/list-vagas/list-vagas.component';
 import { EditVagasComponent } from '@app/components/vagas/edit-vagas/edit-vagas.component';
+import { ListEmpresasComponent } from '@app/components/empresas/list-empresas/list-empresas.component';
 
 const routes: Routes = [
   { path: 'dashboard', component: DashComponent },
@@ -21,6 +22,7 @@ const routes: Routes = [
   { path: 'tipoQualificacoes', component: ListTipoQualificacoesComponent },
   { path: 'vagas', component: ListVagasComponent },
   { path: 'vaga/:id', component: EditVagasComponent },
+  { path: 'empresas', component: ListEmpresasComponent },
   { path: '**', component: DashComponent }
 ];
 

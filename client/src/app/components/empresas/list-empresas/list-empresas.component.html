@@ -1,0 +1,54 @@
+<div class="container">
+
+    <div style="width: 100%; height: 50px;">
+        <h1 class="mat-h1" style="float: left;">Empresas</h1>
+        <button mat-stroked-button color="primary" style="float: right" id="adicionarEmpresa" (click)="adicionarEmpresa()">Criar Empresa</button>
+    </div>
+
+    <div class="mat-elevation-z8">
+
+        <table mat-table [dataSource]="dataSource" matSort>
+
+            <ng-container matColumnDef="nome">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Nome </th>
+                <td mat-cell *matCellDef="let element">
+                    <span *ngIf="element.id != null">
+                        {{element.nome}}
+                    </span>
+                    <mat-form-field class="default-form-field" *ngIf="!element.id">
+                        <input matInput placeholder="Nome" [(ngModel)]="element.nome" />
+                    </mat-form-field>
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="remover">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header class="coluna-double-botao"> Remover </th>
+                <td mat-cell *matCellDef="let element; let i = index;">
+
+                    <button mat-icon-button color="primary" (click)="remover(element.id)" *ngIf="element.id">
+                        <mat-icon>delete</mat-icon>
+                    </button>
+
+                    <button mat-icon-button color="primary" (click)="salvar(i);" *ngIf="!element.id && indexLoading != i">
+                        <mat-icon>done</mat-icon>
+                    </button>
+
+                    <button mat-icon-button color="primary" (click)="cancelar(i);" *ngIf="!element.id && indexLoading != i">
+                        <mat-icon>clear</mat-icon>
+                    </button>
+
+                    <mat-spinner diameter="20" *ngIf="indexLoading == i"></mat-spinner>
+
+                </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+        </table>
+
+        <mat-paginator [pageSizeOptions]="[10, 25, 100]"></mat-paginator>
+
+    </div>
+
+</div>
