@@ -1,7 +1,7 @@
-import { Component, OnInit, Input, AfterViewInit } from '@angular/core';
+import { Component, OnInit, Input, AfterViewInit, ViewChild } from '@angular/core';
 import { EventoService } from '@app/services/evento.service';
 import { Evento } from '@app/model/Evento';
-import { MatTableDataSource } from '@angular/material';
+import { MatTableDataSource, MatPaginator } from '@angular/material';
 
 @Component({
   selector: 'app-evento-panel',
@@ -15,6 +15,8 @@ export class EventoPanelComponent implements AfterViewInit {
 
   @Input()
   private tipo: String;
+
+  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
 
   displayedColumns: string[] = ['dataEvento', 'operacao'];
 
@@ -35,6 +37,7 @@ export class EventoPanelComponent implements AfterViewInit {
       }
     );
 
+    this.dataSource.paginator = this.paginator;
   }
 
 }
