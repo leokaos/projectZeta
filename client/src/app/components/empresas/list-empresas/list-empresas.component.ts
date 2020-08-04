@@ -18,6 +18,8 @@ export class ListEmpresasComponent implements OnInit {
 
   indexLoading: number;
 
+  empresas: Empresa[] = [];
+
   constructor(private empresaService: EmpresaService, private snackBar: MatSnackBar) {
 
   }
@@ -25,7 +27,9 @@ export class ListEmpresasComponent implements OnInit {
   ngOnInit() {
     this.empresaService.listAll().subscribe((innerEmpresas: Empresa[]) => {
 
-      this.dataSource = new MatTableDataSource(this.empresaService.assemble(innerEmpresas));
+      this.empresas = this.empresaService.assemble(innerEmpresas);
+
+      this.dataSource = new MatTableDataSource(this.empresas);
 
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
@@ -51,16 +55,29 @@ export class ListEmpresasComponent implements OnInit {
   }
 
   public salvar(i: number): void {
-    this.indexLoading  = i;
+    this.indexLoading = i;
     this.empresaService.salvar(this.dataSource.data[i]).subscribe((empresa: Empresa) => {
       this.dataSource.data[i] = empresa;
       this.dataSource._updateChangeSubscription();
       this.indexLoading = null;
+      this.empresas.push(empresa);
     });
   }
 
   public cancelar(i: number): void {
     this.dataSource.data.splice(i, 1);
+    this.dataSource._updateChangeSubscription();
+  }
+
+  public onFiltroChange(filtro: string): void {  
+
+    if (filtro != "") {
+      this.dataSource.data = this.empresas.filter(empresa => empresa.nome.toLowerCase().indexOf(filtro.toLowerCase()) != -1);
+    }
+    else {
+      this.dataSource.data = this.empresas;
+    }
+
     this.dataSource._updateChangeSubscription();
   }
 

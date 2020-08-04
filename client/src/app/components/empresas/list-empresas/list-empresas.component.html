@@ -2,7 +2,16 @@
 
     <div style="width: 100%; height: 50px;">
         <h1 class="mat-h1" style="float: left;">Empresas</h1>
-        <button mat-stroked-button color="primary" style="float: right" id="adicionarEmpresa" (click)="adicionarEmpresa()">Criar Empresa</button>
+
+        <button mat-fab color="primary" style="float: right" id="adicionarEmpresa" (click)="adicionarEmpresa()">
+            <mat-icon>add</mat-icon>
+        </button>
+    </div>
+
+    <div class="mat-elevation-z8" id="panel-filtro">
+        <mat-form-field class="default-form-field">
+            <input matInput placeholder="Filtrar..." autocomplete="off" (input)="onFiltroChange($event.target.value)" />
+        </mat-form-field>
     </div>
 
     <div class="mat-elevation-z8">

@@ -24,4 +24,7 @@ public class Mensagens {
 
 	// VAGA
 	public static final String VAGA_SEM_CANDIDATOS_SELECIONADOS = "vaga.sem.candidatos.selecionados";
+
+	//EMPRESA
+	public static final String EMPRESA_POSSUI_VAGAS = "empresa.possui.vagas";
 }
