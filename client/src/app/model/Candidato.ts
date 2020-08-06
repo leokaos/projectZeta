@@ -12,6 +12,7 @@ export class Candidato implements Deserializable {
     dataContato: Date;
     dataComeco: Date;
     email: String;
+    avatar: String;
 
     constructor() {
         this.experiencias = [];
@@ -45,6 +46,18 @@ export class Candidato implements Deserializable {
         }
 
         return this;
+    }
+
+    contemNomes(itens: string[]): boolean {
+
+        for (let index = 0; index < itens.length; index++) {
+            const element = itens[index].toLowerCase();
+            if (this.nome.toLowerCase().indexOf(element) == -1 && this.sobrenome.toLowerCase().indexOf(element) == -1) {
+                return false;
+            }
+        }
+
+        return true;
     }
 
 }

@@ -1,0 +1,9 @@
+<div id="avatar-container">
+
+    <input type="file" #avatar id="avatar" (change)="onChangeAvatar($event.target.files)" />
+
+    <mat-icon *ngIf="!imagem" id="avatar-icon" (click)="avatar.click()">face</mat-icon>
+
+    <img [src]="imagem" *ngIf="imagem" style="width:120px; height:120px; border-radius: 100%;" (click)="avatar.click()"/>
+
+</div>

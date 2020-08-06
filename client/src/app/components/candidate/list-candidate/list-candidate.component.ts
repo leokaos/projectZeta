@@ -17,6 +17,7 @@ export class ListCandidateComponent implements OnInit, AfterContentInit {
   grid: MatGridList;
 
   candidatos: Candidato[] = [];
+  originalCandidatos: Candidato[] = [];
 
   gridByBreakpoint = { xl: 6, lg: 6, md: 4, sm: 2, xs: 1 };
 
@@ -29,7 +30,8 @@ export class ListCandidateComponent implements OnInit, AfterContentInit {
         query: LIST_CANDIDATE_QUERY
       }).valueChanges.subscribe(
         (result: any) => {
-          this.candidatos = this.candidatoService.assemble(result.data.todosOsCandidatos);
+          this.originalCandidatos = this.candidatoService.assemble(result.data.todosOsCandidatos);
+          this.candidatos = this.originalCandidatos;
         });
   }
 
@@ -39,6 +41,23 @@ export class ListCandidateComponent implements OnInit, AfterContentInit {
       this.grid.cols = this.gridByBreakpoint[change.mqAlias];
     });
   }
+
+  public onFiltroChange(filtro: string): void {
+
+    if (filtro != "") {
+      this.candidatos = this.originalCandidatos.filter((candidato: Candidato) => {
+
+        let itens = filtro.split(" ").filter(x => x.trim() != "");
+
+        return candidato.contemNomes(itens);
+
+      });
+    }
+    else {
+      this.candidatos = this.originalCandidatos;
+    }
+  }
+
 }
 
 export const LIST_CANDIDATE_QUERY = gql`
@@ -48,6 +67,7 @@ query ListarCandidatos {
     sobrenome
     id
     titulo
+    avatar
   }
 }
 `;

@@ -9,7 +9,6 @@ import { EmpresaService } from '@app/services/empresa.service';
 import { MatSnackBar, MatChipInputEvent } from '@angular/material';
 
 import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
-import { Periodo } from '@app/model/Periodo';
 import { FormControl } from '@angular/forms';
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';

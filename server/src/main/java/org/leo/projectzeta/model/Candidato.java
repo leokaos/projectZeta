@@ -1,152 +1,160 @@
 package org.leo.projectzeta.model;
 
-import java.util.Date;
-import java.util.Optional;
-import java.util.Set;
-
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
-
+import com.google.common.collect.Sets;
 import org.leo.projectzeta.api.Entidade;
 import org.leo.projectzeta.factory.ExperienciaFactory;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import com.google.common.collect.Sets;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import java.util.Date;
+import java.util.Optional;
+import java.util.Set;
 
 @Document(collection = "candidato")
 public class Candidato implements Entidade {
 
-	private static final long serialVersionUID = 7401417159169226473L;
+    private static final long serialVersionUID = 7401417159169226473L;
 
-	@Id
-	private String id;
+    @Id
+    private String id;
 
-	@NotEmpty
-	private String nome;
+    @NotEmpty
+    private String nome;
 
-	@NotEmpty
-	private String sobrenome;
+    @NotEmpty
+    private String sobrenome;
 
-	@NotEmpty
-	private String titulo;
+    @NotEmpty
+    private String titulo;
 
-	@NotEmpty
-	private String email;
+    @NotEmpty
+    private String email;
 
-	@NotNull
-	private Date dataContato;
+    @NotNull
+    private Date dataContato;
 
-	private Date dataComeco;
+    private Date dataComeco;
 
-	@NotNull
-	private StatusCandidato status = StatusCandidato.EM_CONTATO;
+    private String avatar;
 
-	private Set<Experiencia> experiencias = Sets.newHashSet();
+    @NotNull
+    private StatusCandidato status = StatusCandidato.EM_CONTATO;
 
-	public Candidato() {
-		super();
-	}
+    private Set<Experiencia> experiencias = Sets.newHashSet();
 
-	@Override
-	public String getId() {
-		return id;
-	}
+    public Candidato() {
+        super();
+    }
 
-	public void setId(String id) {
-		this.id = id;
-	}
+    @Override
+    public String getId() {
+        return id;
+    }
 
-	public String getNome() {
-		return nome;
-	}
+    public void setId(String id) {
+        this.id = id;
+    }
 
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
+    public String getNome() {
+        return nome;
+    }
 
-	public String getSobrenome() {
-		return sobrenome;
-	}
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
 
-	public void setSobrenome(String sobrenome) {
-		this.sobrenome = sobrenome;
-	}
+    public String getSobrenome() {
+        return sobrenome;
+    }
 
-	public String getTitulo() {
-		return titulo;
-	}
+    public void setSobrenome(String sobrenome) {
+        this.sobrenome = sobrenome;
+    }
 
-	public void setTitulo(String titulo) {
-		this.titulo = titulo;
-	}
+    public String getTitulo() {
+        return titulo;
+    }
 
-	public String getEmail() {
-		return email;
-	}
+    public void setTitulo(String titulo) {
+        this.titulo = titulo;
+    }
 
-	public void setEmail(String email) {
-		this.email = email;
-	}
+    public String getEmail() {
+        return email;
+    }
 
-	public Date getDataContato() {
-		return dataContato;
-	}
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
-	public void setDataContato(Date dataContato) {
-		this.dataContato = dataContato;
-	}
+    public Date getDataContato() {
+        return dataContato;
+    }
 
-	public Date getDataComeco() {
-		return dataComeco;
-	}
+    public void setDataContato(Date dataContato) {
+        this.dataContato = dataContato;
+    }
 
-	public void setDataComeco(Date dataComeco) {
-		this.dataComeco = dataComeco;
-	}
+    public Date getDataComeco() {
+        return dataComeco;
+    }
 
-	public StatusCandidato getStatus() {
-		return status;
-	}
+    public void setDataComeco(Date dataComeco) {
+        this.dataComeco = dataComeco;
+    }
 
-	public void setStatus(StatusCandidato status) {
-		this.status = status;
-	}
+    public StatusCandidato getStatus() {
+        return status;
+    }
 
-	public Set<Experiencia> getExperiencias() {
-		return experiencias;
-	}
+    public void setStatus(StatusCandidato status) {
+        this.status = status;
+    }
 
-	public void setExperiencias(Set<Experiencia> experiencias) {
-		this.experiencias = experiencias;
-	}
+    public String getAvatar() {
+        return avatar;
+    }
 
-	public int getPontuacaoParaQualificacao(Qualificacao qualificacao) {
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
+    }
 
-		Optional<Experiencia> exato = experiencias.stream().filter(exp -> exp.getQualificacao().equals(qualificacao)).findFirst();
+    public Set<Experiencia> getExperiencias() {
+        return experiencias;
+    }
 
-		if (exato.isPresent()) {
-			return 100;
-		}
+    public void setExperiencias(Set<Experiencia> experiencias) {
+        this.experiencias = experiencias;
+    }
 
-		Optional<Experiencia> maisAlto = experiencias.stream().filter(exp -> exp.getQualificacao().getEquivalencia(qualificacao) != 0).sorted((e1, e2) -> e2.getQualificacao().getEquivalencia(qualificacao) - e1.getQualificacao().getEquivalencia(qualificacao)).findFirst();
+    public int getPontuacaoParaQualificacao(Qualificacao qualificacao) {
 
-		if (maisAlto.isPresent()) {
-			return maisAlto.get().getQualificacao().getEquivalencia(qualificacao);
-		}
+        Optional<Experiencia> exato = experiencias.stream().filter(exp -> exp.getQualificacao().equals(qualificacao)).findFirst();
 
-		return 0;
-	}
+        if (exato.isPresent()) {
+            return 100;
+        }
 
-	public void addExperiencia(Qualificacao qualificacao, Tempo tempo) {
+        Optional<Experiencia> maisAlto = experiencias.stream().filter(exp -> exp.getQualificacao().getEquivalencia(qualificacao) != 0).sorted((e1, e2) -> e2.getQualificacao().getEquivalencia(qualificacao) - e1.getQualificacao().getEquivalencia(qualificacao)).findFirst();
 
-		experiencias.removeIf(exp -> exp.getQualificacao().equals(qualificacao));
+        if (maisAlto.isPresent()) {
+            return maisAlto.get().getQualificacao().getEquivalencia(qualificacao);
+        }
 
-		experiencias.add(ExperienciaFactory.criar(qualificacao, tempo));
-	}
+        return 0;
+    }
 
-	public boolean estaAptoComecarData(Date data){
-		return dataComeco != null && dataComeco.before(data);
-	}
+    public void addExperiencia(Qualificacao qualificacao, Tempo tempo) {
+
+        experiencias.removeIf(exp -> exp.getQualificacao().equals(qualificacao));
+
+        experiencias.add(ExperienciaFactory.criar(qualificacao, tempo));
+    }
+
+    public boolean estaAptoComecarData(Date data) {
+        return dataComeco != null && dataComeco.before(data);
+    }
 
 }

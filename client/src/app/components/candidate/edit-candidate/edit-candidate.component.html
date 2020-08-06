@@ -4,8 +4,9 @@
 
         <mat-card-header>
             <mat-card-title>
-                <h2 class="mat-h2">Editar Candidatos</h2>
+                <h2 class="mat-h2">Candidato</h2>
             </mat-card-title>
+
         </mat-card-header>
 
         <mat-card-content>
@@ -13,6 +14,7 @@
             <form class="default-form">
 
                 <div class="container" fxLayout fxLayout.xs="column" fxLayoutAlign="center" fxLayoutGap="60px" fxLayoutGap.xs="0">
+
                     <div fxFlex="75%">
                         <mat-form-field class="default-form-field">
                             <input matInput placeholder="Nome" [(ngModel)]="candidato.nome" name="candidato.nome" />
@@ -44,6 +46,8 @@
                             <mat-datepicker-toggle matSuffix [for]="pickerDataComeco"></mat-datepicker-toggle>
                             <mat-datepicker #pickerDataComeco></mat-datepicker>
                         </mat-form-field>
+
+                        <app-avatar-panel [(imagem)]="candidato.avatar"></app-avatar-panel>
 
                     </div>
 

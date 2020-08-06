@@ -20,7 +20,7 @@ p {
 }
 
 .default-form {
-    padding: 40px;
+    padding: 20px;
 }
 
 .default-form-field {
@@ -58,4 +58,10 @@ table {
 
 .coluna-double-botao {
     width: 80px;
+}
+
+.panel-filtro {
+    width: 33%;
+    margin-bottom: 20px;
+    padding: 10px 20px;
 }

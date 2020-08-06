@@ -33,8 +33,11 @@ import { EditVagasComponent } from '@vagas/edit-vagas/edit-vagas.component';
 import { ListEmpresasComponent } from '@empresas/list-empresas/list-empresas.component';
 
 import { CustomHttpInterceptor } from './auth.interceptor';
-import { EditInlineComponent } from './components/edit-inline/edit-inline.component';
-import { EventoPanelComponent } from './components/evento-panel/evento-panel.component';
+
+import { AvatarPanelComponent } from '@components/avatar-panel/avatar-panel.component';
+import { EditInlineComponent } from '@components/edit-inline/edit-inline.component';
+import { EventoPanelComponent } from '@components/evento-panel/evento-panel.component';
+
 import { MAT_DATE_LOCALE } from '@angular/material';
 
 // MODULES
@@ -54,7 +57,8 @@ import { MAT_DATE_LOCALE } from '@angular/material';
     EditVagasComponent,
     EditInlineComponent,
     EventoPanelComponent,
-    ListEmpresasComponent
+    ListEmpresasComponent,
+    AvatarPanelComponent
   ],
   imports: [
     BrowserModule,

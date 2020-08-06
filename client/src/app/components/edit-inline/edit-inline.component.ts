@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef, AfterViewInit, Renderer2, AfterContentInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, ViewChild, ElementRef,  Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-edit-inline',
@@ -19,7 +19,7 @@ export class EditInlineComponent {
   editing: boolean = false;
   showEditButton: boolean = false;
 
-  constructor(private renderer: Renderer2) { }
+  constructor() { }
 
   public editar(): void {
     this.editing = true;
