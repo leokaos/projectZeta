@@ -28,8 +28,13 @@
 
         </mat-card-content>
         <mat-card-actions style="position: absolute;bottom: 24px;right: 24px;">
-          <button mat-button style="float:right;" [routerLink]="['/candidato/',candidato.id]">Edit</button>
+
+          <button mat-icon-button color="primary" [routerLink]="['/candidato/',candidato.id]" style="float: right;" matTooltip="Editar..." matTooltipPosition="above">
+            <mat-icon>edit</mat-icon>
+          </button>
+
           <div style="clear: both"></div>
+
         </mat-card-actions>
       </mat-card>
 

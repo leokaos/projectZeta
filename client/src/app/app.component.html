@@ -1,7 +1,7 @@
 <div class="app-container">
 
     <mat-toolbar color="primary" class="app-toolbar">
-        <button mat-icon-button (click)="snav.toggle()">
+        <button mat-icon-button (click)="snav.toggle()" *ngIf="user">
             <mat-icon>menu</mat-icon>
         </button>
         <h1 class="app-app-name">System</h1>
@@ -27,7 +27,7 @@
                 </a>
                 <a mat-list-item routerLink="/empresas" (click)="snav.toggle()">
                     <mat-icon class="app-sidenav-icon">account_balance</mat-icon>Empresas
-                </a>                
+                </a>
             </mat-nav-list>
         </mat-sidenav>
 

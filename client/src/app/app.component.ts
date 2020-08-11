@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AuthenticateService } from './services/authenticate.service';
 
 @Component({
   selector: 'app-root',
@@ -7,7 +8,9 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
 
-  constructor() {
+  user: string;
 
+  constructor(private authenticateService: AuthenticateService) {
+    this.authenticateService.currentUser.subscribe(x => this.user = x);
   }
 }

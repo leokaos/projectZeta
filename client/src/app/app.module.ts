@@ -16,6 +16,7 @@ import { MaterialComponentsModule } from '@app/modules/material-components.modul
 // COMPONENTS
 import { AppComponent } from '@app/app.component';
 import { DashComponent } from '@app/components/dash/dash.component';
+import { LoginComponent } from '@components/login/login.component';
 
 import { ListCandidateComponent } from '@candidate/list-candidate/list-candidate.component';
 import { EditCandidateComponent } from '@candidate/edit-candidate/edit-candidate.component';
@@ -58,7 +59,8 @@ import { MAT_DATE_LOCALE } from '@angular/material';
     EditInlineComponent,
     EventoPanelComponent,
     ListEmpresasComponent,
-    AvatarPanelComponent
+    AvatarPanelComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,

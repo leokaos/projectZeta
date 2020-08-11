@@ -1,0 +1,13 @@
+.login-card {
+    top: 100px;
+    width: 400px;
+    margin: 0px auto;
+}
+
+.botao-login {
+    float: right;
+}
+
+.form-login {
+    margin: 40px 10px;
+}

@@ -4,14 +4,24 @@ import { HttpInterceptor } from '@angular/common/http';
 import { HttpRequest } from '@angular/common/http';
 import { HttpHandler } from '@angular/common/http';
 import { HttpEvent } from '@angular/common/http';
+import { AuthenticateService } from './services/authenticate.service';
 
 @Injectable()
 export class CustomHttpInterceptor implements HttpInterceptor {
 
-    constructor() { }
+    constructor(private athenticateService: AuthenticateService) { }
 
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-        const modified = req.clone({ setHeaders: { 'Authorization': 'Bearer 67f475b8-1fb8-42c4-9253-cb95eea2c996' } });
+
+        if (!req.headers.get('Authorization')) {
+
+            let tokenizedReq = req.clone({
+                headers: req.headers.set('Authorization','Bearer ' + this.athenticateService.getUser()),
+            })
+
+            return next.handle(tokenizedReq);
+        }
+
         return next.handle(req);
     }
 

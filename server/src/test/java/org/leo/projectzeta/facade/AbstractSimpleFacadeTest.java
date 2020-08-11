@@ -400,7 +400,7 @@ public class AbstractSimpleFacadeTest {
 
 		assertEquals(resultadoEsperado, resultado);
 	}
-
+	
 	private void verifyAll() {
 		verify(mockRepository, mockMongoTemplate);
 	}
