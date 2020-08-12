@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '@environment/environment'
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { Token } from '@model/Token'
 
 const endpoint = environment.REST_API_URL + '/oauth/token';
 const client = environment.REST_CLIENT;
@@ -17,7 +18,7 @@ export class AuthenticateService {
   public currentUser: Observable<any>;
 
   constructor(private http: HttpClient) {
-    this.currentUserSubject = new BehaviorSubject<any>(localStorage.getItem('currentUser'));
+    this.currentUserSubject = new BehaviorSubject<Token>(new Token().deserialize(JSON.parse(localStorage.getItem('currentUser'))));
     this.currentUser = this.currentUserSubject.asObservable();
   }
 
@@ -37,9 +38,12 @@ export class AuthenticateService {
 
     return this.http.post<any>(endpoint, null, { params: params, headers: headers, withCredentials: true })
       .pipe(map(user => {
-        localStorage.setItem('currentUser', user.access_token);
-        this.currentUserSubject.next(user);
-        return user;
+
+        let token = new Token().convert(user);
+
+        localStorage.setItem('currentUser', JSON.stringify(token));
+        this.currentUserSubject.next(token);
+        return token;
       }));
   }
 
@@ -48,7 +52,7 @@ export class AuthenticateService {
     this.currentUserSubject.next(null);
   }
 
-  public getUser(): string {
+  public getUser(): Token {
     return this.currentUserSubject.value;
   }
 

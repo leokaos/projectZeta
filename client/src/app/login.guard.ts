@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Router, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 import { AuthenticateService } from './services/authenticate.service';
+import { Token } from '@model/Token';
 
 @Injectable({ providedIn: 'root' })
 export class LoginGuard implements CanActivate {
@@ -9,12 +10,13 @@ export class LoginGuard implements CanActivate {
 
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
 
-        const currentUser = this.authenticationService.getUser();
+        const currentUser: Token = this.authenticationService.getUser();
 
-        if (currentUser) {
+        if (currentUser && currentUser.expiraEm > new Date()) {
             return true;
         }
 
+        this.authenticationService.logout();
         this.router.navigate(['/login']);
         return false;
     }

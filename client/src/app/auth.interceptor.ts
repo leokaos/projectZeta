@@ -16,7 +16,7 @@ export class CustomHttpInterceptor implements HttpInterceptor {
         if (!req.headers.get('Authorization')) {
 
             let tokenizedReq = req.clone({
-                headers: req.headers.set('Authorization','Bearer ' + this.athenticateService.getUser()),
+                headers: req.headers.set('Authorization','Bearer ' + this.athenticateService.getUser().token),
             })
 
             return next.handle(tokenizedReq);
