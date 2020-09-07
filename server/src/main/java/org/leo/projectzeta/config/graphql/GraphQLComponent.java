@@ -10,6 +10,9 @@ import graphql.schema.idl.RuntimeWiring;
 import graphql.schema.idl.RuntimeWiring.Builder;
 import graphql.schema.idl.SchemaGenerator;
 import graphql.schema.idl.SchemaParser;
+
+import org.leo.projectzeta.config.graphql.types.DateCoercing;
+import org.leo.projectzeta.config.graphql.types.TempoCoercing;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -68,7 +71,6 @@ public class GraphQLComponent {
         builder.type(newTypeWiring("Query").dataFetcher("candidatoPorId", graphQLDataFetchers.getCandidatoPorIdFetcher()));
         builder.type(newTypeWiring("Query").dataFetcher("todasAsQualificacoes", graphQLDataFetchers.getTodasAsQualificacoes()));
         builder.type(newTypeWiring("Query").dataFetcher("todosOsCandidatos", graphQLDataFetchers.getTodosOsCandidatos()));
-        builder.type(newTypeWiring("Query").dataFetcher("buscarVagaPorId", graphQLDataFetchers.buscarVagaPorId()));
         builder.type(newTypeWiring("Query").dataFetcher("todasAsEmpresas", graphQLDataFetchers.todasAsEmpresas()));
 
         builder.type(newTypeWiring("Mutation").dataFetcher("selecionarCandidatos", graphQLDataFetchers.selecionarCandidatos()));

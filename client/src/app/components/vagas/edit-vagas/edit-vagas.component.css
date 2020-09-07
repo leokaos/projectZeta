@@ -1,54 +1,20 @@
-::ng-deep .mat-card-header-text {
-    margin: 0px !important;
-}
-
-.default-form>* {
+.div-periodo {
     width: 100%;
 }
 
-#podium-box {
-    margin: 0 auto;
-    display: flex;
+.div-periodo>mat-form-field {
+    width: 25%;
 }
 
-.podium-number {
-    font-weight: bold;
-    font-size: 4em;
-    color: white;
+.div-periodo mat-form-field:last-of-type {
+    margin-left: 30px;
 }
 
-.step-container {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    margin: 0px 10px;
+.panel-ckeditor{
+    margin: 20px 0px;
+    height: 300px;
 }
 
-.step-container>div:first-child {
-    margin-top: auto;
-    text-align: center;
-    margin-bottom: 10px;
-}
-
-.step {
-    text-align: center;
-}
-
-.bg-blue {
-    background-color: #063b65;
-}
-
-#first-step {
-    height: 80%;
-    background-color: #2ecc71;
-}
-
-#second-step {
-    height: 55%;
-    background-color: #f1c40f;
-}
-
-#third-step {
-    height: 40%;
-    background-color: #e74c3c;
+:host ::ng-deep .ck-editor__editable_inline {
+    min-height: 200px !important;
 }

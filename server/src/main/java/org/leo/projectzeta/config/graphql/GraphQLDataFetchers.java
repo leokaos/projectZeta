@@ -136,15 +136,6 @@ public class GraphQLDataFetchers {
 		};
 	}
 
-	public DataFetcher<Vaga> buscarVagaPorId() {
-		return dataFetchingEnvironment -> {
-
-			String vagaId = dataFetchingEnvironment.getArgument("id");
-
-			return vagaFacade.buscarPorId(vagaId);
-		};
-	}
-
 	public DataFetcher<List<Empresa>> todasAsEmpresas() {
 		return dataFetchingEnvironment -> {
 			return empresaFacade.listarTodos();

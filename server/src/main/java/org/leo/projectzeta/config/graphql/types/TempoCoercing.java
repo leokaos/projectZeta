@@ -1,4 +1,4 @@
-package org.leo.projectzeta.config.graphql;
+package org.leo.projectzeta.config.graphql.types;
 
 import org.leo.projectzeta.factory.TempoFactory;
 import org.leo.projectzeta.model.Tempo;

@@ -14,9 +14,7 @@ type Query {
   candidatoPorId(id: String): Candidato
   
   todosOsCandidatos: [Candidato]
-  
-  buscarVagaPorId(id: String): Vaga
-  
+   
   todasAsEmpresas: [Empresa]
 }
 
@@ -68,7 +66,10 @@ type Vaga {
 	empresa: Empresa
 	descricao: String
 	status: String
+	contatoTelefone: String
+	contatoEmail: String
 	periodo: Periodo
+	tags: [String]
 }
 
 type Periodo {

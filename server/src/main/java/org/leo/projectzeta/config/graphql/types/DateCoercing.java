@@ -1,4 +1,4 @@
-package org.leo.projectzeta.config.graphql;
+package org.leo.projectzeta.config.graphql.types;
 
 import java.util.Date;
 
