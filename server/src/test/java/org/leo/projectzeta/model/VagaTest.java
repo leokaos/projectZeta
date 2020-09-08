@@ -47,7 +47,7 @@ public class VagaTest {
 		vaga.selecionarCandidatos(todosOsCandidatos);
 
 		assertEquals(1, vaga.getCandidatosSelecionados().size());
-		assertEquals(c1, vaga.getCandidatosSelecionados().get("100"));
+		assertEquals(c1, vaga.getCandidatosSelecionados().iterator().next().getCandidato());
 		assertEquals(ENTREVISTANDO, vaga.getStatus());
 	}
 
@@ -78,7 +78,7 @@ public class VagaTest {
 		vaga.selecionarCandidatos(todosOsCandidatos);
 
 		assertEquals(1, vaga.getCandidatosSelecionados().size());
-		assertEquals(c1, vaga.getCandidatosSelecionados().get("50"));
+		assertEquals(c1, vaga.getCandidatosSelecionados().iterator().next().getCandidato());
 		assertEquals(ENTREVISTANDO, vaga.getStatus());
 	}
 
@@ -193,7 +193,7 @@ public class VagaTest {
 
 		Vaga vaga = new Vaga();
 		vaga.setStatus(SELECIONANDO_CANDIDATOS);
-		vaga.getCandidatosSelecionados().put("300", new Candidato());
+		vaga.getCandidatosSelecionados().add(new CandidatoSelecionado(300, new Candidato()));
 
 		vaga.iniarEntrevistas();
 

@@ -12,6 +12,7 @@ import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { FormControl } from '@angular/forms';
 import { map, startWith } from 'rxjs/operators';
 import { Observable } from 'rxjs';
+import { Candidato } from '@app/model/Candidato';
 
 @Component({
   selector: 'app-edit-vagas',

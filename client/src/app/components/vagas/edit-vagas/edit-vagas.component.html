@@ -79,7 +79,56 @@
 
                 </div>
 
-                <div fxFlex="35%"></div>
+                <div fxFlex="35%" style="text-align: center;">
+
+                    <h3 class="mat-h3"><b>Candidatos</b></h3>
+
+                    <div id="podium-box" class="row">
+                        <div class="step-container">
+                            <div>
+                                <img [src]="vaga.candidatosSelecionados[1].candidato.avatar" class="avatar-candidate" *ngIf="vaga.candidatosSelecionados.length > 1">
+                            </div>
+                            <div id="second-step" class="bg-blue step podium-number">
+                                <span *ngIf="vaga.candidatosSelecionados.length > 1">
+                                    {{vaga.candidatosSelecionados[1].pontuacao}}%
+                                </span>
+                            </div>
+                        </div>
+                        <div class="step-container">
+                            <div>
+                                <img [src]="vaga.candidatosSelecionados[0].candidato.avatar" class="avatar-candidate" *ngIf="vaga.candidatosSelecionados.length > 0">
+                            </div>
+                            <div id="first-step" class="bg-blue step podium-number">
+                                <span *ngIf="vaga.candidatosSelecionados.length > 0">
+                                    {{vaga.candidatosSelecionados[1].pontuacao}}%
+                                </span>
+                            </div>
+                        </div>
+                        <div class="step-container">
+                            <div>
+                                <img [src]="vaga.candidatosSelecionados[2].candidato.avatar" class="avatar-candidate" *ngIf="vaga.candidatosSelecionados.length == 3">
+                            </div>
+                            <div id="third-step" class="bg-blue step podium-number">
+                                <span *ngIf="vaga.candidatosSelecionados.length == 3">
+                                    {{vaga.candidatosSelecionados[2].pontuacao}}%
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div style="width: 100%; height: 300px;">
+
+                        <h3 class="mat-h3"><b>Exigências</b></h3>
+
+                        <mat-list #exigencias>
+                            <mat-list-item *ngFor="let exigencia of vaga.exigencias">
+                                {{exigencia.fullName()}}
+                            </mat-list-item>
+                        </mat-list>
+
+                    </div>
+
+                </div>
 
             </div>
 

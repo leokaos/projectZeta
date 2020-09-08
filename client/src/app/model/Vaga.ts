@@ -2,6 +2,8 @@ import { Deserializable } from './Deserializable';
 import { Periodo } from './Periodo';
 import { Empresa } from './Empresa';
 import { Candidato } from './Candidato';
+import { Input } from '@angular/core';
+import { Qualificacao } from './Qualificacao';
 
 export class Vaga implements Deserializable {
 
@@ -16,6 +18,7 @@ export class Vaga implements Deserializable {
     contatoTelefone: string;
     contatoEmail: string;
     candidatosSelecionados: any;
+    exigencias: Qualificacao[] = [];
 
     deserialize(input: any): this {
 
@@ -31,6 +34,27 @@ export class Vaga implements Deserializable {
 
         if (input.empresa != undefined && input.empresa != null) {
             this.empresa = new Empresa().deserialize(input.empresa);
+        }
+
+        this.candidatosSelecionados = [];
+
+        if (input.candidatosSelecionados) {
+
+            for (let item of input.candidatosSelecionados) {
+                this.candidatosSelecionados.push({
+                    "candidato": new Candidato().deserialize(item.candidato),
+                    "pontuacao": item.pontuacao
+                });
+            }
+        }
+
+        this.exigencias = [];
+
+        if (input.exigencias) {
+
+            for (let exigencia of input.exigencias) {
+                this.exigencias.push(new Qualificacao().deserialize(exigencia));
+            }
         }
 
         return this;
