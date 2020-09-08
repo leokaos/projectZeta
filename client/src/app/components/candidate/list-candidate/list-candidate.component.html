@@ -8,7 +8,7 @@
     </mat-form-field>
   </div>
 
-  <mat-grid-list #grid rowHeight="1:1" cols="6">
+  <mat-grid-list #grid rowHeight="1:0.9" cols="5">
 
     <mat-grid-tile *ngFor="let candidato of candidatos">
 
@@ -25,8 +25,14 @@
         </mat-card-header>
 
         <mat-card-content>
-
+          <div>
+            <mat-icon class="material-icons-outlined profile-icon">assignment_ind_outline</mat-icon>
+            <span style=" position: absolute; margin-top: 5px; font-size: 20px;">
+              {{candidato.profileRating | percent }}
+            </span>
+          </div>
         </mat-card-content>
+
         <mat-card-actions style="position: absolute;bottom: 24px;right: 24px;">
 
           <button mat-icon-button color="primary" [routerLink]="['/candidato/',candidato.id]" style="float: right;" matTooltip="Editar..." matTooltipPosition="above">

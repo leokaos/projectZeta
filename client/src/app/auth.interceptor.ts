@@ -7,7 +7,7 @@ import { HttpEvent } from '@angular/common/http';
 import { AuthenticateService } from './services/authenticate.service';
 
 @Injectable()
-export class CustomHttpInterceptor implements HttpInterceptor {
+export class AuthenticatorHttpInterceptor implements HttpInterceptor {
 
     constructor(private athenticateService: AuthenticateService) { }
 

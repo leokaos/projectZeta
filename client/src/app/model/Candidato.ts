@@ -13,6 +13,7 @@ export class Candidato implements Deserializable {
     dataComeco: Date;
     email: String;
     avatar: String;
+    profileRating: number;
 
     constructor() {
         this.experiencias = [];
@@ -45,7 +46,24 @@ export class Candidato implements Deserializable {
             this.dataComeco = new Date(input.dataComeco);
         }
 
+        this.gerarRatingProfile();
+
         return this;
+    }
+
+    private gerarRatingProfile(): void {
+
+        let total = 0;
+
+        if (this.avatar) {
+            total += 1;
+        }
+
+        if (this.experiencias && this.experiencias.length > 0) {
+            total += 1;
+        }
+
+        this.profileRating = total/2;
     }
 
     contemNomes(itens: string[]): boolean {

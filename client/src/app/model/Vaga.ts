@@ -46,6 +46,8 @@ export class Vaga implements Deserializable {
                     "pontuacao": item.pontuacao
                 });
             }
+
+            this.candidatosSelecionados = this.candidatosSelecionados.sort((n1, n2) => n2.pontuacao - n1.pontuacao);
         }
 
         this.exigencias = [];
@@ -55,6 +57,7 @@ export class Vaga implements Deserializable {
             for (let exigencia of input.exigencias) {
                 this.exigencias.push(new Qualificacao().deserialize(exigencia));
             }
+
         }
 
         return this;

@@ -19,7 +19,7 @@ export class ListCandidateComponent implements OnInit, AfterContentInit {
   candidatos: Candidato[] = [];
   originalCandidatos: Candidato[] = [];
 
-  gridByBreakpoint = { xl: 6, lg: 6, md: 4, sm: 2, xs: 1 };
+  gridByBreakpoint = { xl: 5, lg: 5, md: 3, sm: 2, xs: 1 };
 
   constructor(private mediaObserver: MediaObserver, private candidatoService: CandidatoService, private apollo: Apollo) { }
 
@@ -68,6 +68,9 @@ query ListarCandidatos {
     id
     titulo
     avatar
+    experiencias {
+      tempo
+    }
   }
 }
 `;

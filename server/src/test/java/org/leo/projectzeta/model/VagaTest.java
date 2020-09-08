@@ -1,7 +1,6 @@
 package org.leo.projectzeta.model;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.fail;
+import static org.junit.Assert.*;
 import static org.leo.projectzeta.model.StatusVaga.AGUARDANDO_INICIO;
 import static org.leo.projectzeta.model.StatusVaga.CANCELADA;
 import static org.leo.projectzeta.model.StatusVaga.ENTREVISTANDO;
@@ -14,6 +13,8 @@ import static org.leo.projectzeta.util.Mensagens.VAGA_SEM_CANDIDATOS_SELECIONADO
 
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
 
 import org.apache.commons.lang3.time.DateUtils;
 import org.assertj.core.util.Lists;
@@ -230,6 +231,17 @@ public class VagaTest {
 			assertEquals(VAGA_SEM_CANDIDATOS_SELECIONADOS, e.getMessage());
 		}
 
+	}
+	
+	@Test
+	public void testName() throws Exception {
+		Set<CandidatoSelecionado> l = new TreeSet<CandidatoSelecionado>();
+		
+		l.add(new CandidatoSelecionado(20, null));
+		l.add(new CandidatoSelecionado(30, null));
+		l.add(new CandidatoSelecionado(10, null));
+		
+		System.out.println(l);
 	}
 
 }

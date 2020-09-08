@@ -2,6 +2,7 @@ package org.leo.projectzeta.model;
 
 import java.io.Serializable;
 
+import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 
 public class CandidatoSelecionado implements Comparable<CandidatoSelecionado>, Serializable {
@@ -41,7 +42,12 @@ public class CandidatoSelecionado implements Comparable<CandidatoSelecionado>, S
 
 	@Override
 	public int compareTo(CandidatoSelecionado o) {
-		return this.pontuacao.compareTo(o.pontuacao);
+		return this.pontuacao.compareTo(o.pontuacao) * -1;
+	}
+
+	@Override
+	public String toString() {
+		return ToStringBuilder.reflectionToString(this);
 	}
 
 }

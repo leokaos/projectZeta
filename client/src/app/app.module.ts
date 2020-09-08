@@ -33,7 +33,7 @@ import { EditVagasComponent } from '@vagas/edit-vagas/edit-vagas.component';
 
 import { ListEmpresasComponent } from '@empresas/list-empresas/list-empresas.component';
 
-import { CustomHttpInterceptor } from './auth.interceptor';
+import { AuthenticatorHttpInterceptor } from './auth.interceptor';
 
 import { AvatarPanelComponent } from '@components/avatar-panel/avatar-panel.component';
 import { EditInlineComponent } from '@components/edit-inline/edit-inline.component';
@@ -76,7 +76,7 @@ import { MAT_DATE_LOCALE } from '@angular/material';
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,
-    useClass: CustomHttpInterceptor,
+    useClass: AuthenticatorHttpInterceptor,
     multi: true
   },
   {

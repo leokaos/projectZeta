@@ -61,7 +61,7 @@ public class Vaga implements Entidade {
 	@DBRef
 	private Set<Qualificacao> exigencias = Sets.newHashSet();
 
-	private Set<CandidatoSelecionado> candidatosSelecionados = Sets.newTreeSet();
+	private Set<CandidatoSelecionado> candidatosSelecionados;
 
 	@NotEmpty
 	private Set<String> tags = Sets.newHashSet();
@@ -170,7 +170,7 @@ public class Vaga implements Entidade {
 	public void selecionarCandidatos(List<Candidato> todosOsCandidatos) {
 
 		if (candidatosSelecionados == null) {
-			this.candidatosSelecionados = Sets.newTreeSet();
+			this.candidatosSelecionados = Sets.newHashSet();
 		}
 
 		for (Candidato candidato : todosOsCandidatos) {
