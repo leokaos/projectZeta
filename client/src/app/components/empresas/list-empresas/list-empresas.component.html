@@ -25,7 +25,7 @@
                         {{element.nome}}
                     </span>
                     <mat-form-field class="default-form-field" *ngIf="!element.id">
-                        <input matInput placeholder="Nome" [(ngModel)]="element.nome" />
+                        <input matInput placeholder="Nome" [(ngModel)]="element.nome" autocomplete="off"/>
                     </mat-form-field>
                 </td>
             </ng-container>

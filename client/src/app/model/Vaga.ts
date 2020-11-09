@@ -2,7 +2,6 @@ import { Deserializable } from './Deserializable';
 import { Periodo } from './Periodo';
 import { Empresa } from './Empresa';
 import { Candidato } from './Candidato';
-import { Input } from '@angular/core';
 import { Qualificacao } from './Qualificacao';
 
 export class Vaga implements Deserializable {
