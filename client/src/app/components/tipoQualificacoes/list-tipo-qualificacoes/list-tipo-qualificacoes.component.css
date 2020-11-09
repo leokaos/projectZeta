@@ -3,18 +3,16 @@
     height: calc(100% - 80px);
 }
 
-.mat-grid-list {
-    padding-bottom: 0px !important;
-}
-
-.lista-qualificacoes {
-    width: 70%;
-    float: left;
-}
-
-.quadro-numeros {
-    width: 30%;
+.btn-delete {
     float: right;
+}
+
+::ng-deep .mat-card-header-text {
+    width: 100%;
+}
+
+.descricao-text {
+    font-size: 24px;
 }
 
 .quadro-numeros div {
@@ -34,9 +32,4 @@
 
 .icon-display {
     transform: scale(1.75);
-}
-
-.btnDelete {
-    float: right;
-    margin-top: 10px;
 }

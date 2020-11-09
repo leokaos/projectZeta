@@ -8,29 +8,36 @@
         </button>
     </div>
 
-    <div>
-        <mat-grid-list #grid rowHeight="1:0.56" cols="2" style="width: 75%; margin: 0px auto; padding-bottom: 0px;">
+    <mat-grid-list #grid rowHeight="1:0.5" cols="2">
 
-            <mat-grid-tile *ngFor=" let tipo of tipoQualificacoes">
+        <mat-grid-tile *ngFor=" let tipo of tipoQualificacoes">
 
-                <mat-card style="position: relative; ">
+            <mat-card>
 
-                    <mat-card-header>
-                        <mat-card-title style="font-size: 20px;">{{tipo.descricao}}</mat-card-title>
-                    </mat-card-header>
+                <mat-card-header>
 
-                    <mat-card-content>
+                    <mat-card-title>
+                        <span class="descricao-text">{{tipo.descricao}}</span>
+                        <button mat-icon-button (click)="delete(tipo.id)" class="btn-delete">
+                            <mat-icon>delete</mat-icon>
+                        </button>
+                    </mat-card-title>
 
-                        <div style="width: 100%">
+                </mat-card-header>
 
-                            <div class="lista-qualificacoes">
-                                <mat-list dense>
-                                    <mat-list-item *ngFor="let qualificacao of tipo.qualificacoes">
-                                        <h6 mat-line>{{qualificacao.fullName()}}</h6>
-                                    </mat-list-item>
-                                </mat-list>
-                            </div>
+                <mat-card-content>
 
+                    <div class="container" fxLayout fxLayout.xs="column" fxLayoutAlign="center" fxLayoutGap="60px" fxLayoutGap.xs="0">
+
+                        <div fxFlex="75%">
+                            <mat-list dense>
+                                <mat-list-item *ngFor="let qualificacao of tipo.qualificacoes">
+                                    <h4 mat-line>{{qualificacao.fullName()}}</h4>
+                                </mat-list-item>
+                            </mat-list>
+                        </div>
+
+                        <div fxFlex="25%">
                             <div class="quadro-numeros">
                                 <div>
                                     <mat-icon class="icon-display">cached</mat-icon>
@@ -40,21 +47,16 @@
                                     <mat-icon class="icon-display">reorder</mat-icon>
                                     <span title="Quantidade total de qualificacoes nesta categoria!">{{tipo.qualificacoes.length}}</span>
                                 </div>
-
-                                <button mat-raised-button (click)="delete(tipo.id)" class="btnDelete">Remover</button>
-
                             </div>
-
                         </div>
+                    </div>
 
-                    </mat-card-content>
+                </mat-card-content>
 
-                </mat-card>
+            </mat-card>
 
-            </mat-grid-tile>
+        </mat-grid-tile>
 
-        </mat-grid-list>
-
-    </div>
+    </mat-grid-list>
 
 </div>

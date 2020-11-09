@@ -3,7 +3,7 @@ import { Qualificacao } from '@model/Qualificacao';
 import { QualificacaoService } from '@services/qualificacao.service';
 import { MatSnackBar, MatTableDataSource } from '@angular/material';
 
-import { Component, OnInit } from '@angular/core';
+import { AfterContentInit, Component, OnInit } from '@angular/core';
 import { CandidatoService } from '@app/services/candidato.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Apollo } from 'apollo-angular';
@@ -15,7 +15,7 @@ import { Experiencia } from '@app/model/Experiencia';
   templateUrl: './edit-candidate.component.html',
   styleUrls: ['./edit-candidate.component.css']
 })
-export class EditCandidateComponent implements OnInit {
+export class EditCandidateComponent implements OnInit,AfterContentInit {
 
   candidato: Candidato = new Candidato();
   qualificacoes: Qualificacao[] = [];
@@ -32,8 +32,13 @@ export class EditCandidateComponent implements OnInit {
     private apollo: Apollo) {
 
   }
+  ngAfterContentInit(): void {
+   console.info("AfterContentInit");
+  }
 
   ngOnInit() {
+
+    console.info("OnInit");
 
     this.apollo.watchQuery(
       {
@@ -47,6 +52,8 @@ export class EditCandidateComponent implements OnInit {
           this.candidato = new Candidato().deserialize(result.data.candidatoPorId);
           this.dataSource.data = this.candidato.experiencias;
         });
+
+        this.candidatoService.searchForId(this.route.snapshot.paramMap.get("id")).subscribe(data => console.info(data));
   }
 
   public salvar() {

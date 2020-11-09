@@ -30,7 +30,7 @@ public abstract class AbstractSimpleController<T extends Entidade> implements Si
 
 	@Override
 	@RequestMapping(method = GET, produces = APPLICATION_JSON_UTF8_VALUE)
-	public List<T> buscarPorFiltro(@RequestParam Map<String, Object> parametros) throws BusinessException {
+	public List<T> buscarPorFiltro(@RequestParam(required = false) Map<String, Object> parametros) throws BusinessException {
 
 		if (parametros != null && !parametros.isEmpty()) {
 			return getFacade().buscarPorFiltro(parametros);

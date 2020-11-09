@@ -46,7 +46,7 @@ public class AutorizationServerConfiguration extends AuthorizationServerConfigur
 
 	@Override
 	public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
-		clients.inMemory().withClient("client").secret(oauthClientPasswordEncoder.encode("clientpassword")).scopes("read", "write").authorizedGrantTypes("password", "client_credentials").accessTokenValiditySeconds(36000);
+		clients.inMemory().withClient("client").secret(oauthClientPasswordEncoder.encode("clientpassword")).scopes("read", "write").authorizedGrantTypes("password", "client_credentials","token").accessTokenValiditySeconds(36000);
 	}
 
 	@Override
