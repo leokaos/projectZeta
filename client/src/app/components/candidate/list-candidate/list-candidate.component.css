@@ -2,10 +2,3 @@
    width: calc(100% - 80px);
    height: calc(100% - 80px);
  }
-
- .profile-icon {
-   height: 30px;
-   width: 30px;
-   font-size: 30px;
-   margin-right: 10px;
- }

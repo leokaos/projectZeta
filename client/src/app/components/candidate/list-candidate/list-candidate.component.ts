@@ -18,6 +18,7 @@ export class ListCandidateComponent implements OnInit, AfterContentInit {
 
   candidatos: Candidato[] = [];
   originalCandidatos: Candidato[] = [];
+  vagasPorCandidato: any[] = [];
 
   gridByBreakpoint = { xl: 5, lg: 5, md: 3, sm: 2, xs: 1 };
 
@@ -32,6 +33,7 @@ export class ListCandidateComponent implements OnInit, AfterContentInit {
         (result: any) => {
           this.originalCandidatos = this.candidatoService.assemble(result.data.todosOsCandidatos);
           this.candidatos = this.originalCandidatos;
+          this.vagasPorCandidato = result.data.vagasPorCandidato;
         });
   }
 
@@ -58,6 +60,13 @@ export class ListCandidateComponent implements OnInit, AfterContentInit {
     }
   }
 
+  public getProcessos(id: String): String {
+
+    let item = this.vagasPorCandidato.filter(x => x.id == id)[0];
+
+    return !item? 0 : item['quantidade'];
+  }
+
 }
 
 export const LIST_CANDIDATE_QUERY = gql`
@@ -71,6 +80,10 @@ query ListarCandidatos {
     experiencias {
       tempo
     }
+  }
+  vagasPorCandidato {
+    id
+    quantidade
   }
 }
 `;

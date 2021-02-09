@@ -34,4 +34,4 @@ Utilize o endpoint:
 Para rodar redis-commander -p <PORTA>
 
 * Docker UI Control
-docker run -p 9000:9000 -v //var/run/docker.sock:/var/run/docker.sock --name portainer portainer/portainer
+docker run -p 9000:9000 -v //var/run/docker.sock:/var/run/docker.sock --name portainer portainer/portainer-ce

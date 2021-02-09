@@ -26,9 +26,12 @@
 
         <mat-card-content>
           <div>
-            <mat-icon class="material-icons-outlined profile-icon" matTooltip="Completude do Perfil">assignment_ind_outline</mat-icon>
-            <span style=" position: absolute; margin-top: 5px; font-size: 20px;">
-              {{candidato.profileRating | percent }}
+            <mat-icon matTooltip="Completude do Perfil">assignment_ind</mat-icon>
+            <span>{{candidato.profileRating | percent }}</span>
+            <br>
+            <span>
+              <mat-icon matTooltip="Processos Seletivos">work</mat-icon>
+              <span>{{getProcessos(candidato.id)}}</span>
             </span>
           </div>
         </mat-card-content>

@@ -16,6 +16,8 @@ type Query {
   todosOsCandidatos: [Candidato]
    
   todasAsEmpresas: [Empresa]
+  
+  vagasPorCandidato: [VagasPorCandidato]
 }
 
 type Mutation {
@@ -34,6 +36,11 @@ type Mutation {
 type TipoQualificacao {
   id: String
   descricao: String
+}
+
+type VagasPorCandidato {
+  id: String
+  quantidade: Int
 }
 
 type Candidato {
