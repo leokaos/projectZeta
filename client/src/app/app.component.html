@@ -1,10 +1,10 @@
 <div class="app-container">
 
     <mat-toolbar color="primary" class="app-toolbar">
-        <button mat-icon-button (click)="snav.toggle()" *ngIf="user">
+        <button mat-icon-button (click)="snav.toggle()" *ngIf="user.token" id="toggle-menu">
             <mat-icon>menu</mat-icon>
         </button>
-        <h1 class="app-app-name">System</h1>
+        <h1>System</h1>
     </mat-toolbar>
 
     <mat-sidenav-container class="app-sidenav-container">
@@ -22,10 +22,10 @@
                 <a mat-list-item routerLink="/qualificacoes" (click)="snav.toggle()">
                     <mat-icon class="app-sidenav-icon">school</mat-icon>Qualificações
                 </a>
-                <a mat-list-item routerLink="/tipoQualificacoes" (click)="snav.toggle()">
-                    <mat-icon class="app-sidenav-icon">bookmarks</mat-icon>Tipo de qualificações
+                <a mat-list-item routerLink="/categorias" (click)="snav.toggle()" id="link-categorias">
+                    <mat-icon class="app-sidenav-icon">bookmarks</mat-icon>Categorias
                 </a>
-                <a mat-list-item routerLink="/empresas" (click)="snav.toggle()">
+                <a mat-list-item routerLink="/empresas" (click)="snav.toggle()" id="link-empresas">
                     <mat-icon class="app-sidenav-icon">account_balance</mat-icon>Empresas
                 </a>
             </mat-nav-list>

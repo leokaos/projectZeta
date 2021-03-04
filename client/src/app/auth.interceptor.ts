@@ -4,7 +4,7 @@ import { HttpInterceptor } from '@angular/common/http';
 import { HttpRequest } from '@angular/common/http';
 import { HttpHandler } from '@angular/common/http';
 import { HttpEvent } from '@angular/common/http';
-import { AuthenticateService } from './services/authenticate.service';
+import { AuthenticateService } from '@services/authenticate.service';
 
 @Injectable()
 export class AuthenticatorHttpInterceptor implements HttpInterceptor {
@@ -16,7 +16,7 @@ export class AuthenticatorHttpInterceptor implements HttpInterceptor {
         if (!req.headers.get('Authorization')) {
 
             let tokenizedReq = req.clone({
-                headers: req.headers.set('Authorization','Bearer ' + this.athenticateService.getUser().token),
+                headers: req.headers.set('Authorization', 'Bearer ' + this.athenticateService.getUser().token),
             })
 
             return next.handle(tokenizedReq);
