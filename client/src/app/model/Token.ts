@@ -5,9 +5,7 @@ export class Token implements Deserializable {
     token: string;
     expiraEm: Date;
 
-    constructor() {
-
-    }
+    constructor() { }
 
     deserialize(input: any): this {
 

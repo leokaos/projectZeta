@@ -4,10 +4,8 @@ export class Tempo implements Deserializable {
 
     private static FORMATO = /(([1-9])*y)*(([1-9])*m)*/;
 
-    private value: String;
-
-    anos: number;
-    meses: number;
+    anos: number = 0;
+    meses: number = 0;
 
     constructor() {
 

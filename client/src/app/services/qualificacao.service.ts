@@ -25,7 +25,7 @@ export class QualificacaoService {
 
   public assemble(data: Qualificacao[]): Qualificacao[] {
     let innerQualificacoes: Qualificacao[] = [];
-    data.map((qualificacao: Qualificacao) => { innerQualificacoes.push(new Qualificacao().deserialize(qualificacao)); });
+    data.map((qualificacao: Qualificacao) => { innerQualificacoes.push(new Qualificacao().deserialize(qualificacao)) });
     return innerQualificacoes;
   }
 
@@ -42,7 +42,7 @@ export class QualificacaoService {
     }
   }
 
-  public remover(id: String): Observable<any> {
+  public remove(id: String): Observable<any> {
     return this.http.delete(endpoint + '/' + id);
   }
 

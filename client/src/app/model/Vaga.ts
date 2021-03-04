@@ -46,7 +46,7 @@ export class Vaga implements Deserializable {
                 });
             }
 
-            this.candidatosSelecionados = this.candidatosSelecionados.sort((n1, n2) => n2.pontuacao - n1.pontuacao);
+            this.candidatosSelecionados = this.candidatosSelecionados.sort((n1: any, n2: any) => n2.pontuacao - n1.pontuacao);
         }
 
         this.exigencias = [];

@@ -1,20 +1,20 @@
+import { Categoria } from './Categoria';
 import { Deserializable } from './Deserializable';
-import { TipoQualificacao } from './TipoQualificacao';
 import { Equivalencia } from './Equivalencia';
 
 export class Qualificacao implements Deserializable {
 
-    descricao: string;
-    versao: string;
+    descricao: string = '';
+    versao: string = '';
     id: string;
     equivalencias: Equivalencia[] = [];
-    tipo: TipoQualificacao = new TipoQualificacao();
+    categoria: Categoria = new Categoria();
 
     deserialize(input: any): this {
         Object.assign(this, input);
 
-        if (input.tipo != undefined) {
-            this.tipo = new TipoQualificacao().deserialize(input.tipo);
+        if (input.categoria != undefined) {
+            this.categoria = new Categoria().deserialize(input.categoria);
         }
 
         return this;

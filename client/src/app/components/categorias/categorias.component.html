@@ -1,0 +1,59 @@
+<div class="container">
+
+    <div class="panel-button">
+        <h1 class="mat-h1">Categorias</h1>
+
+        <button mat-fab color="primary" id="adicionar-categoria" (click)="criarCategoria()">
+            <mat-icon>add</mat-icon>
+        </button>
+    </div>
+
+    <mat-grid-list #grid rowHeight="1:0.5" cols="3">
+
+        <mat-grid-tile *ngFor=" let categoria of categorias; index as i;">
+
+            <mat-card>
+
+                <mat-card-header>
+
+                    <mat-card-title>
+                        <span>{{categoria.descricao}}</span>
+                    </mat-card-title>
+
+                </mat-card-header>
+
+                <mat-card-content>
+
+                    <mat-list dense>
+
+                        <mat-list-item>
+                            <mat-icon mat-list-icon>reorder</mat-icon>
+                            <span matBadge="!" matBadgeColor="warn" [matBadgeHidden]="categoria.qualificacoes.length != 0.0" matBadgeOverlap="false" matBadgeSize="small">
+                                Número de Qualificações: {{categoria.qualificacoes.length}}
+                            </span>
+                        </mat-list-item>
+
+                        <mat-list-item>
+                            <mat-icon mat-list-icon>cached</mat-icon>
+                            <span matBadge="!" matBadgeColor="warn" [matBadgeHidden]="categoria.porcentagemEquivalentes() != 0.0" matBadgeOverlap="false" matBadgeSize="small">
+                                Qualificações com ao menos 1 equivalencia: {{categoria.porcentagemEquivalentes() | percent}}
+                            </span>
+                        </mat-list-item>
+
+                    </mat-list>
+
+                </mat-card-content>
+
+                <mat-card-actions class="mat-card-actions-bottom">
+                    <button mat-icon-button (click)="delete(categoria.id)" matTooltip="Excluir" matTooltipPosition="above" id="remover-categoria-{{i}}">
+                        <mat-icon>delete</mat-icon>
+                    </button>
+                </mat-card-actions>
+
+            </mat-card>
+
+        </mat-grid-tile>
+
+    </mat-grid-list>
+
+</div>

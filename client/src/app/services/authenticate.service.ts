@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { environment } from '@environment/environment'
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -43,7 +43,9 @@ export class AuthenticateService {
 
         localStorage.setItem('currentUser', JSON.stringify(token));
         this.currentUserSubject.next(token);
+
         return token;
+
       }));
   }
 

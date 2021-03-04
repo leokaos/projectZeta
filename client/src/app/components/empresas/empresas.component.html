@@ -1,0 +1,68 @@
+<div class="container">
+
+    <div class="panel-button">
+        <h1 class="mat-h1">Empresas</h1>
+
+        <button mat-fab color="primary" id="adicionarEmpresa" (click)="adicionarEmpresa()">
+            <mat-icon>add</mat-icon>
+        </button>
+    </div>
+
+    <div class="mat-elevation-z8 panel-filtro">
+        <mat-form-field class="default-form-field">
+            <input matInput placeholder="Filtrar..." autocomplete="off" (input)="onFiltroChange($event.target.value)" />
+        </mat-form-field>
+    </div>
+
+    <mat-spinner *ngIf="!empresas" diameter="20"></mat-spinner>
+
+    <div class="mat-elevation-z8" *ngIf="empresas">
+
+        <table mat-table [dataSource]="dataSource" matSort>
+
+            <ng-container matColumnDef="nome">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Nome </th>
+                <td mat-cell *matCellDef="let element">
+                    <span *ngIf="element.id != null">
+                        {{element.nome}}
+                    </span>
+                    <mat-form-field class="default-form-field" *ngIf="!element.id">
+                        <input matInput placeholder="Nome" [(ngModel)]="element.nome" autocomplete="off" id="nomeEmpresa" />
+                    </mat-form-field>
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="remover">
+
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Remover </th>
+
+                <td mat-cell *matCellDef="let element; let i = index;">
+
+                    <button mat-icon-button color="primary" (click)="remove(element.id)" *ngIf="element.id" id="remove-empresa-{{i}}">
+                        <mat-icon>delete</mat-icon>
+                    </button>
+
+                    <button mat-icon-button color="primary" (click)="save(i);" *ngIf="!element.id && indexLoading != i" id="adicionar-empresa">
+                        <mat-icon>done</mat-icon>
+                    </button>
+
+                    <button mat-icon-button color="primary" (click)="cancel(i);" *ngIf="!element.id && indexLoading != i" id="cancela-empresa">
+                        <mat-icon>clear</mat-icon>
+                    </button>
+
+                    <mat-spinner diameter="20" *ngIf="indexLoading == i"></mat-spinner>
+
+                </td>
+
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+        </table>
+
+        <mat-paginator [pageSizeOptions]="[10, 25, 100]"></mat-paginator>
+
+    </div>
+
+</div>

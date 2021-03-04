@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Router, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
-import { AuthenticateService } from './services/authenticate.service';
+import { AuthenticateService } from '@services/authenticate.service';
 import { Token } from '@model/Token';
 
 @Injectable({ providedIn: 'root' })
@@ -18,6 +18,7 @@ export class LoginGuard implements CanActivate {
 
         this.authenticationService.logout();
         this.router.navigate(['/login']);
-        return false;
+
+        return true;
     }
 }

@@ -1,4 +1,3 @@
-import { Qualificacao } from './Qualificacao';
 import { Deserializable } from './Deserializable';
 import { Experiencia } from './Experiencia';
 

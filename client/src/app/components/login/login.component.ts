@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
+import { Qualificacao } from '@app/model/Qualificacao';
 import { AuthenticateService } from '@app/services/authenticate.service';
 import { first } from 'rxjs/operators';
 
@@ -8,7 +10,7 @@ import { first } from 'rxjs/operators';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent {
 
   username: string;
   password: string;
@@ -16,19 +18,19 @@ export class LoginComponent implements OnInit {
 
   token: string;
 
-  constructor(private router: Router, private authenticateService: AuthenticateService) { }
-
-  ngOnInit() { }
+  constructor(private router: Router, private authenticateService: AuthenticateService, private snackBar: MatSnackBar) { }
 
   login(): void {
+
     this.authenticateService.login(this.username, this.password).pipe(first())
       .subscribe(
         data => {
           this.router.navigate(['/dashboard']);
         },
-        error => {
-          console.info('erro');
-        });
+        (error) => {
+          this.snackBar.open(error.statusText);
+        }
+      );
   }
 
 }

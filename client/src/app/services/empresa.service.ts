@@ -33,7 +33,7 @@ export class EmpresaService {
     return this.http.get<Empresa>(endpoint + '/' + id);
   }
 
-  public salvar(empresa: Empresa): Observable<Empresa> {
+  public save(empresa: Empresa): Observable<Empresa> {
 
     if (empresa.id != null) {
       return this.http.put<Empresa>(endpoint + '/' + empresa.id, empresa);
@@ -43,7 +43,7 @@ export class EmpresaService {
 
   }
 
-  public remover(id: String): Observable<any> {
+  public remove(id: String): Observable<any> {
     return this.http.delete(endpoint + '/' + id);
   }
 

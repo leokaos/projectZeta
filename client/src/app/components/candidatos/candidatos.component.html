@@ -1,0 +1,46 @@
+<div class="container">
+
+  <div class="panel-button">
+    <h1 class="mat-h1">Candidatos</h1>
+
+    <button mat-fab color="primary" id="adicionarTipoQualificacao" (click)="criarCandidato()">
+      <mat-icon>add</mat-icon>
+    </button>
+  </div>
+
+  <div class="mat-elevation-z8 panel-filtro">
+    <mat-form-field class="default-form-field">
+      <input matInput placeholder="Filtrar..." autocomplete="off" (input)="onFiltroChange($event.target.value)" />
+    </mat-form-field>
+  </div>
+
+  <mat-grid-list #grid rowHeight="1:0.8" cols="5">
+
+    <mat-grid-tile *ngFor="let candidato of candidatos">
+
+      <mat-card>
+
+        <mat-card-header>
+
+          <img mat-card-avatar [src]="candidato.avatar" *ngIf="candidato.avatar" />
+          <mat-icon mat-card-avatar *ngIf="!candidato.avatar">face</mat-icon>
+
+          <mat-card-title>{{candidato.sobrenome}}, {{candidato.nome}}</mat-card-title>
+          <mat-card-subtitle>{{candidato.titulo}}</mat-card-subtitle>
+
+        </mat-card-header>
+
+        <mat-card-actions class="mat-card-actions-bottom">
+          <button mat-icon-button color="primary" [routerLink]="['/candidato/',candidato.id]" style="float: right;" matTooltip="Editar..." matTooltipPosition="above">
+            <mat-icon>edit</mat-icon>
+          </button>
+        </mat-card-actions>
+
+      </mat-card>
+
+    </mat-grid-tile>
+
+  </mat-grid-list>
+
+
+</div>

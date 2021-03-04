@@ -1,6 +1,5 @@
 import { Deserializable } from './Deserializable';
 
-
 export class Evento implements Deserializable {
 
     dataEvento: Date;
@@ -10,8 +9,8 @@ export class Evento implements Deserializable {
 
         Object.assign(this, input);
 
-        if (input.dataEvento != undefined){
-            this.dataEvento = new Date(input.dataEvento);
+        if (input['data-evento'] != undefined) {
+            this.dataEvento = new Date(input['data-evento']);
         }
 
         return this;

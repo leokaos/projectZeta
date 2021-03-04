@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Vaga } from '@app/model/Vaga';
+import { Observable } from 'rxjs';
 import { environment } from '@environment/environment'
 
 const endpoint = environment.REST_API_URL + '/secured/vaga';
@@ -11,32 +11,39 @@ const endpoint = environment.REST_API_URL + '/secured/vaga';
 })
 export class VagaService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+
+  }
 
   public listAll(): Observable<Vaga[]> {
     return this.http.get<Vaga[]>(endpoint);
   }
 
+  public buscarPorFiltro(filtro: any): Observable<Vaga[]> {
+    return this.http.get<Vaga[]>(endpoint, { params: new HttpParams({ fromObject: filtro }) });
+  }
+
   public assemble(data: Vaga[]): Vaga[] {
     let innerVagas: Vaga[] = [];
-    data.map((vaga: Vaga) => { innerVagas.push(new Vaga().deserialize(vaga)); });
+    data.map((vaga: Vaga) => { innerVagas.push(new Vaga().deserialize(vaga)) });
     return innerVagas;
   }
 
-  public criar(vaga: Vaga): Observable<Vaga> {
-    return this.http.post<Vaga>(endpoint, vaga);
-  }
-
-  public remove(id: String) {
-    return this.http.delete<Vaga>(endpoint + "/" + id);
-  }
-
-  public searchForId(id: string): Observable<Vaga> {
+  public buscarPorId(id: string) {
     return this.http.get<Vaga>(endpoint + '/' + id);
   }
 
   public salvar(vaga: Vaga): Observable<Vaga> {
-    return this.http.put<Vaga>(endpoint + '/' + vaga.id, Vaga);
+
+    if (vaga.id != null) {
+      return this.http.put<Vaga>(endpoint + '/' + vaga.id, Vaga);
+    } else {
+      return this.http.post<Vaga>(endpoint, Vaga);
+    }
+  }
+
+  public remove(id: String): Observable<any> {
+    return this.http.delete(endpoint + '/' + id);
   }
 
 }

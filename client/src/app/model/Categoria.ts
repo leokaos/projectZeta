@@ -1,11 +1,13 @@
 import { Deserializable } from './Deserializable';
 import { Qualificacao } from './Qualificacao';
 
-export class TipoQualificacao implements Deserializable {
+export class Categoria implements Deserializable {
 
     descricao: string;
     id: string;
     qualificacoes: Qualificacao[] = [];
+
+    constructor() { }
 
     public porcentagemEquivalentes() {
 

@@ -6,7 +6,8 @@ export const environment = {
   production: false,
   REST_API_URL: "http://localhost:8090",
   REST_CLIENT: "client",
-  REST_CLIENT_SECRET: "clientpassword"
+  REST_CLIENT_SECRET: "clientpassword",
+  WS_URL: "ws://localhost:8090/ws"
 };
 
 /*

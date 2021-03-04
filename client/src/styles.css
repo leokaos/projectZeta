@@ -1,44 +1,60 @@
 /* You can add global styles to this file, and also import other style files */
 
 @import '~@angular/material/prebuilt-themes/indigo-pink.css';
+
+html, body {
+    height: 100%;
+}
+
 body {
     margin: 0;
-    background-color: #fafafa;
-}
-
-p {
     font-family: Roboto, "Helvetica Neue", sans-serif;
-}
-
-.table-coluna-botao {
-    width: 40px;
-}
-
-.container {
-    margin: 10px;
-    padding: 10px;
-}
-
-.default-form {
-    padding: 20px;
 }
 
 .default-form-field {
     width: 100%;
 }
 
-.spacer {
-    flex: 1 1 auto;
+.panel-button {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 0px 0px 20px 0px;
+}
+
+.panel-button> :first-child {
+    flex-grow: 1;
+}
+
+.mat-card-actions-bottom {
+    position: absolute;
+    bottom: 24px;
+    right: 24px;
+}
+
+.container {
+    padding: 20px;
 }
 
 table {
     width: 100%;
 }
 
-.table-coluna-delete {
-    width: 30px;
-    padding-right: 0px !important;
-    margin-left: 20px;
+form {
+    padding: 16px;
+}
+
+th.th-button {
+    width: 80px;
+}
+
+.panel-filtro {
+    padding: 10px;
+    margin: 20px 0px;
+    width: 50%;
+}
+
+.mat-spinner {
+    width: 200px;
 }
 
 .badge {
@@ -50,18 +66,4 @@ table {
 .badge.primary {
     background-color: #3f51b5;
     color: #FFF;
-}
-
-.coluna-botao {
-    width: 40px;
-}
-
-.coluna-double-botao {
-    width: 80px;
-}
-
-.panel-filtro {
-    width: 33%;
-    margin-bottom: 20px;
-    padding: 10px 20px;
 }

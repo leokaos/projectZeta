@@ -1,0 +1,109 @@
+<div class="container">
+
+  <mat-card>
+
+    <mat-card-header>
+
+      <mat-card-title>
+
+        <h2 class="mat-h2" nf-if="qualificacao.id">{{qualificacao.fullName()}}</h2>
+
+      </mat-card-title>
+
+    </mat-card-header>
+
+    <mat-card-content>
+
+      <form>
+
+        <div class="panel-dados-basicos">
+
+          <h3 class="mat-h3">Dados Básicos</h3>
+
+          <mat-form-field class="default-form-field">
+            <input matInput placeholder="Descricao" [(ngModel)]="qualificacao.descricao" name="descricao" autocomplete="off" />
+          </mat-form-field>
+
+          <mat-form-field class="default-form-field">
+            <input matInput placeholder="Versao" [(ngModel)]="qualificacao.versao" name="versao" autocomplete="off" />
+          </mat-form-field>
+
+          <mat-form-field class="default-form-field">
+            <mat-label>Categoria</mat-label>
+            <mat-select [(ngModel)]="qualificacao.categoria" name="categoria" (selectionChange)="onChangeCategoria(qualificacao.categoria)" [compareWith]="idComparator">
+              <mat-option *ngFor="let categoria of categorias" [value]="categoria">
+                {{categoria.descricao}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+        </div>
+
+        <div>
+
+          <div class="panel-button">
+
+            <h3 class="mat-h3">Equivalências</h3>
+
+            <button mat-raised-button (click)="adicionarEquivalencia();" color="primary">
+              <mat-icon class="icon-display">add</mat-icon>
+            </button>
+
+          </div>
+
+          <div>
+
+            <table mat-table [dataSource]="dataSource" *ngIf="qualificacao.equivalencias.length > 0">
+
+              <ng-container matColumnDef="qualificacao">
+                <th mat-header-cell *matHeaderCellDef>Qualificação</th>
+                <td mat-cell *matCellDef="let equivalencia; let i = index;" class="column-equivalencia-qualification">
+                  <mat-select [(ngModel)]="equivalencia.destino" name="equivalencia.destino_{{i}}" [compareWith]="idComparator">
+                    <mat-option *ngFor="let q of todasAsQualificacoesDoTipo" [value]="q">
+                      {{q.fullName()}}
+                    </mat-option>
+                  </mat-select>
+                </td>
+              </ng-container>
+
+              <ng-container matColumnDef="valor">
+                <th mat-header-cell *matHeaderCellDef>Valor</th>
+                <td mat-cell *matCellDef="let equivalencia; let i = index;" class="column-equivalencia-valor">
+                  <mat-form-field>
+                    <input matInput [(ngModel)]="equivalencia.valor" name="equivalencia.valor_{{i}}" />
+                    <span matPrefix>%&nbsp;</span>
+                    <span matSuffix>,00</span>
+                  </mat-form-field>
+                </td>
+              </ng-container>
+
+              <ng-container matColumnDef="delete">
+                <th class="th-button" mat-header-cell *matHeaderCellDef class="column-equivalencia-delete"></th>
+                <td mat-cell *matCellDef="let equivalencia; let i = index;">
+                  <button mat-icon-button (click)="removerEquivalencia(i)">
+                    <mat-icon>delete_outline</mat-icon>
+                  </button>
+                </td>
+              </ng-container>
+
+              <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+            </table>
+          </div>
+
+        </div>
+
+      </form>
+
+    </mat-card-content>
+
+    <mat-card-actions>
+      <button mat-stroked-button color="primary" [routerLink]="['/qualificacoes/']">Cancelar</button>
+      <div fxFlex></div>
+      <button mat-stroked-button color="primary" (click)="salvar()">Salvar</button>
+    </mat-card-actions>
+
+  </mat-card>
+
+</div>

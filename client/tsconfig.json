@@ -1,5 +1,5 @@
 {
-  "compileOnSave": false,
+  "compileOnSave": true,
   "compilerOptions": {
     "baseUrl": "./",
     "outDir": "./dist/out-tsc",
@@ -7,32 +7,51 @@
     "declaration": false,
     "downlevelIteration": true,
     "experimentalDecorators": true,
-    "module": "esnext",
     "moduleResolution": "node",
     "importHelpers": true,
     "target": "es2015",
-    "typeRoots": [
-      "node_modules/@types"
-    ],
+    "module": "es2020",
     "lib": [
       "es2018",
       "dom",
       "esnext.asynciterable"
-    ],    
+    ],
     "paths": {
-      "@app/*": ["src/app/*"],
-      "@components/*": ["src/app/components/*"],
-      "@candidate/*": ["src/app/components/candidate/*"],
-      "@qualificacoes/*": ["src/app/components/qualificacoes/*"],
-      "@tipoQualificacoes/*": ["src/app/components/tipoQualificacoes/*"],
-      "@vagas/*": ["src/app/components/vagas/*"],
-      "@empresas/*": ["src/app/components/empresas/*"],
-      "@model/*": ["src/app/model/*"],
-      "@services/*": ["src/app/services/*"],
-      "@environment/*": ["src/environments/*"]
-    }
+      "@app/*": [
+        "src/app/*"
+      ],
+      "@components/*": [
+        "src/app/components/*"
+      ],
+      "@candidate/*": [
+        "src/app/components/candidate/*"
+      ],
+      "@qualificacoes/*": [
+        "src/app/components/qualificacoes/*"
+      ],
+      "@tipoQualificacoes/*": [
+        "src/app/components/tipoQualificacoes/*"
+      ],
+      "@vagas/*": [
+        "src/app/components/vagas/*"
+      ],
+      "@empresas/*": [
+        "src/app/components/empresas/*"
+      ],
+      "@model/*": [
+        "src/app/model/*"
+      ],
+      "@services/*": [
+        "src/app/services/*"
+      ],
+      "@environment/*": [
+        "src/environments/*"
+      ]
+    },
+    "allowSyntheticDefaultImports": true
   },
   "angularCompilerOptions": {
+    "enableI18nLegacyMessageIdFormat": false,
     "fullTemplateTypeCheck": true,
     "strictInjectionParameters": true
   }

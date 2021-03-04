@@ -19,6 +19,10 @@ export class Experiencia implements Deserializable {
             this.qualificacao = new Qualificacao().deserialize(input.qualificacao);
         }
 
+        if (input.tempo != undefined && input.tempo != null) {
+            this.tempo = new Tempo().deserialize(input.tempo);
+        }
+
         return this;
     }
 

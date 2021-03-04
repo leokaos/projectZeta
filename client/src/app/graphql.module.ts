@@ -1,14 +1,14 @@
 import { NgModule } from '@angular/core';
-import { ApolloModule, APOLLO_OPTIONS } from 'apollo-angular';
-import { HttpLinkModule, HttpLink } from 'apollo-angular-link-http';
-import { InMemoryCache } from 'apollo-cache-inmemory';
-import { environment } from '@environment/environment'
-import { HttpHeaders } from '@angular/common/http';
+import { APOLLO_OPTIONS } from 'apollo-angular';
+import { ApolloClientOptions, InMemoryCache } from '@apollo/client/core';
+import { HttpLink } from 'apollo-angular/http';
 import { AuthenticateService } from './services/authenticate.service';
+import { environment } from '@environment/environment';
+import { HttpHeaders } from '@angular/common/http';
 
 const uri = environment.REST_API_URL + '/graphql';
 
-export function createApollo(httpLink: HttpLink, authenticateService: AuthenticateService) {
+export function createApollo(httpLink: HttpLink, authenticateService: AuthenticateService): ApolloClientOptions<any> {
   return {
     link: httpLink.create(
       {
@@ -22,7 +22,6 @@ export function createApollo(httpLink: HttpLink, authenticateService: Authentica
 }
 
 @NgModule({
-  exports: [ApolloModule, HttpLinkModule],
   providers: [
     {
       provide: APOLLO_OPTIONS,
