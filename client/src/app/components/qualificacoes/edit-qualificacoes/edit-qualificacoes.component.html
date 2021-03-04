@@ -26,7 +26,7 @@
 
           <mat-form-field class="default-form-field">
             <mat-label>Tipo da Qualificacao</mat-label>
-            <mat-select [(ngModel)]="qualificacao.tipo" name="tipoQualificacao" (selectionChange)="buscarQualificacoesPorTipo()" [compareWith]="tipoQualificaoCompare">
+            <mat-select [(ngModel)]="qualificacao.tipo" name="categoria" (selectionChange)="buscarQualificacoesPorTipo()" [compareWith]="tipoQualificaoCompare">
               <mat-option *ngFor="let tipo of tipos" [value]="tipo">
                 {{tipo.descricao}}
               </mat-option>

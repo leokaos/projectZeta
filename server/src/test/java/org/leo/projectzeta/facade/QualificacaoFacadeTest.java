@@ -5,9 +5,7 @@ import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
-import static org.leo.projectzeta.util.Mensagens.EQUIVALENCIA_INVALIDA;
-import static org.leo.projectzeta.util.Mensagens.QUALIFICACAO_JA_EXISTE;
-import static org.leo.projectzeta.util.Mensagens.TIPO_QUALIFICACAO_INVALIDA;
+import static org.leo.projectzeta.util.Mensagens.*;
 
 import java.util.Optional;
 
@@ -18,10 +16,10 @@ import org.easymock.TestSubject;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.leo.projectzeta.exception.BusinessException;
+import org.leo.projectzeta.model.Categoria;
 import org.leo.projectzeta.model.Qualificacao;
-import org.leo.projectzeta.model.TipoQualificacao;
 import org.leo.projectzeta.repository.QualificacaoRepository;
-import org.leo.projectzeta.repository.TipoQualificacaoRepository;
+import org.leo.projectzeta.repository.CategoriaRepository;
 
 import com.google.common.collect.Lists;
 
@@ -32,24 +30,24 @@ public class QualificacaoFacadeTest {
 	private QualificacaoFacade facade = new QualificacaoFacade();
 
 	@Mock(type = MockType.STRICT)
-	private TipoQualificacaoRepository mockTipoQualificacaoRepository;
+	private CategoriaRepository mockCategoriaRepository;
 
 	@Mock(type = MockType.STRICT)
 	private QualificacaoRepository mockQualificacaoRepository;
 
 	@Test
-	public void deveriaRetornarUmErrorPoisNaoExisteTipoQualificacaoTest() {
+	public void deveriaRetornarUmErrorPoisNaoExisteCategoriaTest() {
 
-		TipoQualificacao tipo = new TipoQualificacao();
-		tipo.setDescricao("TESTE");
+		Categoria categoria = new Categoria();
+		categoria.setDescricao("TESTE");
 
 		Qualificacao qualificacao = new Qualificacao();
 		qualificacao.setDescricao("TESTE");
 		qualificacao.setVersao("10");
-		qualificacao.setTipo(tipo);
+		qualificacao.setCategoria(categoria);
 
 		expect(mockQualificacaoRepository.findByDescricaoAndVersao("TESTE", "10")).andReturn(null);
-		expect(mockTipoQualificacaoRepository.findByDescricao("TESTE")).andReturn(Lists.newArrayList());
+		expect(mockCategoriaRepository.findByDescricao("TESTE")).andReturn(Lists.newArrayList());
 
 		replayAll();
 
@@ -58,25 +56,25 @@ public class QualificacaoFacadeTest {
 			fail();
 		} catch (BusinessException e) {
 			assertEquals(BusinessException.class, e.getClass());
-			assertEquals(TIPO_QUALIFICACAO_INVALIDA, e.getMessage());
+			assertEquals(CATEGORIA_INVALIDA, e.getMessage());
 		}
 
 		verifyAll();
 	}
 
 	@Test
-	public void deveriaRetornarUmErrorPoisExisteMaisDeUmTipoQualificacaoTest() {
+	public void deveriaRetornarUmErrorPoisExisteMaisDeUmCategoriaTest() {
 
-		TipoQualificacao tipo = new TipoQualificacao();
-		tipo.setDescricao("TESTE");
+		Categoria categoria = new Categoria();
+		categoria.setDescricao("TESTE");
 
 		Qualificacao qualificacao = new Qualificacao();
 		qualificacao.setDescricao("TESTE");
 		qualificacao.setVersao("10");
-		qualificacao.setTipo(tipo);
+		qualificacao.setCategoria(categoria);
 
 		expect(mockQualificacaoRepository.findByDescricaoAndVersao("TESTE", "10")).andReturn(null);
-		expect(mockTipoQualificacaoRepository.findByDescricao("TESTE")).andReturn(Lists.newArrayList(tipo, tipo));
+		expect(mockCategoriaRepository.findByDescricao("TESTE")).andReturn(Lists.newArrayList(categoria, categoria));
 
 		replayAll();
 
@@ -85,7 +83,7 @@ public class QualificacaoFacadeTest {
 			fail();
 		} catch (BusinessException e) {
 			assertEquals(BusinessException.class, e.getClass());
-			assertEquals(TIPO_QUALIFICACAO_INVALIDA, e.getMessage());
+			assertEquals(CATEGORIA_INVALIDA, e.getMessage());
 		}
 
 		verifyAll();
@@ -94,19 +92,19 @@ public class QualificacaoFacadeTest {
 	@Test
 	public void deveriaRetornarSucessoTest() {
 
-		TipoQualificacao tipo = new TipoQualificacao();
-		tipo.setDescricao("TESTE");
+		Categoria categoria = new Categoria();
+		categoria.setDescricao("TESTE");
 
-		TipoQualificacao tipoComId = new TipoQualificacao();
-		tipoComId.setDescricao("TESTE");
-		tipoComId.setId("123");
+		Categoria categoriaComId = new Categoria();
+		categoriaComId.setDescricao("TESTE");
+		categoriaComId.setId("123");
 
 		Qualificacao qualificacao = new Qualificacao();
 		qualificacao.setDescricao("TESTE");
 		qualificacao.setVersao("7");
-		qualificacao.setTipo(tipo);
+		qualificacao.setCategoria(categoria);
 
-		expect(mockTipoQualificacaoRepository.findByDescricao("TESTE")).andReturn(Lists.newArrayList(tipoComId));
+		expect(mockCategoriaRepository.findByDescricao("TESTE")).andReturn(Lists.newArrayList(categoriaComId));
 		expect(mockQualificacaoRepository.findByDescricaoAndVersao("TESTE", "7")).andReturn(null);
 		expect(mockQualificacaoRepository.insert(qualificacao)).andReturn(qualificacao);
 
@@ -122,28 +120,28 @@ public class QualificacaoFacadeTest {
 
 		verifyAll();
 
-		assertEquals("123", qualificacaoSalva.getTipo().getId());
+		assertEquals("123", qualificacaoSalva.getCategoria().getId());
 	}
 
 	@Test
 	public void deveriaRetornarSucessoAtualizarTest() {
 
-		TipoQualificacao tipo = new TipoQualificacao();
-		tipo.setDescricao("TESTE");
+		Categoria categoria = new Categoria();
+		categoria.setDescricao("TESTE");
 
-		TipoQualificacao tipoComId = new TipoQualificacao();
-		tipoComId.setDescricao("TESTE");
-		tipoComId.setId("123");
+		Categoria categoriaComId = new Categoria();
+		categoriaComId.setDescricao("TESTE");
+		categoriaComId.setId("123");
 
 		Qualificacao qualificacao = new Qualificacao();
 		qualificacao.setDescricao("TESTE");
 		qualificacao.setVersao("7");
-		qualificacao.setTipo(tipo);
+		qualificacao.setCategoria(categoria);
 		qualificacao.setId("456");
 
 		expect(mockQualificacaoRepository.existsById("456")).andReturn(true);
 		expect(mockQualificacaoRepository.findByDescricaoAndVersao("TESTE", "7")).andReturn(null);
-		expect(mockTipoQualificacaoRepository.findByDescricao("TESTE")).andReturn(Lists.newArrayList(tipoComId));
+		expect(mockCategoriaRepository.findByDescricao("TESTE")).andReturn(Lists.newArrayList(categoriaComId));
 		expect(mockQualificacaoRepository.save(qualificacao)).andReturn(qualificacao);
 
 		replayAll();
@@ -158,35 +156,35 @@ public class QualificacaoFacadeTest {
 
 		verifyAll();
 
-		assertEquals("123", qualificacaoSalva.getTipo().getId());
+		assertEquals("123", qualificacaoSalva.getCategoria().getId());
 	}
 
 	@Test
 	public void deveriaRetornarErroAtualizarEquivalenciaNotExistsTest() {
 
-		TipoQualificacao tipo = new TipoQualificacao();
-		tipo.setDescricao("TESTE");
+		Categoria categoria = new Categoria();
+		categoria.setDescricao("TESTE");
 
-		TipoQualificacao tipoComId = new TipoQualificacao();
-		tipoComId.setDescricao("TESTE");
-		tipoComId.setId("123");
+		Categoria categoriaComId = new Categoria();
+		categoriaComId.setDescricao("TESTE");
+		categoriaComId.setId("123");
 
 		Qualificacao qualificacao = new Qualificacao();
 		qualificacao.setDescricao("TESTE");
 		qualificacao.setVersao("7");
-		qualificacao.setTipo(tipo);
+		qualificacao.setCategoria(categoria);
 		qualificacao.setId("456");
 
 		Qualificacao innerQualificacao = new Qualificacao();
 		innerQualificacao.setDescricao("TESTE 2");
-		innerQualificacao.setTipo(tipo);
+		innerQualificacao.setCategoria(categoria);
 		innerQualificacao.setId("Q2");
 
 		qualificacao.addEquivalencia(innerQualificacao, 70);
 
 		expect(mockQualificacaoRepository.existsById("456")).andReturn(true);
 		expect(mockQualificacaoRepository.findByDescricaoAndVersao("TESTE", "7")).andReturn(null);
-		expect(mockTipoQualificacaoRepository.findByDescricao("TESTE")).andReturn(Lists.newArrayList(tipoComId));
+		expect(mockCategoriaRepository.findByDescricao("TESTE")).andReturn(Lists.newArrayList(categoriaComId));
 		expect(mockQualificacaoRepository.findById("Q2")).andReturn(Optional.empty());
 
 		replayAll();
@@ -230,11 +228,11 @@ public class QualificacaoFacadeTest {
 	}
 
 	private void replayAll() {
-		replay(mockTipoQualificacaoRepository, mockQualificacaoRepository);
+		replay(mockCategoriaRepository, mockQualificacaoRepository);
 	}
 
 	private void verifyAll() {
-		verify(mockTipoQualificacaoRepository, mockQualificacaoRepository);
+		verify(mockCategoriaRepository, mockQualificacaoRepository);
 	}
 
 }

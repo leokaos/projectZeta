@@ -1,140 +1,138 @@
 package org.leo.projectzeta.model;
 
-import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
-
-import javax.validation.Valid;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
-
+import com.google.common.collect.Sets;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.leo.projectzeta.api.Entidade;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import com.google.common.collect.Sets;
+import javax.validation.Valid;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Document(collection = "qualificacao")
 public class Qualificacao implements Entidade {
 
-	private static final long serialVersionUID = -8953603121364594301L;
+    private static final long serialVersionUID = -8953603121364594301L;
 
-	@Id
-	private String id;
+    @Id
+    private String id;
 
-	@NotEmpty
-	private String descricao;
+    @NotEmpty
+    private String descricao;
 
-	@NotEmpty
-	private String versao;
+    @NotEmpty
+    private String versao;
 
-	@Valid
-	@NotNull
-	@DBRef
-	private TipoQualificacao tipo;
+    @Valid
+    @NotNull
+    @DBRef
+    private Categoria categoria;
 
-	@Valid
-	private Set<Equivalencia> equivalencias = Sets.newHashSet();
+    @Valid
+    private Set<Equivalencia> equivalencias = Sets.newHashSet();
 
-	public Qualificacao() {
-		super();
-	}
+    public Qualificacao() {
+        super();
+    }
 
-	@Override
-	public String getId() {
-		return id;
-	}
+    @Override
+    public String getId() {
+        return id;
+    }
 
-	public void setId(String id) {
-		this.id = id;
-	}
+    public void setId(String id) {
+        this.id = id;
+    }
 
-	public String getDescricao() {
-		return descricao;
-	}
+    public String getDescricao() {
+        return descricao;
+    }
 
-	public void setDescricao(String descricao) {
-		this.descricao = descricao;
-	}
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
+    }
 
-	public String getVersao() {
-		return versao;
-	}
+    public String getVersao() {
+        return versao;
+    }
 
-	public void setVersao(String versao) {
-		this.versao = versao;
-	}
+    public void setVersao(String versao) {
+        this.versao = versao;
+    }
 
-	public TipoQualificacao getTipo() {
-		return tipo;
-	}
+    public Categoria getCategoria() {
+        return categoria;
+    }
 
-	public void setTipo(TipoQualificacao tipo) {
-		this.tipo = tipo;
-	}
+    public void setCategoria(Categoria categoria) {
+        this.categoria = categoria;
+    }
 
-	public Set<Equivalencia> getEquivalencias() {
-		return equivalencias;
-	}
+    public Set<Equivalencia> getEquivalencias() {
+        return equivalencias;
+    }
 
-	public void setEquivalencias(Set<Equivalencia> equivalencias) {
-		this.equivalencias = equivalencias;
-	}
+    public void setEquivalencias(Set<Equivalencia> equivalencias) {
+        this.equivalencias = equivalencias;
+    }
 
-	public void addEquivalencia(Qualificacao qualificacao, int valor) {
+    public void addEquivalencia(Qualificacao qualificacao, int valor) {
 
-		Equivalencia eq = new Equivalencia();
+        Equivalencia eq = new Equivalencia();
 
-		eq.setDestino(qualificacao);
-		eq.setValor(valor);
+        eq.setDestino(qualificacao);
+        eq.setValor(valor);
 
-		this.equivalencias.add(eq);
-	}
+        this.equivalencias.add(eq);
+    }
 
-	public Integer getEquivalencia(Qualificacao qualificacao) {
+    public Integer getEquivalencia(Qualificacao qualificacao) {
 
-		if (this.equals(qualificacao)) {
-			return 100;
-		}
+        if (this.equals(qualificacao)) {
+            return 100;
+        }
 
-		List<Equivalencia> exists = this.equivalencias.stream().filter(eq -> eq.getDestino().equals(qualificacao)).collect(Collectors.toList());
+        List<Equivalencia> exists = this.equivalencias.stream().filter(eq -> eq.getDestino().equals(qualificacao)).collect(Collectors.toList());
 
-		if (exists.isEmpty()) {
-			return 0;
-		} else {
-			return exists.iterator().next().getValor();
-		}
+        if (exists.isEmpty()) {
+            return 0;
+        } else {
+            return exists.iterator().next().getValor();
+        }
 
-	}
+    }
 
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		return result;
-	}
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((id == null) ? 0 : id.hashCode());
+        return result;
+    }
 
-	@Override
-	public boolean equals(Object obj) {
+    @Override
+    public boolean equals(Object obj) {
 
-		if (this == obj) {
-			return true;
-		}
+        if (this == obj) {
+            return true;
+        }
 
-		if (obj == null) {
-			return false;
-		}
+        if (obj == null) {
+            return false;
+        }
 
-		if (getClass() != obj.getClass()) {
-			return false;
-		}
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
 
-		Qualificacao other = (Qualificacao) obj;
+        Qualificacao other = (Qualificacao) obj;
 
-		return new EqualsBuilder().append(this.id, other.id).isEquals();
-	}
+        return new EqualsBuilder().append(this.id, other.id).isEquals();
+    }
 
 }

@@ -11,13 +11,13 @@ import { TipoQualificacaoService } from '@app/services/tipoqualificacao.service'
 })
 export class EditTipoQualificacoesComponent implements OnInit {
 
-  tipoQualificacao: TipoQualificacao = new TipoQualificacao();
+  categoria: TipoQualificacao = new TipoQualificacao();
 
   constructor(public dialogRef: MatDialogRef<ListTipoQualificacoesComponent>, private tipoQualificacaoService: TipoQualificacaoService) { }
 
   public onCriarClick(): void {
-    this.tipoQualificacaoService.criar(this.tipoQualificacao).subscribe(
-      (tipoQualificacao: TipoQualificacao) => {
+    this.tipoQualificacaoService.criar(this.categoria).subscribe(
+      (categoria: TipoQualificacao) => {
         this.dialogRef.close();
       });
   }

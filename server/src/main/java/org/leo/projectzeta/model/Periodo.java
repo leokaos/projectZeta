@@ -1,5 +1,7 @@
 package org.leo.projectzeta.model;
 
+import org.codehaus.jackson.annotate.JsonProperty;
+
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.Date;
@@ -18,6 +20,7 @@ public class Periodo implements Serializable {
 		super();
 	}
 
+	@JsonProperty("data-inicial")
 	public Date getDataInicial() {
 		return dataInicial;
 	}
@@ -26,6 +29,7 @@ public class Periodo implements Serializable {
 		this.dataInicial = dataInicial;
 	}
 
+	@JsonProperty("data-final")
 	public Date getDataFinal() {
 		return dataFinal;
 	}

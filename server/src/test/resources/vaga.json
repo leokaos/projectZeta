@@ -19,7 +19,7 @@
          "id":"5ddfc6253369794604abedc8",
          "descricao":"Java",
          "versao":"7",
-         "tipo":{
+         "categoria":{
             "id":"5ddfc5f93369794604abedc6",
             "descricao":"Linguagens de Programacao"
          },
@@ -38,7 +38,7 @@
          "id":"5ddfc62b3369794604abedc9",
          "descricao":"Java",
          "versao":"8",
-         "tipo":{
+         "categoria":{
             "id":"5ddfc5f93369794604abedc6",
             "descricao":"Linguagens de Programacao"
          },
@@ -57,7 +57,7 @@
          "id":"5de6137117eb002468bc2ddf",
          "descricao":"Jira",
          "versao":"1",
-         "tipo":{
+         "categoria":{
             "id":"5ddfc6033369794604abedc7",
             "descricao":"Ferramentas"
          },
@@ -66,9 +66,9 @@
          ]
       }
    ],
-   "candidatosSelecionados":{
+   "candidatosSelecionados":[
 
-   },
+   ],
    "tags":[
       "Scrum Master",
       "Agile",

@@ -1,21 +1,21 @@
 package org.leo.projectzeta.controller;
 
 import org.leo.projectzeta.api.SimpleFacade;
-import org.leo.projectzeta.facade.TipoQualificacaoFacade;
-import org.leo.projectzeta.model.TipoQualificacao;
+import org.leo.projectzeta.facade.CategoriaFacade;
+import org.leo.projectzeta.model.Categoria;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/secured/tipoQualificacao")
-public class TipoQualificacaoController extends AbstractSimpleController<TipoQualificacao> {
+@RequestMapping("/secured/categoria")
+public class CategoriaController extends AbstractSimpleController<Categoria> {
 
 	@Autowired
-	private TipoQualificacaoFacade facade;
+	private CategoriaFacade facade;
 
 	@Override
-	protected SimpleFacade<TipoQualificacao> getFacade() {
+	protected SimpleFacade<Categoria> getFacade() {
 		return this.facade;
 	}
 

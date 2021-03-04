@@ -61,7 +61,7 @@ public class Vaga implements Entidade {
 	@DBRef
 	private Set<Qualificacao> exigencias = Sets.newHashSet();
 
-	private Set<CandidatoSelecionado> candidatosSelecionados;
+	private Set<CandidatoSelecionado> candidatosSelecionados = Sets.newHashSet();
 
 	@NotEmpty
 	private Set<String> tags = Sets.newHashSet();

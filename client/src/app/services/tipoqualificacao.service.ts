@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { TipoQualificacao } from '@app/model/TipoQualificacao';
 import { environment } from '@environment/environment'
 
-const endpoint = environment.REST_API_URL + '/secured/tipoQualificacao';
+const endpoint = environment.REST_API_URL + '/secured/categoria';
 
 @Injectable({
   providedIn: 'root'
@@ -25,8 +25,8 @@ export class TipoQualificacaoService {
     return innerTipoQualificacoes;
   }
 
-  public criar(tipoQualificacao: TipoQualificacao): Observable<TipoQualificacao> {
-    return this.http.post<TipoQualificacao>(endpoint, tipoQualificacao);
+  public criar(categoria: TipoQualificacao): Observable<TipoQualificacao> {
+    return this.http.post<TipoQualificacao>(endpoint, categoria);
   }
 
   public remove(id: String) {

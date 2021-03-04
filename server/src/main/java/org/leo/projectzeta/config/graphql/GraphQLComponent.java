@@ -66,13 +66,14 @@ public class GraphQLComponent {
 
         Builder builder = RuntimeWiring.newRuntimeWiring();
 
-        builder.type(newTypeWiring("Query").dataFetcher("tipoQualificacaoPorId", graphQLDataFetchers.getTipoQualificacaoByIdFetcher()));
-        builder.type(newTypeWiring("Query").dataFetcher("todosOsTiposDeQualificacoes", graphQLDataFetchers.getTodosOsTiposDeQualificacoesFetcher()));
+        builder.type(newTypeWiring("Query").dataFetcher("categoriaPorId", graphQLDataFetchers.getCategoriaByIdFetcher()));
+        builder.type(newTypeWiring("Query").dataFetcher("todasAsCategorias", graphQLDataFetchers.getTodasAsCategoriasFetcher()));
         builder.type(newTypeWiring("Query").dataFetcher("candidatoPorId", graphQLDataFetchers.getCandidatoPorIdFetcher()));
         builder.type(newTypeWiring("Query").dataFetcher("todasAsQualificacoes", graphQLDataFetchers.getTodasAsQualificacoes()));
         builder.type(newTypeWiring("Query").dataFetcher("todosOsCandidatos", graphQLDataFetchers.getTodosOsCandidatos()));
         builder.type(newTypeWiring("Query").dataFetcher("todasAsEmpresas", graphQLDataFetchers.todasAsEmpresas()));
         builder.type(newTypeWiring("Query").dataFetcher("vagasPorCandidato", graphQLDataFetchers.vagasPorCandidato()));
+        builder.type(newTypeWiring("Query").dataFetcher("qualificacaoPorId", graphQLDataFetchers.getQualificacaoPorId()));
 
         builder.type(newTypeWiring("Mutation").dataFetcher("selecionarCandidatos", graphQLDataFetchers.selecionarCandidatos()));
         builder.type(newTypeWiring("Mutation").dataFetcher("iniciarEntrevistas", graphQLDataFetchers.iniciarEntrevistas()));
