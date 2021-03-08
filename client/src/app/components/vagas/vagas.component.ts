@@ -44,6 +44,7 @@ export class VagasComponent implements OnInit {
       }
 
     });
+
     this.websocket.connect('/topic/vagas',
       (data: any) => {
 

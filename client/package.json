@@ -23,7 +23,6 @@
     "@angular/platform-browser-dynamic": "~11.1.2",
     "@angular/router": "~11.1.2",
     "@apollo/client": "^3.0.0",
-    "@ckeditor/ckeditor5-angular": "^2.0.1",
     "@stomp/ng2-stompjs": "^8.0.0",
     "apollo-angular": "^2.4.0",
     "graphql": "^15.0.0",

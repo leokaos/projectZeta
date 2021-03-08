@@ -5,6 +5,8 @@ import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterTestingModule } from '@angular/router/testing';
 import { MaterialComponentsModule } from '@app/modules/material-components.module';
+import { StompService } from '@stomp/ng2-stompjs';
+import Observable from 'zen-observable';
 import { VagasComponent } from './vagas.component';
 
 describe('VagasComponent', () => {
@@ -17,6 +19,7 @@ describe('VagasComponent', () => {
     TestBed.configureTestingModule({
       declarations: [VagasComponent],
       imports: [HttpClientTestingModule, BrowserAnimationsModule, RouterTestingModule, MaterialComponentsModule, FormsModule],
+      providers: [{ provide: StompService, useValue: { subscribe: (topic: String) => { return new Observable(() => { }); } } }],
       schemas: [CUSTOM_ELEMENTS_SCHEMA]
     }).compileComponents();
   }));
@@ -32,7 +35,7 @@ describe('VagasComponent', () => {
     httpMock.verify();
   });
 
-  fit('should load the oportunities into the list', () => {
+  it('should load the oportunities into the list', () => {
 
     defaultLoad();
 

@@ -4,7 +4,9 @@ import { MatDialog } from "@angular/material/dialog";
 import { MatGridList } from "@angular/material/grid-list";
 import { MatSnackBar } from "@angular/material/snack-bar";
 import { Categoria } from "@app/model/Categoria";
+import { Qualificacao } from "@app/model/Qualificacao";
 import { CategoriaService } from "@app/services/categoria.service";
+import { QualificacaoService } from "@app/services/qualificacao.service";
 import { CategoriaComponent } from "../categoria/categoria.component";
 
 @Component({
@@ -21,7 +23,7 @@ export class CategoriasComponent implements OnInit, AfterContentInit {
 
   gridByBreakpoint = { xl: 3, lg: 3, md: 2, sm: 1, xs: 1 };
 
-  constructor(private categoriaService: CategoriaService, private mediaObserver: MediaObserver, private snackBar: MatSnackBar, public dialog: MatDialog) {
+  constructor(private categoriaService: CategoriaService, private qualificacaoService: QualificacaoService, private mediaObserver: MediaObserver, private snackBar: MatSnackBar, public dialog: MatDialog) {
 
   }
 
@@ -34,9 +36,16 @@ export class CategoriasComponent implements OnInit, AfterContentInit {
   ngOnInit(): void {
 
     this.categoriaService.listAll().subscribe(
-
       (innerCategorias: Categoria[]) => {
+
         this.categorias = this.categoriaService.assemble(innerCategorias);
+
+        this.categorias.forEach(categoria => {
+          this.qualificacaoService.buscarPorFiltro({ 'categoria.id': categoria.id }).subscribe(
+            (qualificacoes: Qualificacao[]) => categoria.qualificacoes = this.qualificacaoService.assemble(qualificacoes)
+          );
+        });
+
       });
 
   }

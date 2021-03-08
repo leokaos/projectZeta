@@ -13,11 +13,18 @@ export class LoginGuard implements CanActivate {
         const currentUser: Token = this.authenticationService.getUser();
 
         if (currentUser && currentUser.expiraEm > new Date()) {
+
+            if (state.url === '/' || state.url === 'login') {
+                this.router.navigate(['/dashboard']);
+            }
+
             return true;
         }
 
-        this.authenticationService.logout();
-        this.router.navigate(['/login']);
+        if (state.url !== 'login' && state.url !== '/') {
+            this.authenticationService.logout();
+            this.router.navigate(['/login']);
+        }
 
         return true;
     }

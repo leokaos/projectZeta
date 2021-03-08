@@ -13,6 +13,9 @@
 #cypress
 /cypress
 
+#build
+/build
+
 #VS Code
 /.vscode
 

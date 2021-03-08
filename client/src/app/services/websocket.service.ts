@@ -24,5 +24,5 @@ export const WebSocketConfig: StompConfig = {
     heartbeat_in: 0,
     heartbeat_out: 20000,
     reconnect_delay: 5000,
-    debug: false
+    debug: true
 }

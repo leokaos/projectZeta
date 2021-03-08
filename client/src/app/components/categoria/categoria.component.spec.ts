@@ -36,7 +36,7 @@ describe('CategoriaComponent', () => {
 
   it('should create a category', () => {
 
-    let spyOnClose = spyOn(component.dialog, "close");
+    let spyOnClose = spyOn(component.dialog, "close").and.callThrough();
 
     component.onCriarClick();
 
@@ -50,7 +50,7 @@ describe('CategoriaComponent', () => {
 
   it('should show an error', () => {
 
-    let spyOnOpen = spyOn(component.snackBar, "open");
+    let spyOnOpen = spyOn(component.snackBar, "open").and.callThrough();
 
     component.onCriarClick();
 
@@ -64,7 +64,7 @@ describe('CategoriaComponent', () => {
 
   it('should close the dialog', () => {
 
-    let spyOnClose = spyOn(component.dialog, "close");
+    let spyOnClose = spyOn(component.dialog, "close").and.callThrough();
 
     component.onCancelar();
 

@@ -7,9 +7,9 @@
         </button>
     </div>
 
-    <div class="mat-elevation-z8 out-container">
+    <div class="mat-elevation-z8 out-lista">
 
-        <div *ngFor="let item of listas | keyvalue:asIsOrder" class="out-lista">
+        <div *ngFor="let item of listas | keyvalue:asIsOrder" class="item-lista">
 
             <div class="lista-header">
                 <span>{{labelStatus[item.key]}}</span>
@@ -44,9 +44,7 @@
                 </mat-card>
 
             </div>
-
         </div>
-
     </div>
 
 </div>

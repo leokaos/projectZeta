@@ -8,8 +8,8 @@ import { Vaga } from "@app/model/Vaga";
 import { EmpresaService } from "@app/services/empresa.service";
 import { VagaService } from "@app/services/Vaga.service";
 import { map, startWith } from 'rxjs/operators';
+import { forkJoin } from "rxjs";
 
-import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { Observable } from "@apollo/client/core";
 
 @Component({
@@ -26,15 +26,30 @@ export class VagaComponent implements OnInit {
   empresas: Empresa[] = [];
   filteredEmpresas: Observable<Empresa[]>;
 
-  editor = ClassicEditor;
-
   editVagaFormControl: FormControl = new FormControl();
 
   constructor(private vagaService: VagaService, private empresaService: EmpresaService, private route: ActivatedRoute, private router: Router, private snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
 
-    this.filteredEmpresas = this.editVagaFormControl.valueChanges.pipe(map(value => this.buscarEmpresa(value)));
+    this.filteredEmpresas = new Observable((observer) => {
+      this.editVagaFormControl.valueChanges.pipe(map(value => this.buscarEmpresa(value)));
+    });
+
+    let id = this.route.snapshot.paramMap.get('id');
+
+    if (id) {
+
+      forkJoin([
+        this.vagaService.buscarPorId(id),
+        this.empresaService.listAll()
+      ]).subscribe(result => {
+        this.vaga = new Vaga().deserialize(result[0]);
+        this.editVagaFormControl.setValue(this.vaga.empresa);
+        this.empresas = this.empresaService.assemble(result[1]);
+        this.carregado = true;
+      });
+    }
 
   }
 

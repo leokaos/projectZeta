@@ -78,7 +78,7 @@ describe('EmpresasComponent', () => {
 
   it('should remove the selected company', () => {
 
-    let spyOnOpen = spyOn(component.snackBar, "open");
+    let spyOnOpen = spyOn(component.snackBar, "open").and.callThrough();
 
     defaultLoad();
 
@@ -95,7 +95,7 @@ describe('EmpresasComponent', () => {
 
   it('should NOT remove the selected company due an error on the service', () => {
 
-    let spyOnOpen = spyOn(component.snackBar, "open");
+    let spyOnOpen = spyOn(component.snackBar, "open").and.callThrough();
 
     defaultLoad();
 
@@ -127,7 +127,7 @@ describe('EmpresasComponent', () => {
 
   it('should NOT create a new company, due an error', () => {
 
-    let spyOnOpen = spyOn(component.snackBar, "open");
+    let spyOnOpen = spyOn(component.snackBar, "open").and.callThrough();
 
     defaultLoad();
 

@@ -35,12 +35,20 @@ describe('CategoriasComponent', () => {
 
   it('should get all the categories', () => {
 
-    const deserializeSpy = spyOn(Categoria.prototype, 'deserialize');
+    const deserializeSpy = spyOn(Categoria.prototype, 'deserialize').and.callThrough();
 
-    const req = httpMock.expectOne('http://localhost:8090/secured/categoria');
+    let req = httpMock.expectOne('http://localhost:8090/secured/categoria');
     expect(req.request.method).toBe('GET');
 
-    req.flush([{ "id": "123" }, { "id": "456" }]);
+    req.flush([{ 'id': '123' }, { 'id': '456' }]);
+
+    let buscarQualificacao123 = httpMock.expectOne('http://localhost:8090/secured/qualificacao?categoria.id=123');
+    expect(buscarQualificacao123.request.method).toBe('GET');
+    buscarQualificacao123.flush([]);
+
+    let buscarQualificacao456 = httpMock.expectOne('http://localhost:8090/secured/qualificacao?categoria.id=456');
+    expect(buscarQualificacao456.request.method).toBe('GET');
+    buscarQualificacao456.flush([]);
 
     expect(component.categorias.length).toBe(2);
     expect(deserializeSpy).toHaveBeenCalledTimes(2);
@@ -64,7 +72,7 @@ describe('CategoriasComponent', () => {
 
   it('should delete the category with errors', () => {
 
-    const snackbarSpy = spyOn(TestBed.get(MatSnackBar), 'open');
+    const snackbarSpy = spyOn(TestBed.get(MatSnackBar), 'open').and.callThrough();
 
     component.delete('123');
 

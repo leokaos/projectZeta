@@ -27,7 +27,6 @@ import { MAT_DATE_LOCALE } from '@angular/material/core';
 import { StompConfig, StompService } from '@stomp/ng2-stompjs';
 import { EditInlineComponent } from './components/edit-inline/edit-inline.component';
 import { ShowVagaComponent } from './components/show-vaga/show-vaga.component';
-import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { VagaComponent } from './components/vaga/vaga.component';
 
 @NgModule({
@@ -57,7 +56,6 @@ import { VagaComponent } from './components/vaga/vaga.component';
     AppRoutingModule,
     FormsModule,
     GraphQLModule,
-    CKEditorModule,
     ReactiveFormsModule
   ],
   providers: [

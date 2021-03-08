@@ -55,7 +55,9 @@
                     <mat-tab-group>
 
                         <mat-tab label="Experiencia">
+
                             <div class="tabs-candidato">
+
                                 <div class="panel-button">
                                     <h3 class="mat-h3"></h3>
                                     <button mat-raised-button (click)="adicionarExperiencia()" color="primary">
@@ -67,7 +69,7 @@
 
                                     <ng-container matColumnDef="qualificacao">
                                         <th mat-header-cell *matHeaderCellDef>Qualificação</th>
-                                        <td mat-cell *matCellDef="let experiencia; let i = index;">
+                                        <td mat-cell *matCellDef="let experiencia; let i = index;" class="coluna-qualificacao">
                                             <mat-select [(ngModel)]="experiencia.qualificacao.id" name="experiencia.qualificacao_{{i}}">
                                                 <mat-option *ngFor="let q of qualificacoes" [value]="q.id">
                                                     {{q.fullName()}}
@@ -78,7 +80,7 @@
 
                                     <ng-container matColumnDef="tempo">
                                         <th mat-header-cell *matHeaderCellDef> Tempo </th>
-                                        <td mat-cell *matCellDef="let experiencia; let i = index;">
+                                        <td mat-cell *matCellDef="let experiencia; let i = index;" class="coluna-tempo">
                                             <mat-form-field>
                                                 <input matInput [(ngModel)]="experiencia.tempo" name="equivalencia.tempo_{{i}}" autocomplete="off" />
                                             </mat-form-field>

@@ -1,35 +1,41 @@
+import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
+import { CUSTOM_ELEMENTS_SCHEMA, Type } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
-import { EditVagasComponent } from './edit-vagas.component';
-import { MaterialComponentsModule } from '@app/modules/material-components.module';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { RouterTestingModule } from '@angular/router/testing';
+import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { ApolloTestingModule } from 'apollo-angular/testing';
-import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
+import { RouterTestingModule } from '@angular/router/testing';
+import { MaterialComponentsModule } from '@app/modules/material-components.module';
+import { StompService } from '@stomp/ng2-stompjs';
+import { VagaComponent } from './vaga.component';
 
-describe('EditVagasComponent', () => {
-  let component: EditVagasComponent;
-  let fixture: ComponentFixture<EditVagasComponent>;
+describe('VagaComponent', () => {
+
+  let component: VagaComponent;
+  let fixture: ComponentFixture<VagaComponent>;
+  let httpMock: HttpTestingController;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [EditVagasComponent],
-      imports: [MaterialComponentsModule, FormsModule, RouterTestingModule, BrowserAnimationsModule, HttpClientTestingModule, ApolloTestingModule, FormsModule, ReactiveFormsModule, CKEditorModule],
+      declarations: [VagaComponent],
+      imports: [HttpClientTestingModule, BrowserAnimationsModule, RouterTestingModule, MaterialComponentsModule, FormsModule],
       schemas: [CUSTOM_ELEMENTS_SCHEMA]
-    })
-      .compileComponents();
+    }).compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(EditVagasComponent);
+    fixture = TestBed.createComponent(VagaComponent);
     component = fixture.componentInstance;
+    httpMock = fixture.debugElement.injector.get<HttpTestingController>(HttpTestingController as Type<HttpTestingController>);
     fixture.detectChanges();
   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
+  afterEach(() => {
+    httpMock.verify();
   });
+
+  function defaultLoad() {
+
+
+  }
+
 });

@@ -37,7 +37,7 @@ describe('CandidatosComponent', () => {
 
   it('should load all candidates', () => {
 
-    const deserializeSpy = spyOn(Candidato.prototype, 'deserialize');
+    const deserializeSpy = spyOn(Candidato.prototype, 'deserialize').and.callThrough();
 
     defaultLoad();
 

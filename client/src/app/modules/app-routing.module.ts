@@ -10,6 +10,7 @@ import { EmpresasComponent } from '@app/components/empresas/empresas.component';
 import { LoginComponent } from '@app/components/login/login.component';
 import { QualificacaoComponent } from '@app/components/qualificacao/qualificacao.component';
 import { QualificacoesComponent } from '@app/components/qualificacoes/qualificacoes.component';
+import { VagaComponent } from '@app/components/vaga/vaga.component';
 import { VagasComponent } from '@app/components/vagas/vagas.component';
 import { LoginGuard } from '@app/login.guard';
 
@@ -23,9 +24,9 @@ const routes: Routes = [
   { path: 'qualificacao', component: QualificacaoComponent, canActivate: [LoginGuard] },
   { path: 'categorias', component: CategoriasComponent, canActivate: [LoginGuard] },
   { path: 'vagas', component: VagasComponent, canActivate: [LoginGuard] },
-  // { path: 'vaga/:id', component: EditVagasComponent, canActivate: [LoginGuard] },
+  { path: 'vaga/:id', component: VagaComponent, canActivate: [LoginGuard] },
   { path: 'empresas', component: EmpresasComponent, canActivate: [LoginGuard] },
-  { path: '**', component: LoginComponent }
+  { path: '**', component: LoginComponent, canActivate: [LoginGuard] }
 ];
 
 @NgModule({
