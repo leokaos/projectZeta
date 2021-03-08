@@ -43,6 +43,9 @@ export class QualificacaoComponent implements AfterViewInit {
 
         this.carregarQualificacoesPorTipo(this.qualificacao.categoria);
       });
+
+    } else {
+      this.categoriaService.listAll().subscribe((categorias: Categoria[]) => this.categorias = this.categoriaService.assemble(categorias));
     }
   }
 

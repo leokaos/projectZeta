@@ -1,4 +1,6 @@
 import { AfterContentInit, Component, OnInit } from '@angular/core';
+import { Vaga } from '@app/model/Vaga';
+import { VagaService } from '@app/services/Vaga.service';
 import { CloudData, CloudOptions } from 'angular-tag-cloud-module';
 
 @Component({
@@ -9,33 +11,38 @@ import { CloudData, CloudOptions } from 'angular-tag-cloud-module';
 export class PanelQualificacoesComponent implements OnInit {
 
   nome: String;
+  carregado: boolean = false;
 
   options: CloudOptions;
   data: CloudData[];
 
-  constructor() { }
+  constructor(private vagaService: VagaService) { }
 
   ngOnInit(): void {
 
-    Promise.resolve(null).then(() => {
+    this.vagaService.listAll().subscribe((vagas: Vaga[]) => {
 
-      this.options = {
-        width: 1,
-        height: 200,
-        overflow: false,
-      };
+      let innerVagas: Vaga[] = this.vagaService.assemble(vagas);
 
-      this.data = [
-        { text: 'Kubernetes 1.14', weight: 2, color: '#162b77' },
-        { text: 'HTML 5', weight: 2, color: '#162b77' },
-        { text: 'JavaScript ES5', weight: 1, color: '#162b77' },
-        { text: 'Java 8', weight: 2, color: '#162b77' },
-        { text: 'Docker 1', weight: 2, color: '#162b77' },
-        { text: 'CSS 3', weight: 1, color: '#162b77' },
-        { text: 'Oracle 12c', weight: 1, color: '#162b77' },
-        { text: 'Gradle 6', weight: 1, color: '#162b77' }
-      ];
+      let exigencias = innerVagas
+        .reduce((c: any, v: any) => c.concat(v.exigencias), [])
+        .reduce((c: any, v: any) => {
+          let key = v.fullName();
+          c[key] = (c[key] || []);
+          c[key].push(v);
+          return c
+        }, {});
 
+      this.options = { width: 1, height: 200, overflow: false, };
+
+      let data = [];
+
+      for (const property in exigencias) {
+        data.push({ text: property, weight: exigencias[property].length, color: '#162b77' });
+      }
+
+      this.data = data;
+      this.carregado = true;
     });
 
   }
