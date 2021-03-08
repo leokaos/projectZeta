@@ -1,0 +1,138 @@
+[
+    {
+        "_id": {
+            "_id": "5f2965330318d40eac5f14e1",
+            "descricao": "Kubernetes",
+            "versao": "1.14",
+            "equivalencias": [],
+            "_class": "org.leo.projectzeta.model.Qualificacao",
+            "categoria": {
+                "$ref": "categoria",
+                "$id": "5f29635c0318d40eac5f14df"
+            }
+        },
+        "total": 2.0
+    },
+    {
+        "_id": {
+            "_id": "5f2bb43c5fcb0202e4927611",
+            "descricao": "HTML",
+            "versao": "5",
+            "equivalencias": [],
+            "_class": "org.leo.projectzeta.model.Qualificacao",
+            "categoria": {
+                "$ref": "categoria",
+                "$id": "6034be0aee599a72482f96f5"
+            }
+        },
+        "total": 2.0
+    },
+    {
+        "_id": {
+            "_id": "5f2bb4695fcb0202e4927615",
+            "descricao": "JavaScript",
+            "versao": "ES5",
+            "equivalencias": [],
+            "_class": "org.leo.projectzeta.model.Qualificacao",
+            "categoria": {
+                "$ref": "categoria",
+                "$id": "6034be0aee599a72482f96f5"
+            }
+        },
+        "total": 1.0
+    },
+    {
+        "_id": {
+            "_id": "5f2912880318d454f49c37fa",
+            "descricao": "Java",
+            "versao": "8",
+            "equivalencias": [
+                {
+                    "destino": {
+                        "$ref": "qualificacao",
+                        "$id": "5f2912930318d454f49c37fc"
+                    },
+                    "valor": 100
+                }
+            ],
+            "_class": "org.leo.projectzeta.model.Qualificacao",
+            "categoria": {
+                "$ref": "categoria",
+                "$id": "5f2912790318d454f49c37f8"
+            }
+        },
+        "total": 2.0
+    },
+    {
+        "_id": {
+            "_id": "5f29658e0318d40eac5f14e3",
+            "descricao": "Docker",
+            "versao": "1",
+            "equivalencias": [],
+            "_class": "org.leo.projectzeta.model.Qualificacao",
+            "categoria": {
+                "$ref": "categoria",
+                "$id": "5f29635c0318d40eac5f14df"
+            }
+        },
+        "total": 2.0
+    },
+    {
+        "_id": {
+            "_id": "5f2bb4475fcb0202e4927613",
+            "descricao": "CSS",
+            "versao": "3",
+            "equivalencias": [],
+            "_class": "org.leo.projectzeta.model.Qualificacao",
+            "categoria": {
+                "$ref": "categoria",
+                "$id": "6034be0aee599a72482f96f5"
+            }
+        },
+        "total": 1.0
+    },
+    {
+        "_id": {
+            "_id": "5f24296808bb3a000110d471",
+            "descricao": "Oracle",
+            "versao": "12c",
+            "equivalencias": [
+                {
+                    "destino": {
+                        "$ref": "qualificacao",
+                        "$id": "5f2427c408bb3a000110d46f"
+                    },
+                    "valor": 100
+                }
+            ],
+            "_class": "org.leo.projectzeta.model.Qualificacao",
+            "categoria": {
+                "$ref": "categoria",
+                "$id": "5f24122808bb3a000110d46d"
+            }
+        },
+        "total": 1.0
+    },
+    {
+        "_id": {
+            "_id": "5f2912ed0318d454f49c3804",
+            "descricao": "Gradle",
+            "versao": "6",
+            "categoria": {
+                "$ref": "categoria",
+                "$id": "5f2912be0318d454f49c3800"
+            },
+            "equivalencias": [
+                {
+                    "destino": {
+                        "$ref": "qualificacao",
+                        "$id": "5f2912e50318d454f49c3802"
+                    },
+                    "valor": 50
+                }
+            ],
+            "_class": "org.leo.projectzeta.model.Qualificacao"
+        },
+        "total": 1.0
+    }
+]

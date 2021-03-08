@@ -28,6 +28,10 @@ import { StompConfig, StompService } from '@stomp/ng2-stompjs';
 import { EditInlineComponent } from './components/edit-inline/edit-inline.component';
 import { ShowVagaComponent } from './components/show-vaga/show-vaga.component';
 import { VagaComponent } from './components/vaga/vaga.component';
+import { PanelVagasComponent } from './components/panel-vagas/panel-vagas.component';
+import { PanelCandidatosComponent } from './components/panel-candidatos/panel-candidatos.component';
+import { PanelQualificacoesComponent } from './components/panel-qualificacoes/panel-qualificacoes.component';
+import { TagCloudModule } from 'angular-tag-cloud-module';
 
 @NgModule({
   declarations: [
@@ -46,7 +50,10 @@ import { VagaComponent } from './components/vaga/vaga.component';
     VagasComponent,
     EditInlineComponent,
     ShowVagaComponent,
-    VagaComponent
+    VagaComponent,
+    PanelVagasComponent,
+    PanelCandidatosComponent,
+    PanelQualificacoesComponent
   ],
   imports: [
     BrowserModule,
@@ -56,7 +63,8 @@ import { VagaComponent } from './components/vaga/vaga.component';
     AppRoutingModule,
     FormsModule,
     GraphQLModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    TagCloudModule
   ],
   providers: [
     {
@@ -75,6 +83,6 @@ import { VagaComponent } from './components/vaga/vaga.component';
     }
   ],
   bootstrap: [AppComponent],
-  entryComponents: [CategoriaComponent, ShowVagaComponent]
+  entryComponents: [CategoriaComponent, ShowVagaComponent, PanelVagasComponent, PanelQualificacoesComponent, PanelCandidatosComponent]
 })
 export class AppModule { }
