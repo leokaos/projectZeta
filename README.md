@@ -7,13 +7,13 @@ Para iniciar o projeto tenha instalado:
 * Gradle
 * Node.js
 
-####Passos para iniciar:
+#### Passos para iniciar:
 
 1. Inicie o banco de dados: docker-compose up mongo
 1. Inicie o servidor de LDAP: docker-compose up ldap
 1. Construa o projeto: gradle build
 
-####Configuracao do OAUTH2
+#### Configuracao do OAUTH2
 
 Utilize o cliente/senha:
 * client/clientpassword
@@ -22,16 +22,13 @@ Utilize o endpoint:
 * POST http://localhost:8090/oauth/token?password=<SENHA_USUARIO>&grant_type=password&client_id=client&username=<NOME_USUARIO>
 
 
-####URLS:
+#### URLS:
 
 * [Swagger](http://localhost:8090/swagger-ui.html)
 * [UI](http://localhost:4200)
 
-####Utilitários
+#### Utilitários
 
-* npm install -g redis-commander -> Redis GUI
+* **Redis GUI** npm install -g redis-commander -> Para rodar redis-commander -p <PORTA>
 
-Para rodar redis-commander -p <PORTA>
-
-* Docker UI Control
-docker run -p 9000:9000 -v //var/run/docker.sock:/var/run/docker.sock --name portainer portainer/portainer-ce
+* **Docker UI Control** docker run -p 9000:9000 -v //var/run/docker.sock:/var/run/docker.sock --name portainer portainer/portainer-ce
