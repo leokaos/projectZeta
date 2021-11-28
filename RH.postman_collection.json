@@ -1,0 +1,130 @@
+{
+	"info": {
+		"_postman_id": "36c9e82c-f451-4af8-8ee5-0a80729fc8bb",
+		"name": "RH",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "CREATE VAGA",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJncnVwb3MiOltdLCJleHAiOjE2MzgxNjE0NzMsInVzZXJfbmFtZSI6ImxlbyIsImp0aSI6Ijk2NjQ4ZTU5LWI1ZWEtNDU5OC1hZjI4LTNlYzVmZTE1YzMxMyIsImNsaWVudF9pZCI6ImNsaWVudCIsInNjb3BlIjpbInJlYWQiLCJ3cml0ZSJdfQ.ouIA56ksi8fRMMQp8IUYQX-WsIY3xVsDWQLhYAxdRl4",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"empresa\": {\r\n        \"id\": \"61a3cf9a09456c3e040ad53c\",\r\n        \"nome\": \"Churros INC\"\r\n    },\r\n    \"status\": \"NOVA\",\r\n    \"titulo\": \"Manager\",\r\n    \"descricao\": \"manager bom\",\r\n    \"periodo\": {\r\n        \"dataInicial\": 1567534932414,\r\n        \"dataFinal\": 1578075732414\r\n    },\r\n    \"dataEntrada\": 1564856532414,\r\n    \"contatoTelefone\": \"+49 1525 234 8042\",\r\n    \"contatoEmail\": \"leokaos@gmail.com\",\r\n    \"exigencias\": [\r\n        {\r\n            \"id\": \"61a3ceb009456c3e040ad537\",\r\n            \"descricao\": \"Oracle\",\r\n            \"versao\": \"11c\",\r\n            \"categoria\": {\r\n                \"id\": \"61a3cea109456c3e040ad535\",\r\n                \"descricao\": \"Database\"\r\n            },\r\n            \"equivalencias\": []\r\n        }\r\n    ],\r\n    \"candidatosSelecionados\": [],\r\n    \"tags\": [\r\n        \"Scrum Master\",\r\n        \"Agile\",\r\n        \"Jira\"\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8090/secured/vaga",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"secured",
+						"vaga"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "BUSCAR VAGA",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJncnVwb3MiOltdLCJleHAiOjE2MzgxNjE0NzMsInVzZXJfbmFtZSI6ImxlbyIsImp0aSI6Ijk2NjQ4ZTU5LWI1ZWEtNDU5OC1hZjI4LTNlYzVmZTE1YzMxMyIsImNsaWVudF9pZCI6ImNsaWVudCIsInNjb3BlIjpbInJlYWQiLCJ3cml0ZSJdfQ.ouIA56ksi8fRMMQp8IUYQX-WsIY3xVsDWQLhYAxdRl4",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8090/secured/vaga",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"secured",
+						"vaga"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE VAGA",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJncnVwb3MiOltdLCJleHAiOjE2MzgxNjE0NzMsInVzZXJfbmFtZSI6ImxlbyIsImp0aSI6Ijk2NjQ4ZTU5LWI1ZWEtNDU5OC1hZjI4LTNlYzVmZTE1YzMxMyIsImNsaWVudF9pZCI6ImNsaWVudCIsInNjb3BlIjpbInJlYWQiLCJ3cml0ZSJdfQ.ouIA56ksi8fRMMQp8IUYQX-WsIY3xVsDWQLhYAxdRl4",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8090/secured/vaga/61a3d37e09456c0e388ec359",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"secured",
+						"vaga",
+						"61a3d37e09456c0e388ec359"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

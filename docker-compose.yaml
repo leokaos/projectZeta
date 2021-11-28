@@ -4,7 +4,7 @@ services:
         image: mongo:latest
         container_name: rh-mongo
         volumes:
-          - ./data/db
+          - .\data\db:/tmp/data
         ports:
             - 27017:27017
         expose:
@@ -16,25 +16,6 @@ services:
             - 6379:6379
         expose:
             - 6379
-    web:
-        build: ./client/
-        container_name: rh-web
-        ports:
-          - 4200:4200
-        expose: 
-          - 4200
-    server:
-        build: ./server/
-        container_name: rh-server
-        ports:
-          - 8090:8090
-        expose: 
-          - 8090
-        environment:
-          LDAP_SERVER: ldap://rh-ldap:389/dc=rh,dc=system,dc=org
-          MONGO_HOST : rh-mongo
-          SPRING_KAFKA_BOOTSTRAPSERVERS : rh-kafka:9092
-          CACHE_HOSTNAME: rh-redis
     ldap:
         image: dinkel/openldap
         container_name: rh-ldap
@@ -57,7 +38,7 @@ services:
         image: prom/prometheus
         container_name: rh-prometheus
         volumes:
-          - ./prometheus.yaml:/etc/prometheus/prometheus.yml
+          - .\prometheus.yaml:/etc/prometheus/prometheus.yml
         ports:
             - "9090:9090"
         expose:
@@ -82,3 +63,22 @@ services:
           KAFKA_ADVERTISED_HOST_NAME: localhost
           KAFKA_ZOOKEEPER_CONNECT: rh-zookeeper:2181
           KAFKA_BROKER_ID: 1
+    web:
+        build: ./client/
+        container_name: rh-web
+        ports:
+          - 4200:4200
+        expose: 
+          - 4200
+    server:
+        build: ./server/
+        container_name: rh-server
+        ports:
+          - 8090:8090
+        expose: 
+          - 8090
+        environment:
+          LDAP_SERVER: ldap://rh-ldap:389/dc=rh,dc=system,dc=org
+          MONGO_HOST : rh-mongo
+          SPRING_KAFKA_BOOTSTRAPSERVERS : rh-kafka:9092
+          CACHE_HOSTNAME: rh-redis          
