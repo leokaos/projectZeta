@@ -63,6 +63,24 @@ services:
           KAFKA_ADVERTISED_HOST_NAME: localhost
           KAFKA_ZOOKEEPER_CONNECT: rh-zookeeper:2181
           KAFKA_BROKER_ID: 1
+    keycloak:
+        image: quay.io/keycloak/keycloak
+        container_name: rh-keycloak
+        ports: 
+            - 8080:8080
+        expose: 
+            - 8080
+        depends_on:
+            - ldap
+        environment:
+          KEYCLOAK_ADMIN: admin
+          KEYCLOAK_ADMIN_PASSWORD: admin
+        command:
+            - "start-dev"
+        volumes:
+            - type: bind
+              source: ./server/src/test/resources/realm-export.json
+              target: /tmp/realm-export.json
     web:
         build: ./client/
         container_name: rh-web
@@ -81,4 +99,4 @@ services:
           LDAP_SERVER: ldap://rh-ldap:389/dc=rh,dc=system,dc=org
           MONGO_HOST : rh-mongo
           SPRING_KAFKA_BOOTSTRAPSERVERS : rh-kafka:9092
-          CACHE_HOSTNAME: rh-redis          
+          CACHE_HOSTNAME: rh-redis
