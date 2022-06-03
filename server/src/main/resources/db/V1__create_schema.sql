@@ -1,0 +1,3 @@
+-- DROP SCHEMA rh;
+
+CREATE SCHEMA rh AUTHORIZATION rh_admin;

@@ -1,4 +1,4 @@
-version: '2'
+version: '3.2'
 services:
     mongo:
         image: mongo:latest
@@ -27,6 +27,24 @@ services:
           - SLAPD_PASSWORD=leo123
           - SLAPD_DOMAIN=rh.system.org
           - SLAPD_ADDITIONAL_MODULES=memberof
+          - SLAPD_FORCE_RECONFIGURE=true
+        volumes:
+          - type: bind
+            source: ./initial_user.ldif
+            target: /etc/leo/prepopulate/initial_user.ldif
+
+    ldap2:
+      image: osixia/openldap:1.5.0
+      container_name: ldap
+      environment:
+        - LDAP_ORGANISATION=rh
+        - LDAP_DOMAIN=rh.system.org
+        - "LDAP_BASE_DN=dc=rh,dc=system,dc=org"
+        - LDAP_ADMIN_PASSWORD=leo123
+      ports:
+        - 389:389
+        - 636:636
+
     zookeeper:
         image: wurstmeister/zookeeper
         container_name: rh-zookeeper
@@ -50,6 +68,15 @@ services:
           - "3000:3000"
         expose:
           - 3000
+    db:
+      image: postgres
+      restart: always
+      ports:
+        - 5432:5432
+      environment:
+        POSTGRES_PASSWORD: leo
+        POSTGRES_USER: rh_admin
+        POSTGRES_DB: rh_local
     kafka:
         image: wurstmeister/kafka
         container_name: rh-kafka
