@@ -3,7 +3,6 @@ package org.leo.projectzeta.config.rest;
 import java.io.IOException;
 
 import org.leo.projectzeta.factory.TempoFactory;
-import org.leo.projectzeta.model.Tempo;
 
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.JsonSerializer;

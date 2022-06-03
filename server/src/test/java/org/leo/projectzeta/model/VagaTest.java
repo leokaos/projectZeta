@@ -22,6 +22,7 @@ import org.junit.Test;
 import org.leo.projectzeta.exception.BusinessException;
 import org.leo.projectzeta.factory.PeriodoFactory;
 import org.leo.projectzeta.factory.TempoFactory;
+import org.leo.projectzeta.novo.Vaga;
 
 public class VagaTest {
 
@@ -194,7 +195,7 @@ public class VagaTest {
 
 		Vaga vaga = new Vaga();
 		vaga.setStatus(SELECIONANDO_CANDIDATOS);
-		vaga.getCandidatosSelecionados().add(new CandidatoSelecionado(300, new Candidato()));
+		vaga.getCandidatosSelecionados().add(new Candidato(300, new Candidato()));
 
 		vaga.iniarEntrevistas();
 
@@ -235,11 +236,11 @@ public class VagaTest {
 	
 	@Test
 	public void testName() throws Exception {
-		Set<CandidatoSelecionado> l = new TreeSet<CandidatoSelecionado>();
+		Set<Candidato> l = new TreeSet<Candidato>();
 		
-		l.add(new CandidatoSelecionado(20, null));
-		l.add(new CandidatoSelecionado(30, null));
-		l.add(new CandidatoSelecionado(10, null));
+		l.add(new Candidato(20, null));
+		l.add(new Candidato(30, null));
+		l.add(new Candidato(10, null));
 		
 		System.out.println(l);
 	}

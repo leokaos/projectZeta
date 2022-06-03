@@ -12,3 +12,5 @@ CREATE TABLE rh.profissional (
 );
 
 ALTER TABLE rh.profissional ADD CONSTRAINT profissional_check CHECK (status in ('EM_CONTATO','EM_CONTRATACAO','DISPONIVEL','ALOCADO','FINALIZADO'));
+
+CREATE SEQUENCE rh.profissional_seq	INCREMENT BY 1;

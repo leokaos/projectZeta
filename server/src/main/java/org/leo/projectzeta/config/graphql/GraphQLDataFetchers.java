@@ -5,7 +5,9 @@ import graphql.schema.DataFetcher;
 import org.leo.projectzeta.config.graphql.types.VagaPorCandidato;
 import org.leo.projectzeta.facade.*;
 import org.leo.projectzeta.mensagens.VagasMensagens;
-import org.leo.projectzeta.model.*;
+import org.leo.projectzeta.model.Candidato;
+import org.leo.projectzeta.novo.Empresa;
+import org.leo.projectzeta.novo.Vaga;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -157,7 +159,7 @@ public class GraphQLDataFetchers {
 
             for (Vaga vaga : vagaFacade.buscarPorFiltro(filtro)) {
 
-                for (CandidatoSelecionado candidatoSelecionado : vaga.getCandidatosSelecionados()) {
+                for (Candidato candidatoSelecionado : vaga.getCandidatosSelecionados()) {
 
                     String id = candidatoSelecionado.getCandidato().getId();
 

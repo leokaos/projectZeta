@@ -1,6 +1,5 @@
 package org.leo.projectzeta.facade;
 
-import org.leo.projectzeta.model.Candidato;
 import org.leo.projectzeta.repository.CandidatoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.repository.MongoRepository;

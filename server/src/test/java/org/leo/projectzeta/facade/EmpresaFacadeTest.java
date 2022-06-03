@@ -5,8 +5,8 @@ import org.easymock.*;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.leo.projectzeta.exception.BusinessException;
-import org.leo.projectzeta.model.Empresa;
-import org.leo.projectzeta.model.Vaga;
+import org.leo.projectzeta.novo.Empresa;
+import org.leo.projectzeta.novo.Vaga;
 import org.leo.projectzeta.util.Mensagens;
 
 import java.util.Map;

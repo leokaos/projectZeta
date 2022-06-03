@@ -2,8 +2,6 @@ package org.leo.projectzeta.config.rest;
 
 import java.io.IOException;
 
-import org.leo.projectzeta.model.Equivalencia;
-
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.JsonSerializer;
 import com.fasterxml.jackson.databind.SerializerProvider;

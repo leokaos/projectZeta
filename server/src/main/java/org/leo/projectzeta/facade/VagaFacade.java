@@ -1,7 +1,7 @@
 package org.leo.projectzeta.facade;
 
 import org.leo.projectzeta.exception.BusinessException;
-import org.leo.projectzeta.model.Vaga;
+import org.leo.projectzeta.novo.Vaga;
 import org.leo.projectzeta.repository.VagaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;

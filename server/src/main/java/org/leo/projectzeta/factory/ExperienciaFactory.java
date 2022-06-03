@@ -1,23 +1,23 @@
 package org.leo.projectzeta.factory;
 
-import org.leo.projectzeta.model.Experiencia;
-import org.leo.projectzeta.model.Qualificacao;
-import org.leo.projectzeta.model.Tempo;
+import org.leo.projectzeta.novo.Experiencia;
+import org.leo.projectzeta.novo.Qualificacao;
+import org.leo.projectzeta.novo.Tempo;
 
 public class ExperienciaFactory {
 
-	private ExperienciaFactory() {
-		super();
-	}
+    private ExperienciaFactory() {
+        super();
+    }
 
-	public static Experiencia criar(Qualificacao qualificacao, Tempo tempo) {
+    public static Experiencia criar(Qualificacao qualificacao, Tempo tempo) {
 
-		Experiencia exp = new Experiencia();
+        Experiencia exp = new Experiencia();
 
-		exp.setQualificacao(qualificacao);
-		exp.setTempo(tempo);
+        exp.setQualificacao(qualificacao);
+        exp.setTempo(tempo);
 
-		return exp;
-	}
+        return exp;
+    }
 
 }

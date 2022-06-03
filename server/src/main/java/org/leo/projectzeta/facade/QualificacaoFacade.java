@@ -1,9 +1,6 @@
 package org.leo.projectzeta.facade;
 
 import org.leo.projectzeta.exception.BusinessException;
-import org.leo.projectzeta.model.Categoria;
-import org.leo.projectzeta.model.Equivalencia;
-import org.leo.projectzeta.model.Qualificacao;
 import org.leo.projectzeta.repository.QualificacaoRepository;
 import org.leo.projectzeta.repository.CategoriaRepository;
 import org.springframework.beans.factory.annotation.Autowired;

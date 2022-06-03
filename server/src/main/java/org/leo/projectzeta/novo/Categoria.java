@@ -1,44 +1,39 @@
 package org.leo.projectzeta.novo;
 
 import org.leo.projectzeta.api.Entidade;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.util.StringUtils;
 
+import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 
-public class Categoria implements Entidade {
+@Entity
+@Table(name = "categoria", schema = "rh")
+public class Categoria implements Entidade<Long> {
 
-	private static final long serialVersionUID = 4835527334281299043L;
+    private static final long serialVersionUID = 4835527334281299043L;
 
-	private String id;
+    @Id
+    @GeneratedValue(generator = "categoria_seq")
+    @SequenceGenerator(name = "categoria_seq", sequenceName = "categoria_seq", allocationSize = 1, schema = "rh")
+    private Long id;
 
-	@NotEmpty
-	private String descricao;
+    @NotEmpty
+    @Column(name = "descricao")
+    private String descricao;
 
-	public Categoria() {
-		super();
-	}
+    @Override
+    public Long getId() {
+        return id;
+    }
 
-	@Override
-	public String getId() {
-		return id;
-	}
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-	public void setId(String id) {
-		this.id = id;
-	}
+    public String getDescricao() {
+        return descricao;
+    }
 
-	public String getDescricao() {
-		return descricao;
-	}
-
-	public void setDescricao(String descricao) {
-		this.descricao = descricao;
-	}
-
-	public boolean hasId() {
-		return !StringUtils.isEmpty(id);
-	}
-
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
+    }
 }

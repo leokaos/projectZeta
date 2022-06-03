@@ -1,6 +1,6 @@
 package org.leo.projectzeta.novo;
 
-public enum StatusCandidato {
+public enum StatusProfissional {
 
 	EM_CONTATO,
 	EM_CONTRATACAO,

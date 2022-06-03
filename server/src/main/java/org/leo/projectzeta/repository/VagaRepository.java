@@ -1,6 +1,6 @@
 package org.leo.projectzeta.repository;
 
-import org.leo.projectzeta.model.Vaga;
+import org.leo.projectzeta.novo.Vaga;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 

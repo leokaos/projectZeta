@@ -3,7 +3,7 @@ package org.leo.projectzeta.facade;
 import com.google.common.collect.Maps;
 import io.micrometer.core.instrument.util.StringUtils;
 import org.leo.projectzeta.exception.BusinessException;
-import org.leo.projectzeta.model.Empresa;
+import org.leo.projectzeta.novo.Empresa;
 import org.leo.projectzeta.repository.EmpresaRepository;
 import org.leo.projectzeta.util.Mensagens;
 import org.springframework.beans.factory.annotation.Autowired;

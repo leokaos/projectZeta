@@ -3,7 +3,6 @@ package org.leo.projectzeta.factory;
 import static org.junit.Assert.*;
 
 import org.junit.Test;
-import org.leo.projectzeta.model.Tempo;
 
 public class TempoFactoryTest {
 

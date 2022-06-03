@@ -2,8 +2,6 @@ package org.leo.projectzeta.facade;
 
 import com.google.common.collect.Maps;
 import org.leo.projectzeta.exception.BusinessException;
-import org.leo.projectzeta.model.Categoria;
-import org.leo.projectzeta.model.Qualificacao;
 import org.leo.projectzeta.repository.CategoriaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.repository.MongoRepository;

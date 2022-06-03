@@ -16,8 +16,6 @@ import org.easymock.TestSubject;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.leo.projectzeta.exception.BusinessException;
-import org.leo.projectzeta.model.Categoria;
-import org.leo.projectzeta.model.Qualificacao;
 import org.leo.projectzeta.repository.QualificacaoRepository;
 import org.leo.projectzeta.repository.CategoriaRepository;
 

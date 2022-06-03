@@ -7,8 +7,7 @@ import java.util.List;
 
 import org.leo.projectzeta.facade.CandidatoFacade;
 import org.leo.projectzeta.facade.VagaFacade;
-import org.leo.projectzeta.model.Candidato;
-import org.leo.projectzeta.model.Vaga;
+import org.leo.projectzeta.novo.Vaga;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
