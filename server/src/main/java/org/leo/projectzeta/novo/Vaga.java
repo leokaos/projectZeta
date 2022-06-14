@@ -76,6 +76,103 @@ public class Vaga implements Entidade<Long> {
 
     private Set<Candidato> candidatosSelecionados = Sets.newHashSet();
 
+    @Override
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Empresa getEmpresa() {
+        return empresa;
+    }
+
+    public void setEmpresa(Empresa empresa) {
+        this.empresa = empresa;
+    }
+
+    public StatusVaga getStatus() {
+        return status;
+    }
+
+    public void setStatus(StatusVaga status) {
+        this.status = status;
+    }
+
+    public String getTitulo() {
+        return titulo;
+    }
+
+    public void setTitulo(String titulo) {
+        this.titulo = titulo;
+    }
+
+    public String getDescricao() {
+        return descricao;
+    }
+
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
+    }
+
+    public Periodo getPeriodo() {
+        return periodo;
+    }
+
+    public void setPeriodo(Periodo periodo) {
+        this.periodo = periodo;
+    }
+
+    public Date getDataEntrada() {
+        return dataEntrada;
+    }
+
+    public void setDataEntrada(Date dataEntrada) {
+        this.dataEntrada = dataEntrada;
+    }
+
+    public String getContatoTelefone() {
+        return contatoTelefone;
+    }
+
+    public void setContatoTelefone(String contatoTelefone) {
+        this.contatoTelefone = contatoTelefone;
+    }
+
+    public String getContatoEmail() {
+        return contatoEmail;
+    }
+
+    public void setContatoEmail(String contatoEmail) {
+        this.contatoEmail = contatoEmail;
+    }
+
+    public Set<Qualificacao> getExigencias() {
+        return exigencias;
+    }
+
+    public void setExigencias(Set<Qualificacao> exigencias) {
+        this.exigencias = exigencias;
+    }
+
+    public Set<Candidato> getCandidatosSelecionados() {
+        return candidatosSelecionados;
+    }
+
+    public void setCandidatosSelecionados(Set<Candidato> candidatosSelecionados) {
+        this.candidatosSelecionados = candidatosSelecionados;
+    }
+
+    public Set<String> getTags() {
+        return tags;
+    }
+
+    public void setTags(Set<String> tags) {
+        this.tags = tags;
+    }
+
     @NotEmpty
     private Set<String> tags = Sets.newHashSet();
 

@@ -1,13 +1,14 @@
 package org.leo.projectzeta.repository;
 
-import java.util.List;
-
-import org.springframework.data.mongodb.repository.MongoRepository;
+import org.leo.projectzeta.novo.Categoria;
+import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
-@Repository
-public interface CategoriaRepository extends MongoRepository<Categoria, String> {
+import java.util.List;
 
-	List<Categoria> findByDescricao(String descricao);
+@Repository
+public interface CategoriaRepository extends CrudRepository<Categoria, Long> {
+
+    List<Categoria> findByDescricao(String descricao);
 
 }

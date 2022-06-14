@@ -19,7 +19,7 @@ import java.util.Map;
 import static org.leo.projectzeta.util.Mensagens.*;
 import static org.leo.projectzeta.util.MongoFiltroUtil.toQuery;
 
-public abstract class AbstractSimpleFacade<T extends Entidade> implements SimpleFacade<T> {
+public abstract class AbstractSimpleFacade<K, T extends Entidade<K>> implements SimpleFacade<T> {
 
     @Autowired
     private MongoTemplate mongoTemplate;
@@ -32,7 +32,7 @@ public abstract class AbstractSimpleFacade<T extends Entidade> implements Simple
             throwObjectNulo();
         }
 
-        if (StringUtils.isNotEmpty(t.getId())) {
+        if (t.hasId()) {
             throwIdInvalido();
         }
 
@@ -107,7 +107,7 @@ public abstract class AbstractSimpleFacade<T extends Entidade> implements Simple
             throwObjectNulo();
         }
 
-        if (StringUtils.isEmpty(t.getId())) {
+        if (!t.hasId()) {
             throwIdInvalido();
             return;
         }
@@ -179,7 +179,7 @@ public abstract class AbstractSimpleFacade<T extends Entidade> implements Simple
 
     }
 
-    protected abstract MongoRepository<T, String> getRepository();
+    protected abstract MongoRepository<T, K> getRepository();
 
     public abstract Class<T> getClasseDaEntidade();
 
