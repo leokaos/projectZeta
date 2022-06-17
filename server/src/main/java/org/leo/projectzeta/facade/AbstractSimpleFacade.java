@@ -1,6 +1,13 @@
 package org.leo.projectzeta.facade;
 
-import org.apache.commons.lang3.StringUtils;
+import static org.leo.projectzeta.util.Mensagens.ENTIDADE_INEXISTENTE;
+import static org.leo.projectzeta.util.Mensagens.ID_INVALIDO;
+import static org.leo.projectzeta.util.Mensagens.OBJECT_NULO;
+import static org.leo.projectzeta.util.MongoFiltroUtil.toQuery;
+
+import java.util.List;
+import java.util.Map;
+
 import org.leo.projectzeta.api.Entidade;
 import org.leo.projectzeta.api.SimpleFacade;
 import org.leo.projectzeta.aspect.LogEvent;
@@ -10,177 +17,167 @@ import org.leo.projectzeta.exception.BusinessException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.mongodb.core.MongoTemplate;
-import org.springframework.data.mongodb.repository.MongoRepository;
 
-import java.util.List;
-import java.util.Map;
+public abstract class AbstractSimpleFacade<T extends Entidade<K>, K> implements SimpleFacade<T, K> {
 
-import static org.leo.projectzeta.util.Mensagens.*;
-import static org.leo.projectzeta.util.MongoFiltroUtil.toQuery;
+	@Autowired
+	private MongoTemplate mongoTemplate;
 
-public abstract class AbstractSimpleFacade<K, T extends Entidade<K>> implements SimpleFacade<T> {
+	@Override
+	@LogEvent(operation = "Criar")
+	public T novo(@LogObject T t) throws BusinessException {
 
-    @Autowired
-    private MongoTemplate mongoTemplate;
+		if (t == null) {
+			throwObjectNulo();
+		}
 
-    @Override
-    @LogEvent(operation = "Criar")
-    public T novo(@LogObject T t) throws BusinessException {
+		if (t.hasId()) {
+			throwIdInvalido();
+		}
 
-        if (t == null) {
-            throwObjectNulo();
-        }
+		antesSalvar(t);
 
-        if (t.hasId()) {
-            throwIdInvalido();
-        }
+		T entity = getRepository().save(t);
 
-        antesSalvar(t);
+		depoisSalvar(entity);
 
-        T entity = getRepository().insert(t);
+		return entity;
+	}
 
-        depoisSalvar(entity);
+	@Override
+	@CacheEvict(key = "#id")
+	@LogEvent(operation = "Atualizar")
+	public T atualizar(@LogObject T t, @LogId K id) throws BusinessException {
 
-        return entity;
-    }
+		if (t == null) {
+			return throwObjectNulo();
+		}
 
-    @Override
-    @CacheEvict(key = "#id")
-    @LogEvent(operation = "Atualizar")
-    public T atualizar(@LogObject T t, @LogId String id) throws BusinessException {
+		if (!id.equals(t.getId())) {
+			throwIdInvalido();
+		}
 
-        if (t == null) {
-            return throwObjectNulo();
-        }
+		if (!getRepository().existsById(id)) {
+			throwIdInvalido();
+		}
 
-        if (StringUtils.isEmpty(id)) {
-            throwIdInvalido();
-        }
+		antesSalvar(t);
 
-        if (!id.equals(t.getId())) {
-            throwIdInvalido();
-        }
+		T entity = getRepository().save(t);
 
-        if (!getRepository().existsById(id)) {
-            throwIdInvalido();
-        }
+		depoisSalvar(entity);
 
-        antesSalvar(t);
+		return entity;
+	}
 
-        T entity = getRepository().save(t);
+	@Override
+	public List<T> buscarPorFiltro(Map<String, Object> filtro) {
 
-        depoisSalvar(entity);
+		if (filtro == null || filtro.isEmpty()) {
+			return getRepository().findAll();
+		}
 
-        return entity;
-    }
+		return mongoTemplate.find(toQuery(filtro), getClasseDaEntidade());
+	}
 
-    @Override
-    public List<T> buscarPorFiltro(Map<String, Object> filtro) {
+	@Override
+	@Cacheable
+	public T buscarPorId(K id) throws BusinessException {
 
-        if (filtro == null || filtro.isEmpty()) {
-            return getRepository().findAll();
-        }
+		if (id == null) {
+			throwIdInvalido();
+		}
 
-        return mongoTemplate.find(toQuery(filtro), getClasseDaEntidade());
-    }
+		if (!getRepository().existsById(id)) {
+			return throwEntidadeInexistente();
+		}
 
-    @Override
-    @Cacheable
-    public T buscarPorId(String id) throws BusinessException {
+		return getRepository().findById(id).orElse(null);
+	}
 
-        if (StringUtils.isEmpty(id)) {
-            throwIdInvalido();
-        }
+	@Override
+	public void remover(T t) throws BusinessException {
 
-        if (!getRepository().existsById(id)) {
-            return throwEntidadeInexistente();
-        }
+		if (t == null) {
+			throwObjectNulo();
+		}
 
-        return getRepository().findById(id).orElse(null);
-    }
+		if (!t.hasId()) {
+			throwIdInvalido();
+			return;
+		}
 
-    @Override
-    public void remover(T t) throws BusinessException {
+		if (!getRepository().existsById(t.getId())) {
+			throwIdInvalido();
+		}
 
-        if (t == null) {
-            throwObjectNulo();
-        }
+		removerInterno(t);
+	}
 
-        if (!t.hasId()) {
-            throwIdInvalido();
-            return;
-        }
+	@Override
+	@CacheEvict(key = "#id")
+	public void removerPorId(K id) throws BusinessException {
 
-        if (!getRepository().existsById(t.getId())) {
-            throwIdInvalido();
-        }
+		if (id == null) {
+			throwIdInvalido();
+		}
 
-        removerInterno(t);
-    }
+		if (!getRepository().existsById(id)) {
+			throwIdInvalido();
+		}
 
-    @Override
-    @CacheEvict(key = "#id")
-    public void removerPorId(String id) throws BusinessException {
+		T entidade = getRepository().findById(id).orElse(null);
 
-        if (StringUtils.isEmpty(id)) {
-            throwIdInvalido();
-        }
+		removerInterno(entidade);
+	}
 
-        if (!getRepository().existsById(id)) {
-            throwIdInvalido();
-        }
+	@LogEvent(operation = "Remover")
+	private void removerInterno(@LogObject T entidade) throws BusinessException {
 
-        T entidade = getRepository().findById(id).orElse(null);
+		antesRemover(entidade);
 
-        removerInterno(entidade);
-    }
+		getRepository().delete(entidade);
 
-    @LogEvent(operation = "Remover")
-    private void removerInterno(@LogObject T entidade) throws BusinessException {
+		depoisRemover(entidade);
+	}
 
-        antesRemover(entidade);
+	private void throwIdInvalido() throws BusinessException {
+		throw new BusinessException(ID_INVALIDO, "", "id");
+	}
 
-        getRepository().delete(entidade);
+	private T throwObjectNulo() throws BusinessException {
+		throw new BusinessException(OBJECT_NULO, "", "entity");
+	}
 
-        depoisRemover(entidade);
-    }
+	private T throwEntidadeInexistente() throws BusinessException {
+		throw new BusinessException(ENTIDADE_INEXISTENTE, "", "entity");
+	}
 
-    private void throwIdInvalido() throws BusinessException {
-        throw new BusinessException(ID_INVALIDO, "", "id");
-    }
+	@Override
+	public List<T> listarTodos() throws BusinessException {
+		return getRepository().findAll();
+	}
 
-    private T throwObjectNulo() throws BusinessException {
-        throw new BusinessException(OBJECT_NULO, "", "entity");
-    }
+	protected void antesSalvar(T t) throws BusinessException {
 
-    private T throwEntidadeInexistente() throws BusinessException {
-        throw new BusinessException(ENTIDADE_INEXISTENTE, "", "entity");
-    }
+	}
 
-    @Override
-    public List<T> listarTodos() throws BusinessException {
-        return getRepository().findAll();
-    }
+	protected void depoisSalvar(T t) {
 
-    protected void antesSalvar(T t) throws BusinessException {
+	}
 
-    }
+	protected void antesRemover(T t) throws BusinessException {
 
-    protected void depoisSalvar(T t) {
+	}
 
-    }
+	protected void depoisRemover(T t) {
 
-    protected void antesRemover(T t) throws BusinessException {
+	}
 
-    }
+	protected abstract JpaRepository<T, K> getRepository();
 
-    protected void depoisRemover(T t) {
-
-    }
-
-    protected abstract MongoRepository<T, K> getRepository();
-
-    public abstract Class<T> getClasseDaEntidade();
+	public abstract Class<T> getClasseDaEntidade();
 
 }

@@ -1,5 +1,5 @@
 CREATE TABLE rh.empresa (
-	id numeric NOT NULL,
+	id int8 NOT NULL,
 	nome varchar(255) NOT NULL,
 	CONSTRAINT empresa_pk PRIMARY KEY (id)
 );

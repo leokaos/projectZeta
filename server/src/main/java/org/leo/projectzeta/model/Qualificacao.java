@@ -1,4 +1,4 @@
-package org.leo.projectzeta.novo;
+package org.leo.projectzeta.model;
 
 import com.google.common.collect.Sets;
 import org.leo.projectzeta.api.Entidade;

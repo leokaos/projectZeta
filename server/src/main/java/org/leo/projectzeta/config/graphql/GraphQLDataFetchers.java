@@ -1,182 +1,187 @@
 package org.leo.projectzeta.config.graphql;
 
-import com.google.common.collect.Maps;
-import graphql.schema.DataFetcher;
-import org.leo.projectzeta.config.graphql.types.VagaPorCandidato;
-import org.leo.projectzeta.facade.*;
-import org.leo.projectzeta.mensagens.VagasMensagens;
-import org.leo.projectzeta.model.Candidato;
-import org.leo.projectzeta.novo.Empresa;
-import org.leo.projectzeta.novo.Vaga;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import static org.leo.projectzeta.model.StatusVaga.ENTREVISTANDO;
 
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-import static org.leo.projectzeta.model.StatusVaga.ENTREVISTANDO;
+import org.leo.projectzeta.config.graphql.types.VagaPorCandidato;
+import org.leo.projectzeta.facade.CategoriaFacade;
+import org.leo.projectzeta.facade.EmpresaFacade;
+import org.leo.projectzeta.facade.ProfissionalFacade;
+import org.leo.projectzeta.facade.QualificacaoFacade;
+import org.leo.projectzeta.facade.VagaFacade;
+import org.leo.projectzeta.mensagens.VagasMensagens;
+import org.leo.projectzeta.model.Candidato;
+import org.leo.projectzeta.model.Categoria;
+import org.leo.projectzeta.model.Empresa;
+import org.leo.projectzeta.model.Profissional;
+import org.leo.projectzeta.model.Qualificacao;
+import org.leo.projectzeta.model.Vaga;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+import com.google.common.collect.Maps;
+
+import graphql.schema.DataFetcher;
 
 @Component
 public class GraphQLDataFetchers {
 
-    @Autowired
-    private CategoriaFacade categoriaFacade;
+	@Autowired
+	private CategoriaFacade categoriaFacade;
 
-    @Autowired
-    private CandidatoFacade candidatoFacade;
+	@Autowired
+	private ProfissionalFacade profissionalFacade;
 
-    @Autowired
-    private QualificacaoFacade qualificacaoFacade;
+	@Autowired
+	private QualificacaoFacade qualificacaoFacade;
 
-    @Autowired
-    private VagaFacade vagaFacade;
+	@Autowired
+	private VagaFacade vagaFacade;
 
-    @Autowired
-    private EmpresaFacade empresaFacade;
+	@Autowired
+	private EmpresaFacade empresaFacade;
 
-    @Autowired
-    private VagasMensagens vagasMensagens;
+	@Autowired
+	private VagasMensagens vagasMensagens;
 
-    public DataFetcher<Categoria> getCategoriaByIdFetcher() {
-        return dataFetchingEnvironment -> {
-            String categoriaID = dataFetchingEnvironment.getArgument("id");
-            return categoriaFacade.buscarPorId(categoriaID);
-        };
-    }
+	public DataFetcher<Categoria> getCategoriaByIdFetcher() {
+		return dataFetchingEnvironment -> {
+			Long categoriaID = dataFetchingEnvironment.getArgument("id");
+			return categoriaFacade.buscarPorId(categoriaID);
+		};
+	}
 
-    public DataFetcher<List<Categoria>> getTodasAsCategoriasFetcher() {
-        return dataFetchingEnvironment -> {
-            return categoriaFacade.listarTodos();
-        };
-    }
+	public DataFetcher<List<Categoria>> getTodasAsCategoriasFetcher() {
+		return dataFetchingEnvironment -> {
+			return categoriaFacade.listarTodos();
+		};
+	}
 
-    public DataFetcher<Candidato> getCandidatoPorIdFetcher() {
-        return dataFetchingEnvironment -> {
-            String candidatoId = dataFetchingEnvironment.getArgument("id");
-            return candidatoFacade.buscarPorId(candidatoId);
-        };
-    }
+	public DataFetcher<Profissional> getProfissionalPorIdFetcher() {
+		return dataFetchingEnvironment -> {
+			Long candidatoId = dataFetchingEnvironment.getArgument("id");
+			return profissionalFacade.buscarPorId(candidatoId);
+		};
+	}
 
-    public DataFetcher<List<Qualificacao>> getTodasAsQualificacoes() {
-        return dataFetchingEnvironment -> {
-            return qualificacaoFacade.listarTodos();
-        };
-    }
+	public DataFetcher<List<Qualificacao>> getTodasAsQualificacoes() {
+		return dataFetchingEnvironment -> {
+			return qualificacaoFacade.listarTodos();
+		};
+	}
 
-    public DataFetcher<List<Candidato>> getTodosOsCandidatos() {
-        return dataFetchingEnvironment -> {
-            return candidatoFacade.listarTodos();
-        };
-    }
+	public DataFetcher<List<Profissional>> getTodosOsCandidatos() {
+		return dataFetchingEnvironment -> {
+			return profissionalFacade.listarTodos();
+		};
+	}
 
-    public DataFetcher<Qualificacao> getQualificacaoPorId() {
-        return dataFetchingEnvironment -> {
-            String qualificacaoId = dataFetchingEnvironment.getArgument("id");
-            return qualificacaoFacade.buscarPorId(qualificacaoId);
-        };
-    }
+	public DataFetcher<Qualificacao> getQualificacaoPorId() {
+		return dataFetchingEnvironment -> {
+			Long qualificacaoId = dataFetchingEnvironment.getArgument("id");
+			return qualificacaoFacade.buscarPorId(qualificacaoId);
+		};
+	}
 
-    public DataFetcher<Vaga> selecionarCandidatos() {
-        return dataFetchingEnvironment -> {
+	public DataFetcher<Vaga> selecionarCandidatos() {
+		return dataFetchingEnvironment -> {
 
-            String vagaId = dataFetchingEnvironment.getArgument("id");
+			Long vagaId = dataFetchingEnvironment.getArgument("id");
 
-            Vaga vaga = vagaFacade.buscarPorId(vagaId);
+			Vaga vaga = vagaFacade.buscarPorId(vagaId);
 
-            vagasMensagens.processVaga(vaga);
+			vagasMensagens.processVaga(vaga);
 
-            return vaga;
-        };
-    }
+			return vaga;
+		};
+	}
 
-    public DataFetcher<Vaga> iniciarEntrevistas() {
-        return dataFetchingEnvironment -> {
+	public DataFetcher<Vaga> iniciarEntrevistas() {
+		return dataFetchingEnvironment -> {
 
-            String vagaId = dataFetchingEnvironment.getArgument("id");
+			Long vagaId = dataFetchingEnvironment.getArgument("id");
 
-            Vaga vaga = vagaFacade.buscarPorId(vagaId);
+			Vaga vaga = vagaFacade.buscarPorId(vagaId);
 
-            vaga.iniarEntrevistas();
+			vaga.iniarEntrevistas();
 
-            return vaga;
-        };
-    }
+			return vaga;
+		};
+	}
 
-    public DataFetcher<Vaga> iniciar() {
-        return dataFetchingEnvironment -> {
+	public DataFetcher<Vaga> iniciar() {
+		return dataFetchingEnvironment -> {
 
-            String vagaId = dataFetchingEnvironment.getArgument("id");
+			Long vagaId = dataFetchingEnvironment.getArgument("id");
 
-            Vaga vaga = vagaFacade.buscarPorId(vagaId);
+			Vaga vaga = vagaFacade.buscarPorId(vagaId);
 
-            vaga.iniciar();
+			vaga.iniciar();
 
-            return vaga;
-        };
-    }
+			return vaga;
+		};
+	}
 
-    public DataFetcher<Vaga> finalizarVaga() {
-        return dataFetchingEnvironment -> {
+	public DataFetcher<Vaga> finalizarVaga() {
+		return dataFetchingEnvironment -> {
 
-            String vagaId = dataFetchingEnvironment.getArgument("id");
+			Long vagaId = dataFetchingEnvironment.getArgument("id");
 
-            Vaga vaga = vagaFacade.buscarPorId(vagaId);
+			Vaga vaga = vagaFacade.buscarPorId(vagaId);
 
-            vaga.finalizarVaga();
+			vaga.finalizarVaga();
 
-            return vaga;
-        };
-    }
+			return vaga;
+		};
+	}
 
-    public DataFetcher<Vaga> cancelarVaga() {
-        return dataFetchingEnvironment -> {
+	public DataFetcher<Vaga> cancelarVaga() {
+		return dataFetchingEnvironment -> {
 
-            String vagaId = dataFetchingEnvironment.getArgument("id");
+			Long vagaId = dataFetchingEnvironment.getArgument("id");
 
-            Vaga vaga = vagaFacade.buscarPorId(vagaId);
+			Vaga vaga = vagaFacade.buscarPorId(vagaId);
 
-            vaga.cancelarVaga();
+			vaga.cancelarVaga();
 
-            return vaga;
-        };
-    }
+			return vaga;
+		};
+	}
 
-    public DataFetcher<List<Empresa>> todasAsEmpresas() {
-        return dataFetchingEnvironment -> {
-            return empresaFacade.listarTodos();
-        };
-    }
+	public DataFetcher<List<Empresa>> todasAsEmpresas() {
+		return dataFetchingEnvironment -> {
+			return empresaFacade.listarTodos();
+		};
+	}
 
-    public DataFetcher<List<VagaPorCandidato>> vagasPorCandidato() {
+	public DataFetcher<List<VagaPorCandidato>> vagasPorCandidato() {
 
-        return dataFetchingEnvironment -> {
+		return dataFetchingEnvironment -> {
 
-            Map<String, Object> filtro = Maps.newHashMap();
-            filtro.put("status", ENTREVISTANDO);
+			Map<String, Object> filtro = Maps.newHashMap();
+			filtro.put("status", ENTREVISTANDO);
 
-            Map<String, Integer> result = Maps.newHashMap();
+			Map<Long, Integer> result = Maps.newHashMap();
 
-            for (Vaga vaga : vagaFacade.buscarPorFiltro(filtro)) {
+			for (Vaga vaga : vagaFacade.buscarPorFiltro(filtro)) {
 
-                for (Candidato candidatoSelecionado : vaga.getCandidatosSelecionados()) {
+				for (Candidato candidatoSelecionado : vaga.getCandidatos()) {
 
-                    String id = candidatoSelecionado.getCandidato().getId();
+					Long id = candidatoSelecionado.getProfissional().getId();
 
-                    if (!result.containsKey(id)) {
-                        result.put(id, 0);
-                    }
+					if (!result.containsKey(id)) {
+						result.put(id, 0);
+					}
 
-                    result.put(id, result.get(id) + 1);
-                }
-            }
+					result.put(id, result.get(id) + 1);
+				}
+			}
 
-            return result
-                    .entrySet()
-                    .stream()
-                    .map(a -> new VagaPorCandidato(a.getKey(), a.getValue()))
-                    .collect(Collectors.toList());
-        };
-    }
+			return result.entrySet().stream().map(a -> new VagaPorCandidato(a.getKey(), a.getValue())).collect(Collectors.toList());
+		};
+	}
 
 }

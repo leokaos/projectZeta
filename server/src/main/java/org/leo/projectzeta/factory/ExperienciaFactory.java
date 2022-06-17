@@ -1,8 +1,8 @@
 package org.leo.projectzeta.factory;
 
-import org.leo.projectzeta.novo.Experiencia;
-import org.leo.projectzeta.novo.Qualificacao;
-import org.leo.projectzeta.novo.Tempo;
+import org.leo.projectzeta.model.Experiencia;
+import org.leo.projectzeta.model.Qualificacao;
+import org.leo.projectzeta.model.Tempo;
 
 public class ExperienciaFactory {
 

@@ -5,9 +5,9 @@ import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
-import static org.leo.projectzeta.util.Mensagens.OBJECT_NULO;
 import static org.leo.projectzeta.util.Mensagens.CATEGORIA_JA_EXISTE;
 import static org.leo.projectzeta.util.Mensagens.CATEGORIA_JA_TEM_QUALIFICACOES_ASSOCIADAS;
+import static org.leo.projectzeta.util.Mensagens.OBJECT_NULO;
 
 import java.util.Optional;
 
@@ -20,6 +20,8 @@ import org.easymock.TestSubject;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.leo.projectzeta.exception.BusinessException;
+import org.leo.projectzeta.model.Categoria;
+import org.leo.projectzeta.model.Qualificacao;
 import org.leo.projectzeta.repository.CategoriaRepository;
 
 import com.google.common.collect.Lists;
@@ -64,7 +66,7 @@ public class CategoriaFacadeTest {
 		categoria.setDescricao("TESTE");
 
 		expect(mockRepository.findByDescricao("TESTE")).andReturn(Lists.newArrayList());
-		expect(mockRepository.insert(categoria)).andReturn(categoria);
+		expect(mockRepository.save(categoria)).andReturn(categoria);
 
 		replay(mockRepository);
 
@@ -81,18 +83,18 @@ public class CategoriaFacadeTest {
 	public void deveriaRetornarErroPoisTemQualificacoesAssociadasTest() {
 
 		Categoria tipo = new Categoria();
-		tipo.setId("123");
+		tipo.setId(123L);
 
 		Optional<Categoria> op = Optional.of(tipo);
 
-		expect(mockRepository.existsById("123")).andReturn(true);
-		expect(mockRepository.findById("123")).andReturn(op);
-		expect(mockQualificacaoFacade.buscarPorFiltro(Maps.newHashMap("tipo.id", "123"))).andReturn(Lists.newArrayList(new Qualificacao()));
+		expect(mockRepository.existsById(123L)).andReturn(true);
+		expect(mockRepository.findById(123L)).andReturn(op);
+		expect(mockQualificacaoFacade.buscarPorFiltro(Maps.newHashMap("tipo.id", 123L))).andReturn(Lists.newArrayList(new Qualificacao()));
 
 		replay(mockQualificacaoFacade, mockRepository);
 
 		try {
-			facade.removerPorId("123");
+			facade.removerPorId(123L);
 			fail();
 		} catch (BusinessException e) {
 			assertEquals(BusinessException.class, e.getClass());
@@ -106,19 +108,19 @@ public class CategoriaFacadeTest {
 	public void deveriaRetornarSucessoAoRemoverTest() {
 
 		Categoria tipo = new Categoria();
-		tipo.setId("123");
+		tipo.setId(123L);
 
 		Optional<Categoria> op = Optional.of(tipo);
 
-		expect(mockRepository.existsById("123")).andReturn(true);
-		expect(mockRepository.findById("123")).andReturn(op);
-		expect(mockQualificacaoFacade.buscarPorFiltro(Maps.newHashMap("tipo.id", "123"))).andReturn(Lists.newArrayList());
+		expect(mockRepository.existsById(123L)).andReturn(true);
+		expect(mockRepository.findById(123L)).andReturn(op);
+		expect(mockQualificacaoFacade.buscarPorFiltro(Maps.newHashMap("tipo.id", 123L))).andReturn(Lists.newArrayList());
 		mockRepository.delete(EasyMock.anyObject(Categoria.class));
 
 		replay(mockQualificacaoFacade, mockRepository);
 
 		try {
-			facade.removerPorId("123");
+			facade.removerPorId(123L);
 		} catch (BusinessException e) {
 			fail();
 		}

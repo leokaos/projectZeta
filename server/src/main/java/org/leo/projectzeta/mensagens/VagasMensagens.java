@@ -5,9 +5,10 @@ import static org.leo.projectzeta.websocket.VagaWebSocket.TOPIC_VAGAS;
 
 import java.util.List;
 
-import org.leo.projectzeta.facade.CandidatoFacade;
+import org.leo.projectzeta.facade.ProfissionalFacade;
 import org.leo.projectzeta.facade.VagaFacade;
-import org.leo.projectzeta.novo.Vaga;
+import org.leo.projectzeta.model.Profissional;
+import org.leo.projectzeta.model.Vaga;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +28,7 @@ public class VagasMensagens {
 	private static final String VAGAS_TOPIC = "vagas";
 
 	@Autowired
-	private CandidatoFacade candidatoFacade;
+	private ProfissionalFacade profissionalFacade;
 
 	@Autowired
 	private VagaFacade vagaFacade;
@@ -50,7 +51,7 @@ public class VagasMensagens {
 
 			if (vaga.comStatus(NOVA)) {
 
-				List<Candidato> todosOsCandidatos = candidatoFacade.listarTodos();
+				List<Profissional> todosOsCandidatos = profissionalFacade.listarTodos();
 
 				vaga.selecionarCandidatos(todosOsCandidatos);
 

@@ -4,14 +4,15 @@ import static org.junit.Assert.assertEquals;
 import static org.leo.projectzeta.model.builder.QualificacaoBuilder.qualificacao;
 
 import org.junit.Test;
+import org.leo.projectzeta.model.Qualificacao;
 
 public class QualificacaoTest {
 
 	@Test
 	public void deveriaRetornarEquivalenciaCorretaTest() {
 
-		Qualificacao java7 = qualificacao("java", "7", "1");
-		Qualificacao java8 = qualificacao("java", "8", "2");
+		Qualificacao java7 = qualificacao("java", "7", 1L);
+		Qualificacao java8 = qualificacao("java", "8", 2L);
 
 		java7.addEquivalencia(java8, 100);
 		java8.addEquivalencia(java7, 70);

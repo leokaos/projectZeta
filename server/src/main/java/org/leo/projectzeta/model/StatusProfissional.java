@@ -1,4 +1,4 @@
-package org.leo.projectzeta.novo;
+package org.leo.projectzeta.model;
 
 public enum StatusProfissional {
 

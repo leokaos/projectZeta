@@ -5,7 +5,9 @@ import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
-import static org.leo.projectzeta.util.Mensagens.*;
+import static org.leo.projectzeta.util.Mensagens.CATEGORIA_INVALIDA;
+import static org.leo.projectzeta.util.Mensagens.EQUIVALENCIA_INVALIDA;
+import static org.leo.projectzeta.util.Mensagens.QUALIFICACAO_JA_EXISTE;
 
 import java.util.Optional;
 
@@ -16,8 +18,10 @@ import org.easymock.TestSubject;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.leo.projectzeta.exception.BusinessException;
-import org.leo.projectzeta.repository.QualificacaoRepository;
+import org.leo.projectzeta.model.Categoria;
+import org.leo.projectzeta.model.Qualificacao;
 import org.leo.projectzeta.repository.CategoriaRepository;
+import org.leo.projectzeta.repository.QualificacaoRepository;
 
 import com.google.common.collect.Lists;
 
@@ -95,7 +99,7 @@ public class QualificacaoFacadeTest {
 
 		Categoria categoriaComId = new Categoria();
 		categoriaComId.setDescricao("TESTE");
-		categoriaComId.setId("123");
+		categoriaComId.setId(123L);
 
 		Qualificacao qualificacao = new Qualificacao();
 		qualificacao.setDescricao("TESTE");
@@ -104,7 +108,7 @@ public class QualificacaoFacadeTest {
 
 		expect(mockCategoriaRepository.findByDescricao("TESTE")).andReturn(Lists.newArrayList(categoriaComId));
 		expect(mockQualificacaoRepository.findByDescricaoAndVersao("TESTE", "7")).andReturn(null);
-		expect(mockQualificacaoRepository.insert(qualificacao)).andReturn(qualificacao);
+		expect(mockQualificacaoRepository.save(qualificacao)).andReturn(qualificacao);
 
 		replayAll();
 
@@ -118,7 +122,7 @@ public class QualificacaoFacadeTest {
 
 		verifyAll();
 
-		assertEquals("123", qualificacaoSalva.getCategoria().getId());
+		assertEquals(123L, qualificacaoSalva.getCategoria().getId().longValue());
 	}
 
 	@Test
@@ -129,15 +133,15 @@ public class QualificacaoFacadeTest {
 
 		Categoria categoriaComId = new Categoria();
 		categoriaComId.setDescricao("TESTE");
-		categoriaComId.setId("123");
+		categoriaComId.setId(123L);
 
 		Qualificacao qualificacao = new Qualificacao();
 		qualificacao.setDescricao("TESTE");
 		qualificacao.setVersao("7");
 		qualificacao.setCategoria(categoria);
-		qualificacao.setId("456");
+		qualificacao.setId(456L);
 
-		expect(mockQualificacaoRepository.existsById("456")).andReturn(true);
+		expect(mockQualificacaoRepository.existsById(456L)).andReturn(true);
 		expect(mockQualificacaoRepository.findByDescricaoAndVersao("TESTE", "7")).andReturn(null);
 		expect(mockCategoriaRepository.findByDescricao("TESTE")).andReturn(Lists.newArrayList(categoriaComId));
 		expect(mockQualificacaoRepository.save(qualificacao)).andReturn(qualificacao);
@@ -147,14 +151,14 @@ public class QualificacaoFacadeTest {
 		Qualificacao qualificacaoSalva = null;
 
 		try {
-			qualificacaoSalva = facade.atualizar(qualificacao, "456");
+			qualificacaoSalva = facade.atualizar(qualificacao, 456L);
 		} catch (BusinessException e) {
 			fail();
 		}
 
 		verifyAll();
 
-		assertEquals("123", qualificacaoSalva.getCategoria().getId());
+		assertEquals(123L, qualificacaoSalva.getCategoria().getId().longValue());
 	}
 
 	@Test
@@ -165,30 +169,30 @@ public class QualificacaoFacadeTest {
 
 		Categoria categoriaComId = new Categoria();
 		categoriaComId.setDescricao("TESTE");
-		categoriaComId.setId("123");
+		categoriaComId.setId(123L);
 
 		Qualificacao qualificacao = new Qualificacao();
 		qualificacao.setDescricao("TESTE");
 		qualificacao.setVersao("7");
 		qualificacao.setCategoria(categoria);
-		qualificacao.setId("456");
+		qualificacao.setId(456L);
 
 		Qualificacao innerQualificacao = new Qualificacao();
 		innerQualificacao.setDescricao("TESTE 2");
 		innerQualificacao.setCategoria(categoria);
-		innerQualificacao.setId("Q2");
+		innerQualificacao.setId(2L);
 
 		qualificacao.addEquivalencia(innerQualificacao, 70);
 
-		expect(mockQualificacaoRepository.existsById("456")).andReturn(true);
+		expect(mockQualificacaoRepository.existsById(456L)).andReturn(true);
 		expect(mockQualificacaoRepository.findByDescricaoAndVersao("TESTE", "7")).andReturn(null);
 		expect(mockCategoriaRepository.findByDescricao("TESTE")).andReturn(Lists.newArrayList(categoriaComId));
-		expect(mockQualificacaoRepository.findById("Q2")).andReturn(Optional.empty());
+		expect(mockQualificacaoRepository.findById(2L)).andReturn(Optional.empty());
 
 		replayAll();
 
 		try {
-			facade.atualizar(qualificacao, "456");
+			facade.atualizar(qualificacao, 456L);
 			fail();
 		} catch (BusinessException e) {
 			assertEquals(BusinessException.class, e.getClass());
@@ -203,7 +207,7 @@ public class QualificacaoFacadeTest {
 	public void deveriaRetornarErrorPoisJaExisteTest() throws Exception {
 
 		Qualificacao qualificacaoEncontrada = new Qualificacao();
-		qualificacaoEncontrada.setId("123");
+		qualificacaoEncontrada.setId(123L);
 
 		Qualificacao qualificacao = new Qualificacao();
 		qualificacao.setDescricao("TESTE");

@@ -4,6 +4,8 @@ import java.text.MessageFormat;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.leo.projectzeta.model.Tempo;
+
 public final class TempoFactory {
 
 	public static final String FORMATO = "(([1-9]?[0-9])y)?(([1-2]?[0-9])m)?";

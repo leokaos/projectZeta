@@ -26,7 +26,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-public abstract class AbstractSimpleController<T extends Entidade> implements SimpleController<T> {
+public abstract class AbstractSimpleController<T extends Entidade<K>, K> implements SimpleController<T, K> {
 
 	@Override
 	@RequestMapping(method = GET, produces = APPLICATION_JSON_UTF8_VALUE)
@@ -42,7 +42,7 @@ public abstract class AbstractSimpleController<T extends Entidade> implements Si
 
 	@Override
 	@RequestMapping(method = GET, produces = APPLICATION_JSON_UTF8_VALUE, path = "/{id}")
-	public T buscarPorId(@PathVariable("id") String id) throws BusinessException {
+	public T buscarPorId(@PathVariable("id") K id) throws BusinessException {
 		return this.getFacade().buscarPorId(id);
 	}
 
@@ -55,17 +55,17 @@ public abstract class AbstractSimpleController<T extends Entidade> implements Si
 
 	@Override
 	@RequestMapping(method = PUT, produces = APPLICATION_JSON_UTF8_VALUE, path = "/{id}")
-	public ResponseEntity<T> salvar(@RequestBody @Valid T t, @PathVariable("id") String id) throws BusinessException {
+	public ResponseEntity<T> salvar(@RequestBody @Valid T t, @PathVariable("id") K id) throws BusinessException {
 		return ResponseEntity.ok(getFacade().atualizar(t, id));
 	}
 
 	@Override
 	@ResponseStatus(NO_CONTENT)
 	@RequestMapping(method = RequestMethod.DELETE, path = "/{id}")
-	public void removerPorId(@PathVariable("id") String id) throws BusinessException {
+	public void removerPorId(@PathVariable("id") K id) throws BusinessException {
 		getFacade().removerPorId(id);
 	}
 
-	protected abstract SimpleFacade<T> getFacade();
+	protected abstract SimpleFacade<T, K> getFacade();
 
 }

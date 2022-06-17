@@ -113,11 +113,11 @@ public class AspectConfigurationTest {
 		return null;
 	}
 
-	private Entidade getTestEntidade(final String id) {
+	private Entidade<String> getTestEntidade(final String id) {
 		return new TestEntidade(id);
 	}
 
-	private static class TestEntidade implements Entidade {
+	private static class TestEntidade implements Entidade<String> {
 
 		private static final long serialVersionUID = 1L;
 

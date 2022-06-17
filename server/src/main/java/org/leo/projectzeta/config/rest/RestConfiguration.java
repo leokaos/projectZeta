@@ -2,6 +2,8 @@ package org.leo.projectzeta.config.rest;
 
 import static com.fasterxml.jackson.databind.DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES;
 
+import org.leo.projectzeta.model.Equivalencia;
+import org.leo.projectzeta.model.Tempo;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder;

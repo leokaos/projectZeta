@@ -2,24 +2,24 @@ package org.leo.projectzeta.config.graphql.types;
 
 public class VagaPorCandidato {
 
-	private String id;
+	private Long id;
 	private Integer quantidade;
 
 	public VagaPorCandidato() {
 		super();
 	}
 
-	public VagaPorCandidato(String id, Integer quantidade) {
+	public VagaPorCandidato(Long id, Integer quantidade) {
 		super();
 		this.id = id;
 		this.quantidade = quantidade;
 	}
 
-	public String getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(String id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 

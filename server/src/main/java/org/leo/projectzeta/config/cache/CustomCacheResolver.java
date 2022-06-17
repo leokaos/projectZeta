@@ -18,7 +18,7 @@ public class CustomCacheResolver extends SimpleCacheResolver {
 	@Override
 	protected Collection<String> getCacheNames(CacheOperationInvocationContext<?> context) {
 
-		AbstractSimpleFacade<?> facade = (AbstractSimpleFacade<?>) context.getTarget();
+		AbstractSimpleFacade<?, ?> facade = (AbstractSimpleFacade<?, ?>) context.getTarget();
 
 		return Lists.newArrayList(facade.getClasseDaEntidade().getSimpleName());
 	}

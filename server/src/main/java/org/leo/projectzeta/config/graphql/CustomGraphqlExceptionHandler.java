@@ -7,13 +7,14 @@ import graphql.execution.DataFetcherExceptionHandlerParameters;
 import graphql.execution.DataFetcherExceptionHandlerResult;
 
 public class CustomGraphqlExceptionHandler implements DataFetcherExceptionHandler {
-    @Override
-    public DataFetcherExceptionHandlerResult onException(DataFetcherExceptionHandlerParameters handlerParameters) {
 
-        Throwable exception = handlerParameters.getException();
+	@Override
+	public DataFetcherExceptionHandlerResult onException(DataFetcherExceptionHandlerParameters handlerParameters) {
 
-        GraphQLError error = GraphqlErrorBuilder.newError().message(exception.getMessage()).build();
+		Throwable exception = handlerParameters.getException();
 
-        return DataFetcherExceptionHandlerResult.newResult().error(error).build();
-    }
+		GraphQLError error = GraphqlErrorBuilder.newError().message(exception.getMessage()).build();
+
+		return DataFetcherExceptionHandlerResult.newResult().error(error).build();
+	}
 }

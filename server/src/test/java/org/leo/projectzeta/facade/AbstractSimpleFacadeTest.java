@@ -27,9 +27,9 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.leo.projectzeta.api.Entidade;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Query;
-import org.springframework.data.mongodb.repository.MongoRepository;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
@@ -38,7 +38,7 @@ import com.google.common.collect.Maps;
 public class AbstractSimpleFacadeTest {
 
 	@Mock(type = MockType.STRICT)
-	private MongoRepository<TestEntidade, String> mockRepository;
+	private JpaRepository<TestEntidade, String> mockRepository;
 
 	@Mock(type = MockType.STRICT)
 	private MongoTemplate mockMongoTemplate;
@@ -56,7 +56,7 @@ public class AbstractSimpleFacadeTest {
 
 		TestEntidade entidade = new TestEntidade(null);
 
-		expect(mockRepository.insert(entidade)).andReturn(entidade);
+		expect(mockRepository.save(entidade)).andReturn(entidade);
 
 		replay(mockRepository);
 
@@ -369,7 +369,6 @@ public class AbstractSimpleFacadeTest {
 	@Test
 	public void deveriaRetornarErrorPoisEntidadeNaoExisteTest() throws Exception {
 
-
 		expect(mockRepository.existsById("123")).andReturn(false);
 
 		replayAll();
@@ -400,7 +399,7 @@ public class AbstractSimpleFacadeTest {
 
 		assertEquals(resultadoEsperado, resultado);
 	}
-	
+
 	private void verifyAll() {
 		verify(mockRepository, mockMongoTemplate);
 	}
@@ -409,17 +408,17 @@ public class AbstractSimpleFacadeTest {
 		replay(mockRepository, mockMongoTemplate);
 	}
 
-	private static class TestAbstractSimpleFacade extends AbstractSimpleFacade<TestEntidade> {
+	private static class TestAbstractSimpleFacade extends AbstractSimpleFacade<TestEntidade, String> {
 
-		private MongoRepository<TestEntidade, String> repository;
+		private JpaRepository<TestEntidade, String> repository;
 
-		public TestAbstractSimpleFacade(MongoRepository<TestEntidade, String> repository) {
+		public TestAbstractSimpleFacade(JpaRepository<TestEntidade, String> repository) {
 			super();
 			this.repository = repository;
 		}
 
 		@Override
-		protected MongoRepository<TestEntidade, String> getRepository() {
+		protected JpaRepository<TestEntidade, String> getRepository() {
 			return repository;
 		}
 
@@ -430,7 +429,7 @@ public class AbstractSimpleFacadeTest {
 
 	}
 
-	private static class TestEntidade implements Entidade {
+	private static class TestEntidade implements Entidade<String> {
 
 		private static final long serialVersionUID = 1L;
 

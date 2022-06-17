@@ -4,10 +4,10 @@ import java.io.Serializable;
 
 public interface Entidade<T> extends Serializable {
 
-    T getId();
+	T getId();
 
-    default boolean hasId() {
-        return getId() != null;
-    }
+	default boolean hasId() {
+		return getId() != null;
+	}
 
 }
