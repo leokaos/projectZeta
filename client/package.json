@@ -5,49 +5,60 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
-    "test": "ng test",
-    "lint": "ng lint",
-    "e2e": "ng e2e"
+    "watch": "ng build --watch --configuration development",
+    "test": "ng test"
   },
   "private": true,
   "dependencies": {
-    "@angular/animations": "~11.1.2",
-    "@angular/cdk": "^11.1.2",
-    "@angular/common": "~11.1.2",
-    "@angular/compiler": "~11.1.2",
-    "@angular/core": "~11.1.2",
-    "@angular/flex-layout": "^11.0.0-beta.33",
-    "@angular/forms": "~11.1.2",
-    "@angular/material": "^11.1.2",
-    "@angular/platform-browser": "~11.1.2",
-    "@angular/platform-browser-dynamic": "~11.1.2",
-    "@angular/router": "~11.1.2",
+    "@angular/animations": "^14.0.0",
+    "@angular/cdk": "^14.0.2",
+    "@angular/common": "^14.0.0",
+    "@angular/compiler": "^14.0.0",
+    "@angular/core": "^14.0.0",
+    "@angular/flex-layout": "^13.0.0-beta.38",
+    "@angular/forms": "^14.0.0",
+    "@angular/material": "^14.0.2",
+    "@angular/platform-browser": "^14.0.0",
+    "@angular/platform-browser-dynamic": "^14.0.0",
+    "@angular/router": "^14.0.0",
     "@apollo/client": "^3.0.0",
-    "@stomp/ng2-stompjs": "^8.0.0",
-    "angular-tag-cloud-module": "^5.3.0",
-    "apollo-angular": "^2.4.0",
-    "graphql": "^15.0.0",
-    "rxjs": "~6.6.0",
-    "tslib": "^2.0.0",
-    "zone.js": "~0.11.3"
+    "@stomp/rx-stomp": "^1.1.4",
+    "angular-tag-cloud-module": "^13.0.0",
+    "apollo-angular": "^3.0.1",
+    "graphql": "^16",
+    "keycloak-angular": "^10.0.1",
+    "keycloak-js": "^18.0.1",
+    "rxjs": "~7.5.0",
+    "tslib": "^2.3.0",
+    "zone.js": "~0.11.4"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "~0.1101.4",
-    "@angular/cli": "~11.1.4",
-    "@angular/compiler-cli": "~11.1.2",
-    "@types/jasmine": "~3.6.0",
-    "@types/node": "^12.11.1",
-    "codelyzer": "^6.0.0",
-    "jasmine-core": "~3.10.1",
-    "jasmine-spec-reporter": "~5.0.0",
-    "karma": "~5.2.0",
+    "@angular-devkit/build-angular": "^14.0.2",
+    "@angular/cli": "~14.0.2",
+    "@angular/compiler-cli": "^14.0.0",
+    "@types/jasmine": "~4.0.0",
+    "jasmine-core": "~4.1.0",
+    "karma": "~6.3.0",
     "karma-chrome-launcher": "~3.1.0",
-    "karma-coverage": "~2.0.3",
-    "karma-jasmine": "~4.0.0",
-    "karma-jasmine-html-reporter": "^1.5.0",
-    "protractor": "~7.0.0",
-    "ts-node": "~8.3.0",
-    "tslint": "~6.1.0",
-    "typescript": "~4.1.2"
+    "karma-coverage": "~2.2.0",
+    "karma-jasmine": "~5.0.0",
+    "karma-jasmine-html-reporter": "~1.7.0",
+    "typescript": "~4.7.2"
+  },
+  "overrides": {
+    "keycloak-angular": {
+      "@angular/common": "$@angular/common",
+      "@angular/core": "$@angular/core",
+      "@angular/router": "$@angular/router"
+    },
+    "apollo-angular": {
+      "@angular/core": "$@angular/core"
+    },
+    "@angular/flex-layout": {
+      "@angular/cdk": "$@angular/cdk",
+      "@angular/core": "$@angular/core",
+      "@angular/common": "$@angular/common",
+      "@angular/platform-browser": "$@angular/platform-browser"
+    }
   }
 }

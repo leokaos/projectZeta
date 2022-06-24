@@ -11,6 +11,7 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.leo.projectzeta.api.Entidade;
 
 @Entity
@@ -28,6 +29,7 @@ public class Categoria implements Entidade<Long> {
 	@Column(name = "descricao")
 	private String descricao;
 
+	@JsonIgnore
 	@OneToMany(mappedBy = "categoria")
 	private List<Qualificacao> qualificacoes;
 

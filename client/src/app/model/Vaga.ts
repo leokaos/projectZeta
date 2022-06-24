@@ -1,8 +1,8 @@
 import { Deserializable } from './Deserializable';
 import { Periodo } from './Periodo';
 import { Empresa } from './Empresa';
-import { Candidato } from './Candidato';
 import { Qualificacao } from './Qualificacao';
+import { Profissional } from './Profissional';
 
 export class Vaga implements Deserializable {
 
@@ -41,7 +41,7 @@ export class Vaga implements Deserializable {
 
             for (let item of input.candidatosSelecionados) {
                 this.candidatosSelecionados.push({
-                    "candidato": new Candidato().deserialize(item.candidato),
+                    "candidato": new Profissional().deserialize(item.candidato),
                     "pontuacao": item.pontuacao
                 });
             }
@@ -66,7 +66,7 @@ export class Vaga implements Deserializable {
         return Math.ceil(Math.abs(new Date().getTime() - this.dataEntrada.getTime()) / (1000 * 3600 * 24));
     }
 
-    public static LABEL_STATUS = {
+    public static LABEL_STATUS: { [key: string]: string } = {
         'NOVA': 'Nova',
         'SELECIONANDO_CANDIDATOS': 'Selecionando Candidatos',
         'ENTREVISTANDO': 'Entrevistando',

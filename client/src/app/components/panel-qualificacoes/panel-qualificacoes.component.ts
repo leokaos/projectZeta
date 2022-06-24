@@ -1,12 +1,12 @@
-import { AfterContentInit, Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Vaga } from '@app/model/Vaga';
-import { VagaService } from '@app/services/Vaga.service';
+import { VagaService } from '@app/services/vaga.service';
 import { CloudData, CloudOptions } from 'angular-tag-cloud-module';
 
 @Component({
   selector: 'app-panel-qualificacoes',
   templateUrl: './panel-qualificacoes.component.html',
-  styleUrls: ['./panel-qualificacoes.component.css']
+  styleUrls: ['./panel-qualificacoes.component.scss']
 })
 export class PanelQualificacoesComponent implements OnInit {
 
@@ -24,14 +24,14 @@ export class PanelQualificacoesComponent implements OnInit {
 
       let innerVagas: Vaga[] = this.vagaService.assemble(vagas);
 
-      let exigencias = innerVagas
+      let exigencias: { [key: string]: any } = {};/*innerVagas
         .reduce((c: any, v: any) => c.concat(v.exigencias), [])
         .reduce((c: any, v: any) => {
           let key = v.fullName();
           c[key] = (c[key] || []);
           c[key].push(v);
           return c
-        }, {});
+        }, {});*/
 
       this.options = { width: 1, height: 200, overflow: false, };
 

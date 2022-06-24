@@ -1,6 +1,4 @@
-import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
-import { AfterViewChecked, AfterViewInit, Component, ComponentFactoryResolver, OnInit, QueryList, ViewChild, ViewChildren, ViewContainerRef } from '@angular/core';
-import { map } from 'rxjs/operators';
+import { AfterViewInit, Component, ComponentFactoryResolver, QueryList, ViewChildren, ViewContainerRef } from '@angular/core';
 import { PanelCandidatosComponent } from '../panel-candidatos/panel-candidatos.component';
 import { PanelQualificacoesComponent } from '../panel-qualificacoes/panel-qualificacoes.component';
 import { PanelVagasComponent } from '../panel-vagas/panel-vagas.component';
@@ -8,7 +6,7 @@ import { PanelVagasComponent } from '../panel-vagas/panel-vagas.component';
 @Component({
   selector: 'app-dash',
   templateUrl: './dash.component.html',
-  styleUrls: ['./dash.component.css']
+  styleUrls: ['./dash.component.scss']
 })
 export class DashComponent implements AfterViewInit {
 
@@ -32,8 +30,8 @@ export class DashComponent implements AfterViewInit {
       this.viewContainerRefList.map((vcr: ViewContainerRef, index: number) => {
 
         if (this.cards[index].class != null) {
-          const factory = this.factoryResolver.resolveComponentFactory(this.cards[index].class);
-          vcr.createComponent(factory);
+          /*const factory = this.factoryResolver.resolveComponentFactory(this.cards[index].class);
+          vcr.createComponent(factory);*/
         }
 
       });

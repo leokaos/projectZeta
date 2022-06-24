@@ -3,7 +3,7 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
 @Component({
   selector: 'app-avatar',
   templateUrl: './avatar.component.html',
-  styleUrls: ['./avatar.component.css']
+  styleUrls: ['./avatar.component.scss']
 })
 export class AvatarComponent {
 
@@ -13,9 +13,9 @@ export class AvatarComponent {
 
   constructor() { }
 
-  public onChangeAvatar(files: FileList): void {
+  public onChangeAvatar(files: any): void {
 
-    let file = files[0];
+    let file = files.target.files[0];
     let pattern = /image-*/;
     let reader = new FileReader();
 

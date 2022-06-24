@@ -9,7 +9,7 @@ import { QualificacaoService } from '@app/services/qualificacao.service';
 @Component({
   selector: 'app-qualificacoes',
   templateUrl: './qualificacoes.component.html',
-  styleUrls: ['./qualificacoes.component.css']
+  styleUrls: ['./qualificacoes.component.scss']
 })
 export class QualificacoesComponent implements AfterViewInit {
 

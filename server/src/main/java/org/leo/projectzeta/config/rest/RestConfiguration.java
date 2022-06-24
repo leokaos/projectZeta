@@ -14,32 +14,32 @@ import com.fasterxml.jackson.databind.module.SimpleModule;
 @Configuration
 public class RestConfiguration {
 
-	@Bean
-	public Jackson2ObjectMapperBuilder jackson2ObjectMapperBuilder() {
-		return new Jackson2ObjectMapperBuilder().modules(createSimpleModule());
-	}
+    @Bean
+    public Jackson2ObjectMapperBuilder jackson2ObjectMapperBuilder() {
+        return new Jackson2ObjectMapperBuilder().modules(createSimpleModule());
+    }
 
-	@Bean
-	public ObjectMapper objectMapper() {
+    @Bean
+    public ObjectMapper objectMapper() {
 
-		ObjectMapper objectMapper = new ObjectMapper();
+        ObjectMapper objectMapper = new ObjectMapper();
 
-		objectMapper.registerModule(createSimpleModule());
-		objectMapper.configure(FAIL_ON_UNKNOWN_PROPERTIES, false);
+        objectMapper.registerModule(createSimpleModule());
+        objectMapper.configure(FAIL_ON_UNKNOWN_PROPERTIES, false);
 
-		return objectMapper;
-	}
+        return objectMapper;
+    }
 
-	private SimpleModule createSimpleModule() {
+    private SimpleModule createSimpleModule() {
 
-		SimpleModule m = new SimpleModule();
+        SimpleModule m = new SimpleModule();
 
-		m.addSerializer(Tempo.class, new TempoSerializer());
-		m.addSerializer(Equivalencia.class, new EquivalenciaSerializer());
+        m.addSerializer(Tempo.class, new TempoSerializer());
+        m.addSerializer(Equivalencia.class, new EquivalenciaSerializer());
 
-		m.addDeserializer(Tempo.class, new TempoDeserializer());
+        m.addDeserializer(Tempo.class, new TempoDeserializer());
 
-		return m;
-	}
+        return m;
+    }
 
 }

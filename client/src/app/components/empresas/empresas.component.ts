@@ -9,7 +9,7 @@ import { EmpresaService } from '@app/services/empresa.service';
 @Component({
   selector: 'app-empresas',
   templateUrl: './empresas.component.html',
-  styleUrls: ['./empresas.component.css']
+  styleUrls: ['./empresas.component.scss']
 })
 export class EmpresasComponent implements OnInit {
 
@@ -24,7 +24,7 @@ export class EmpresasComponent implements OnInit {
   dataSource: MatTableDataSource<Empresa> = new MatTableDataSource();
   empresas: Empresa[];
 
-  indexLoading: number;
+  indexLoading?: number;
 
   constructor(private empresaService: EmpresaService, public snackBar: MatSnackBar) {
 
@@ -46,10 +46,12 @@ export class EmpresasComponent implements OnInit {
     this.dataSource.data = this.dataSource.data.concat(new Empresa());
   }
 
-  public onFiltroChange(filtro: string): void {
+  public onFiltroChange(event: Event): void {
 
-    if (filtro != "") {
-      this.dataSource.data = this.empresas.filter(empresa => empresa.nome.toLowerCase().indexOf(filtro.toLowerCase()) != -1);
+    let filtro = event as InputEvent;
+
+    if (filtro.data) {
+      this.dataSource.data = this.empresas.filter(empresa => empresa.nome.toLowerCase().indexOf(filtro.data!.toLowerCase()) != -1);
     }
     else {
       this.dataSource.data = this.empresas;
@@ -80,7 +82,7 @@ export class EmpresasComponent implements OnInit {
       (empresa: Empresa) => {
         this.dataSource.data[i] = empresa;
         this.dataSource._updateChangeSubscription();
-        this.indexLoading = null;
+        this.indexLoading = undefined;
         this.empresas.push(empresa);
       },
       (err: any) => {

@@ -3,7 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { Vaga } from '@app/model/Vaga';
 import { WebSocketAPI } from '@app/services/websocket.service';
 import { WorkflowVaga } from '@app/services/workflowVaga';
-import { VagaService } from '@app/services/Vaga.service';
+import { VagaService } from '@app/services/vaga.service';
 import { CdkDragDrop, transferArrayItem, moveItemInArray } from '@angular/cdk/drag-drop';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ShowVagaComponent } from '../show-vaga/show-vaga.component';
@@ -11,11 +11,11 @@ import { ShowVagaComponent } from '../show-vaga/show-vaga.component';
 @Component({
   selector: 'app-vagas',
   templateUrl: './vagas.component.html',
-  styleUrls: ['./vagas.component.css']
+  styleUrls: ['./vagas.component.scss']
 })
 export class VagasComponent implements OnInit {
 
-  listas = {
+  listas: { [key: string]: any } = {
     'NOVA': { 'data': [], 'connected': ['SELECIONANDO_CANDIDATOS', 'FINALIZADA'] },
     'SELECIONANDO_CANDIDATOS': { 'data': [], 'connected': 'ENTREVISTANDO' },
     'ENTREVISTANDO': { 'data': [], 'connected': 'AGUARDANDO_INICIO' },
@@ -97,7 +97,7 @@ export class VagasComponent implements OnInit {
     }
   }
 
-  asIsOrder(a, b) {
+  asIsOrder(a: any, b: any) {
     return 1;
   }
 

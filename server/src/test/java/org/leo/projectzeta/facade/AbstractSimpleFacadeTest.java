@@ -184,7 +184,7 @@ public class AbstractSimpleFacadeTest {
 
 		replay(mockRepository);
 
-		facade.buscarPorFiltro(null);
+		facade.buscarPorFiltro( (Map<String, Object>) null);
 
 		facade.buscarPorFiltro(Maps.newHashMap());
 

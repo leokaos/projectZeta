@@ -3,6 +3,7 @@ package org.leo.projectzeta.model;
 import org.leo.projectzeta.api.Entidade;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
 
 @Entity
 @Table(name = "empresa", schema = "rh")
@@ -16,6 +17,7 @@ public class Empresa implements Entidade<Long> {
     private Long id;
 
     @Column(name = "nome")
+    @NotEmpty
     private String nome;
 
     @Override

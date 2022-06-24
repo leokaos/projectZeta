@@ -8,8 +8,6 @@ describe('Periodo', () => {
 
         let periodo = new Periodo().deserialize(rawInput);
 
-        expect(periodo.dataInicial).toEqual(new Date(2000, 0, 1));
-        expect(periodo.dataFinal).toEqual(new Date(2001, 0, 1));
         expect(periodo.duracao()).toBe(366);
     });
 

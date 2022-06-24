@@ -1,6 +1,6 @@
 import { TestBed, inject } from '@angular/core/testing';
 
-import { EventoService } from './Evento.service';
+import { EventoService } from './evento.service';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { Evento } from '@app/model/Evento';
 

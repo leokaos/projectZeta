@@ -4,7 +4,7 @@ import { Vaga } from '@app/model/Vaga';
 import { Observable } from 'rxjs';
 import { environment } from '@environment/environment'
 
-const endpoint = environment.REST_API_URL + '/secured/vaga';
+const endpoint = environment.restApiurl + '/secured/vaga';
 
 @Injectable({
   providedIn: 'root'

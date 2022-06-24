@@ -1,0 +1,44 @@
+html,
+body {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    background-color: #fafafa;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+table {
+    width: 100%;
+}
+
+.button-column {
+    width: 100px;
+}
+
+.default-form-field {
+    width: 100%;
+}
+
+.panel-button {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 0px 0px 20px 0px;
+}
+
+.panel-button> :first-child {
+    flex-grow: 1;
+}
+
+.panel-filtro {
+    padding: 10px;
+    margin: 20px 0px;
+    width: 50%;
+}
+
+.mat-card-actions-bottom {
+    position: absolute;
+    bottom: 24px;
+    right: 24px;
+}

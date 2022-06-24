@@ -6,7 +6,7 @@ import { ActivatedRoute, Router } from "@angular/router";
 import { Empresa } from "@app/model/Empresa";
 import { Vaga } from "@app/model/Vaga";
 import { EmpresaService } from "@app/services/empresa.service";
-import { VagaService } from "@app/services/Vaga.service";
+import { VagaService } from "@app/services/vaga.service";
 import { map, startWith } from 'rxjs/operators';
 import { forkJoin } from "rxjs";
 
@@ -15,7 +15,7 @@ import { Observable } from "@apollo/client/core";
 @Component({
   selector: 'app-vaga',
   templateUrl: './vaga.component.html',
-  styleUrls: ['./vaga.component.css']
+  styleUrls: ['./vaga.component.scss']
 })
 export class VagaComponent implements OnInit {
 

@@ -3,7 +3,7 @@ import { Component, ViewChild, ElementRef,  Input, Output, EventEmitter } from '
 @Component({
   selector: 'app-edit-inline',
   templateUrl: './edit-inline.component.html',
-  styleUrls: ['./edit-inline.component.css']
+  styleUrls: ['./edit-inline.component.scss']
 })
 export class EditInlineComponent {
 

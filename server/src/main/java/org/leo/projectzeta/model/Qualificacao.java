@@ -37,7 +37,7 @@ public class Qualificacao implements Entidade<Long> {
     private Categoria categoria;
 
     @Valid
-    @OneToMany(mappedBy = "origem")
+    @OneToMany(mappedBy = "origem", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Set<Equivalencia> equivalencias = Sets.newHashSet();
 
     @Override

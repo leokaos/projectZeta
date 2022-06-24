@@ -4,16 +4,7 @@ import java.util.Date;
 import java.util.Optional;
 import java.util.Set;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Lob;
-import javax.persistence.OneToMany;
-import javax.persistence.SequenceGenerator;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
@@ -65,7 +56,7 @@ public class Profissional implements Entidade<Long> {
 	@Enumerated(EnumType.STRING)
 	private StatusProfissional status = StatusProfissional.EM_CONTATO;
 
-	@OneToMany(mappedBy = "profissional")
+	@OneToMany(mappedBy = "profissional", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private Set<Experiencia> experiencias = Sets.newHashSet();
 
 	@Override

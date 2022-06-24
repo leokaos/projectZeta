@@ -1,8 +1,8 @@
 import { TestBed, inject } from '@angular/core/testing';
 
-import { VagaService } from './Vaga.service';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { Vaga } from '@app/model/Vaga';
+import { VagaService } from '@services/vaga.service';
 
 describe('VagaService', () => {
   beforeEach(() => {

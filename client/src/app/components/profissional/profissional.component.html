@@ -1,0 +1,125 @@
+<div class="container">
+
+    <mat-card>
+
+        <mat-card-header>
+            <mat-card-title>
+                <h2 class="mat-h2">Profissional</h2>
+            </mat-card-title>
+        </mat-card-header>
+
+        <mat-card-content>
+
+            <form>
+
+                <div class="container" fxLayout fxLayout.xs="column" fxLayoutAlign="center" fxLayoutGap="60px" fxLayoutGap.xs="0">
+
+                    <div fxFlex="75%">
+                        <mat-form-field class="default-form-field">
+                            <input matInput placeholder="Nome" [(ngModel)]="profissional.nome" name="profissional.nome" autocomplete="off" />
+                        </mat-form-field>
+
+                        <mat-form-field class="default-form-field">
+                            <input matInput placeholder="Sobrenome" [(ngModel)]="profissional.sobrenome" name="profissional.sobrenome" autocomplete="off" />
+                        </mat-form-field>
+
+                        <mat-form-field class="default-form-field">
+                            <input matInput placeholder="Titulo" [(ngModel)]="profissional.titulo" name="profissional.titulo" autocomplete="off" />
+                        </mat-form-field>
+
+                        <mat-form-field class="default-form-field">
+                            <input matInput placeholder="E-mail" [(ngModel)]="profissional.email" name="profissional.email" autocomplete="off" />
+                        </mat-form-field>
+                    </div>
+
+                    <div fxFlex="25%">
+                        <mat-form-field class="default-form-field">
+                            <input matInput [matDatepicker]="pickerDataContato" [(ngModel)]="profissional.dataContato" name="profissional.dataContato" placeholder="Data Inicial do contato" autocomplete="off">
+                            <mat-datepicker-toggle matSuffix [for]="pickerDataContato"></mat-datepicker-toggle>
+                            <mat-datepicker #pickerDataContato></mat-datepicker>
+                        </mat-form-field>
+
+                        <mat-form-field class="default-form-field">
+                            <input matInput [matDatepicker]="pickerDataComeco" [(ngModel)]="profissional.dataComeco" name="profissional.dataComeco" placeholder="Data Início" autocomplete="off">
+                            <mat-datepicker-toggle matSuffix [for]="pickerDataComeco"></mat-datepicker-toggle>
+                            <mat-datepicker #pickerDataComeco></mat-datepicker>
+                        </mat-form-field>
+
+                        <app-avatar [(imagem)]="profissional.avatar"></app-avatar>
+                    </div>
+
+                </div>
+
+                <div>
+
+                    <mat-tab-group>
+
+                        <mat-tab label="Experiencia">
+
+                            <div class="tabs-profissional">
+
+                                <div class="panel-button">
+                                    <h3 class="mat-h3"></h3>
+                                    <button mat-raised-button (click)="adicionarExperiencia()" color="primary">
+                                        <mat-icon class="icon-display">add</mat-icon>
+                                    </button>
+                                </div>
+
+                                <table mat-table [dataSource]="dataSource" *ngIf="profissional.experiencias.length > 0">
+
+                                    <ng-container matColumnDef="qualificacao">
+                                        <th mat-header-cell *matHeaderCellDef>Qualificação</th>
+                                        <td mat-cell *matCellDef="let experiencia; let i = index;" class="coluna-qualificacao">
+                                            <mat-select [(ngModel)]="experiencia.qualificacao.id" name="experiencia.qualificacao_{{i}}">
+                                                <mat-option *ngFor="let q of qualificacoes" [value]="q.id">
+                                                    {{q.fullName()}}
+                                                </mat-option>
+                                            </mat-select>
+                                        </td>
+                                    </ng-container>
+
+                                    <ng-container matColumnDef="tempo">
+                                        <th mat-header-cell *matHeaderCellDef> Tempo </th>
+                                        <td mat-cell *matCellDef="let experiencia; let i = index;" class="coluna-tempo">
+                                            <mat-form-field>
+                                                <input matInput [(ngModel)]="experiencia.tempo" name="equivalencia.tempo_{{i}}" autocomplete="off" />
+                                            </mat-form-field>
+                                        </td>
+                                    </ng-container>
+
+                                    <ng-container matColumnDef="delete">
+                                        <th mat-header-cell *matHeaderCellDef></th>
+                                        <td mat-cell *matCellDef="let experiencia; let i = index;" class="table-coluna-delete">
+                                            <button mat-icon-button (click)="removerExperiencia(i)">
+                                                <mat-icon>delete_outline</mat-icon>
+                                            </button>
+                                        </td>
+                                    </ng-container>
+
+                                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+                                </table>
+                            </div>
+                        </mat-tab>
+
+                        <mat-tab label="Eventos">
+                            <app-eventos id="{{profissional.id}}" tipo="profissional" *ngIf="profissional.id != undefined"></app-eventos>
+                        </mat-tab>
+
+                    </mat-tab-group>
+                </div>
+
+            </form>
+
+        </mat-card-content>
+
+        <mat-card-actions>
+            <button mat-stroked-button color="primary" [routerLink]="['/profissionais/']">Cancelar</button>
+            <div fxFlex></div>
+            <button mat-stroked-button color="primary" (click)="salvar()">Salvar</button>
+        </mat-card-actions>
+
+    </mat-card>
+
+</div>

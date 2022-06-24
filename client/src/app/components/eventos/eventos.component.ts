@@ -1,21 +1,21 @@
 import { Component, Input, AfterViewInit, ViewChild } from '@angular/core';
-import { EventoService } from '@app/services/evento.service';
 import { Evento } from '@app/model/Evento';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
+import { EventoService } from '@app/services/evento.service';
 
 @Component({
   selector: 'app-eventos',
   templateUrl: './eventos.component.html',
-  styleUrls: ['./eventos.component.css']
+  styleUrls: ['./eventos.component.scss']
 })
 export class EventosComponent implements AfterViewInit {
 
   @Input()
-  private id: String;
+  id: String;
 
   @Input()
-  private tipo: String;
+  tipo: String;
 
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
 

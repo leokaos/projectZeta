@@ -17,33 +17,21 @@ services:
         expose:
             - 6379
     ldap:
-        image: dinkel/openldap
-        container_name: rh-ldap
-        ports: 
-          - 389:389
-        expose:
-          - 389
-        environment:
-          - SLAPD_PASSWORD=leo123
-          - SLAPD_DOMAIN=rh.system.org
-          - SLAPD_ADDITIONAL_MODULES=memberof
-          - SLAPD_FORCE_RECONFIGURE=true
-        volumes:
-          - type: bind
-            source: ./initial_user.ldif
-            target: /etc/leo/prepopulate/initial_user.ldif
-
-    ldap2:
       image: osixia/openldap:1.5.0
-      container_name: ldap
+      container_name: rh-ldap
       environment:
         - LDAP_ORGANISATION=rh
         - LDAP_DOMAIN=rh.system.org
+        - LDAP_TLS=false
         - "LDAP_BASE_DN=dc=rh,dc=system,dc=org"
         - LDAP_ADMIN_PASSWORD=leo123
+      command: [ '--copy-service' ]
       ports:
         - 389:389
-        - 636:636
+      volumes:
+        - type: bind
+          source: ./initial_user.ldif
+          target: /container/service/slapd/assets/config/bootstrap/ldif/initial_user.ldif
 
     zookeeper:
         image: wurstmeister/zookeeper
@@ -70,6 +58,7 @@ services:
           - 3000
     db:
       image: postgres
+      container_name: rh-db
       restart: always
       ports:
         - 5432:5432

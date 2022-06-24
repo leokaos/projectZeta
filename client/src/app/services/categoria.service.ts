@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { environment } from '@environment/environment'
 import { Categoria } from '@app/model/Categoria';
 
-const endpoint = environment.REST_API_URL + '/secured/categoria';
+const endpoint = environment.restApiurl + '/secured/categoria';
 
 @Injectable({
   providedIn: 'root'

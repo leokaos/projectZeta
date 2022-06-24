@@ -12,7 +12,7 @@ import { CategoriaComponent } from "../categoria/categoria.component";
 @Component({
   selector: 'app-categorias',
   templateUrl: './categorias.component.html',
-  styleUrls: ['./categorias.component.css']
+  styleUrls: ['./categorias.component.scss']
 })
 export class CategoriasComponent implements OnInit, AfterContentInit {
 
@@ -21,11 +21,13 @@ export class CategoriasComponent implements OnInit, AfterContentInit {
   @ViewChild('grid', { static: false })
   grid: MatGridList;
 
-  gridByBreakpoint = { xl: 3, lg: 3, md: 2, sm: 1, xs: 1 };
+  gridByBreakpoint: { [key: string]: any } = { xl: 3, lg: 3, md: 2, sm: 1, xs: 1 };
 
-  constructor(private categoriaService: CategoriaService, private qualificacaoService: QualificacaoService, private mediaObserver: MediaObserver, private snackBar: MatSnackBar, public dialog: MatDialog) {
-
-  }
+  constructor(private categoriaService: CategoriaService,
+    private qualificacaoService: QualificacaoService,
+    private mediaObserver: MediaObserver,
+    private snackBar: MatSnackBar,
+    public dialog: MatDialog) { }
 
   ngAfterContentInit(): void {
     this.mediaObserver.asObservable().subscribe((change: MediaChange[]) => {

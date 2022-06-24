@@ -8,7 +8,7 @@ import { Apollo } from 'apollo-angular';
 })
 export class WorkflowVaga {
 
-  private endpoints = {};
+  private endpoints: { [key: string]: any } = {};
 
   constructor(private apollo: Apollo) {
     this.endpoints['NOVA'] = SELECIONAR_CANDIDATOS;

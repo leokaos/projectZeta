@@ -12,7 +12,7 @@ import { forkJoin } from "rxjs";
 @Component({
   selector: 'app-qualificacao',
   templateUrl: './qualificacao.component.html',
-  styleUrls: ['./qualificacao.component.css']
+  styleUrls: ['./qualificacao.component.scss']
 })
 export class QualificacaoComponent implements AfterViewInit {
 
@@ -49,7 +49,7 @@ export class QualificacaoComponent implements AfterViewInit {
     }
   }
 
-  public idComparator = function (option, value): boolean {
+  public idComparator = function (option: any, value: any): boolean {
     return option.id === value.id;
   }
 
@@ -57,7 +57,7 @@ export class QualificacaoComponent implements AfterViewInit {
     this.qualificacaoService.salvar(this.qualificacao).subscribe(
       (data: any) => {
         this.router.navigate(['qualificacoes']);
-        this.snackBar.open('Qualificacao salva com sucesso!', 'Fechar');
+        this.snackBar.open('Qualificação salva com sucesso!', 'Fechar');
       },
       (err: any) => {
         this.snackBar.open(err.error.message, 'Fechar');

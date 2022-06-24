@@ -5,8 +5,8 @@ import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterTestingModule } from '@angular/router/testing';
 import { MaterialComponentsModule } from '@app/modules/material-components.module';
-import { StompService } from '@stomp/ng2-stompjs';
-import Observable from 'zen-observable';
+import { StompService } from '@app/services/stomp.service';
+import { Observable } from 'rxjs';
 import { VagasComponent } from './vagas.component';
 
 describe('VagasComponent', () => {
