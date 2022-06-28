@@ -12,7 +12,6 @@ import org.leo.projectzeta.model.Qualificacao;
 import org.leo.projectzeta.repository.CategoriaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Service;
 
 import com.google.common.collect.Maps;

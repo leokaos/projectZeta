@@ -3,12 +3,21 @@
 
         <ng-container matColumnDef="dataEvento">
             <th mat-header-cell *matHeaderCellDef> Data</th>
-            <td mat-cell *matCellDef="let evento"> {{evento.dataEvento | date: 'dd/MM/yyyy'}} </td>
+            <td mat-cell *matCellDef="let evento"> {{evento.dataEvento | date: 'dd/MM/yyyy HH:mm:ss'}} </td>
         </ng-container>
 
         <ng-container matColumnDef="operacao">
             <th mat-header-cell *matHeaderCellDef> Operacao </th>
             <td mat-cell *matCellDef="let evento"> {{evento.operacao}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="entidade">
+            <th mat-header-cell *matHeaderCellDef> Conteúdo </th>
+            <td mat-cell *matCellDef="let evento" class="button-column">
+                <button mat-icon-button color="primary" (click)="open(evento.entidade)">
+                    <mat-icon>open_in_new</mat-icon>
+                </button>
+            </td>
         </ng-container>
 
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

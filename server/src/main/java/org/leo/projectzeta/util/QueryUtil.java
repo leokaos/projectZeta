@@ -1,15 +1,13 @@
 package org.leo.projectzeta.util;
 
-import org.leo.projectzeta.api.Entidade;
-import org.leo.projectzeta.api.SimpleFilter;
-import org.leo.projectzeta.config.web.CustomDTOArgumentConverters;
-
-import javax.persistence.Parameter;
-import javax.persistence.Query;
-import javax.persistence.TypedQuery;
 import java.text.MessageFormat;
 import java.util.Iterator;
 import java.util.Map;
+
+import javax.persistence.Parameter;
+import javax.persistence.Query;
+
+import org.leo.projectzeta.config.web.CustomDTOArgumentConverters;
 
 public class QueryUtil {
 

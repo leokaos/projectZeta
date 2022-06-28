@@ -21,11 +21,6 @@ import org.junit.Test;
 import org.leo.projectzeta.exception.BusinessException;
 import org.leo.projectzeta.factory.PeriodoFactory;
 import org.leo.projectzeta.factory.TempoFactory;
-import org.leo.projectzeta.model.Candidato;
-import org.leo.projectzeta.model.Profissional;
-import org.leo.projectzeta.model.Qualificacao;
-import org.leo.projectzeta.model.Tempo;
-import org.leo.projectzeta.model.Vaga;
 
 public class VagaTest {
 

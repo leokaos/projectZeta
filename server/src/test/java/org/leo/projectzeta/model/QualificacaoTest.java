@@ -4,7 +4,6 @@ import static org.junit.Assert.assertEquals;
 import static org.leo.projectzeta.model.builder.QualificacaoBuilder.qualificacao;
 
 import org.junit.Test;
-import org.leo.projectzeta.model.Qualificacao;
 
 public class QualificacaoTest {
 

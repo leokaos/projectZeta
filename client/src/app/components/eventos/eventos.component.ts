@@ -3,6 +3,8 @@ import { Evento } from '@app/model/Evento';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { EventoService } from '@app/services/evento.service';
+import { MatDialog } from '@angular/material/dialog';
+import { EventoEntidadeComponent } from '../evento-entidade/evento-entidade.component';
 
 @Component({
   selector: 'app-eventos',
@@ -19,11 +21,11 @@ export class EventosComponent implements AfterViewInit {
 
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
 
-  displayedColumns: string[] = ['dataEvento', 'operacao'];
+  displayedColumns: string[] = ['dataEvento', 'operacao', 'entidade'];
 
   dataSource: MatTableDataSource<Evento> = new MatTableDataSource();
 
-  constructor(private eventoService: EventoService) { }
+  constructor(private eventoService: EventoService, private dialog: MatDialog) { }
 
   ngAfterViewInit() {
 
@@ -41,4 +43,7 @@ export class EventosComponent implements AfterViewInit {
     this.dataSource.paginator = this.paginator;
   }
 
+  open(entidade: any) {
+    this.dialog.open(EventoEntidadeComponent, { width: '1000px', height: '700px', data: { 'data': JSON.parse(entidade) } });
+  }
 }

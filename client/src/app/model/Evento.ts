@@ -3,7 +3,8 @@ import { Deserializable } from './Deserializable';
 export class Evento implements Deserializable {
 
     dataEvento: Date;
-    operacao: String;
+    operacao: string;
+    entidade: string;
 
     deserialize(input: any): this {
 
