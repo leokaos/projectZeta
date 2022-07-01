@@ -6,7 +6,12 @@ import javax.persistence.Embeddable;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import lombok.Getter;
+import lombok.Setter;
+
 @Embeddable
+@Getter
+@Setter
 public class EquivalenciaPK implements Serializable {
 
     private static final long serialVersionUID = 431458135783565558L;

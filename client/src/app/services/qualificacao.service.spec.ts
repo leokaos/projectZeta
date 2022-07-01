@@ -61,7 +61,7 @@ describe('QualificacaoService', () => {
 
   it('should delete the qualification with the given ID', inject([HttpTestingController, QualificacaoService], (httpMock: HttpTestingController, service: QualificacaoService) => {
 
-    service.remove("123").subscribe(data => {
+    service.remove(123).subscribe(data => {
       expect(data).not.toBeNull();
     });
 
@@ -84,7 +84,7 @@ describe('QualificacaoService', () => {
 
   it('should search by ID', inject([HttpTestingController, QualificacaoService], (httpMock: HttpTestingController, service: QualificacaoService) => {
 
-    service.buscarPorId("123").subscribe(data => {
+    service.buscarPorId(123).subscribe(data => {
       expect(data).not.toBeNull();
     });
 

@@ -10,7 +10,7 @@ import { PanelVagasComponent } from '../panel-vagas/panel-vagas.component';
 })
 export class DashComponent implements AfterViewInit {
 
-  cards = [
+  cards: any = [
     { title: 'Vagas', cols: 1, rows: 1, class: PanelVagasComponent },
     { title: 'Candidatos', cols: 1, rows: 1, class: PanelCandidatosComponent },
     { title: 'Hot Skills', cols: 1, rows: 1, class: PanelQualificacoesComponent },
@@ -30,8 +30,8 @@ export class DashComponent implements AfterViewInit {
       this.viewContainerRefList.map((vcr: ViewContainerRef, index: number) => {
 
         if (this.cards[index].class != null) {
-          /*const factory = this.factoryResolver.resolveComponentFactory(this.cards[index].class);
-          vcr.createComponent(factory);*/
+          const factory = this.factoryResolver.resolveComponentFactory(this.cards[index].class);
+          vcr.createComponent(factory);
         }
 
       });

@@ -19,7 +19,8 @@ public class CustomDTOArgumentResolver implements HandlerMethodArgumentResolver 
         return parameter.hasParameterAnnotation(DTOResolver.class);
     }
 
-    @Override
+    @SuppressWarnings("deprecation")
+	@Override
     public Object resolveArgument(MethodParameter parameter, ModelAndViewContainer mavContainer, NativeWebRequest webRequest, WebDataBinderFactory binderFactory) throws Exception {
 
         Class<?> clazz = parameter.getParameterType();

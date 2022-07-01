@@ -11,7 +11,12 @@ import javax.validation.constraints.NotNull;
 
 import org.leo.projectzeta.api.Entidade;
 
+import lombok.Getter;
+import lombok.Setter;
+
 @Entity
+@Getter
+@Setter
 @Table(name = "equivalencia", schema = "rh")
 public class Equivalencia implements Entidade<EquivalenciaPK> {
 
@@ -33,36 +38,4 @@ public class Equivalencia implements Entidade<EquivalenciaPK> {
 	@Min(value = 0L)
 	private Integer valor;
 
-	@Override
-	public EquivalenciaPK getId() {
-		return id;
-	}
-
-	public void setId(EquivalenciaPK id) {
-		this.id = id;
-	}
-
-	public Qualificacao getDestino() {
-		return destino;
-	}
-
-	public void setDestino(Qualificacao destino) {
-		this.destino = destino;
-	}
-
-	public Qualificacao getOrigem() {
-		return origem;
-	}
-
-	public void setOrigem(Qualificacao origem) {
-		this.origem = origem;
-	}
-
-	public Integer getValor() {
-		return valor;
-	}
-
-	public void setValor(Integer valor) {
-		this.valor = valor;
-	}
 }

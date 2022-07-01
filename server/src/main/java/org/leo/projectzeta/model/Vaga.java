@@ -12,6 +12,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.CollectionTable;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
@@ -19,6 +20,7 @@ import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -37,8 +39,15 @@ import org.leo.projectzeta.exception.BusinessException;
 
 import com.google.common.collect.Sets;
 
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
+
 @Entity
 @Table(name = "vaga", schema = "rh")
+@Getter
+@Setter
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class Vaga implements Entidade<Long> {
 
 	private static final long serialVersionUID = 6766591657037334221L;
@@ -46,6 +55,7 @@ public class Vaga implements Entidade<Long> {
 	@Id
 	@GeneratedValue(generator = "vaga_seq")
 	@SequenceGenerator(name = "vaga_seq", sequenceName = "vaga_seq", allocationSize = 1, schema = "rh")
+	@EqualsAndHashCode.Include
 	private Long id;
 
 	@ManyToOne
@@ -82,115 +92,18 @@ public class Vaga implements Entidade<Long> {
 	@Column(name = "contato_email")
 	private String contatoEmail;
 
-	@ManyToMany
+	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "exigencias", schema = "rh", joinColumns = @JoinColumn(name = "vaga_id"), inverseJoinColumns = @JoinColumn(name = "qualificacao_id"))
 	private Set<Qualificacao> exigencias = Sets.newHashSet();
 
-	@OneToMany(mappedBy = "vaga")
+	@OneToMany(mappedBy = "vaga", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	private Set<Candidato> candidatos = Sets.newHashSet();
 
 	@NotEmpty
-	@ElementCollection
+	@ElementCollection(fetch = FetchType.EAGER)
 	@Column(name = "tag")
 	@CollectionTable(name = "tags", schema = "rh", joinColumns = { @JoinColumn(columnDefinition = "vaga_id") })
 	private Set<String> tags = Sets.newHashSet();
-
-	@Override
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public Empresa getEmpresa() {
-		return empresa;
-	}
-
-	public void setEmpresa(Empresa empresa) {
-		this.empresa = empresa;
-	}
-
-	public StatusVaga getStatus() {
-		return status;
-	}
-
-	public void setStatus(StatusVaga status) {
-		this.status = status;
-	}
-
-	public String getTitulo() {
-		return titulo;
-	}
-
-	public void setTitulo(String titulo) {
-		this.titulo = titulo;
-	}
-
-	public String getDescricao() {
-		return descricao;
-	}
-
-	public void setDescricao(String descricao) {
-		this.descricao = descricao;
-	}
-
-	public Periodo getPeriodo() {
-		return periodo;
-	}
-
-	public void setPeriodo(Periodo periodo) {
-		this.periodo = periodo;
-	}
-
-	public Date getDataEntrada() {
-		return dataEntrada;
-	}
-
-	public void setDataEntrada(Date dataEntrada) {
-		this.dataEntrada = dataEntrada;
-	}
-
-	public String getContatoTelefone() {
-		return contatoTelefone;
-	}
-
-	public void setContatoTelefone(String contatoTelefone) {
-		this.contatoTelefone = contatoTelefone;
-	}
-
-	public String getContatoEmail() {
-		return contatoEmail;
-	}
-
-	public void setContatoEmail(String contatoEmail) {
-		this.contatoEmail = contatoEmail;
-	}
-
-	public Set<Qualificacao> getExigencias() {
-		return exigencias;
-	}
-
-	public void setExigencias(Set<Qualificacao> exigencias) {
-		this.exigencias = exigencias;
-	}
-
-	public Set<Candidato> getCandidatos() {
-		return candidatos;
-	}
-
-	public void setCandidatos(Set<Candidato> candidatos) {
-		this.candidatos = candidatos;
-	}
-
-	public Set<String> getTags() {
-		return tags;
-	}
-
-	public void setTags(Set<String> tags) {
-		this.tags = tags;
-	}
 
 	public void selecionarCandidatos(List<Profissional> todosOsProfissionais) {
 

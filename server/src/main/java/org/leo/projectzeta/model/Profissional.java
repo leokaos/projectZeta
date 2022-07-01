@@ -4,7 +4,20 @@ import java.util.Date;
 import java.util.Optional;
 import java.util.Set;
 
-import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Lob;
+import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
@@ -13,8 +26,15 @@ import org.leo.projectzeta.factory.ExperienciaFactory;
 
 import com.google.common.collect.Sets;
 
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
+
 @Entity
 @Table(name = "profissional", schema = "rh")
+@Setter
+@Getter
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class Profissional implements Entidade<Long> {
 
 	private static final long serialVersionUID = 4167462411308649614L;
@@ -22,6 +42,7 @@ public class Profissional implements Entidade<Long> {
 	@Id
 	@GeneratedValue(generator = "profissional_seq")
 	@SequenceGenerator(name = "profissional_seq", sequenceName = "profissional_seq", allocationSize = 1, schema = "rh")
+	@EqualsAndHashCode.Include
 	private Long id;
 
 	@NotEmpty
@@ -41,10 +62,12 @@ public class Profissional implements Entidade<Long> {
 	private String email;
 
 	@NotNull
+	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "data_contato")
 	private Date dataContato;
 
 	@Column(name = "data_comeco")
+	@Temporal(TemporalType.TIMESTAMP)
 	private Date dataComeco;
 
 	@Lob
@@ -56,89 +79,8 @@ public class Profissional implements Entidade<Long> {
 	@Enumerated(EnumType.STRING)
 	private StatusProfissional status = StatusProfissional.EM_CONTATO;
 
-	@OneToMany(mappedBy = "profissional", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "profissional", cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
 	private Set<Experiencia> experiencias = Sets.newHashSet();
-
-	@Override
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public String getNome() {
-		return nome;
-	}
-
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
-
-	public String getSobrenome() {
-		return sobrenome;
-	}
-
-	public void setSobrenome(String sobrenome) {
-		this.sobrenome = sobrenome;
-	}
-
-	public String getTitulo() {
-		return titulo;
-	}
-
-	public void setTitulo(String titulo) {
-		this.titulo = titulo;
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-	public Date getDataContato() {
-		return dataContato;
-	}
-
-	public void setDataContato(Date dataContato) {
-		this.dataContato = dataContato;
-	}
-
-	public Date getDataComeco() {
-		return dataComeco;
-	}
-
-	public void setDataComeco(Date dataComeco) {
-		this.dataComeco = dataComeco;
-	}
-
-	public String getAvatar() {
-		return avatar;
-	}
-
-	public void setAvatar(String avatar) {
-		this.avatar = avatar;
-	}
-
-	public StatusProfissional getStatus() {
-		return status;
-	}
-
-	public void setStatus(StatusProfissional status) {
-		this.status = status;
-	}
-
-	public Set<Experiencia> getExperiencias() {
-		return experiencias;
-	}
-
-	public void setExperiencias(Set<Experiencia> experiencias) {
-		this.experiencias = experiencias;
-	}
 
 	public int getPontuacaoParaQualificacao(Qualificacao qualificacao) {
 

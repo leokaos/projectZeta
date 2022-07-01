@@ -8,7 +8,7 @@ describe('Profissional', () => {
     let spyOnExperienciaDeserialize = spyOn(Experiencia.prototype, 'deserialize').and.callThrough();
 
     let rawProfissional = {
-      id: 'id',
+      id: 3,
       nome: 'nome',
       sobrenome: 'sobrenome',
       titulo: 'titulo',
@@ -26,7 +26,7 @@ describe('Profissional', () => {
 
     expect(profissional.nome).toBe('nome');
     expect(profissional.sobrenome).toBe('sobrenome');
-    expect(profissional.id).toBe('id');
+    expect(profissional.id).toBe(3);
     expect(profissional.email).toBe('email');
     expect(profissional.titulo).toBe('titulo');
     expect(profissional.avatar).toBe('avatar');

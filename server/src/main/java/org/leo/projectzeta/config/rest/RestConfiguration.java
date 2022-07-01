@@ -3,6 +3,7 @@ package org.leo.projectzeta.config.rest;
 import static com.fasterxml.jackson.databind.DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES;
 
 import org.leo.projectzeta.model.Equivalencia;
+import org.leo.projectzeta.model.Experiencia;
 import org.leo.projectzeta.model.Tempo;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -36,6 +37,7 @@ public class RestConfiguration {
 
         m.addSerializer(Tempo.class, new TempoSerializer());
         m.addSerializer(Equivalencia.class, new EquivalenciaSerializer());
+        m.addSerializer(Experiencia.class, new ExperienciaSerializer());
 
         m.addDeserializer(Tempo.class, new TempoDeserializer());
 

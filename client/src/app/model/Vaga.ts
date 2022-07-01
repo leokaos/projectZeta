@@ -13,7 +13,7 @@ export class Vaga implements Deserializable {
     empresa: Empresa = new Empresa();
     dataEntrada: Date;
     tags: string[];
-    id: string;
+    id: number;
     contatoTelefone: string;
     contatoEmail: string;
     candidatosSelecionados: any;

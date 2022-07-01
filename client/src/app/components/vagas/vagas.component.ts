@@ -27,7 +27,11 @@ export class VagasComponent implements OnInit {
   labelStatus = Vaga.LABEL_STATUS;
   novasVagas: Vaga[] = [];
 
-  constructor(private vagaService: VagaService, private dialog: MatDialog, private websocket: WebSocketAPI, private workflowVaga: WorkflowVaga, private snackBar: MatSnackBar) { }
+  constructor(private vagaService: VagaService,
+    private dialog: MatDialog,
+    private websocket: WebSocketAPI,
+    private workflowVaga: WorkflowVaga,
+    private snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
 
@@ -101,7 +105,7 @@ export class VagasComponent implements OnInit {
     return 1;
   }
 
-  isNova(id: String): boolean {
+  isNova(id: number): boolean {
     return this.novasVagas.filter(vaga => vaga.id == id).length > 0;
   }
 

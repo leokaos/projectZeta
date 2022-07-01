@@ -49,8 +49,8 @@ public class GraphQLDataFetchers {
 
 	public DataFetcher<Categoria> getCategoriaByIdFetcher() {
 		return dataFetchingEnvironment -> {
-			Long categoriaID = dataFetchingEnvironment.getArgument("id");
-			return categoriaFacade.buscarPorId(categoriaID);
+			Integer categoriaID = dataFetchingEnvironment.getArgument("id");
+			return categoriaFacade.buscarPorId(categoriaID.longValue());
 		};
 	}
 
@@ -62,8 +62,8 @@ public class GraphQLDataFetchers {
 
 	public DataFetcher<Profissional> getProfissionalPorIdFetcher() {
 		return dataFetchingEnvironment -> {
-			Long candidatoId = dataFetchingEnvironment.getArgument("id");
-			return profissionalFacade.buscarPorId(candidatoId);
+			Integer candidatoId = dataFetchingEnvironment.getArgument("id");
+			return profissionalFacade.buscarPorId(candidatoId.longValue());
 		};
 	}
 
@@ -81,17 +81,17 @@ public class GraphQLDataFetchers {
 
 	public DataFetcher<Qualificacao> getQualificacaoPorId() {
 		return dataFetchingEnvironment -> {
-			Long qualificacaoId = dataFetchingEnvironment.getArgument("id");
-			return qualificacaoFacade.buscarPorId(qualificacaoId);
+			Integer qualificacaoId = dataFetchingEnvironment.getArgument("id");
+			return qualificacaoFacade.buscarPorId(qualificacaoId.longValue());
 		};
 	}
 
 	public DataFetcher<Vaga> selecionarCandidatos() {
 		return dataFetchingEnvironment -> {
 
-			Long vagaId = dataFetchingEnvironment.getArgument("id");
+			Integer vagaId = dataFetchingEnvironment.getArgument("id");
 
-			Vaga vaga = vagaFacade.buscarPorId(vagaId);
+			Vaga vaga = vagaFacade.buscarPorId(vagaId.longValue());
 
 			vagasMensagens.processVaga(vaga);
 
@@ -102,9 +102,9 @@ public class GraphQLDataFetchers {
 	public DataFetcher<Vaga> iniciarEntrevistas() {
 		return dataFetchingEnvironment -> {
 
-			Long vagaId = dataFetchingEnvironment.getArgument("id");
+			Integer vagaId = dataFetchingEnvironment.getArgument("id");
 
-			Vaga vaga = vagaFacade.buscarPorId(vagaId);
+			Vaga vaga = vagaFacade.buscarPorId(vagaId.longValue());
 
 			vaga.iniarEntrevistas();
 
@@ -115,9 +115,9 @@ public class GraphQLDataFetchers {
 	public DataFetcher<Vaga> iniciar() {
 		return dataFetchingEnvironment -> {
 
-			Long vagaId = dataFetchingEnvironment.getArgument("id");
+			Integer vagaId = dataFetchingEnvironment.getArgument("id");
 
-			Vaga vaga = vagaFacade.buscarPorId(vagaId);
+			Vaga vaga = vagaFacade.buscarPorId(vagaId.longValue());
 
 			vaga.iniciar();
 
@@ -128,9 +128,9 @@ public class GraphQLDataFetchers {
 	public DataFetcher<Vaga> finalizarVaga() {
 		return dataFetchingEnvironment -> {
 
-			Long vagaId = dataFetchingEnvironment.getArgument("id");
+			Integer vagaId = dataFetchingEnvironment.getArgument("id");
 
-			Vaga vaga = vagaFacade.buscarPorId(vagaId);
+			Vaga vaga = vagaFacade.buscarPorId(vagaId.longValue());
 
 			vaga.finalizarVaga();
 
@@ -141,9 +141,9 @@ public class GraphQLDataFetchers {
 	public DataFetcher<Vaga> cancelarVaga() {
 		return dataFetchingEnvironment -> {
 
-			Long vagaId = dataFetchingEnvironment.getArgument("id");
+			Integer vagaId = dataFetchingEnvironment.getArgument("id");
 
-			Vaga vaga = vagaFacade.buscarPorId(vagaId);
+			Vaga vaga = vagaFacade.buscarPorId(vagaId.longValue());
 
 			vaga.cancelarVaga();
 

@@ -62,7 +62,7 @@ export class CategoriasComponent implements OnInit, AfterContentInit {
 
   }
 
-  public delete(id: string): void {
+  public delete(id: number): void {
 
     this.categoriaService.remove(id).subscribe(
       (data: any) => {

@@ -56,7 +56,7 @@ describe('CategoriasComponent', () => {
 
   it('should delete the category with no errors', () => {
 
-    component.delete('123');
+    component.delete(123);
 
     let firstSearchRequest = httpMock.expectOne('http://localhost:8090/secured/categoria');
     firstSearchRequest.flush([]);
@@ -74,7 +74,7 @@ describe('CategoriasComponent', () => {
 
     const snackbarSpy = spyOn(TestBed.get(MatSnackBar), 'open').and.callThrough();
 
-    component.delete('123');
+    component.delete(123);
 
     let firstSearchRequest = httpMock.expectOne('http://localhost:8090/secured/categoria');
     firstSearchRequest.flush([]);

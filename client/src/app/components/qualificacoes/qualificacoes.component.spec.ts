@@ -40,7 +40,7 @@ describe('QualificacoesComponent', () => {
         const req = httpMock.expectOne('http://localhost:8090/secured/qualificacao');
         expect(req.request.method).toBe('GET');
 
-        req.flush([{ 'id': '123' }, { 'id': '456' }]);
+        req.flush([{ 'id': 123 }, { 'id': 456 }]);
 
         expect(component.dataSource.data.length).toBe(2);
         expect(deserializeSpy).toHaveBeenCalledTimes(2);
@@ -54,12 +54,12 @@ describe('QualificacoesComponent', () => {
 
         const req = httpMock.expectOne('http://localhost:8090/secured/qualificacao');
         expect(req.request.method).toBe('GET');
-        req.flush([{ 'id': '123' }, { 'id': '456' }]);
+        req.flush([{ 'id': 123 }, { 'id': 456 }]);
 
         expect(component.dataSource.data.length).toBe(2);
         expect(deserializeSpy).toHaveBeenCalledTimes(2);
 
-        component.remover('123');
+        component.remover(123);
 
         const deleteRequest = httpMock.expectOne('http://localhost:8090/secured/qualificacao/123');
         expect(deleteRequest.request.method).toBe('DELETE');
@@ -81,7 +81,7 @@ describe('QualificacoesComponent', () => {
         expect(component.dataSource.data.length).toBe(2);
         expect(deserializeSpy).toHaveBeenCalledTimes(2);
 
-        component.remover('123');
+        component.remover(123);
 
         const deleteRequest = httpMock.expectOne('http://localhost:8090/secured/qualificacao/123');
         expect(deleteRequest.request.method).toBe('DELETE');

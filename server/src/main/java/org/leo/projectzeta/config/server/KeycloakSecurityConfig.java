@@ -25,6 +25,7 @@ public class KeycloakSecurityConfig extends KeycloakWebSecurityConfigurerAdapter
 	protected void configure(HttpSecurity http) throws Exception {
 		super.configure(http);
 		http.authorizeRequests().antMatchers("/ws").permitAll();
+		http.authorizeRequests().antMatchers("/graphql").permitAll();
 		http.authorizeRequests().anyRequest().authenticated();
 		http.csrf().disable();
 		http.cors();

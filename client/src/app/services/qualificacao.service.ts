@@ -29,7 +29,7 @@ export class QualificacaoService {
     return innerQualificacoes;
   }
 
-  public buscarPorId(id: string) {
+  public buscarPorId(id: any) {
     return this.http.get<Qualificacao>(endpoint + '/' + id);
   }
 
@@ -42,7 +42,7 @@ export class QualificacaoService {
     }
   }
 
-  public remove(id: String): Observable<any> {
+  public remove(id: number): Observable<any> {
     return this.http.delete(endpoint + '/' + id);
   }
 

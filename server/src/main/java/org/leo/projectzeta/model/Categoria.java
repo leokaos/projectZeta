@@ -11,10 +11,18 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.leo.projectzeta.api.Entidade;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
+
 @Entity
+@Getter
+@Setter
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Table(name = "categoria", schema = "rh")
 public class Categoria implements Entidade<Long> {
 
@@ -23,6 +31,7 @@ public class Categoria implements Entidade<Long> {
 	@Id
 	@GeneratedValue(generator = "categoria_seq")
 	@SequenceGenerator(name = "categoria_seq", sequenceName = "categoria_seq", allocationSize = 1, schema = "rh")
+	@EqualsAndHashCode.Include
 	private Long id;
 
 	@NotEmpty
@@ -32,30 +41,5 @@ public class Categoria implements Entidade<Long> {
 	@JsonIgnore
 	@OneToMany(mappedBy = "categoria")
 	private List<Qualificacao> qualificacoes;
-
-	@Override
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public String getDescricao() {
-		return descricao;
-	}
-
-	public void setDescricao(String descricao) {
-		this.descricao = descricao;
-	}
-
-	public List<Qualificacao> getQualificacoes() {
-		return qualificacoes;
-	}
-
-	public void setQualificacoes(List<Qualificacao> qualificacoes) {
-		this.qualificacoes = qualificacoes;
-	}
 
 }

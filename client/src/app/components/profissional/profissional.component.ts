@@ -23,23 +23,31 @@ export class ProfissionalComponent implements OnInit {
 
     displayedColumns: string[] = ['qualificacao', 'tempo', 'delete'];
 
-    constructor(private qualificacaoService: QualificacaoService, private profissionalService: ProfissionalService, private route: ActivatedRoute, private router: Router, private snackBar: MatSnackBar) { }
+    constructor(private qualificacaoService: QualificacaoService,
+        private profissionalService: ProfissionalService,
+        private route: ActivatedRoute,
+        private router: Router,
+        private snackBar: MatSnackBar) { }
 
-    ngOnInit(): void {
+    async ngOnInit(): Promise<void> {
+
+        await this.getQualificacoes();
 
         let id = this.route.snapshot.paramMap.get('id');
 
         if (id) {
-            forkJoin([
-                this.profissionalService.buscarPorId(id),
-                this.qualificacaoService.listAll()
-            ]).subscribe(result => {
-                this.profissional = new Profissional().deserialize(result[0]);
+
+            this.profissionalService.buscarPorId(id).subscribe(data => {
+                console.info(id)
+                this.profissional = new Profissional().deserialize(data);
                 this.dataSource.data = this.profissional.experiencias;
-                this.qualificacoes = this.qualificacaoService.assemble(result[1]);
-            });
+            })
         }
 
+    }
+
+    async getQualificacoes() {
+        this.qualificacaoService.listAll().subscribe(data => this.qualificacoes = this.qualificacaoService.assemble(data));
     }
 
     public salvar(): void {

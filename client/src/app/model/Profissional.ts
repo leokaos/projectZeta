@@ -5,7 +5,7 @@ export class Profissional implements Deserializable {
 
     nome: string;
     sobrenome: string;
-    id: string;
+    id: number;
     titulo: string;
     experiencias: Experiencia[];
     dataContato: Date;

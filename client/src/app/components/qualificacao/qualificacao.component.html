@@ -35,7 +35,7 @@
                   name="categoria" 
                   (selectionChange)="onChangeCategoria(qualificacao.categoria)" 
                   [compareWith]="idComparator" 
-                  *ngIf="categorias.length > 0">
+                  [hidden]="!(categorias.length > 0)">
               <mat-option *ngFor="let categoria of categorias" [value]="categoria">
                 {{categoria.descricao}}
               </mat-option>

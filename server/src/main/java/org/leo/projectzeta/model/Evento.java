@@ -7,7 +7,14 @@ import org.codehaus.jackson.annotate.JsonProperty;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 @Document(collection = "eventos")
+@Getter
+@Setter
+@NoArgsConstructor
 public class Evento implements Serializable {
 
 	private static final long serialVersionUID = -1796369471555373481L;
@@ -27,57 +34,5 @@ public class Evento implements Serializable {
 	private String idEntidade;
 
 	private String operacao;
-
-	public Evento() {
-		super();
-	}
-
-	public String getId() {
-		return id;
-	}
-
-	public void setId(String id) {
-		this.id = id;
-	}
-
-	public Date getDataEvento() {
-		return dataEvento;
-	}
-
-	public void setDataEvento(Date dataEvento) {
-		this.dataEvento = dataEvento;
-	}
-
-	public String getEntidade() {
-		return entidade;
-	}
-
-	public void setEntidade(String entidade) {
-		this.entidade = entidade;
-	}
-
-	public String getTipoEntidade() {
-		return tipoEntidade;
-	}
-
-	public void setTipoEntidade(String tipoEntidade) {
-		this.tipoEntidade = tipoEntidade;
-	}
-
-	public String getIdEntidade() {
-		return idEntidade;
-	}
-
-	public void setIdEntidade(String idEntidade) {
-		this.idEntidade = idEntidade;
-	}
-
-	public String getOperacao() {
-		return operacao;
-	}
-
-	public void setOperacao(String operacao) {
-		this.operacao = operacao;
-	}
 
 }

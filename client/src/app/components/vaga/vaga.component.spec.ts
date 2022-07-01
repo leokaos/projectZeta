@@ -5,7 +5,6 @@ import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterTestingModule } from '@angular/router/testing';
 import { MaterialComponentsModule } from '@app/modules/material-components.module';
-import { StompService } from '@stomp/ng2-stompjs';
 import { VagaComponent } from './vaga.component';
 
 describe('VagaComponent', () => {
@@ -33,9 +32,8 @@ describe('VagaComponent', () => {
     httpMock.verify();
   });
 
-  function defaultLoad() {
-
-
-  }
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
 
 });

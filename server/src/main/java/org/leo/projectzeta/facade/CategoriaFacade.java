@@ -50,7 +50,7 @@ public class CategoriaFacade extends AbstractSimpleFacade<Categoria, Long> {
 	protected void antesRemover(Categoria t) throws BusinessException {
 
 		Map<String, Object> filtro = Maps.newHashMap();
-		filtro.put("tipo.id", t.getId());
+		filtro.put("categoria.id", t.getId());
 
 		List<Qualificacao> qualificacoes = qualificacaoFacade.buscarPorFiltro(filtro);
 

@@ -24,14 +24,14 @@ export class PanelQualificacoesComponent implements OnInit {
 
       let innerVagas: Vaga[] = this.vagaService.assemble(vagas);
 
-      let exigencias: { [key: string]: any } = {};/*innerVagas
+      let exigencias: { [key: string]: any } = innerVagas
         .reduce((c: any, v: any) => c.concat(v.exigencias), [])
         .reduce((c: any, v: any) => {
           let key = v.fullName();
           c[key] = (c[key] || []);
           c[key].push(v);
           return c
-        }, {});*/
+        }, {});
 
       this.options = { width: 1, height: 200, overflow: false, };
 

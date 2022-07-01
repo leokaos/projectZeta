@@ -9,24 +9,23 @@ Para iniciar o projeto tenha instalado:
 
 #### Passos para iniciar:
 
-1. Inicie o banco de dados: docker-compose up mongo
-1. Inicie o servidor de LDAP: docker-compose up ldap
-1. Construa o projeto: gradle build
+1. Inicie os containers: 
+```sh
+docker-compose up -d mongo db zookeeper ldap keycloak redis kafka
+```
+> **_Importante:_**  o container do kafka depende do serviço do zookeeper para funcionar, e algumas vezes o kafka não vai reconhecer a tempo o zookeeper. Apenas tente inicializar novamente.
 
-#### Configuracao do OAUTH2
+2. Execute o plugin flyway para iniciar sua base de dados:
+ 
+```sh
+./gradlew flyway:baseline flyway:migrate
+```
 
-Utilize o cliente/senha:
-* client/clientpassword
-	
-Utilize o endpoint: 
-* POST http://localhost:8090/oauth/token?password=<SENHA_USUARIO>&grant_type=password&client_id=client&username=<NOME_USUARIO>
+3. Construa o projeto:
 
-
-#### URLS:
-
-* [Swagger](http://localhost:8090/swagger-ui.html)
-* [UI](http://localhost:4200)
-
+```sh
+./gradlew clean build
+```
 #### Utilitários
 
 * **Redis GUI** npm install -g redis-commander -> Para rodar redis-commander -p <PORTA>

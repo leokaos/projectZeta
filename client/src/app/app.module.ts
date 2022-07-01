@@ -30,6 +30,7 @@ import { VagaComponent } from './components/vaga/vaga.component';
 import { ShowVagaComponent } from './components/show-vaga/show-vaga.component';
 import { EditInlineComponent } from './components/edit-inline/edit-inline.component';
 import { EventoEntidadeComponent } from './components/evento-entidade/evento-entidade.component';
+import { MAT_DATE_LOCALE } from '@angular/material/core';
 
 @NgModule({
   declarations: [
@@ -75,6 +76,10 @@ import { EventoEntidadeComponent } from './components/evento-entidade/evento-ent
     {
       provide: StompService,
       useFactory: stompServiceFactory,
+    },
+    {
+      provide: MAT_DATE_LOCALE,
+      useValue: 'en-GB'
     }
   ],
   bootstrap: [AppComponent]

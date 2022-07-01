@@ -19,7 +19,7 @@ export class EventosComponent implements AfterViewInit {
   @Input()
   tipo: String;
 
-  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
+  @ViewChild(MatPaginator, {static:false}) paginator: MatPaginator;
 
   displayedColumns: string[] = ['dataEvento', 'operacao', 'entidade'];
 
@@ -37,13 +37,22 @@ export class EventosComponent implements AfterViewInit {
     this.eventoService.buscarPorFiltro(filtro).subscribe(
       (result: Evento[]) => {
         this.dataSource.data = this.eventoService.assemble(result);
+        this.dataSource.paginator = this.paginator;
       }
     );
 
-    this.dataSource.paginator = this.paginator;
   }
 
   open(entidade: any) {
-    this.dialog.open(EventoEntidadeComponent, { width: '1000px', height: '700px', data: { 'data': JSON.parse(entidade) } });
+
+    this.dialog.open(EventoEntidadeComponent, {
+      width: '1000px',
+      height: '700px',
+      data: {
+        'data': JSON.parse(entidade)
+      }
+    });
+
   }
+
 }

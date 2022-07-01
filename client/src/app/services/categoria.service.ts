@@ -29,7 +29,7 @@ export class CategoriaService {
     return this.http.post<Categoria>(endpoint, Categoria);
   }
 
-  public remove(id: String) {
+  public remove(id: number) {
     return this.http.delete<Categoria>(endpoint + "/" + id);
   }
 

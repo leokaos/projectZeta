@@ -19,7 +19,7 @@ describe('ProfissionalComponent', () => {
             declarations: [ProfissionalComponent],
             imports: [MaterialComponentsModule, FormsModule, RouterTestingModule.withRoutes([{ path: 'profissional', component: ProfissionalComponent }]), BrowserAnimationsModule, HttpClientTestingModule],
             schemas: [CUSTOM_ELEMENTS_SCHEMA],
-            providers: [{ provide: ActivatedRoute, useValue: { snapshot: { paramMap: convertToParamMap({ id: '123' }) } } }]
+            providers: [{ provide: ActivatedRoute, useValue: { snapshot: { paramMap: convertToParamMap({ id: 123 }) } } }]
         }).compileComponents();
     }));
 
@@ -63,13 +63,14 @@ describe('ProfissionalComponent', () => {
 
     function defaultLoad() {
 
+        let searchAllQualificacoesRequest = httpMock.expectOne('http://localhost:8090/secured/qualificacao');
+        expect(searchAllQualificacoesRequest.request.method).toBe('GET');
+        searchAllQualificacoesRequest.flush([{}]);
+
         let searchByIdRequest = httpMock.expectOne('http://localhost:8090/secured/profissional/123');
         expect(searchByIdRequest.request.method).toBe('GET');
         searchByIdRequest.flush({});
 
-        let searchAllQualificacoesRequest = httpMock.expectOne('http://localhost:8090/secured/qualificacao');
-        expect(searchAllQualificacoesRequest.request.method).toBe('GET');
-        searchAllQualificacoesRequest.flush([{}]);
     }
 
 });

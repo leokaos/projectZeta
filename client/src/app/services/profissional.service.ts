@@ -23,7 +23,7 @@ export class ProfissionalService {
     return this.http.get<Profissional[]>(endpoint);
   }
 
-  public buscarPorId(id: string): Observable<Profissional> {
+  public buscarPorId(id: any): Observable<Profissional> {
     return this.http.get<Profissional>(endpoint + '/' + id);
   }
 

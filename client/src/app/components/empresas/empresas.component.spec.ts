@@ -50,7 +50,9 @@ describe('EmpresasComponent', () => {
 
     defaultLoad();
 
-    component.onFiltroChange('')
+    let event: InputEvent = new InputEvent('test');
+
+    component.onFiltroChange(event);
 
     expect(component.dataSource.data.length).toBe(2);
 
@@ -60,7 +62,9 @@ describe('EmpresasComponent', () => {
 
     defaultLoad();
 
-    component.onFiltroChange('name')
+    let event: InputEvent = new InputEvent('test', {data: 'name'});
+
+    component.onFiltroChange(event)
 
     expect(component.dataSource.data.length).toBe(1);
 
@@ -70,7 +74,9 @@ describe('EmpresasComponent', () => {
 
     defaultLoad();
 
-    component.onFiltroChange('test')
+    let event: InputEvent = new InputEvent('test', {data: 'test'});
+
+    component.onFiltroChange(event)
 
     expect(component.dataSource.data.length).toBe(0);
 

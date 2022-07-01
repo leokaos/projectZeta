@@ -11,6 +11,13 @@ import javax.persistence.Table;
 import org.leo.projectzeta.api.Entidade;
 import org.leo.projectzeta.config.db.TempoConverter;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 @Entity
 @Table(name = "experiencia", schema = "rh")
 public class Experiencia implements Entidade<ExperienciaPK> {
@@ -18,6 +25,7 @@ public class Experiencia implements Entidade<ExperienciaPK> {
 	private static final long serialVersionUID = -1381767258274041223L;
 
 	@EmbeddedId
+	@JsonIgnore
 	private ExperienciaPK id;
 
 	@ManyToOne
@@ -26,42 +34,11 @@ public class Experiencia implements Entidade<ExperienciaPK> {
 
 	@ManyToOne
 	@JoinColumn(name = "profissional_id", insertable = false, updatable = false)
+	@JsonIgnore
 	private Profissional profissional;
 
 	@Column(name = "tempo")
 	@Convert(converter = TempoConverter.class)
 	private Tempo tempo;
 
-	@Override
-	public ExperienciaPK getId() {
-		return id;
-	}
-
-	public void setId(ExperienciaPK id) {
-		this.id = id;
-	}
-
-	public Qualificacao getQualificacao() {
-		return qualificacao;
-	}
-
-	public void setQualificacao(Qualificacao qualificacao) {
-		this.qualificacao = qualificacao;
-	}
-
-	public Profissional getProfissional() {
-		return profissional;
-	}
-
-	public void setProfissional(Profissional profissional) {
-		this.profissional = profissional;
-	}
-
-	public Tempo getTempo() {
-		return tempo;
-	}
-
-	public void setTempo(Tempo tempo) {
-		this.tempo = tempo;
-	}
 }

@@ -1,17 +1,36 @@
 package org.leo.projectzeta.model;
 
-import com.google.common.collect.Sets;
-import org.leo.projectzeta.api.Entidade;
-
-import javax.persistence.*;
-import javax.validation.Valid;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
+import javax.validation.Valid;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+
+import org.leo.projectzeta.api.Entidade;
+
+import com.google.common.collect.Sets;
+
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
+
 @Entity
+@Getter
+@Setter
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Table(name = "qualificacao", schema = "rh")
 public class Qualificacao implements Entidade<Long> {
 
@@ -20,6 +39,7 @@ public class Qualificacao implements Entidade<Long> {
     @Id
     @GeneratedValue(generator = "profissional_seq")
     @SequenceGenerator(name = "profissional_seq", sequenceName = "profissional_seq", allocationSize = 1, schema = "rh")
+    @EqualsAndHashCode.Include
     private Long id;
 
     @NotEmpty
@@ -39,47 +59,6 @@ public class Qualificacao implements Entidade<Long> {
     @Valid
     @OneToMany(mappedBy = "origem", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Set<Equivalencia> equivalencias = Sets.newHashSet();
-
-    @Override
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getDescricao() {
-        return descricao;
-    }
-
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
-    }
-
-    public String getVersao() {
-        return versao;
-    }
-
-    public void setVersao(String versao) {
-        this.versao = versao;
-    }
-
-    public Categoria getCategoria() {
-        return categoria;
-    }
-
-    public void setCategoria(Categoria categoria) {
-        this.categoria = categoria;
-    }
-
-    public Set<Equivalencia> getEquivalencias() {
-        return equivalencias;
-    }
-
-    public void setEquivalencias(Set<Equivalencia> equivalencias) {
-        this.equivalencias = equivalencias;
-    }
 
     public void addEquivalencia(Qualificacao qualificacao, int valor) {
 

@@ -6,7 +6,7 @@ export class Qualificacao implements Deserializable {
 
     descricao: string = '';
     versao: string = '';
-    id: string;
+    id?: number;
     equivalencias: Equivalencia[] = [];
     categoria: Categoria = new Categoria();
 

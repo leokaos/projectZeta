@@ -39,7 +39,7 @@ export class QualificacoesComponent implements AfterViewInit {
       });
   }
 
-  public remover(id: String): void {
+  public remover(id: number): void {
 
     this.qualificacaoService.remove(id).subscribe(
       (data: any) => {

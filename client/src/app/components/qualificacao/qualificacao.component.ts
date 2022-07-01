@@ -23,15 +23,17 @@ export class QualificacaoComponent implements AfterViewInit {
   dataSource: MatTableDataSource<Equivalencia> = new MatTableDataSource<Equivalencia>();
   displayedColumns: string[] = ['qualificacao', 'valor', 'delete'];
 
-  constructor(private qualificacaoService: QualificacaoService, private categoriaService: CategoriaService, private route: ActivatedRoute, public router: Router, public snackBar: MatSnackBar) {
-
-  }
+  constructor(private qualificacaoService: QualificacaoService,
+    private categoriaService: CategoriaService,
+    private route: ActivatedRoute,
+    public router: Router,
+    public snackBar: MatSnackBar) { }
 
   ngAfterViewInit(): void {
 
     let id = this.route.snapshot.paramMap.get('id');
 
-    if (id) {
+    if (id != null) {
 
       forkJoin([
         this.qualificacaoService.buscarPorId(id),
@@ -47,6 +49,7 @@ export class QualificacaoComponent implements AfterViewInit {
     } else {
       this.categoriaService.listAll().subscribe((categorias: Categoria[]) => this.categorias = this.categoriaService.assemble(categorias));
     }
+
   }
 
   public idComparator = function (option: any, value: any): boolean {
