@@ -29,25 +29,25 @@ export class ProfissionalComponent implements OnInit {
         private router: Router,
         private snackBar: MatSnackBar) { }
 
-    async ngOnInit(): Promise<void> {
-
-        await this.getQualificacoes();
+    ngOnInit(): void {
 
         let id = this.route.snapshot.paramMap.get('id');
+
+        this.qualificacaoService.listAll().subscribe(data => {
+            this.qualificacoes = this.qualificacaoService.assemble(data);
+            this.loadProfissional(id)
+        });
+    }
+
+    public loadProfissional(id: string | null) {
 
         if (id) {
 
             this.profissionalService.buscarPorId(id).subscribe(data => {
-                console.info(id)
                 this.profissional = new Profissional().deserialize(data);
                 this.dataSource.data = this.profissional.experiencias;
             })
         }
-
-    }
-
-    async getQualificacoes() {
-        this.qualificacaoService.listAll().subscribe(data => this.qualificacoes = this.qualificacaoService.assemble(data));
     }
 
     public salvar(): void {
