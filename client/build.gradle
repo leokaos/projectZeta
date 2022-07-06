@@ -12,7 +12,6 @@ node {
 
 task testUnit(type: NpmTask) {
     args = ['test']
-
 }
 
 test.dependsOn testUnit
