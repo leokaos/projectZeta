@@ -53,7 +53,7 @@ public class EmpresaFacadeTest {
 
 		verifyAll();
 
-		assertEquals(captureFiltro.getValue().get("empresa.id"), "123");
+		assertEquals(captureFiltro.getValue().get("empresa.id"), 123L);
 	}
 
 	private void replayAll() {

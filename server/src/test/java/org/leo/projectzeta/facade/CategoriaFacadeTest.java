@@ -89,7 +89,7 @@ public class CategoriaFacadeTest {
 
 		expect(mockRepository.existsById(123L)).andReturn(true);
 		expect(mockRepository.findById(123L)).andReturn(op);
-		expect(mockQualificacaoFacade.buscarPorFiltro(Maps.newHashMap("tipo.id", 123L))).andReturn(Lists.newArrayList(new Qualificacao()));
+		expect(mockQualificacaoFacade.buscarPorFiltro(Maps.newHashMap("categoria.id", 123L))).andReturn(Lists.newArrayList(new Qualificacao()));
 
 		replay(mockQualificacaoFacade, mockRepository);
 
@@ -114,7 +114,7 @@ public class CategoriaFacadeTest {
 
 		expect(mockRepository.existsById(123L)).andReturn(true);
 		expect(mockRepository.findById(123L)).andReturn(op);
-		expect(mockQualificacaoFacade.buscarPorFiltro(Maps.newHashMap("tipo.id", 123L))).andReturn(Lists.newArrayList());
+		expect(mockQualificacaoFacade.buscarPorFiltro(Maps.newHashMap("categoria.id", 123L))).andReturn(Lists.newArrayList());
 		mockRepository.delete(EasyMock.anyObject(Categoria.class));
 
 		replay(mockQualificacaoFacade, mockRepository);

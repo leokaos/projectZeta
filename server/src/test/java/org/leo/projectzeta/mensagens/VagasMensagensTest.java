@@ -121,7 +121,7 @@ public class VagasMensagensTest {
 
 		verifyAll();
 
-		String strVaga = "{\"id\":\"123\",\"empresa\":null,\"status\":\"NOVA\"";
+		String strVaga = "{\"id\":123,\"empresa\":null,\"status\":\"NOVA\"";
 
 		assertTrue(vagaCapture.getValue().contains(strVaga));
 	}

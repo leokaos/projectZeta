@@ -2,7 +2,11 @@ package org.leo.projectzeta.config.web;
 
 import static org.leo.projectzeta.config.web.CustomDTOArgumentConverters.convert;
 
+import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
+import java.util.Arrays;
+import java.util.Optional;
 
 import org.apache.commons.lang3.reflect.FieldUtils;
 import org.apache.commons.lang3.reflect.MethodUtils;
@@ -24,7 +28,7 @@ public class CustomDTOArgumentResolver implements HandlerMethodArgumentResolver 
 
         Class<?> clazz = parameter.getParameterType();
 
-        Object dto = clazz.newInstance();
+        Object dto = createNewObjectUsingNoArgsConstructor(clazz);
 
         for (Field field : FieldUtils.getFieldsListWithAnnotation(clazz, DTOAttribute.class)) {
 
@@ -35,6 +39,16 @@ public class CustomDTOArgumentResolver implements HandlerMethodArgumentResolver 
         }
 
         return dto;
+    }
+
+    private Object createNewObjectUsingNoArgsConstructor(Class<?> clazz) throws InvocationTargetException, InstantiationException, IllegalAccessException {
+        Optional<Constructor<?>> first = Arrays.stream(clazz.getDeclaredConstructors()).filter(c -> c.getParameterCount() == 0).findFirst();
+
+        if (first.isPresent()){
+            return first.get().newInstance();
+        }
+
+        return null;
     }
 
     private String toSetterName(Field field) {

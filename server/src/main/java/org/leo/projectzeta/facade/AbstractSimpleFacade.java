@@ -22,7 +22,7 @@ import static org.leo.projectzeta.util.Mensagens.*;
 public abstract class AbstractSimpleFacade<T extends Entidade<K>, K> implements SimpleFacade<T, K> {
 
     @PersistenceContext
-    private EntityManager entityManager;
+    protected EntityManager entityManager;
 
     @Override
     @LogEvent(operation = "Criar")

@@ -47,7 +47,7 @@ public class VagaTest {
 		vaga.selecionarCandidatos(todosOsProfissionals);
 
 		assertEquals(1, vaga.getCandidatos().size());
-		assertEquals(c1, vaga.getCandidatos().iterator().next().getProfissional());
+		assertEquals(c1.getId(), vaga.getCandidatos().iterator().next().getId().getProfissional());
 		assertEquals(ENTREVISTANDO, vaga.getStatus());
 	}
 
@@ -67,10 +67,12 @@ public class VagaTest {
 
 		Tempo t1 = TempoFactory.parse("1y2m");
 		Profissional c1 = new Profissional();
+		c1.setId(123L);
 		c1.addExperiencia(q2, t1);
 		c1.setDataComeco(DateUtils.addDays(new Date(), -1));
 
 		Profissional c2 = new Profissional();
+		c2.setId(456L);
 		c2.setDataComeco(DateUtils.addDays(new Date(), -1));
 
 		List<Profissional> todosOsProfissionals = Lists.newArrayList(c1, c2);
@@ -78,7 +80,7 @@ public class VagaTest {
 		vaga.selecionarCandidatos(todosOsProfissionals);
 
 		assertEquals(1, vaga.getCandidatos().size());
-		assertEquals(c1, vaga.getCandidatos().iterator().next().getProfissional());
+		assertEquals(c1.getId(), vaga.getCandidatos().iterator().next().getId().getProfissional());
 		assertEquals(ENTREVISTANDO, vaga.getStatus());
 	}
 
