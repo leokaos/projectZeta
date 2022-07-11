@@ -46,6 +46,71 @@ INSERT INTO rh.experiencia (profissional_id, qualificacao_id, tempo) VALUES
 
 --EMPRESA
 INSERT INTO rh.empresa (id,nome) VALUES
-	 (1,'Churros Inc.'),
-	 (2,'Bozo Company'),
-	 (3,'Festa da Uva LTDA.');
+	 (nextval('rh.empresa_seq'),'Churros Inc.'),
+	 (nextval('rh.empresa_seq'),'Bozo Company'),
+	 (nextval('rh.empresa_seq'),'Festa da Uva LTDA.');
+	 
+--VAGAS
+INSERT INTO rh.vaga
+	(id, empresa_id, status, titulo, descricao, data_inicial, data_final, data_entrada, contato_telefone, contato_email)
+VALUES
+	(nextval('rh.vaga_seq'), (select id  from rh.empresa where nome = 'Churros Inc.'), 'NOVA', 'Project Manager', 'Project Manager', 
+	(select now() + interval '20' day), (select now() + interval '20' day + interval '6' month), now(), '+(49) 1525 1234567', 'churros@test.com'),
+	
+	(nextval('rh.vaga_seq'), (select id  from rh.empresa where nome = 'Bozo Company'), 'NOVA', 'Java Senior Developer', 'Java Senior Developer', 
+	(select now() + interval '10' day), (select now() + interval '10' day + interval '12' month), now(), '+(351) 123 456 789', 'bozo@test.com'),
+	
+	(nextval('rh.vaga_seq'), (select id  from rh.empresa where nome = 'Festa da Uva LTDA.'), 'NOVA', 'Tester', 'Tester', 
+	(select now() + interval '10' day), (select now() + interval '10' day + interval '2' year), now(), '+(31) 20 369 8139', 'festa@test.com'),
+	
+	(nextval('rh.vaga_seq'), (select id  from rh.empresa where nome = 'Churros Inc.'), 'NOVA', 'Tech Lead', 'Tech Lead', 
+	(select now() + interval '30' day), (select now() + interval '30' day + interval '6' month), now(), '+(49) 1525 1234567', 'churros@test.com'),
+	
+	(nextval('rh.vaga_seq'), (select id  from rh.empresa where nome = 'Bozo Company'), 'NOVA', 'Team Lead', 'Team Lead', 
+	(select now() + interval '10' day), (select now() + interval '10' day + interval '12' month), now(), '+(351) 123 456 789', 'bozo@test.com');
+
+--TAGS
+INSERT INTO rh.tags (vaga_id, tag) VALUES 
+	((select id from rh.vaga where titulo = 'Project Manager'), 'Jira'),
+	((select id from rh.vaga where titulo = 'Project Manager'), 'Leadership'),
+	((select id from rh.vaga where titulo = 'Project Manager'), 'Excel');
+	
+INSERT INTO rh.tags (vaga_id, tag) VALUES 
+	((select id from rh.vaga where titulo = 'Java Senior Developer'), 'Java'),
+	((select id from rh.vaga where titulo = 'Java Senior Developer'), 'MySQL'),
+	((select id from rh.vaga where titulo = 'Java Senior Developer'), 'Git');
+	
+INSERT INTO rh.tags (vaga_id, tag) VALUES 
+	((select id from rh.vaga where titulo = 'Tester'), 'Selenuim'),
+	((select id from rh.vaga where titulo = 'Tester'), 'Jira'),
+	((select id from rh.vaga where titulo = 'Tester'), 'Documentação');
+	
+INSERT INTO rh.tags (vaga_id, tag) VALUES 
+	((select id from rh.vaga where titulo = 'Tech Lead'), 'JAVA'),
+	((select id from rh.vaga where titulo = 'Tech Lead'), 'AWS'),
+	((select id from rh.vaga where titulo = 'Tech Lead'), 'Arquitetura');
+	
+INSERT INTO rh.tags (vaga_id, tag) VALUES 
+	((select id from rh.vaga where titulo = 'Team Lead'), 'JAVA'),
+	((select id from rh.vaga where titulo = 'Team Lead'), 'PostgreSQL'),
+	((select id from rh.vaga where titulo = 'Team Lead'), 'Micro-service');
+	
+--EXIGENCIAS
+INSERT INTO rh.exigencias (vaga_id, qualificacao_id) VALUES
+	((SELECT ID FROM rh.vaga where titulo = 'Project Manager'), (SELECT ID FROM rh.qualificacao where descricao = 'Java' AND versao='8')),
+	((SELECT ID FROM rh.vaga where titulo = 'Project Manager'), (SELECT ID FROM rh.qualificacao where descricao = 'PostgreSQL' AND versao='12')),
+	((SELECT ID FROM rh.vaga where titulo = 'Java Senior Developer'), (SELECT ID FROM rh.qualificacao where descricao = 'Java' AND versao='11')),
+	((SELECT ID FROM rh.vaga where titulo = 'Java Senior Developer'), (SELECT ID FROM rh.qualificacao where descricao = 'PostgreSQL' AND versao='12')),
+	((SELECT ID FROM rh.vaga where titulo = 'Java Senior Developer'), (SELECT ID FROM rh.qualificacao where descricao = 'Gradle' AND versao='7.0')),
+	((SELECT ID FROM rh.vaga where titulo = 'Tester'),(SELECT ID FROM rh.qualificacao where descricao = 'Java' AND versao='11')),
+	((SELECT ID FROM rh.vaga where titulo = 'Tester'),(SELECT ID FROM rh.qualificacao where descricao = 'PostgreSQL' AND versao='12')),
+	((SELECT ID FROM rh.vaga where titulo = 'Tester'),(SELECT ID FROM rh.qualificacao where descricao = 'AWS' AND versao='1.0')),
+	((SELECT ID FROM rh.vaga where titulo = 'Tech Lead'),(SELECT ID FROM rh.qualificacao where descricao = 'PHP' AND versao='8.0')),
+	((SELECT ID FROM rh.vaga where titulo = 'Tech Lead'),(SELECT ID FROM rh.qualificacao where descricao = 'Angular' AND versao='8+')),
+	((SELECT ID FROM rh.vaga where titulo = 'Tech Lead'),(SELECT ID FROM rh.qualificacao where descricao = 'Maven' AND versao='3')),
+	((SELECT ID FROM rh.vaga where titulo = 'Tech Lead'),(SELECT ID FROM rh.qualificacao where descricao = 'AWS' AND versao='1.0')),
+	((SELECT ID FROM rh.vaga where titulo = 'Team Lead'),(SELECT ID FROM rh.qualificacao where descricao = 'Java' AND versao='11')),
+	((SELECT ID FROM rh.vaga where titulo = 'Team Lead'),(SELECT ID FROM rh.qualificacao where descricao = 'PostgreSQL' AND versao='9.6')),
+	((SELECT ID FROM rh.vaga where titulo = 'Team Lead'),(SELECT ID FROM rh.qualificacao where descricao = 'Angular' AND versao='8+')),
+	((SELECT ID FROM rh.vaga where titulo = 'Team Lead'),(SELECT ID FROM rh.qualificacao where descricao = 'Maven' AND versao='3')),
+	((SELECT ID FROM rh.vaga where titulo = 'Team Lead'),(SELECT ID FROM rh.qualificacao where descricao = 'AWS' AND versao='1.0'));

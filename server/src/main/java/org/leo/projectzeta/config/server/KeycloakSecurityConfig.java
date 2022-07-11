@@ -26,6 +26,8 @@ public class KeycloakSecurityConfig extends KeycloakWebSecurityConfigurerAdapter
 		super.configure(http);
 		http.authorizeRequests().antMatchers("/ws").permitAll();
 		http.authorizeRequests().antMatchers("/graphql").permitAll();
+		http.authorizeRequests().antMatchers("/actuator/prometheus").permitAll();
+		http.authorizeRequests().antMatchers("/api/swagger-ui.html").permitAll();
 		http.authorizeRequests().anyRequest().authenticated();
 		http.csrf().disable();
 		http.cors();
