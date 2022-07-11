@@ -25,6 +25,7 @@ public class Candidato implements Entidade<CandidatoPK> {
 	private static final long serialVersionUID = -2041826426408185887L;
 
 	@EmbeddedId
+	@JsonIgnore
 	private CandidatoPK id;
 
 	@ManyToOne

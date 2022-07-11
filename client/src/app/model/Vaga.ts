@@ -3,20 +3,21 @@ import { Periodo } from './Periodo';
 import { Empresa } from './Empresa';
 import { Qualificacao } from './Qualificacao';
 import { Profissional } from './Profissional';
+import { Candidato } from './Candidato';
 
 export class Vaga implements Deserializable {
 
-    status: string;
+    status: string = 'NOVA';
     titulo: string;
     descricao: string;
-    periodo: Periodo;
+    periodo: Periodo = new Periodo();
     empresa: Empresa = new Empresa();
     dataEntrada: Date;
-    tags: string[];
+    tags: string[] = [];
     id: number;
     contatoTelefone: string;
     contatoEmail: string;
-    candidatosSelecionados: any;
+    candidatos: Candidato[] = [];
     exigencias: Qualificacao[] = [];
 
     deserialize(input: any): this {
@@ -35,18 +36,15 @@ export class Vaga implements Deserializable {
             this.empresa = new Empresa().deserialize(input.empresa);
         }
 
-        this.candidatosSelecionados = [];
+        if (input.candidatos) {
 
-        if (input.candidatosSelecionados) {
+            this.candidatos = [];
 
-            for (let item of input.candidatosSelecionados) {
-                this.candidatosSelecionados.push({
-                    "candidato": new Profissional().deserialize(item.candidato),
-                    "pontuacao": item.pontuacao
-                });
+            for (let item of input.candidatos) {
+                this.candidatos.push(new Candidato().deserialize(item));
             }
 
-            this.candidatosSelecionados = this.candidatosSelecionados.sort((n1: any, n2: any) => n2.pontuacao - n1.pontuacao);
+            this.candidatos = this.candidatos.sort((n1: any, n2: any) => n2.pontuacao - n1.pontuacao);
         }
 
         this.exigencias = [];

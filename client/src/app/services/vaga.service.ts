@@ -36,9 +36,9 @@ export class VagaService {
   public salvar(vaga: Vaga): Observable<Vaga> {
 
     if (vaga.id != null) {
-      return this.http.put<Vaga>(endpoint + '/' + vaga.id, Vaga);
+      return this.http.put<Vaga>(endpoint + '/' + vaga.id, vaga);
     } else {
-      return this.http.post<Vaga>(endpoint, Vaga);
+      return this.http.post<Vaga>(endpoint, vaga);
     }
   }
 

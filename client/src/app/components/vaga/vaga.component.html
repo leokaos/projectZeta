@@ -82,31 +82,31 @@
                     <div id="podium-box" class="row">
                         <div class="step-container">
                             <div>
-                                <img [src]="vaga.candidatosSelecionados[1].candidato.avatar" class="avatar-candidate" *ngIf="vaga.candidatosSelecionados.length > 1">
+                                <img [src]="vaga.candidatos[1].profissional.avatar" class="avatar-candidate" *ngIf="vaga.candidatos.length > 1">
                             </div>
                             <div id="second-step" class="bg-blue step podium-number">
-                                <span *ngIf="vaga.candidatosSelecionados.length > 1">
-                                    {{vaga.candidatosSelecionados[1].pontuacao}}%
+                                <span *ngIf="vaga.candidatos.length > 1">
+                                    {{vaga.candidatos[1].pontuacao}}%
                                 </span>
                             </div>
                         </div>
                         <div class="step-container">
                             <div>
-                                <img [src]="vaga.candidatosSelecionados[0].candidato.avatar" class="avatar-candidate" *ngIf="vaga.candidatosSelecionados.length > 0">
+                                <img [src]="vaga.candidatos[0].profissional.avatar" class="avatar-candidate" *ngIf="vaga.candidatos.length > 0">
                             </div>
                             <div id="first-step" class="bg-blue step podium-number">
-                                <span *ngIf="vaga.candidatosSelecionados.length > 0">
-                                    {{vaga.candidatosSelecionados[0].pontuacao}}%
+                                <span *ngIf="vaga.candidatos.length > 0">
+                                    {{vaga.candidatos[0].pontuacao}}%
                                 </span>
                             </div>
                         </div>
                         <div class="step-container">
                             <div>
-                                <img [src]="vaga.candidatosSelecionados[2].candidato.avatar" class="avatar-candidate" *ngIf="vaga.candidatosSelecionados.length > 2">
+                                <img [src]="vaga.candidatos[2].profissional.avatar" class="avatar-candidate" *ngIf="vaga.candidatos.length > 2">
                             </div>
                             <div id="third-step" class="bg-blue step podium-number">
-                                <span *ngIf="vaga.candidatosSelecionados.length > 2">
-                                    {{vaga.candidatosSelecionados[2].pontuacao}}%
+                                <span *ngIf="vaga.candidatos.length > 2">
+                                    {{vaga.candidatos[2].pontuacao}}%
                                 </span>
                             </div>
                         </div>

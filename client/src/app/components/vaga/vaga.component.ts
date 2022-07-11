@@ -7,10 +7,8 @@ import { Empresa } from "@app/model/Empresa";
 import { Vaga } from "@app/model/Vaga";
 import { EmpresaService } from "@app/services/empresa.service";
 import { VagaService } from "@app/services/vaga.service";
-import { map, startWith } from 'rxjs/operators';
-import { forkJoin } from "rxjs";
-
-import { Observable } from "@apollo/client/core";
+import { Observable } from "rxjs";
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-vaga',
@@ -32,25 +30,25 @@ export class VagaComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.filteredEmpresas = new Observable((observer) => {
-      this.editVagaFormControl.valueChanges.pipe(map(value => this.buscarEmpresa(value)));
-    });
-
     let id = this.route.snapshot.paramMap.get('id');
 
-    if (id) {
+    this.empresaService.listAll().subscribe(empresas => {
 
-      forkJoin([
-        this.vagaService.buscarPorId(id),
-        this.empresaService.listAll()
-      ]).subscribe(result => {
-        this.vaga = new Vaga().deserialize(result[0]);
-        this.editVagaFormControl.setValue(this.vaga.empresa);
-        this.empresas = this.empresaService.assemble(result[1]);
+      this.empresas = this.empresaService.assemble(empresas);
+
+      if (id) {
+
+        this.vagaService.buscarPorId(id).subscribe(vaga => {
+          this.vaga = new Vaga().deserialize(vaga);
+          this.editVagaFormControl.setValue(this.vaga.empresa);
+          this.carregado = true;
+        });
+
+      } else
         this.carregado = true;
-      });
-    }
+    });
 
+    this.filteredEmpresas = this.editVagaFormControl.valueChanges.pipe(map(value => this.buscarEmpresa(value)));
   }
 
   public selectEmpresa() {
@@ -93,15 +91,15 @@ export class VagaComponent implements OnInit {
 
   public salvar() {
 
-    /*this.vagaService.salvar(this.vaga).subscribe(
+    this.vagaService.salvar(this.vaga).subscribe(
       (data: any) => {
         this.router.navigate(['vagas']);
         this.snackBar.open('Vaga salva com sucesso!', 'Fechar');
       },
       (err: any) => {
         this.snackBar.open(err.error.message, 'Fechar');
-      });*/
-    console.info(this.vaga);
+      });
+
   }
 
 }

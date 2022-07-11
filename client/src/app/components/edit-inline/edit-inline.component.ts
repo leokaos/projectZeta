@@ -16,8 +16,8 @@ export class EditInlineComponent {
   @Output() dataChange = new EventEmitter<string>();
 
   readOnly: boolean = true;
-  editing: boolean = false;
-  showEditButton: boolean = false;
+  editing: boolean = true;
+  showEditButton: boolean = true;
 
   constructor() { }
 
