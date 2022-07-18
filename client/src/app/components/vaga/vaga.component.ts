@@ -26,7 +26,11 @@ export class VagaComponent implements OnInit {
 
   editVagaFormControl: FormControl = new FormControl();
 
-  constructor(private vagaService: VagaService, private empresaService: EmpresaService, private route: ActivatedRoute, private router: Router, private snackBar: MatSnackBar) { }
+  constructor(private vagaService: VagaService, 
+    private empresaService: EmpresaService, 
+    private route: ActivatedRoute, 
+    private router: Router, 
+    private snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
 
