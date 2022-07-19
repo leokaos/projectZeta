@@ -3,6 +3,7 @@ import { Empresa } from './Empresa';
 import { Periodo } from './Periodo';
 import { Qualificacao } from './Qualificacao';
 import { Vaga } from './Vaga';
+import { Candidato } from './Candidato';
 
 describe('Vaga', () => {
 
@@ -36,14 +37,14 @@ describe('Vaga', () => {
         expect(spyEmpresa).toHaveBeenCalledTimes(1);
     });
 
-    it('should assemble ONLY candidatosSelecionados', () => {
+    it('should assemble ONLY candidatos', () => {
 
-        let spyCandidato = spyOn(Profissional.prototype, 'deserialize').and.callThrough();
+        let spyCandidato = spyOn(Candidato.prototype, 'deserialize').and.callThrough();
 
-        let vaga = new Vaga().deserialize({ candidatosSelecionados: [{ pontuacao: 100, candidato: {} }] });
+        let vaga = new Vaga().deserialize({ candidatos: [{ pontuacao: 100, candidato: {} }] });
 
-        expect(vaga.candidatosSelecionados.length).toBe(1);
-        expect(vaga.candidatosSelecionados[0].pontuacao).toBe(100);
+        expect(vaga.candidatos.length).toBe(1);
+        expect(vaga.candidatos[0].pontuacao).toBe(100);
         expect(spyCandidato).toHaveBeenCalledTimes(1);
     });
 

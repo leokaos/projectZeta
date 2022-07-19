@@ -33,7 +33,11 @@ describe('VagaComponent', () => {
   });
 
   it('should create', () => {
+
+    const req = httpMock.expectOne('http://localhost:8090/secured/empresa');
+
     expect(component).toBeTruthy();
+
   });
 
 });
