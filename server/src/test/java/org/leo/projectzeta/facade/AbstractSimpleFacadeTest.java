@@ -27,28 +27,38 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.leo.projectzeta.api.Entidade;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.mongodb.core.MongoTemplate;
-import org.springframework.data.mongodb.core.query.Query;
-import org.springframework.data.mongodb.repository.MongoRepository;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
+
+import javax.persistence.EntityManager;
+import javax.persistence.Parameter;
+import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 
 @RunWith(EasyMockRunner.class)
 public class AbstractSimpleFacadeTest {
 
 	@Mock(type = MockType.STRICT)
-	private MongoRepository<TestEntidade, String> mockRepository;
+	private JpaRepository<TestEntidade, String> mockRepository;
 
 	@Mock(type = MockType.STRICT)
 	private MongoTemplate mockMongoTemplate;
 
+	@Mock(type = MockType.STRICT)
+	private EntityManager mockEntityManager;
+
+	@Mock(type = MockType.STRICT)
+	private TypedQuery mockQuery;
+
 	@TestSubject
-	private TestAbstractSimpleFacade facade = new TestAbstractSimpleFacade(mockRepository);
+	private TestAbstractSimpleFacade facade = new TestAbstractSimpleFacade(mockRepository, mockEntityManager);
 
 	@Before
 	public void resetMocks() {
-		reset(mockRepository, mockMongoTemplate);
+		reset(mockRepository, mockMongoTemplate, mockQuery, mockEntityManager);
 	}
 
 	@Test
@@ -56,7 +66,7 @@ public class AbstractSimpleFacadeTest {
 
 		TestEntidade entidade = new TestEntidade(null);
 
-		expect(mockRepository.insert(entidade)).andReturn(entidade);
+		expect(mockRepository.save(entidade)).andReturn(entidade);
 
 		replay(mockRepository);
 
@@ -66,7 +76,7 @@ public class AbstractSimpleFacadeTest {
 	}
 
 	@Test
-	public void deveriaRetornarErrorPoisObjetoEstaNuloTest() throws Exception {
+	public void deveriaRetornarErrorPoisObjetoEstaNuloTest() {
 
 		replay(mockRepository);
 
@@ -81,7 +91,7 @@ public class AbstractSimpleFacadeTest {
 	}
 
 	@Test
-	public void deveriaRetornarErrorPoisObjetoTemIdTest() throws Exception {
+	public void deveriaRetornarErrorPoisObjetoTemIdTest() {
 
 		replay(mockRepository);
 
@@ -96,7 +106,7 @@ public class AbstractSimpleFacadeTest {
 	}
 
 	@Test
-	public void deveriaRetornarErrorAoAtualizarPoisObjetoEstaNuloTest() throws Exception {
+	public void deveriaRetornarErrorAoAtualizarPoisObjetoEstaNuloTest() {
 
 		replay(mockRepository);
 
@@ -111,7 +121,7 @@ public class AbstractSimpleFacadeTest {
 	}
 
 	@Test
-	public void deveriaRetornarErrorAoAtualizarPoisIdEstaNuloTest() throws Exception {
+	public void deveriaRetornarErrorAoAtualizarPoisIdEstaNuloTest() {
 
 		replay(mockRepository);
 
@@ -126,7 +136,7 @@ public class AbstractSimpleFacadeTest {
 	}
 
 	@Test
-	public void deveriaRetornarErrorAoAtualizarPoisIdEstaDiferenteDaEntidadeTest() throws Exception {
+	public void deveriaRetornarErrorAoAtualizarPoisIdEstaDiferenteDaEntidadeTest() {
 
 		replay(mockRepository);
 
@@ -141,7 +151,7 @@ public class AbstractSimpleFacadeTest {
 	}
 
 	@Test
-	public void deveriaRetornarErrorAoAtualizarPoisIdNaoExisteTest() throws Exception {
+	public void deveriaRetornarErrorAoAtualizarPoisIdNaoExisteTest() {
 
 		expect(mockRepository.existsById("123")).andReturn(false);
 
@@ -184,35 +194,11 @@ public class AbstractSimpleFacadeTest {
 
 		replay(mockRepository);
 
-		facade.buscarPorFiltro(null);
+		facade.buscarPorFiltro( (Map<String, Object>) null);
 
 		facade.buscarPorFiltro(Maps.newHashMap());
 
 		verify(mockRepository);
-	}
-
-	@Test
-	public void deveriaBuscarPorFiltroTest() throws Exception {
-
-		Map<String, Object> filtro = Maps.newHashMap();
-
-		filtro.put("teste", 10);
-		filtro.put("teste 2", "Jonh Doe");
-
-		Capture<Query> queryCapture = EasyMock.newCapture();
-
-		expect(mockMongoTemplate.find(capture(queryCapture), eq(TestEntidade.class))).andReturn(Lists.newArrayList());
-
-		replayAll();
-
-		facade.buscarPorFiltro(filtro);
-
-		verifyAll();
-
-		Query query = queryCapture.getValue();
-
-		assertEquals(10, query.getQueryObject().get("teste"));
-		assertEquals("Jonh Doe", query.getQueryObject().get("teste 2"));
 	}
 
 	@Test
@@ -254,13 +240,6 @@ public class AbstractSimpleFacadeTest {
 
 	@Test
 	public void deveriaRetornarErroPoisIdEstaNuloTest() throws Exception {
-
-		try {
-			facade.buscarPorId("");
-			fail();
-		} catch (Exception e) {
-			assertEquals(ID_INVALIDO, e.getMessage());
-		}
 
 		try {
 			facade.buscarPorId(null);
@@ -369,7 +348,6 @@ public class AbstractSimpleFacadeTest {
 	@Test
 	public void deveriaRetornarErrorPoisEntidadeNaoExisteTest() throws Exception {
 
-
 		expect(mockRepository.existsById("123")).andReturn(false);
 
 		replayAll();
@@ -400,26 +378,27 @@ public class AbstractSimpleFacadeTest {
 
 		assertEquals(resultadoEsperado, resultado);
 	}
-	
+
 	private void verifyAll() {
-		verify(mockRepository, mockMongoTemplate);
+		verify(mockRepository, mockMongoTemplate, mockQuery, mockEntityManager);
 	}
 
 	private void replayAll() {
-		replay(mockRepository, mockMongoTemplate);
+		replay(mockRepository, mockMongoTemplate, mockQuery, mockEntityManager);
 	}
 
-	private static class TestAbstractSimpleFacade extends AbstractSimpleFacade<TestEntidade> {
+	private static class TestAbstractSimpleFacade extends AbstractSimpleFacade<TestEntidade, String> {
 
-		private MongoRepository<TestEntidade, String> repository;
+		private JpaRepository<TestEntidade, String> repository;
 
-		public TestAbstractSimpleFacade(MongoRepository<TestEntidade, String> repository) {
+		public TestAbstractSimpleFacade(JpaRepository<TestEntidade, String> repository, EntityManager entityManager) {
 			super();
+			this.entityManager = entityManager;
 			this.repository = repository;
 		}
 
 		@Override
-		protected MongoRepository<TestEntidade, String> getRepository() {
+		protected JpaRepository<TestEntidade, String> getRepository() {
 			return repository;
 		}
 
@@ -430,7 +409,7 @@ public class AbstractSimpleFacadeTest {
 
 	}
 
-	private static class TestEntidade implements Entidade {
+	private static class TestEntidade implements Entidade<String> {
 
 		private static final long serialVersionUID = 1L;
 

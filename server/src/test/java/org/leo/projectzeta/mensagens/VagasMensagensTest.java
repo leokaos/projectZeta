@@ -26,9 +26,9 @@ import org.easymock.TestSubject;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.leo.projectzeta.facade.CandidatoFacade;
+import org.leo.projectzeta.facade.ProfissionalFacade;
 import org.leo.projectzeta.facade.VagaFacade;
-import org.leo.projectzeta.model.Candidato;
+import org.leo.projectzeta.model.Profissional;
 import org.leo.projectzeta.model.Vaga;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.kafka.support.SendResult;
@@ -44,7 +44,7 @@ public class VagasMensagensTest {
 	private VagasMensagens vagasMensagens = new VagasMensagens();
 
 	@Mock(type = MockType.STRICT)
-	private CandidatoFacade mockCandidatoFacade;
+	private ProfissionalFacade mockCandidatoFacade;
 
 	@Mock(type = MockType.STRICT)
 	private VagaFacade mockVagaFacade;
@@ -73,13 +73,13 @@ public class VagasMensagensTest {
 
 		String strVaga = IOUtils.resourceToString("/vaga.json", StandardCharsets.UTF_8);
 
-		Candidato candidato = new Candidato();
-		candidato.setDataComeco(DateUtils.addDays(new Date(), -1));
+		Profissional profissional = new Profissional();
+		profissional.setDataComeco(DateUtils.addDays(new Date(), -1));
 
 		Capture<Vaga> vagaCapture = EasyMock.newCapture();
 
-		expect(mockCandidatoFacade.listarTodos()).andReturn(Lists.newArrayList(candidato));
-		expect(mockVagaFacade.atualizar(capture(vagaCapture), eq("5de79f04a31d82544ca30d03"))).andReturn(new Vaga());
+		expect(mockCandidatoFacade.listarTodos()).andReturn(Lists.newArrayList(profissional));
+		expect(mockVagaFacade.atualizar(capture(vagaCapture), eq(123L))).andReturn(new Vaga());
 		mockSimpMessagingTemplate.convertAndSend(eq("/topic/vagas"), anyObject(Vaga.class));
 
 		replayAll();
@@ -89,7 +89,7 @@ public class VagasMensagensTest {
 		verifyAll();
 
 		assertEquals(SELECIONANDO_CANDIDATOS, vagaCapture.getValue().getStatus());
-		assertTrue(vagaCapture.getValue().getCandidatosSelecionados().isEmpty());
+		assertTrue(vagaCapture.getValue().getCandidatos().isEmpty());
 	}
 
 	@Test
@@ -109,7 +109,7 @@ public class VagasMensagensTest {
 	public void deveriaProcessarVagaTest() throws Exception {
 
 		Vaga vaga = new Vaga();
-		vaga.setId("123");
+		vaga.setId(123L);
 
 		Capture<String> vagaCapture = EasyMock.newCapture();
 
@@ -121,7 +121,7 @@ public class VagasMensagensTest {
 
 		verifyAll();
 
-		String strVaga = "{\"id\":\"123\",\"empresa\":null,\"status\":\"NOVA\"";
+		String strVaga = "{\"id\":123,\"empresa\":null,\"status\":\"NOVA\"";
 
 		assertTrue(vagaCapture.getValue().contains(strVaga));
 	}

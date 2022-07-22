@@ -10,6 +10,10 @@ buildscript {
 	}
 }
 
+plugins {
+	id "org.flywaydb.flyway" version "8.5.12"
+}
+
 apply plugin: 'java'
 apply plugin: 'org.springframework.boot'
 apply plugin: 'io.spring.dependency-management'
@@ -24,27 +28,18 @@ bootJar {
 
 dependencies {
 
-	testImplementation('org.springframework.boot:spring-boot-starter-test')
-	testImplementation('org.springframework.security:spring-security-test')
-	
-	testImplementation group: 'org.easymock', name: 'easymock', version: '4.0.2'
-
-	implementation('org.springframework.boot:spring-boot-starter-security')
-	implementation('org.springframework.boot:spring-boot-starter-web')
-	implementation('org.springframework.boot:spring-boot-devtools')
-	implementation('org.springframework.boot:spring-boot-starter-actuator')
 	implementation('org.springframework.data:spring-data-mongodb')
 	implementation('org.springframework.data:spring-data-redis')
-
-	implementation('org.springframework.ldap:spring-ldap-core')
-    implementation('org.springframework.security:spring-security-ldap')
-    implementation('org.springframework:spring-tx')
-    implementation('com.unboundid:unboundid-ldapsdk')
-
+	implementation('org.springframework.boot:spring-boot-starter-data-jpa')
+	implementation('org.springframework.boot:spring-boot-devtools')
+	implementation('org.springframework.boot:spring-boot-starter-actuator')
+	
 	implementation('io.micrometer:micrometer-registry-prometheus:')
 	
-	implementation group: 'com.google.guava', name: 'guava', version: '25.1-jre'
+	implementation 'org.projectlombok:lombok'  
+  	annotationProcessor 'org.projectlombok:lombok'
 	
+	implementation group: 'com.google.guava', name: 'guava', version: '25.1-jre'
 	implementation group: 'javax.xml.bind', name: 'jaxb-api', version: '2.4.0-b180830.0359'
 	implementation group: 'com.sun.xml.bind', name: 'jaxb-core', version: '2.3.0.1'
 	implementation group: 'com.sun.xml.bind', name: 'jaxb-impl', version: '2.4.0-b180830.0438'
@@ -52,17 +47,28 @@ dependencies {
 	implementation group: 'io.springfox', name: 'springfox-swagger2', version: '2.9.2'
 	implementation group: 'io.springfox', name: 'springfox-swagger-ui', version: '2.9.2'
 	implementation group: 'org.apache.commons', name: 'commons-lang3', version: '3.9'
-	
 	implementation group: 'com.graphql-java', name: 'graphql-java', version: '2019-08-05T23-30-46-c454ba2'
 	implementation group: 'com.graphql-java', name: 'graphql-java-spring-boot-starter-webmvc', version: '2019-06-24T11-47-27-31ab4f9'
-	
 	implementation group: 'redis.clients', name: 'jedis', version: '2.10.2'
-	
-	implementation group: 'org.springframework.security.oauth', name: 'spring-security-oauth2', version: '2.3.3.RELEASE'
-	implementation group: 'org.springframework.kafka', name: 'spring-kafka', version: '2.2.8.RELEASE'
-	implementation group: 'org.springframework', name: 'spring-websocket', version: '5.1.9.RELEASE'
-	implementation group: 'org.springframework.security', name: 'spring-security-jwt', version: '1.0.10.RELEASE'
-	implementation group: 'org.springframework.boot', name: 'spring-boot-starter-aop', version: '2.2.1.RELEASE'
 	implementation group: 'commons-io', name: 'commons-io', version: '2.6'
+	implementation group: 'org.postgresql', name: 'postgresql', version: '42.3.6'
 
+	implementation group: 'org.springframework', name: 'spring-websocket', version: '5.1.9.RELEASE'
+	implementation group: 'org.springframework.security.oauth', name: 'spring-security-oauth2', version: '2.3.3.RELEASE'
+	implementation group: 'org.springframework.boot', name: 'spring-boot-starter-aop', version: '2.2.1.RELEASE'
+	implementation group: 'org.springframework.kafka', name: 'spring-kafka', version: '2.2.8.RELEASE'
+	implementation group: 'org.keycloak', name: 'keycloak-spring-boot-starter', version: '18.0.0'
+	
+	testImplementation('org.springframework.boot:spring-boot-starter-test')
+	testImplementation('org.springframework.security:spring-security-test')
+
+	testImplementation group: 'org.easymock', name: 'easymock', version: '4.0.2'
+}
+
+flyway {
+	url = 'jdbc:postgresql://localhost:5432/rh_local'
+	user = 'rh_admin'
+	password = 'leo'
+	schemas = ['rh']
+	locations = ['filesystem:src/main/resources/db']
 }

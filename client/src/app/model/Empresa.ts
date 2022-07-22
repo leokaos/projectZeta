@@ -12,4 +12,8 @@ export class Empresa implements Deserializable {
         return this;
     }
 
+    search(query: string): boolean {
+        return this.nome.toLowerCase().indexOf(query.toLowerCase()) != -1;
+    }
+
 }

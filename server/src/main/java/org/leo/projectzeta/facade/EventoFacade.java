@@ -1,25 +1,31 @@
 package org.leo.projectzeta.facade;
 
+import java.util.List;
+import java.util.Map;
+
 import org.leo.projectzeta.model.Evento;
 import org.leo.projectzeta.repository.EventoRepository;
+import org.leo.projectzeta.util.MongoFiltroUtil;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.mongodb.repository.MongoRepository;
+import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.stereotype.Service;
 
 @Service
-public class EventoFacade extends AbstractSimpleFacade<Evento> {
+public class EventoFacade {
+
+	@Autowired
+	private MongoTemplate mongoTemplate;
 
 	@Autowired
 	private EventoRepository repository;
 
-	@Override
-	protected MongoRepository<Evento, String> getRepository() {
-		return repository;
-	}
+	public List<Evento> buscarPorFiltro(Map<String, Object> filtro) {
 
-	@Override
-	public Class<Evento> getClasseDaEntidade() {
-		return Evento.class;
+		if (filtro == null || filtro.isEmpty()) {
+			return repository.findAll();
+		}
+
+		return mongoTemplate.find(MongoFiltroUtil.toQuery(filtro), Evento.class);
 	}
 
 }

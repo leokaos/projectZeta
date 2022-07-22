@@ -1,28 +1,28 @@
 package org.leo.projectzeta.facade;
 
-import org.apache.commons.lang3.StringUtils;
 import org.leo.projectzeta.api.Entidade;
 import org.leo.projectzeta.api.SimpleFacade;
 import org.leo.projectzeta.aspect.LogEvent;
 import org.leo.projectzeta.aspect.LogId;
 import org.leo.projectzeta.aspect.LogObject;
 import org.leo.projectzeta.exception.BusinessException;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.leo.projectzeta.util.QueryUtil;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
-import org.springframework.data.mongodb.core.MongoTemplate;
-import org.springframework.data.mongodb.repository.MongoRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 import java.util.List;
 import java.util.Map;
 
 import static org.leo.projectzeta.util.Mensagens.*;
-import static org.leo.projectzeta.util.MongoFiltroUtil.toQuery;
 
-public abstract class AbstractSimpleFacade<T extends Entidade> implements SimpleFacade<T> {
+public abstract class AbstractSimpleFacade<T extends Entidade<K>, K> implements SimpleFacade<T, K> {
 
-    @Autowired
-    private MongoTemplate mongoTemplate;
+    @PersistenceContext
+    protected EntityManager entityManager;
 
     @Override
     @LogEvent(operation = "Criar")
@@ -32,13 +32,13 @@ public abstract class AbstractSimpleFacade<T extends Entidade> implements Simple
             throwObjectNulo();
         }
 
-        if (StringUtils.isNotEmpty(t.getId())) {
+        if (t.hasId()) {
             throwIdInvalido();
         }
 
         antesSalvar(t);
 
-        T entity = getRepository().insert(t);
+        T entity = getRepository().save(t);
 
         depoisSalvar(entity);
 
@@ -48,14 +48,10 @@ public abstract class AbstractSimpleFacade<T extends Entidade> implements Simple
     @Override
     @CacheEvict(key = "#id")
     @LogEvent(operation = "Atualizar")
-    public T atualizar(@LogObject T t, @LogId String id) throws BusinessException {
+    public T atualizar(@LogObject T t, @LogId K id) throws BusinessException {
 
         if (t == null) {
             return throwObjectNulo();
-        }
-
-        if (StringUtils.isEmpty(id)) {
-            throwIdInvalido();
         }
 
         if (!id.equals(t.getId())) {
@@ -82,14 +78,20 @@ public abstract class AbstractSimpleFacade<T extends Entidade> implements Simple
             return getRepository().findAll();
         }
 
-        return mongoTemplate.find(toQuery(filtro), getClasseDaEntidade());
+        String srcQuery = QueryUtil.from(filtro, getClasseDaEntidade());
+
+        TypedQuery<T> query = entityManager.createQuery(srcQuery, getClasseDaEntidade());
+
+        QueryUtil.bindParameters(query, filtro);
+
+        return query.getResultList();
     }
 
     @Override
     @Cacheable
-    public T buscarPorId(String id) throws BusinessException {
+    public T buscarPorId(K id) throws BusinessException {
 
-        if (StringUtils.isEmpty(id)) {
+        if (id == null) {
             throwIdInvalido();
         }
 
@@ -107,7 +109,7 @@ public abstract class AbstractSimpleFacade<T extends Entidade> implements Simple
             throwObjectNulo();
         }
 
-        if (StringUtils.isEmpty(t.getId())) {
+        if (!t.hasId()) {
             throwIdInvalido();
             return;
         }
@@ -121,9 +123,9 @@ public abstract class AbstractSimpleFacade<T extends Entidade> implements Simple
 
     @Override
     @CacheEvict(key = "#id")
-    public void removerPorId(String id) throws BusinessException {
+    public void removerPorId(K id) throws BusinessException {
 
-        if (StringUtils.isEmpty(id)) {
+        if (id == null) {
             throwIdInvalido();
         }
 
@@ -179,7 +181,7 @@ public abstract class AbstractSimpleFacade<T extends Entidade> implements Simple
 
     }
 
-    protected abstract MongoRepository<T, String> getRepository();
+    protected abstract JpaRepository<T, K> getRepository();
 
     public abstract Class<T> getClasseDaEntidade();
 

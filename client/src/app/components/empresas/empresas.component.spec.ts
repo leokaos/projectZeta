@@ -50,7 +50,9 @@ describe('EmpresasComponent', () => {
 
     defaultLoad();
 
-    component.onFiltroChange('')
+    component.query = ''
+
+    component.onFiltroChange();
 
     expect(component.dataSource.data.length).toBe(2);
 
@@ -60,7 +62,9 @@ describe('EmpresasComponent', () => {
 
     defaultLoad();
 
-    component.onFiltroChange('name')
+    component.query = 'name'
+
+    component.onFiltroChange();
 
     expect(component.dataSource.data.length).toBe(1);
 
@@ -70,7 +74,9 @@ describe('EmpresasComponent', () => {
 
     defaultLoad();
 
-    component.onFiltroChange('test')
+    component.query = 'test'
+
+    component.onFiltroChange();
 
     expect(component.dataSource.data.length).toBe(0);
 

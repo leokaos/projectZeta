@@ -1,0 +1,2 @@
+import "cypress-keycloak-commands";
+

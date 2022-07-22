@@ -17,7 +17,7 @@
 
             <div class="lista" cdkDropList [cdkDropListData]="item.value.data" (cdkDropListDropped)="drop($event)" [cdkDropListConnectedTo]="item.value.connected" id="{{item.key}}">
 
-                <mat-card *ngFor="let vaga of item.value.data" class="item-vaga" cdkDrag [cdkDragData]="vaga">
+                <mat-card *ngFor="let vaga of item.value.data" class="item-vaga" cdkDrag [cdkDragData]="vaga" (dblclick)="abrirTextoVaga(vaga)">
 
                     <mat-card-header>
                         <mat-card-title matBadge="!" [matBadgeHidden]="!isNova(vaga.id)" matBadgeColor="warn" matBadgeOverlap="false" matBadgePosition="above after">{{vaga.titulo}}</mat-card-title>

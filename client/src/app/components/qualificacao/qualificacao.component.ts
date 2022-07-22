@@ -12,7 +12,7 @@ import { forkJoin } from "rxjs";
 @Component({
   selector: 'app-qualificacao',
   templateUrl: './qualificacao.component.html',
-  styleUrls: ['./qualificacao.component.css']
+  styleUrls: ['./qualificacao.component.scss']
 })
 export class QualificacaoComponent implements AfterViewInit {
 
@@ -23,15 +23,17 @@ export class QualificacaoComponent implements AfterViewInit {
   dataSource: MatTableDataSource<Equivalencia> = new MatTableDataSource<Equivalencia>();
   displayedColumns: string[] = ['qualificacao', 'valor', 'delete'];
 
-  constructor(private qualificacaoService: QualificacaoService, private categoriaService: CategoriaService, private route: ActivatedRoute, public router: Router, public snackBar: MatSnackBar) {
-
-  }
+  constructor(private qualificacaoService: QualificacaoService,
+    private categoriaService: CategoriaService,
+    private route: ActivatedRoute,
+    public router: Router,
+    public snackBar: MatSnackBar) { }
 
   ngAfterViewInit(): void {
 
     let id = this.route.snapshot.paramMap.get('id');
 
-    if (id) {
+    if (id != null) {
 
       forkJoin([
         this.qualificacaoService.buscarPorId(id),
@@ -47,21 +49,21 @@ export class QualificacaoComponent implements AfterViewInit {
     } else {
       this.categoriaService.listAll().subscribe((categorias: Categoria[]) => this.categorias = this.categoriaService.assemble(categorias));
     }
+
   }
 
-  public idComparator = function (option, value): boolean {
+  public idComparator = function (option: any, value: any): boolean {
     return option.id === value.id;
   }
 
   public salvar(): void {
+
     this.qualificacaoService.salvar(this.qualificacao).subscribe(
       (data: any) => {
         this.router.navigate(['qualificacoes']);
-        this.snackBar.open('Qualificacao salva com sucesso!', 'Fechar');
+        this.snackBar.open('Qualificação salva com sucesso!', 'Fechar');
       },
-      (err: any) => {
-        this.snackBar.open(err.error.message, 'Fechar');
-      });
+      (err: any) => this.snackBar.open(err.error.message, 'Fechar'));
   }
 
   public adicionarEquivalencia(): void {

@@ -47,7 +47,7 @@ describe('CategoriaService', () => {
 
   it('should delete the category with the given ID', inject([HttpTestingController, CategoriaService], (httpMock: HttpTestingController, service: CategoriaService) => {
 
-    service.remove("123").subscribe(data => {
+    service.remove(123).subscribe(data => {
       expect(data).not.toBeNull();
     });
 

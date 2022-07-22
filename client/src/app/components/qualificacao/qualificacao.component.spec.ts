@@ -77,7 +77,7 @@ describe('QualificacaoComponent', () => {
 
     createRequest.flush({});
 
-    expect(spyOnOpen).toHaveBeenCalledOnceWith('Qualificacao salva com sucesso!', 'Fechar');
+    expect(spyOnOpen).toHaveBeenCalledOnceWith('Qualificação salva com sucesso!', 'Fechar');
 
     router.navigate(['qualificacoes']).then(() => {
       expect(router.url).toBe('/qualificacoes');

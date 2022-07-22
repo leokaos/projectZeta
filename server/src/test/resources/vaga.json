@@ -1,7 +1,7 @@
 {
-   "id":"5de79f04a31d82544ca30d03",
+   "id": 123,
    "empresa":{
-      "id":"5de79ebfa31d82544ca30d01",
+      "id": 456,
       "nome":"Bozo Inc"
    },
    "status":"NOVA",
@@ -16,11 +16,11 @@
    "contatoEmail":"leokaos@gmail.com",
    "exigencias":[
       {
-         "id":"5ddfc6253369794604abedc8",
+         "id":789,
          "descricao":"Java",
          "versao":"7",
          "categoria":{
-            "id":"5ddfc5f93369794604abedc6",
+            "id":147,
             "descricao":"Linguagens de Programacao"
          },
          "equivalencias":[
@@ -28,18 +28,18 @@
                "valor":70,
                "destino":{
                   "descricao":"Java",
-                  "id":"5ddfc62b3369794604abedc9",
+                  "id":258,
                   "versao":"8"
                }
             }
          ]
       },
       {
-         "id":"5ddfc62b3369794604abedc9",
+         "id":369,
          "descricao":"Java",
          "versao":"8",
          "categoria":{
-            "id":"5ddfc5f93369794604abedc6",
+            "id":357,
             "descricao":"Linguagens de Programacao"
          },
          "equivalencias":[
@@ -47,18 +47,18 @@
                "valor":100,
                "destino":{
                   "descricao":"Java",
-                  "id":"5ddfc6253369794604abedc8",
+                  "id": 159,
                   "versao":"7"
                }
             }
          ]
       },
       {
-         "id":"5de6137117eb002468bc2ddf",
+         "id":786,
          "descricao":"Jira",
          "versao":"1",
          "categoria":{
-            "id":"5ddfc6033369794604abedc7",
+            "id": 852,
             "descricao":"Ferramentas"
          },
          "equivalencias":[
@@ -66,7 +66,7 @@
          ]
       }
    ],
-   "candidatosSelecionados":[
+   "candidatos":[
 
    ],
    "tags":[

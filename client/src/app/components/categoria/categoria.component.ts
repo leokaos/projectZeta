@@ -8,7 +8,7 @@ import { CategoriasComponent } from '@components/categorias/categorias.component
 @Component({
   selector: 'app-categoria',
   templateUrl: './categoria.component.html',
-  styleUrls: ['./categoria.component.css']
+  styleUrls: ['./categoria.component.scss']
 })
 export class CategoriaComponent {
 

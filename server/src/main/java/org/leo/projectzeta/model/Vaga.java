@@ -12,187 +12,125 @@ import java.util.Date;
 import java.util.List;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
+import javax.persistence.CollectionTable;
+import javax.persistence.Column;
+import javax.persistence.ElementCollection;
+import javax.persistence.Embedded;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
 import javax.validation.Valid;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 import org.leo.projectzeta.api.Entidade;
 import org.leo.projectzeta.exception.BusinessException;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.DBRef;
-import org.springframework.data.mongodb.core.mapping.Document;
 
 import com.google.common.collect.Sets;
 
-@Document(collection = "vagas")
-public class Vaga implements Entidade {
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
+
+@Entity
+@Table(name = "vaga", schema = "rh")
+@Getter
+@Setter
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
+public class Vaga implements Entidade<Long> {
 
 	private static final long serialVersionUID = 6766591657037334221L;
 
 	@Id
-	private String id;
+	@GeneratedValue(generator = "vaga_seq")
+	@SequenceGenerator(name = "vaga_seq", sequenceName = "vaga_seq", allocationSize = 1, schema = "rh")
+	@EqualsAndHashCode.Include
+	private Long id;
 
-	@DBRef
-	@NotNull
+	@ManyToOne
+	@JoinColumn(name = "empresa_id")
 	private Empresa empresa;
 
 	@NotNull
+	@Column(name = "status")
+	@Enumerated(EnumType.STRING)
 	private StatusVaga status = StatusVaga.NOVA;
 
 	@NotEmpty
+	@Column(name = "titulo")
 	private String titulo;
 
 	@NotEmpty
+	@Column(name = "descricao")
 	private String descricao;
 
-	@NotNull
 	@Valid
+	@NotNull
+	@Embedded
 	private Periodo periodo;
 
 	@NotNull
+	@Column(name = "data_entrada")
 	private Date dataEntrada = new Date();
 
 	@NotEmpty
+	@Column(name = "contato_telefone")
 	private String contatoTelefone;
 
 	@NotEmpty
+	@Column(name = "contato_email")
 	private String contatoEmail;
 
-	@DBRef
+	@ManyToMany(fetch = FetchType.EAGER)
+	@JoinTable(name = "exigencias", schema = "rh", joinColumns = @JoinColumn(name = "vaga_id"), inverseJoinColumns = @JoinColumn(name = "qualificacao_id"))
 	private Set<Qualificacao> exigencias = Sets.newHashSet();
 
-	private Set<CandidatoSelecionado> candidatosSelecionados = Sets.newHashSet();
+	@OneToMany(mappedBy = "vaga", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	private Set<Candidato> candidatos = Sets.newHashSet();
 
 	@NotEmpty
+	@ElementCollection(fetch = FetchType.EAGER)
+	@Column(name = "tag")
+	@CollectionTable(name = "tags", schema = "rh", joinColumns = { @JoinColumn(columnDefinition = "vaga_id") })
 	private Set<String> tags = Sets.newHashSet();
 
-	public Vaga() {
-		super();
-	}
+	public void selecionarCandidatos(List<Profissional> todosOsProfissionais) {
 
-	@Override
-	public String getId() {
-		return id;
-	}
-
-	public void setId(String id) {
-		this.id = id;
-	}
-
-	public Empresa getEmpresa() {
-		return empresa;
-	}
-
-	public void setEmpresa(Empresa empresa) {
-		this.empresa = empresa;
-	}
-
-	public StatusVaga getStatus() {
-		return status;
-	}
-
-	public void setStatus(StatusVaga status) {
-		this.status = status;
-	}
-
-	public String getDescricao() {
-		return descricao;
-	}
-
-	public String getTitulo() {
-		return titulo;
-	}
-
-	public void setTitulo(String titulo) {
-		this.titulo = titulo;
-	}
-
-	public void setDescricao(String descricao) {
-		this.descricao = descricao;
-	}
-
-	public Periodo getPeriodo() {
-		return periodo;
-	}
-
-	public void setPeriodo(Periodo periodo) {
-		this.periodo = periodo;
-	}
-
-	public Date getDataEntrada() {
-		return dataEntrada;
-	}
-
-	public void setDataEntrada(Date dataEntrada) {
-		this.dataEntrada = dataEntrada;
-	}
-
-	public String getContatoTelefone() {
-		return contatoTelefone;
-	}
-
-	public void setContatoTelefone(String contatoTelefone) {
-		this.contatoTelefone = contatoTelefone;
-	}
-
-	public String getContatoEmail() {
-		return contatoEmail;
-	}
-
-	public void setContatoEmail(String contatoEmail) {
-		this.contatoEmail = contatoEmail;
-	}
-
-	public Set<Qualificacao> getExigencias() {
-		return exigencias;
-	}
-
-	public void setExigencias(Set<Qualificacao> exigencias) {
-		this.exigencias = exigencias;
-	}
-
-	public Set<CandidatoSelecionado> getCandidatosSelecionados() {
-		return candidatosSelecionados;
-	}
-
-	public void setCandidatosSelecionados(Set<CandidatoSelecionado> candidatosSelecionados) {
-		this.candidatosSelecionados = candidatosSelecionados;
-	}
-
-	public Set<String> getTags() {
-		return tags;
-	}
-
-	public void setTags(Set<String> tags) {
-		this.tags = tags;
-	}
-
-	public void selecionarCandidatos(List<Candidato> todosOsCandidatos) {
-
-		if (candidatosSelecionados == null) {
-			this.candidatosSelecionados = Sets.newHashSet();
+		if (candidatos == null) {
+			this.candidatos = Sets.newHashSet();
 		}
 
-		for (Candidato candidato : todosOsCandidatos) {
+		for (Profissional profissional : todosOsProfissionais) {
 
-			if (candidato.estaAptoComecarData(this.periodo.getDataInicial())) {
+			if (profissional.estaAptoComecarData(this.periodo.getDataInicial())) {
 
 				int pontuacao = 0;
 
 				for (Qualificacao qualificacao : exigencias) {
-					pontuacao += candidato.getPontuacaoParaQualificacao(qualificacao);
+					pontuacao += profissional.getPontuacaoParaQualificacao(qualificacao);
 				}
-				
+
 				pontuacao = pontuacao / exigencias.size();
 
 				if (pontuacao != 0) {
-					candidatosSelecionados.add(new CandidatoSelecionado(pontuacao, candidato));
+					candidatos.add(Candidato.createFrom(this, profissional, pontuacao));
 				}
 			}
 
 		}
 
-		if (this.candidatosSelecionados.isEmpty()) {
+		if (this.candidatos.isEmpty()) {
 			this.status = SELECIONANDO_CANDIDATOS;
 		} else {
 			this.status = ENTREVISTANDO;
@@ -248,6 +186,6 @@ public class Vaga implements Entidade {
 	}
 
 	private boolean hasCandidatos() {
-		return this.candidatosSelecionados != null && !this.candidatosSelecionados.isEmpty();
+		return this.candidatos != null && !this.candidatos.isEmpty();
 	}
 }

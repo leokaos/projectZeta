@@ -1,27 +1,44 @@
 {
-  "compileOnSave": true,
+  "compileOnSave": false,
   "compilerOptions": {
     "baseUrl": "./",
     "outDir": "./dist/out-tsc",
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,
+    "noImplicitOverride": true,
+    "noPropertyAccessFromIndexSignature": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
     "sourceMap": true,
     "declaration": false,
     "downlevelIteration": true,
     "experimentalDecorators": true,
     "moduleResolution": "node",
     "importHelpers": true,
-    "target": "es2015",
+    "strictPropertyInitialization": false,
+    "target": "es2020",
     "module": "es2020",
     "lib": [
-      "es2018",
+      "es2020",
       "dom",
       "esnext.asynciterable"
     ],
+    "allowSyntheticDefaultImports": true,
     "paths": {
       "@app/*": [
         "src/app/*"
       ],
       "@components/*": [
         "src/app/components/*"
+      ],
+      "@modules/*": [
+        "src/app/modules/*"
+      ],
+      "@config/*": [
+        "src/app/config/*"
+      ],
+      "@guards/*": [
+        "src/app/guard/*"
       ],
       "@candidate/*": [
         "src/app/components/candidate/*"
@@ -47,12 +64,19 @@
       "@environment/*": [
         "src/environments/*"
       ]
-    },
-    "allowSyntheticDefaultImports": true
+    }
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
-    "fullTemplateTypeCheck": true,
-    "strictInjectionParameters": true
-  }
+    "strictInjectionParameters": true,
+    "strictInputAccessModifiers": true,
+    "strictTemplates": true
+  },
+  "include": [
+      "src",
+      "node_modules/cypress"
+  ],
+  "exclude": [
+      "node_modules/cypress"
+  ]
 }

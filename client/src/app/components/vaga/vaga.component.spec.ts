@@ -5,7 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterTestingModule } from '@angular/router/testing';
 import { MaterialComponentsModule } from '@app/modules/material-components.module';
-import { StompService } from '@stomp/ng2-stompjs';
+import { ApolloTestingModule } from 'apollo-angular/testing';
 import { VagaComponent } from './vaga.component';
 
 describe('VagaComponent', () => {
@@ -17,7 +17,7 @@ describe('VagaComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [VagaComponent],
-      imports: [HttpClientTestingModule, BrowserAnimationsModule, RouterTestingModule, MaterialComponentsModule, FormsModule],
+      imports: [HttpClientTestingModule, BrowserAnimationsModule, RouterTestingModule, MaterialComponentsModule, FormsModule, ApolloTestingModule],
       schemas: [CUSTOM_ELEMENTS_SCHEMA]
     }).compileComponents();
   }));
@@ -33,9 +33,12 @@ describe('VagaComponent', () => {
     httpMock.verify();
   });
 
-  function defaultLoad() {
+  it('should create', () => {
 
+    const req = httpMock.expectOne('http://localhost:8090/secured/empresa');
 
-  }
+    expect(component).toBeTruthy();
+
+  });
 
 });

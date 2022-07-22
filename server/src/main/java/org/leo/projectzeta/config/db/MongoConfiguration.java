@@ -1,5 +1,6 @@
 package org.leo.projectzeta.config.db;
 
+import com.google.common.collect.Lists;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -9,34 +10,36 @@ import org.springframework.data.mongodb.repository.config.EnableMongoRepositorie
 
 import com.mongodb.MongoClient;
 
+import java.util.Collection;
+
 @Configuration
 @EnableMongoRepositories(basePackages = "org.leo.projectzeta.repository")
 public class MongoConfiguration extends AbstractMongoConfiguration {
 
-	@Value("${mongo.host}")
-	private String host;
+    @Value("${mongo.host}")
+    private String host;
 
-	@Value("${mongo.port}")
-	private Integer port;
+    @Value("${mongo.port}")
+    private Integer port;
 
-	@Override
-	protected String getDatabaseName() {
-		return "rh";
-	}
+    @Override
+    protected String getDatabaseName() {
+        return "rh";
+    }
 
-	@Override
-	public MongoClient mongoClient() {
-		return new MongoClient(host, port);
-	}
+    @Override
+    public MongoClient mongoClient() {
+        return new MongoClient(host, port);
+    }
 
-	@Override
-	protected String getMappingBasePackage() {
-		return "org.leo.projectzeta.model";
-	}
+    @Override
+    protected Collection<String> getMappingBasePackages() {
+        return Lists.newArrayList("org.leo.projectzeta.model");
+    }
 
-	@Bean
-	public MongoTemplate mongoTemplate() {
-		return new MongoTemplate(mongoClient(), getDatabaseName());
-	}
+    @Bean
+    public MongoTemplate mongoTemplate() {
+        return new MongoTemplate(mongoClient(), getDatabaseName());
+    }
 
 }

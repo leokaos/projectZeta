@@ -1,85 +1,63 @@
 package org.leo.projectzeta.model;
 
-import com.google.common.collect.Sets;
-import org.apache.commons.lang3.builder.EqualsBuilder;
-import org.leo.projectzeta.api.Entidade;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.DBRef;
-import org.springframework.data.mongodb.core.mapping.Document;
-
-import javax.validation.Valid;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-@Document(collection = "qualificacao")
-public class Qualificacao implements Entidade {
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
+import javax.validation.Valid;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+
+import lombok.EqualsAndHashCode;
+import org.leo.projectzeta.api.Entidade;
+
+import com.google.common.collect.Sets;
+
+import lombok.Getter;
+import lombok.Setter;
+
+@Entity
+@Getter
+@Setter
+@Table(name = "qualificacao", schema = "rh")
+@EqualsAndHashCode(of = "id")
+public class Qualificacao implements Entidade<Long> {
 
     private static final long serialVersionUID = -8953603121364594301L;
 
     @Id
-    private String id;
+    @GeneratedValue(generator = "profissional_seq")
+    @SequenceGenerator(name = "profissional_seq", sequenceName = "profissional_seq", allocationSize = 1, schema = "rh")
+    private Long id;
 
     @NotEmpty
+    @Column(name = "descricao")
     private String descricao;
 
     @NotEmpty
+    @Column(name = "versao")
     private String versao;
 
     @Valid
     @NotNull
-    @DBRef
+    @ManyToOne
+    @JoinColumn(name = "categoria_id")
     private Categoria categoria;
 
     @Valid
+    @OneToMany(mappedBy = "origem", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Set<Equivalencia> equivalencias = Sets.newHashSet();
-
-    public Qualificacao() {
-        super();
-    }
-
-    @Override
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public String getDescricao() {
-        return descricao;
-    }
-
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
-    }
-
-    public String getVersao() {
-        return versao;
-    }
-
-    public void setVersao(String versao) {
-        this.versao = versao;
-    }
-
-    public Categoria getCategoria() {
-        return categoria;
-    }
-
-    public void setCategoria(Categoria categoria) {
-        this.categoria = categoria;
-    }
-
-    public Set<Equivalencia> getEquivalencias() {
-        return equivalencias;
-    }
-
-    public void setEquivalencias(Set<Equivalencia> equivalencias) {
-        this.equivalencias = equivalencias;
-    }
 
     public void addEquivalencia(Qualificacao qualificacao, int valor) {
 
@@ -105,34 +83,6 @@ public class Qualificacao implements Entidade {
             return exists.iterator().next().getValor();
         }
 
-    }
-
-    @Override
-    public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + ((id == null) ? 0 : id.hashCode());
-        return result;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-
-        if (this == obj) {
-            return true;
-        }
-
-        if (obj == null) {
-            return false;
-        }
-
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-
-        Qualificacao other = (Qualificacao) obj;
-
-        return new EqualsBuilder().append(this.id, other.id).isEquals();
     }
 
 }

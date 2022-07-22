@@ -1,12 +1,17 @@
 package org.leo.projectzeta.repository;
 
 import org.leo.projectzeta.model.Qualificacao;
-import org.springframework.data.mongodb.repository.MongoRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
-public interface QualificacaoRepository extends MongoRepository<Qualificacao, String> {
+public interface QualificacaoRepository extends JpaRepository<Qualificacao, Long> {
 
 	Qualificacao findByDescricaoAndVersao(String descricao, String versao);
+
+	List<Qualificacao> findByDescricaoContainingIgnoreCase(String query);
 
 }

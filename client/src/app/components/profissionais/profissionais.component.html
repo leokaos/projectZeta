@@ -1,0 +1,50 @@
+<div class="container">
+
+  <div class="panel-button">
+    <h1 class="mat-h1">Profissionais</h1>
+
+    <button mat-fab color="primary" id="adicionarProfissional" (click)="criarProfissional()">
+      <mat-icon>add</mat-icon>
+    </button>
+  </div>
+
+  <div class="mat-elevation-z8 panel-filtro">
+    <mat-form-field class="default-form-field">
+      <input matInput placeholder="Filtrar..." autocomplete="off" (keyup)="onFiltroChange()" [(ngModel)]="query" />
+    </mat-form-field>
+  </div>
+
+  <mat-grid-list #grid rowHeight="1:0.8" cols="5">
+
+    <mat-grid-tile *ngFor="let profissional of profissinais">
+
+      <mat-card>
+
+        <mat-card-header>
+
+          <img mat-card-avatar [src]="profissional.avatar" *ngIf="profissional.avatar" />
+          <mat-icon mat-card-avatar *ngIf="!profissional.avatar">face</mat-icon>
+
+          <mat-card-title>{{profissional.sobrenome}}, {{profissional.nome}}</mat-card-title>
+          <mat-card-subtitle>{{profissional.titulo}}</mat-card-subtitle>
+
+        </mat-card-header>
+
+        <mat-card-content>
+          <p>{{getLabelForStatus(profissional.status)}}</p>
+        </mat-card-content>
+
+        <mat-card-actions class="mat-card-actions-bottom">
+          <button mat-icon-button color="primary" [routerLink]="['/profissional/',profissional.id]" style="float: right;" matTooltip="Editar..." matTooltipPosition="above">
+            <mat-icon>edit</mat-icon>
+          </button>
+        </mat-card-actions>
+
+      </mat-card>
+
+    </mat-grid-tile>
+
+  </mat-grid-list>
+
+
+</div>

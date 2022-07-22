@@ -1,21 +1,21 @@
 package org.leo.projectzeta.facade;
 
-import org.leo.projectzeta.exception.BusinessException;
-import org.leo.projectzeta.model.Categoria;
-import org.leo.projectzeta.model.Equivalencia;
-import org.leo.projectzeta.model.Qualificacao;
-import org.leo.projectzeta.repository.QualificacaoRepository;
-import org.leo.projectzeta.repository.CategoriaRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.mongodb.repository.MongoRepository;
-import org.springframework.stereotype.Service;
+import static org.leo.projectzeta.util.Mensagens.CATEGORIA_INVALIDA;
+import static org.leo.projectzeta.util.Mensagens.EQUIVALENCIA_INVALIDA;
+import static org.leo.projectzeta.util.Mensagens.QUALIFICACAO_JA_EXISTE;
 
 import java.util.List;
 
-import static org.leo.projectzeta.util.Mensagens.*;
+import org.leo.projectzeta.exception.BusinessException;
+import org.leo.projectzeta.model.*;
+import org.leo.projectzeta.repository.CategoriaRepository;
+import org.leo.projectzeta.repository.QualificacaoRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Service;
 
 @Service
-public class QualificacaoFacade extends AbstractSimpleFacade<Qualificacao> {
+public class QualificacaoFacade extends AbstractSimpleFacade<Qualificacao, Long> {
 
     @Autowired
     private QualificacaoRepository repository;
@@ -24,7 +24,7 @@ public class QualificacaoFacade extends AbstractSimpleFacade<Qualificacao> {
     private CategoriaRepository categoriaRepository;
 
     @Override
-    protected MongoRepository<Qualificacao, String> getRepository() {
+    protected JpaRepository<Qualificacao, Long> getRepository() {
         return repository;
     }
 
@@ -59,8 +59,10 @@ public class QualificacaoFacade extends AbstractSimpleFacade<Qualificacao> {
 
             for (Equivalencia eq : t.getEquivalencias()) {
                 if (!repository.findById(eq.getDestino().getId()).isPresent()) {
-                    throw new BusinessException(EQUIVALENCIA_INVALIDA,"equivalencia","");
+                    throw new BusinessException(EQUIVALENCIA_INVALIDA, "equivalencia", "");
                 }
+
+                eq.setId(new EquivalenciaPK(eq.getDestino().getId(), t.getId()));
             }
 
         }
@@ -71,10 +73,13 @@ public class QualificacaoFacade extends AbstractSimpleFacade<Qualificacao> {
         List<Categoria> listaPorDescricao = categoriaRepository.findByDescricao(t.getCategoria().getDescricao());
 
         if (listaPorDescricao.isEmpty() || listaPorDescricao.size() > 1) {
-            throw new BusinessException(CATEGORIA_INVALIDA,"qualificacao","tipo");
+            throw new BusinessException(CATEGORIA_INVALIDA, "qualificacao", "tipo");
         }
 
         t.setCategoria(listaPorDescricao.iterator().next());
     }
 
+    public List<Qualificacao> listarPorNome(String query) {
+        return repository.findByDescricaoContainingIgnoreCase(query);
+    }
 }

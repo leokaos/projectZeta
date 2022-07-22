@@ -1,160 +1,59 @@
 package org.leo.projectzeta.model;
 
-import com.google.common.collect.Sets;
+import javax.persistence.Column;
+import javax.persistence.EmbeddedId;
+import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
+import lombok.EqualsAndHashCode;
 import org.leo.projectzeta.api.Entidade;
-import org.leo.projectzeta.factory.ExperienciaFactory;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
 
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
-import java.util.Date;
-import java.util.Optional;
-import java.util.Set;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
-@Document(collection = "candidato")
-public class Candidato implements Entidade {
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-    private static final long serialVersionUID = 7401417159169226473L;
+@Entity
+@Getter
+@Setter
+@NoArgsConstructor
+@Table(name = "candidato", schema = "rh")
+@EqualsAndHashCode(of = "id")
+public class Candidato implements Entidade<CandidatoPK> {
 
-    @Id
-    private String id;
+    private static final long serialVersionUID = -2041826426408185887L;
 
-    @NotEmpty
-    private String nome;
+    @EmbeddedId
+    @JsonIgnore
+    private CandidatoPK id;
 
-    @NotEmpty
-    private String sobrenome;
+    @ManyToOne
+    @JoinColumn(name = "profissional_id", insertable = false, updatable = false)
+    private Profissional profissional;
 
-    @NotEmpty
-    private String titulo;
+    @ManyToOne
+    @JsonIgnore
+    @JoinColumn(name = "vaga_id", insertable = false, updatable = false)
+    private Vaga vaga;
 
-    @NotEmpty
-    private String email;
+    @Column(name = "pontuacao")
+    private Integer pontuacao;
 
-    @NotNull
-    private Date dataContato;
+    public static Candidato createFrom(Vaga vaga, Profissional profissional, Integer pontuacao) {
 
-    private Date dataComeco;
+        CandidatoPK pk = new CandidatoPK();
+        pk.setProfissional(profissional.getId());
+        pk.setVaga(vaga.getId());
 
-    private String avatar;
+        Candidato candidato = new Candidato();
 
-    @NotNull
-    private StatusCandidato status = StatusCandidato.EM_CONTATO;
+        candidato.setPontuacao(pontuacao);
+        candidato.setId(pk);
 
-    private Set<Experiencia> experiencias = Sets.newHashSet();
-
-    public Candidato() {
-        super();
-    }
-
-    @Override
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
-    public String getSobrenome() {
-        return sobrenome;
-    }
-
-    public void setSobrenome(String sobrenome) {
-        this.sobrenome = sobrenome;
-    }
-
-    public String getTitulo() {
-        return titulo;
-    }
-
-    public void setTitulo(String titulo) {
-        this.titulo = titulo;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public Date getDataContato() {
-        return dataContato;
-    }
-
-    public void setDataContato(Date dataContato) {
-        this.dataContato = dataContato;
-    }
-
-    public Date getDataComeco() {
-        return dataComeco;
-    }
-
-    public void setDataComeco(Date dataComeco) {
-        this.dataComeco = dataComeco;
-    }
-
-    public StatusCandidato getStatus() {
-        return status;
-    }
-
-    public void setStatus(StatusCandidato status) {
-        this.status = status;
-    }
-
-    public String getAvatar() {
-        return avatar;
-    }
-
-    public void setAvatar(String avatar) {
-        this.avatar = avatar;
-    }
-
-    public Set<Experiencia> getExperiencias() {
-        return experiencias;
-    }
-
-    public void setExperiencias(Set<Experiencia> experiencias) {
-        this.experiencias = experiencias;
-    }
-
-    public int getPontuacaoParaQualificacao(Qualificacao qualificacao) {
-
-        Optional<Experiencia> exato = experiencias.stream().filter(exp -> exp.getQualificacao().equals(qualificacao)).findFirst();
-
-        if (exato.isPresent()) {
-            return 100;
-        }
-
-        Optional<Experiencia> maisAlto = experiencias.stream().filter(exp -> exp.getQualificacao().getEquivalencia(qualificacao) != 0).sorted((e1, e2) -> e2.getQualificacao().getEquivalencia(qualificacao) - e1.getQualificacao().getEquivalencia(qualificacao)).findFirst();
-
-        if (maisAlto.isPresent()) {
-            return maisAlto.get().getQualificacao().getEquivalencia(qualificacao);
-        }
-
-        return 0;
-    }
-
-    public void addExperiencia(Qualificacao qualificacao, Tempo tempo) {
-
-        experiencias.removeIf(exp -> exp.getQualificacao().equals(qualificacao));
-
-        experiencias.add(ExperienciaFactory.criar(qualificacao, tempo));
-    }
-
-    public boolean estaAptoComecarData(Date data) {
-        return dataComeco != null && dataComeco.before(data);
+        return candidato;
     }
 
 }

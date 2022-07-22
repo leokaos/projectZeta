@@ -5,8 +5,9 @@ import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterTestingModule } from '@angular/router/testing';
 import { MaterialComponentsModule } from '@app/modules/material-components.module';
-import { StompService } from '@stomp/ng2-stompjs';
-import Observable from 'zen-observable';
+import { StompService } from '@app/services/stomp.service';
+import { ApolloTestingModule } from 'apollo-angular/testing';
+import { Observable } from 'rxjs';
 import { VagasComponent } from './vagas.component';
 
 describe('VagasComponent', () => {
@@ -18,8 +19,8 @@ describe('VagasComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [VagasComponent],
-      imports: [HttpClientTestingModule, BrowserAnimationsModule, RouterTestingModule, MaterialComponentsModule, FormsModule],
-      providers: [{ provide: StompService, useValue: { subscribe: (topic: String) => { return new Observable(() => { }); } } }],
+      imports: [HttpClientTestingModule, BrowserAnimationsModule, RouterTestingModule, MaterialComponentsModule, FormsModule, ApolloTestingModule],
+      providers: [{ provide: StompService, useValue: { watch : (topic: String) => { return new Observable(() => { }); } } }],
       schemas: [CUSTOM_ELEMENTS_SCHEMA]
     }).compileComponents();
   }));

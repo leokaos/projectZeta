@@ -9,13 +9,13 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/secured/qualificacao")
-public class QualificacaoController extends AbstractSimpleController<Qualificacao> {
+public class QualificacaoController extends AbstractSimpleController<Qualificacao, Long> {
 
 	@Autowired
 	private QualificacaoFacade facade;
 
 	@Override
-	protected SimpleFacade<Qualificacao> getFacade() {
+	protected SimpleFacade<Qualificacao, Long> getFacade() {
 		return this.facade;
 	}
 

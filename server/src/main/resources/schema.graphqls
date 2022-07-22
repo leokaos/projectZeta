@@ -5,13 +5,15 @@ scalar Date
 
 type Query {
 
-  categoriaPorId(id: String): Categoria
+  categoriaPorId(id: Int): Categoria
   
   todasAsQualificacoes: [Qualificacao]
 
+  qualificacaoPorQuery(query: String): [Qualificacao]
+
   todasAsCategorias: [Categoria]
   
-  candidatoPorId(id: String): Candidato
+  candidatoPorId(id: Int): Candidato
   
   todosOsCandidatos: [Candidato]
    
@@ -19,34 +21,34 @@ type Query {
   
   vagasPorCandidato: [VagasPorCandidato]
 
-  qualificacaoPorId(id: String): Qualificacao
+  qualificacaoPorId(id: Int): Qualificacao
 }
 
 type Mutation {
 
-	selecionarCandidatos(id: String): Vaga
+	selecionarCandidatos(id: Int): Vaga
 	
-	iniciarEntrevistas(id: String): Vaga
+	iniciarEntrevistas(id: Int): Vaga
 	
-	iniciar(id: String): Vaga
+	iniciar(id: Int): Vaga
 	
-	finalizarVaga(id: String): Vaga
+	finalizarVaga(id: Int): Vaga
 	
-	cancelarVaga(id: String): Vaga
+	cancelarVaga(id: Int): Vaga
 }
 
 type Categoria {
-  id: String
+  id: Int
   descricao: String
 }
 
 type VagasPorCandidato {
-  id: String
+  id: Int
   quantidade: Int
 }
 
 type Candidato {
-	id: String
+	id: Int
 	nome: String
 	sobrenome: String
 	titulo: String
@@ -60,7 +62,7 @@ type Candidato {
 type Qualificacao {
 	descricao: String
 	versao: String
-	id: String
+	id: Int
 	tipo: Categoria
 	equivalencias: [Equivalencia]
 }
@@ -76,7 +78,7 @@ type Experiencia {
 }
 
 type Vaga {
-	id: String
+	id: Int
 	titulo: String
 	empresa: Empresa
 	descricao: String
@@ -93,6 +95,6 @@ type Periodo {
 }
 
 type Empresa {
-	id: String
+	id: Int
 	nome: String
 }

@@ -1,10 +1,10 @@
 package org.leo.projectzeta.repository;
 
 import org.leo.projectzeta.model.Vaga;
-import org.springframework.data.mongodb.repository.MongoRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface VagaRepository extends MongoRepository<Vaga, String> {
+public interface VagaRepository extends JpaRepository<Vaga, Long> {
 
 }

@@ -1,8 +1,9 @@
-import { Candidato } from './Candidato';
+import { Profissional } from './Profissional';
 import { Empresa } from './Empresa';
 import { Periodo } from './Periodo';
 import { Qualificacao } from './Qualificacao';
 import { Vaga } from './Vaga';
+import { Candidato } from './Candidato';
 
 describe('Vaga', () => {
 
@@ -14,8 +15,8 @@ describe('Vaga', () => {
 
         let vaga = new Vaga().deserialize(rawInput);
 
-        expect(vaga.periodo.dataInicial).toEqual(new Date(2000, 0, 1));
-        expect(vaga.periodo.dataFinal).toEqual(new Date(2001, 0, 1));
+        expect(vaga.periodo.dataInicial).toEqual(new Date(1999, 11, 31, 23 ));
+        expect(vaga.periodo.dataFinal).toEqual(new Date(2000, 11, 31, 23));
         expect(spyPeriodo).toHaveBeenCalledTimes(1);
     });
 
@@ -23,7 +24,7 @@ describe('Vaga', () => {
 
         let vaga = new Vaga().deserialize({ dataEntrada: 946681200000 });
 
-        expect(vaga.dataEntrada).toEqual(new Date(2000, 0, 1));
+        expect(vaga.dataEntrada).toEqual(new Date(1999, 11, 31, 23));
     });
 
     it('should assemble ONLY empresa', () => {
@@ -36,14 +37,14 @@ describe('Vaga', () => {
         expect(spyEmpresa).toHaveBeenCalledTimes(1);
     });
 
-    it('should assemble ONLY candidatosSelecionados', () => {
+    it('should assemble ONLY candidatos', () => {
 
         let spyCandidato = spyOn(Candidato.prototype, 'deserialize').and.callThrough();
 
-        let vaga = new Vaga().deserialize({ candidatosSelecionados: [{ pontuacao: 100, candidato: {} }] });
+        let vaga = new Vaga().deserialize({ candidatos: [{ pontuacao: 100, candidato: {} }] });
 
-        expect(vaga.candidatosSelecionados.length).toBe(1);
-        expect(vaga.candidatosSelecionados[0].pontuacao).toBe(100);
+        expect(vaga.candidatos.length).toBe(1);
+        expect(vaga.candidatos[0].pontuacao).toBe(100);
         expect(spyCandidato).toHaveBeenCalledTimes(1);
     });
 

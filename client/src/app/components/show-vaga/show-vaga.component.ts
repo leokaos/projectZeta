@@ -5,7 +5,7 @@ import { Vaga } from '@app/model/Vaga';
 @Component({
   selector: 'app-show-vaga',
   templateUrl: './show-vaga.component.html',
-  styleUrls: ['./show-vaga.component.css']
+  styleUrls: ['./show-vaga.component.scss']
 })
 export class ShowVagaComponent {
 

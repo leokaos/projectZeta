@@ -57,7 +57,7 @@ public class AspectConfiguration {
 			Object logObject = extrairValorParamentro(proceedingJoinPoint, LogObject.class);
 
 			if (logObject instanceof Entidade) {
-				id = ((Entidade) logObject).getId();
+				id = ((Entidade<?>) logObject).getId();
 			}
 		}
 

@@ -4,12 +4,13 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Empresa } from '@app/model/Empresa';
+import { Qualificacao } from '@app/model/Qualificacao';
 import { EmpresaService } from '@app/services/empresa.service';
 
 @Component({
   selector: 'app-empresas',
   templateUrl: './empresas.component.html',
-  styleUrls: ['./empresas.component.css']
+  styleUrls: ['./empresas.component.scss']
 })
 export class EmpresasComponent implements OnInit {
 
@@ -24,7 +25,8 @@ export class EmpresasComponent implements OnInit {
   dataSource: MatTableDataSource<Empresa> = new MatTableDataSource();
   empresas: Empresa[];
 
-  indexLoading: number;
+  indexLoading?: number;
+  query: string;
 
   constructor(private empresaService: EmpresaService, public snackBar: MatSnackBar) {
 
@@ -46,10 +48,10 @@ export class EmpresasComponent implements OnInit {
     this.dataSource.data = this.dataSource.data.concat(new Empresa());
   }
 
-  public onFiltroChange(filtro: string): void {
+  public onFiltroChange(): void {
 
-    if (filtro != "") {
-      this.dataSource.data = this.empresas.filter(empresa => empresa.nome.toLowerCase().indexOf(filtro.toLowerCase()) != -1);
+    if (this.query) {
+      this.dataSource.data = this.empresas.filter(empresa => empresa.nome.toLowerCase().indexOf(this.query.toLowerCase()) != -1);
     }
     else {
       this.dataSource.data = this.empresas;
@@ -80,7 +82,7 @@ export class EmpresasComponent implements OnInit {
       (empresa: Empresa) => {
         this.dataSource.data[i] = empresa;
         this.dataSource._updateChangeSubscription();
-        this.indexLoading = null;
+        this.indexLoading = undefined;
         this.empresas.push(empresa);
       },
       (err: any) => {

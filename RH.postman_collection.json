@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "36c9e82c-f451-4af8-8ee5-0a80729fc8bb",
+		"_postman_id": "ff55e6ed-6c92-4b5d-9802-2246026df329",
 		"name": "RH",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -13,7 +13,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJncnVwb3MiOltdLCJleHAiOjE2MzgxNjE0NzMsInVzZXJfbmFtZSI6ImxlbyIsImp0aSI6Ijk2NjQ4ZTU5LWI1ZWEtNDU5OC1hZjI4LTNlYzVmZTE1YzMxMyIsImNsaWVudF9pZCI6ImNsaWVudCIsInNjb3BlIjpbInJlYWQiLCJ3cml0ZSJdfQ.ouIA56ksi8fRMMQp8IUYQX-WsIY3xVsDWQLhYAxdRl4",
+							"value": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICI1NG12QkFYdHotR3Q5TVN2Q3dNbmF1VzI4ZHdvNHlYWEJvZmhObVlYYWJ3In0.eyJleHAiOjE2NTc1NjA5NjQsImlhdCI6MTY1NzU0Mjk2NCwianRpIjoiOGJhMTZlOWUtNTE1ZC00NTc4LTkyODYtMDNmMWMyNjIxY2FlIiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo4MDgwL3JlYWxtcy9yaCIsInN1YiI6IjcyY2ZmM2JjLWQzZGEtNGUxZS05MWNkLWM5M2ExNWE3NmExMyIsInR5cCI6IkJlYXJlciIsImF6cCI6ImZyb250ZW5kIiwic2Vzc2lvbl9zdGF0ZSI6ImJlODQ5ODhkLTM1YjktNDFhZi1iZDE5LTY3MGI5NDk1M2NhYSIsImFjciI6IjEiLCJhbGxvd2VkLW9yaWdpbnMiOlsiaHR0cDovL2xvY2FsaG9zdDo4MDgxIiwiaHR0cDovL2xvY2FsaG9zdDo0MjAwIl0sInJlYWxtX2FjY2VzcyI6eyJyb2xlcyI6WyJkZWZhdWx0LXJvbGVzLXJoIiwib2ZmbGluZV9hY2Nlc3MiLCJ1bWFfYXV0aG9yaXphdGlvbiJdfSwic2NvcGUiOiJwcm9maWxlIGVtYWlsIiwic2lkIjoiYmU4NDk4OGQtMzViOS00MWFmLWJkMTktNjcwYjk0OTUzY2FhIiwiZW1haWxfdmVyaWZpZWQiOmZhbHNlLCJuYW1lIjoibGVvIiwicHJlZmVycmVkX3VzZXJuYW1lIjoibGVvIiwiZmFtaWx5X25hbWUiOiJsZW8ifQ.QIMRZ1h0kT9MDCzEaUq6U0f3vuzRivW6G7BoDCoSnooyYGCuS_68sXh7J9Hi196imTTiyd4A8pBPx35ec2LPcJI5t9GN-LsWz_foZkRcdh3O7arzTXgi8dWqUHnfXjJH1fA01-hL4X-zame1Cj7jb7Su9KBWvJ8gbFQFgSAIAjdUVje0nsGSy9JKKmdPxZ1irjJZTU7e6F_9a_3N4NYL3ExIGSxwIipJgwsFd5pearsfeVFGlpRoHusPZUGdE-ve1kGc7THAcgnPWAeQFHVnVFuhjtB2uV0wYMrdhEsMy49r9we3z3kAOcEQsjclwamJkUC1FYIaC36TlH2LUCHCCw",
 							"type": "string"
 						}
 					]
@@ -22,7 +22,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"empresa\": {\r\n        \"id\": \"61a3cf9a09456c3e040ad53c\",\r\n        \"nome\": \"Churros INC\"\r\n    },\r\n    \"status\": \"NOVA\",\r\n    \"titulo\": \"Manager\",\r\n    \"descricao\": \"manager bom\",\r\n    \"periodo\": {\r\n        \"dataInicial\": 1567534932414,\r\n        \"dataFinal\": 1578075732414\r\n    },\r\n    \"dataEntrada\": 1564856532414,\r\n    \"contatoTelefone\": \"+49 1525 234 8042\",\r\n    \"contatoEmail\": \"leokaos@gmail.com\",\r\n    \"exigencias\": [\r\n        {\r\n            \"id\": \"61a3ceb009456c3e040ad537\",\r\n            \"descricao\": \"Oracle\",\r\n            \"versao\": \"11c\",\r\n            \"categoria\": {\r\n                \"id\": \"61a3cea109456c3e040ad535\",\r\n                \"descricao\": \"Database\"\r\n            },\r\n            \"equivalencias\": []\r\n        }\r\n    ],\r\n    \"candidatosSelecionados\": [],\r\n    \"tags\": [\r\n        \"Scrum Master\",\r\n        \"Agile\",\r\n        \"Jira\"\r\n    ]\r\n}",
+					"raw": "{\r\n    \"empresa\": {\r\n        \"id\": 1,\r\n        \"nome\": \"Churros INC\"\r\n    },\r\n    \"status\": \"NOVA\",\r\n    \"titulo\": \"Senior Developer\",\r\n    \"descricao\": \"Senior Developer\",\r\n    \"periodo\": {\r\n        \"dataInicial\": 1567534932414,\r\n        \"dataFinal\": 1578075732414\r\n    },\r\n    \"dataEntrada\": 1564856532414,\r\n    \"contatoTelefone\": \"+49 1525 234 8042\",\r\n    \"contatoEmail\": \"leokaos@gmail.com\",\r\n    \"exigencias\": [\r\n        {\r\n            \"id\": 1,\r\n            \"descricao\": \"java\",\r\n            \"versao\": \"8\"\r\n        },\r\n        {\r\n        \"id\": 4,\r\n        \"descricao\": \"PostgreSQL\",\r\n        \"versao\": \"12\"\r\n        }\r\n    ],\r\n    \"tags\": [\r\n        \"Scrum Master\",\r\n        \"Agile\",\r\n        \"Jira\"\r\n    ]\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -125,6 +125,373 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "PROFISSIONAL",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICI1NG12QkFYdHotR3Q5TVN2Q3dNbmF1VzI4ZHdvNHlYWEJvZmhObVlYYWJ3In0.eyJleHAiOjE2NTY2OTg0NDEsImlhdCI6MTY1NjY4MDQ0MSwianRpIjoiMWJiNjI4MGQtNDY5NS00YTJiLTkzODctZjZkM2EwNDdmN2QzIiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo4MDgwL3JlYWxtcy9yaCIsInN1YiI6IjcyY2ZmM2JjLWQzZGEtNGUxZS05MWNkLWM5M2ExNWE3NmExMyIsInR5cCI6IkJlYXJlciIsImF6cCI6ImZyb250ZW5kIiwic2Vzc2lvbl9zdGF0ZSI6IjQyNGY4ZjhiLWU1NWItNDhhMS05YzZhLTVhMzhkNDljZWY0NyIsImFjciI6IjEiLCJhbGxvd2VkLW9yaWdpbnMiOlsiaHR0cDovL2xvY2FsaG9zdDo4MDgxIiwiaHR0cDovL2xvY2FsaG9zdDo0MjAwIl0sInJlYWxtX2FjY2VzcyI6eyJyb2xlcyI6WyJkZWZhdWx0LXJvbGVzLXJoIiwib2ZmbGluZV9hY2Nlc3MiLCJ1bWFfYXV0aG9yaXphdGlvbiJdfSwic2NvcGUiOiJwcm9maWxlIGVtYWlsIiwic2lkIjoiNDI0ZjhmOGItZTU1Yi00OGExLTljNmEtNWEzOGQ0OWNlZjQ3IiwiZW1haWxfdmVyaWZpZWQiOmZhbHNlLCJuYW1lIjoibGVvIiwicHJlZmVycmVkX3VzZXJuYW1lIjoibGVvIiwiZmFtaWx5X25hbWUiOiJsZW8ifQ.efbM7QecoB6AzghQy1ayuo-s2sCSY6VlBOphCocc-lA9zvfCAocd0ZVnmoVc7IpVESje19aE-kvXZQS7pIVaU0T9lSbS2lf_2CLeBUMWNzCDcoH6uoaD42fWtca6c-VhEOGvaIYytI1laC2zOqy-1qXHzkUkYFyXTspDbEYEXEyLVVeHc8AIyXPGiQcGFTQTpiaZP9kW83lImzKMMPZvbRBR3bNbk5xMH7VFlhLRxV9RTBDSP6X49Vqb2KmKqcjTJwgDSYKQ4njDJvL_qQeEcXiQ-0fr5j-rLAmXricbSzsHIUAlFyWSdTteHqPOdP5MctSHTw7IbhYGcW55NTLJkQ",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8090/secured/profissional/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"secured",
+						"profissional",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "QUALIFICACAO",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json, text/plain, */*"
+					},
+					{
+						"key": "Accept-Language",
+						"value": "en-GB,en-US;q=0.9,en;q=0.8"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICI4Q25OWFNRaXEtVWRfZ2RKSUxlZ01GSjFaSVE0eVFmb2YzTERYYll3REE4In0.eyJleHAiOjE2NTYzNzE2MTcsImlhdCI6MTY1NjMzNjI2OCwiYXV0aF90aW1lIjoxNjU2MzM1NjE3LCJqdGkiOiIwZTgxZWJhOS0zMTM1LTRhOTYtOTcxMy1mNjVlOTc0MGI1NzciLCJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjgwODAvcmVhbG1zL3JoIiwiYXVkIjoiYWNjb3VudCIsInN1YiI6IjhjZmZkMzdjLTAzYzYtNDg4Yy1iNjRiLTVmYTNjYjJjOWY4NiIsInR5cCI6IkJlYXJlciIsImF6cCI6ImZyb250ZW5kIiwibm9uY2UiOiI2YTgxYmU2Ny0xMmM0LTRkOGItODJmYS00YWIxY2Q1ZjYzMGYiLCJzZXNzaW9uX3N0YXRlIjoiYTBlOGFlM2UtMGMzZS00YWNlLTkyYjEtMDUzNmFjZmQ1YWIyIiwiYWNyIjoiMCIsImFsbG93ZWQtb3JpZ2lucyI6WyJodHRwOi8vbG9jYWxob3N0OjgwODEiLCJodHRwOi8vbG9jYWxob3N0OjQyMDAiXSwicmVhbG1fYWNjZXNzIjp7InJvbGVzIjpbImRlZmF1bHQtcm9sZXMtcmgiLCJvZmZsaW5lX2FjY2VzcyIsInVtYV9hdXRob3JpemF0aW9uIl19LCJyZXNvdXJjZV9hY2Nlc3MiOnsiYWNjb3VudCI6eyJyb2xlcyI6WyJtYW5hZ2UtYWNjb3VudCIsIm1hbmFnZS1hY2NvdW50LWxpbmtzIiwidmlldy1wcm9maWxlIl19fSwic2NvcGUiOiJvcGVuaWQgcHJvZmlsZSBlbWFpbCIsInNpZCI6ImEwZThhZTNlLTBjM2UtNGFjZS05MmIxLTA1MzZhY2ZkNWFiMiIsImVtYWlsX3ZlcmlmaWVkIjpmYWxzZSwibmFtZSI6ImxlbyIsInByZWZlcnJlZF91c2VybmFtZSI6ImxlbyIsImZhbWlseV9uYW1lIjoibGVvIn0.cuesHbUUcA8VQ_UDkO9SXyG-0Mn3fJO4pcegAwadI_7OC4YDKEtDyu7GpkLh_3Pu1X00z9Zf73t6gift2ccfGs8wn0FgJkFKF4AE-lcQdZnnnytFQJldIMhQdcN0E6-PdUMgBLhfLx0D01kSJ_7fhArPW6CXMuz_XuikBWZYe7LnWwFbaentarVyHYiiBVdru5TbeZi-zZcVjI8yXGggj3jAiaEf_r_u7kokG-pgKvgG4-CgitJXAUerzDg0xgW0bXH520LISd97uegPPjgLLJuYHWFeihFFWtZjBZOJwrDDxyL0G8vi1cd7EtC3Jqm9O2vJl8jXqZmk4P-E3_eoFA"
+					},
+					{
+						"key": "Connection",
+						"value": "keep-alive"
+					},
+					{
+						"key": "Origin",
+						"value": "http://localhost:4200"
+					},
+					{
+						"key": "Referer",
+						"value": "http://localhost:4200/"
+					},
+					{
+						"key": "Sec-Fetch-Dest",
+						"value": "empty"
+					},
+					{
+						"key": "Sec-Fetch-Mode",
+						"value": "cors"
+					},
+					{
+						"key": "Sec-Fetch-Site",
+						"value": "same-site"
+					},
+					{
+						"key": "User-Agent",
+						"value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.5005.115 Safari/537.36"
+					},
+					{
+						"key": "sec-ch-ua",
+						"value": "\" Not A;Brand\";v=\"99\", \"Chromium\";v=\"102\", \"Google Chrome\";v=\"102\""
+					},
+					{
+						"key": "sec-ch-ua-mobile",
+						"value": "?0"
+					},
+					{
+						"key": "sec-ch-ua-platform",
+						"value": "\"Windows\""
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8090/secured/qualificacao",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"secured",
+						"qualificacao"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PROFISSIONAL",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICI4Q25OWFNRaXEtVWRfZ2RKSUxlZ01GSjFaSVE0eVFmb2YzTERYYll3REE4In0.eyJleHAiOjE2NTYzNzE2MTcsImlhdCI6MTY1NjMzNzUzMCwiYXV0aF90aW1lIjoxNjU2MzM1NjE3LCJqdGkiOiJhYjM3YTE2ZS03MjllLTRhNjctYWNkMy1hNzZiNjk3OTY4NDIiLCJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjgwODAvcmVhbG1zL3JoIiwiYXVkIjoiYWNjb3VudCIsInN1YiI6IjhjZmZkMzdjLTAzYzYtNDg4Yy1iNjRiLTVmYTNjYjJjOWY4NiIsInR5cCI6IkJlYXJlciIsImF6cCI6ImZyb250ZW5kIiwibm9uY2UiOiIwMDk4MmYyOC01NDU1LTQxMGMtOWE1OS1hYTU2NjQxMzE1MjMiLCJzZXNzaW9uX3N0YXRlIjoiYTBlOGFlM2UtMGMzZS00YWNlLTkyYjEtMDUzNmFjZmQ1YWIyIiwiYWNyIjoiMCIsImFsbG93ZWQtb3JpZ2lucyI6WyJodHRwOi8vbG9jYWxob3N0OjgwODEiLCJodHRwOi8vbG9jYWxob3N0OjQyMDAiXSwicmVhbG1fYWNjZXNzIjp7InJvbGVzIjpbImRlZmF1bHQtcm9sZXMtcmgiLCJvZmZsaW5lX2FjY2VzcyIsInVtYV9hdXRob3JpemF0aW9uIl19LCJyZXNvdXJjZV9hY2Nlc3MiOnsiYWNjb3VudCI6eyJyb2xlcyI6WyJtYW5hZ2UtYWNjb3VudCIsIm1hbmFnZS1hY2NvdW50LWxpbmtzIiwidmlldy1wcm9maWxlIl19fSwic2NvcGUiOiJvcGVuaWQgcHJvZmlsZSBlbWFpbCIsInNpZCI6ImEwZThhZTNlLTBjM2UtNGFjZS05MmIxLTA1MzZhY2ZkNWFiMiIsImVtYWlsX3ZlcmlmaWVkIjpmYWxzZSwibmFtZSI6ImxlbyIsInByZWZlcnJlZF91c2VybmFtZSI6ImxlbyIsImZhbWlseV9uYW1lIjoibGVvIn0.jaaFfo5tt4w4_OdblY4bSoFRyksVpHyM4IjVgFcWTv4p82pK7amkLWzpkd1jzr7D5hsda8ejozR1ejpxPPJ4htG_jDYfgs-Syx7wivEwPNBxwakg12FQKDvnPURJ3OGHKtDcxdM0Tl0yjX8RylsOvWHhh_zAnKGtmrMakdshIFy8rpLX4wFzvk281_J9ntRvTbVr5wM_sKLAbFuQ4p8ndKmt1RCxkzkVbTnDbBeMAT-y_kP6IpEFrgUUE8TMesokOZMeGVGoUt2FnozCa0P8u0dNT7kvPFfDx6GhIfCn7dYvUW_N8h7K4XspAcU6jionVEOObmCtvm3PGhq62w2l5A",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"experiencias\": [\r\n        {\r\n            \"qualificacao\": 1,\r\n            \"tempo\": \"10y2m\"\r\n        },\r\n                {\r\n            \"qualificacao\": 4,\r\n            \"tempo\": \"5y1m\"\r\n        }\r\n    ],\r\n    \"id\": 3,\r\n    \"nome\": \"Bob\",\r\n    \"sobrenome\": \"Sponge\",\r\n    \"titulo\": \"Tester\",\r\n    \"email\": \"bob.sponge@test.com\",\r\n    \"dataContato\": \"2022-06-30T23:00:00.000Z\",\r\n    \"dataComeco\": \"2022-07-14T23:00:00.000Z\",\r\n    \"avatar\": null,\r\n    \"status\": \"EM_CONTATO\",\r\n    \"profileRating\": 0\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8090/secured/profissional/:id",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"secured",
+						"profissional",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "3"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "QUALIFICACAO",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICI1NG12QkFYdHotR3Q5TVN2Q3dNbmF1VzI4ZHdvNHlYWEJvZmhObVlYYWJ3In0.eyJleHAiOjE2NTc1NjA5NjQsImlhdCI6MTY1NzU0Mjk2NCwianRpIjoiOGJhMTZlOWUtNTE1ZC00NTc4LTkyODYtMDNmMWMyNjIxY2FlIiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo4MDgwL3JlYWxtcy9yaCIsInN1YiI6IjcyY2ZmM2JjLWQzZGEtNGUxZS05MWNkLWM5M2ExNWE3NmExMyIsInR5cCI6IkJlYXJlciIsImF6cCI6ImZyb250ZW5kIiwic2Vzc2lvbl9zdGF0ZSI6ImJlODQ5ODhkLTM1YjktNDFhZi1iZDE5LTY3MGI5NDk1M2NhYSIsImFjciI6IjEiLCJhbGxvd2VkLW9yaWdpbnMiOlsiaHR0cDovL2xvY2FsaG9zdDo4MDgxIiwiaHR0cDovL2xvY2FsaG9zdDo0MjAwIl0sInJlYWxtX2FjY2VzcyI6eyJyb2xlcyI6WyJkZWZhdWx0LXJvbGVzLXJoIiwib2ZmbGluZV9hY2Nlc3MiLCJ1bWFfYXV0aG9yaXphdGlvbiJdfSwic2NvcGUiOiJwcm9maWxlIGVtYWlsIiwic2lkIjoiYmU4NDk4OGQtMzViOS00MWFmLWJkMTktNjcwYjk0OTUzY2FhIiwiZW1haWxfdmVyaWZpZWQiOmZhbHNlLCJuYW1lIjoibGVvIiwicHJlZmVycmVkX3VzZXJuYW1lIjoibGVvIiwiZmFtaWx5X25hbWUiOiJsZW8ifQ.QIMRZ1h0kT9MDCzEaUq6U0f3vuzRivW6G7BoDCoSnooyYGCuS_68sXh7J9Hi196imTTiyd4A8pBPx35ec2LPcJI5t9GN-LsWz_foZkRcdh3O7arzTXgi8dWqUHnfXjJH1fA01-hL4X-zame1Cj7jb7Su9KBWvJ8gbFQFgSAIAjdUVje0nsGSy9JKKmdPxZ1irjJZTU7e6F_9a_3N4NYL3ExIGSxwIipJgwsFd5pearsfeVFGlpRoHusPZUGdE-ve1kGc7THAcgnPWAeQFHVnVFuhjtB2uV0wYMrdhEsMy49r9we3z3kAOcEQsjclwamJkUC1FYIaC36TlH2LUCHCCw",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json, text/plain, */*"
+					},
+					{
+						"key": "Accept-Language",
+						"value": "pt-PT,pt;q=0.9"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICI4Q25OWFNRaXEtVWRfZ2RKSUxlZ01GSjFaSVE0eVFmb2YzTERYYll3REE4In0.eyJleHAiOjE2NTYzNjk1NDYsImlhdCI6MTY1NjMzMzkzOSwiYXV0aF90aW1lIjoxNjU2MzMzNTQ3LCJqdGkiOiIxNGYzZDFjYi0xNWZiLTQ4NTEtYjNjMi1mYTYyZmEzY2YxYzEiLCJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjgwODAvcmVhbG1zL3JoIiwiYXVkIjoiYWNjb3VudCIsInN1YiI6IjhjZmZkMzdjLTAzYzYtNDg4Yy1iNjRiLTVmYTNjYjJjOWY4NiIsInR5cCI6IkJlYXJlciIsImF6cCI6ImZyb250ZW5kIiwibm9uY2UiOiIzODlmNTIwZS05MGRiLTRmNmYtOWMzNi1hZjBiMjlkYzMzMjAiLCJzZXNzaW9uX3N0YXRlIjoiYWUwNjZhMzAtYmUyMS00MGU5LWI3MDEtYzA5NWM2MzBmN2MzIiwiYWNyIjoiMCIsImFsbG93ZWQtb3JpZ2lucyI6WyJodHRwOi8vbG9jYWxob3N0OjgwODEiLCJodHRwOi8vbG9jYWxob3N0OjQyMDAiXSwicmVhbG1fYWNjZXNzIjp7InJvbGVzIjpbImRlZmF1bHQtcm9sZXMtcmgiLCJvZmZsaW5lX2FjY2VzcyIsInVtYV9hdXRob3JpemF0aW9uIl19LCJyZXNvdXJjZV9hY2Nlc3MiOnsiYWNjb3VudCI6eyJyb2xlcyI6WyJtYW5hZ2UtYWNjb3VudCIsIm1hbmFnZS1hY2NvdW50LWxpbmtzIiwidmlldy1wcm9maWxlIl19fSwic2NvcGUiOiJvcGVuaWQgcHJvZmlsZSBlbWFpbCIsInNpZCI6ImFlMDY2YTMwLWJlMjEtNDBlOS1iNzAxLWMwOTVjNjMwZjdjMyIsImVtYWlsX3ZlcmlmaWVkIjpmYWxzZSwibmFtZSI6ImxlbyIsInByZWZlcnJlZF91c2VybmFtZSI6ImxlbyIsImZhbWlseV9uYW1lIjoibGVvIn0.dhOnz24FkY8oKC0AV4-KzVu6AqgQ8tyqWweaMEOTAtP0jCWheKJcpfv-dQcNwsfQqd8S9Se9cFSXwiJCySxkuKG9RDboeOZblspbVv24x-IqK2Q30LroI-iBrKZiOB8VJ1PXoiEUKb7r4RTUyVZfFB0bs4ji13TqnUcvHAOOvMonpw76g7QjPpyi2CdtEDXYmQ3VbjsUQcuqDijmd-jApF0ljSa8AYp-kQMEc7fvgF8OHVHogRTXblN9xW8LY5AjnZrSs7xzK87h7Mg0KfNp2cGyf6Pv4zXXSJRD-komWy3lciRDzqVdn6J_-SS-iWW8VfBsY0A9bttxe6eZITLMhw"
+					},
+					{
+						"key": "Connection",
+						"value": "keep-alive"
+					},
+					{
+						"key": "Origin",
+						"value": "http://localhost:4200"
+					},
+					{
+						"key": "Referer",
+						"value": "http://localhost:4200/"
+					},
+					{
+						"key": "Sec-Fetch-Dest",
+						"value": "empty"
+					},
+					{
+						"key": "Sec-Fetch-Mode",
+						"value": "cors"
+					},
+					{
+						"key": "Sec-Fetch-Site",
+						"value": "same-site"
+					},
+					{
+						"key": "User-Agent",
+						"value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.0.0 Safari/537.36"
+					},
+					{
+						"key": "sec-ch-ua",
+						"value": "\" Not A;Brand\";v=\"99\", \"Chromium\";v=\"102\", \"Google Chrome\";v=\"102\""
+					},
+					{
+						"key": "sec-ch-ua-mobile",
+						"value": "?0"
+					},
+					{
+						"key": "sec-ch-ua-platform",
+						"value": "\"Windows\""
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8090/secured/qualificacao",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"secured",
+						"qualificacao"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "TOKEN",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "client_id",
+							"value": "frontend",
+							"type": "text"
+						},
+						{
+							"key": "username",
+							"value": "leo",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "123",
+							"type": "text"
+						},
+						{
+							"key": "grant_type",
+							"value": "password",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8080/realms/rh/protocol/openid-connect/token",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"realms",
+						"rh",
+						"protocol",
+						"openid-connect",
+						"token"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "QUALIFICACAO ID",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICI1NG12QkFYdHotR3Q5TVN2Q3dNbmF1VzI4ZHdvNHlYWEJvZmhObVlYYWJ3In0.eyJleHAiOjE2NTY2MTA2MzgsImlhdCI6MTY1NjU5MjYzOCwianRpIjoiNDFkNjNiOGYtZmNlYy00MmJmLTlhMzYtMTA4ZjBjN2Y2OThiIiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo4MDgwL3JlYWxtcy9yaCIsInN1YiI6IjcyY2ZmM2JjLWQzZGEtNGUxZS05MWNkLWM5M2ExNWE3NmExMyIsInR5cCI6IkJlYXJlciIsImF6cCI6ImZyb250ZW5kIiwic2Vzc2lvbl9zdGF0ZSI6IjEzMjY0Mzk2LTRlOWYtNDBkNy1iNjkwLTNmMDdjZWQzZWM0MSIsImFjciI6IjEiLCJhbGxvd2VkLW9yaWdpbnMiOlsiaHR0cDovL2xvY2FsaG9zdDo4MDgxIiwiaHR0cDovL2xvY2FsaG9zdDo0MjAwIl0sInJlYWxtX2FjY2VzcyI6eyJyb2xlcyI6WyJkZWZhdWx0LXJvbGVzLXJoIiwib2ZmbGluZV9hY2Nlc3MiLCJ1bWFfYXV0aG9yaXphdGlvbiJdfSwic2NvcGUiOiJwcm9maWxlIGVtYWlsIiwic2lkIjoiMTMyNjQzOTYtNGU5Zi00MGQ3LWI2OTAtM2YwN2NlZDNlYzQxIiwiZW1haWxfdmVyaWZpZWQiOmZhbHNlLCJuYW1lIjoibGVvIiwicHJlZmVycmVkX3VzZXJuYW1lIjoibGVvIiwiZmFtaWx5X25hbWUiOiJsZW8ifQ.Cggrwjlb4K-v79YI4QjXEzOaZx21eD2N4NEFTcFKV1F3hHNeqQfV5PAZsJhe5HCBLuJZtL7h0dLycv55iXbbiEyiyixUDV1bQdV3REm0KxBfOKpDScRTwpujD9w8GRWnp-ewnmzVls7SeW9ELC0HalvCmqFqxyKd2FKt-JWAbLDo_Lbu5zm6CGoNURG46SZgr203t7PQhXBJDslIznoYpvvYpUcdNo31nIGDH-zPNLkOqfVwkM_C68FJpAouSnL_B57JtA0qYXRXk2JB9NA8peEm4jRr8plKB61kntlgwTXChCzDLWCCGyuRNT4z5IFQz414H3xikJaKmIECcVJuZw",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8090/secured/qualificacao/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"secured",
+						"qualificacao",
+						"1"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "oauth2",
+		"oauth2": [
+			{
+				"key": "redirect_uri",
+				"value": "",
+				"type": "string"
+			},
+			{
+				"key": "clientId",
+				"value": "frontend",
+				"type": "string"
+			},
+			{
+				"key": "accessTokenUrl",
+				"value": "http://localhost:8080/realms/rh/protocol/openid-connect/token",
+				"type": "string"
+			},
+			{
+				"key": "authUrl",
+				"value": "http://localhost:8080/realms/rh/protocol/openid-connect/auth",
+				"type": "string"
+			},
+			{
+				"key": "tokenName",
+				"value": "TOKEN",
+				"type": "string"
+			},
+			{
+				"key": "addTokenTo",
+				"value": "header",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
 		}
 	]
 }

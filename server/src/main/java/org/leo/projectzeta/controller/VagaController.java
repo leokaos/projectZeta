@@ -9,13 +9,13 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/secured/vaga")
-public class VagaController extends AbstractSimpleController<Vaga> {
+public class VagaController extends AbstractSimpleController<Vaga, Long> {
 
 	@Autowired
 	private VagaFacade facade;
 
 	@Override
-	protected SimpleFacade<Vaga> getFacade() {
+	protected SimpleFacade<Vaga, Long> getFacade() {
 		return this.facade;
 	}
 

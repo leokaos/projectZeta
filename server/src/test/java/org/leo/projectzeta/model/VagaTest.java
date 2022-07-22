@@ -1,6 +1,7 @@
 package org.leo.projectzeta.model;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
 import static org.leo.projectzeta.model.StatusVaga.AGUARDANDO_INICIO;
 import static org.leo.projectzeta.model.StatusVaga.CANCELADA;
 import static org.leo.projectzeta.model.StatusVaga.ENTREVISTANDO;
@@ -13,8 +14,6 @@ import static org.leo.projectzeta.util.Mensagens.VAGA_SEM_CANDIDATOS_SELECIONADO
 
 import java.util.Date;
 import java.util.List;
-import java.util.Set;
-import java.util.TreeSet;
 
 import org.apache.commons.lang3.time.DateUtils;
 import org.assertj.core.util.Lists;
@@ -26,7 +25,7 @@ import org.leo.projectzeta.factory.TempoFactory;
 public class VagaTest {
 
 	@Test
-	public void deveriaSelecionarUmCandidatoComQualificacaoExataTest() throws Exception {
+	public void deveriaSelecionarUmProfissionalComQualificacaoExataTest() throws Exception {
 
 		Vaga vaga = new Vaga();
 		vaga.setPeriodo(PeriodoFactory.from(new Date(), new Date()));
@@ -36,76 +35,78 @@ public class VagaTest {
 		vaga.getExigencias().add(q1);
 
 		Tempo t1 = TempoFactory.parse("1y2m");
-		Candidato c1 = new Candidato();
+		Profissional c1 = new Profissional();
 		c1.addExperiencia(q1, t1);
 		c1.setDataComeco(DateUtils.addDays(new Date(), -1));
 
-		Candidato c2 = new Candidato();
+		Profissional c2 = new Profissional();
 		c2.setDataComeco(DateUtils.addDays(new Date(), -1));
 
-		List<Candidato> todosOsCandidatos = Lists.newArrayList(c1, c2);
+		List<Profissional> todosOsProfissionals = Lists.newArrayList(c1, c2);
 
-		vaga.selecionarCandidatos(todosOsCandidatos);
+		vaga.selecionarCandidatos(todosOsProfissionals);
 
-		assertEquals(1, vaga.getCandidatosSelecionados().size());
-		assertEquals(c1, vaga.getCandidatosSelecionados().iterator().next().getCandidato());
+		assertEquals(1, vaga.getCandidatos().size());
+		assertEquals(c1.getId(), vaga.getCandidatos().iterator().next().getId().getProfissional());
 		assertEquals(ENTREVISTANDO, vaga.getStatus());
 	}
 
 	@Test
-	public void deveriaSelecionarUmCandidatoComQualificacaoComEquivalenciaTest() throws Exception {
+	public void deveriaSelecionarUmProfissionalComQualificacaoComEquivalenciaTest() throws Exception {
 
 		Vaga vaga = new Vaga();
 		vaga.setPeriodo(PeriodoFactory.from(new Date(), new Date()));
 
 		Qualificacao q1 = new Qualificacao();
-		q1.setId("q1");
+		q1.setId(1L);
 		Qualificacao q2 = new Qualificacao();
-		q2.setId("q2");
+		q2.setId(2L);
 		q2.addEquivalencia(q1, 50);
 
 		vaga.getExigencias().add(q1);
 
 		Tempo t1 = TempoFactory.parse("1y2m");
-		Candidato c1 = new Candidato();
+		Profissional c1 = new Profissional();
+		c1.setId(123L);
 		c1.addExperiencia(q2, t1);
 		c1.setDataComeco(DateUtils.addDays(new Date(), -1));
 
-		Candidato c2 = new Candidato();
+		Profissional c2 = new Profissional();
+		c2.setId(456L);
 		c2.setDataComeco(DateUtils.addDays(new Date(), -1));
 
-		List<Candidato> todosOsCandidatos = Lists.newArrayList(c1, c2);
+		List<Profissional> todosOsProfissionals = Lists.newArrayList(c1, c2);
 
-		vaga.selecionarCandidatos(todosOsCandidatos);
+		vaga.selecionarCandidatos(todosOsProfissionals);
 
-		assertEquals(1, vaga.getCandidatosSelecionados().size());
-		assertEquals(c1, vaga.getCandidatosSelecionados().iterator().next().getCandidato());
+		assertEquals(1, vaga.getCandidatos().size());
+		assertEquals(c1.getId(), vaga.getCandidatos().iterator().next().getId().getProfissional());
 		assertEquals(ENTREVISTANDO, vaga.getStatus());
 	}
 
 	@Test
-	public void deveriaNaoSelecionarNenhumCandidatoTest() throws Exception {
+	public void deveriaNaoSelecionarNenhumProfissionalTest() throws Exception {
 
 		Vaga vaga = new Vaga();
-		vaga.setCandidatosSelecionados(null);
+		vaga.setCandidatos(null);
 		vaga.setPeriodo(PeriodoFactory.from(new Date(), new Date()));
 
 		Qualificacao q1 = new Qualificacao();
-		q1.setId("q1");
+		q1.setId(1L);
 		Qualificacao q2 = new Qualificacao();
-		q2.setId("q2");
+		q2.setId(2L);
 		q2.addEquivalencia(q1, 50);
 
 		vaga.getExigencias().add(q1);
 
-		Candidato c1 = new Candidato();
+		Profissional c1 = new Profissional();
 		c1.setDataComeco(DateUtils.addHours(new Date(), -1));
 
-		List<Candidato> todosOsCandidatos = Lists.newArrayList(c1);
+		List<Profissional> todosOsProfissionals = Lists.newArrayList(c1);
 
-		vaga.selecionarCandidatos(todosOsCandidatos);
+		vaga.selecionarCandidatos(todosOsProfissionals);
 
-		assertEquals(0, vaga.getCandidatosSelecionados().size());
+		assertEquals(0, vaga.getCandidatos().size());
 		assertEquals(SELECIONANDO_CANDIDATOS, vaga.getStatus());
 	}
 
@@ -194,7 +195,7 @@ public class VagaTest {
 
 		Vaga vaga = new Vaga();
 		vaga.setStatus(SELECIONANDO_CANDIDATOS);
-		vaga.getCandidatosSelecionados().add(new CandidatoSelecionado(300, new Candidato()));
+		vaga.getCandidatos().add(Candidato.createFrom(vaga, new Profissional(), 300));
 
 		vaga.iniarEntrevistas();
 
@@ -218,7 +219,7 @@ public class VagaTest {
 	}
 
 	@Test
-	public void deveriaRetornarErroPoisNaoTemNenhumCandidatoSelecionadoTest() throws Exception {
+	public void deveriaRetornarErroPoisNaoTemNenhumProfissionalSelecionadoTest() throws Exception {
 
 		Vaga vaga = new Vaga();
 		vaga.setStatus(SELECIONANDO_CANDIDATOS);
@@ -231,17 +232,6 @@ public class VagaTest {
 			assertEquals(VAGA_SEM_CANDIDATOS_SELECIONADOS, e.getMessage());
 		}
 
-	}
-	
-	@Test
-	public void testName() throws Exception {
-		Set<CandidatoSelecionado> l = new TreeSet<CandidatoSelecionado>();
-		
-		l.add(new CandidatoSelecionado(20, null));
-		l.add(new CandidatoSelecionado(30, null));
-		l.add(new CandidatoSelecionado(10, null));
-		
-		System.out.println(l);
 	}
 
 }

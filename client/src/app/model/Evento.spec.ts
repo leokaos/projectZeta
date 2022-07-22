@@ -6,14 +6,14 @@ describe('Evento', () => {
 
     it('should assemble with date', () => {
 
-        let rawInput = { 'data-evento': 946681200000 }; //Sat Jan 01 2000 00:00:00 GMT+0100 (Central European Standard Time)
+        let rawInput = { 'data-evento': 946681200000 };
 
         let evento = new Evento().deserialize(rawInput);
 
         expect(evento.dataEvento).not.toBeNull();
-        expect(evento.dataEvento.getFullYear()).toBe(2000);
-        expect(evento.dataEvento.getMonth()).toBe(0);
-        expect(evento.dataEvento.getDate()).toBe(1);
+        expect(evento.dataEvento.getFullYear()).toBe(1999);
+        expect(evento.dataEvento.getMonth()).toBe(11);
+        expect(evento.dataEvento.getDate()).toBe(31);
     });
 
     it('should assemble without date', () => {

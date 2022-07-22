@@ -8,7 +8,7 @@ import { Apollo } from 'apollo-angular';
 })
 export class WorkflowVaga {
 
-  private endpoints = {};
+  private endpoints: { [key: string]: any } = {};
 
   constructor(private apollo: Apollo) {
     this.endpoints['NOVA'] = SELECIONAR_CANDIDATOS;
@@ -31,7 +31,7 @@ export class WorkflowVaga {
 }
 
 export const SELECIONAR_CANDIDATOS = gql`
-mutation processar($id: String) {
+mutation processar($id: Int) {
   selecionarCandidatos(id: $id) {
     id
   }
@@ -39,7 +39,7 @@ mutation processar($id: String) {
 `;
 
 export const INICIAR_ENTREVISTAS = gql`
-mutation processar($id: String) {
+mutation processar($id: Int) {
   iniciarEntrevistas(id: $id) {
     id
   }
@@ -47,7 +47,7 @@ mutation processar($id: String) {
 `;
 
 export const INICIAR = gql`
-mutation processar($id: String) {
+mutation processar($id: Int) {
   iniciar(id: $id) {
     id
   }
@@ -55,7 +55,7 @@ mutation processar($id: String) {
 `;
 
 export const FINALIZAR_VAGA = gql`
-mutation processar($id: String) {
+mutation processar($id: Int) {
   finalizarVaga(id: $id) {
     id
   }
@@ -63,7 +63,7 @@ mutation processar($id: String) {
 `;
 
 export const CANCELAR_VAGA = gql`
-mutation processar($id: String) {
+mutation processar($id: Int) {
   cancelarVaga(id: $id) {
     id
   }

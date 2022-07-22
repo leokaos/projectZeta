@@ -1,4 +1,4 @@
-version: '2'
+version: '3.2'
 services:
     mongo:
         image: mongo:latest
@@ -17,16 +17,22 @@ services:
         expose:
             - 6379
     ldap:
-        image: dinkel/openldap
-        container_name: rh-ldap
-        ports: 
-          - 389:389
-        expose:
-          - 389
-        environment:
-          - SLAPD_PASSWORD=leo123
-          - SLAPD_DOMAIN=rh.system.org
-          - SLAPD_ADDITIONAL_MODULES=memberof
+      image: osixia/openldap:1.5.0
+      container_name: rh-ldap
+      environment:
+        - LDAP_ORGANISATION=rh
+        - LDAP_DOMAIN=rh.system.org
+        - LDAP_TLS=false
+        - "LDAP_BASE_DN=dc=rh,dc=system,dc=org"
+        - LDAP_ADMIN_PASSWORD=leo123
+      command: [ '--copy-service' ]
+      ports:
+        - 389:389
+      volumes:
+        - type: bind
+          source: ./initial_user.ldif
+          target: /container/service/slapd/assets/config/bootstrap/ldif/initial_user.ldif
+
     zookeeper:
         image: wurstmeister/zookeeper
         container_name: rh-zookeeper
@@ -50,6 +56,16 @@ services:
           - "3000:3000"
         expose:
           - 3000
+    db:
+      image: postgres
+      container_name: rh-db
+      restart: always
+      ports:
+        - 5432:5432
+      environment:
+        POSTGRES_PASSWORD: leo
+        POSTGRES_USER: rh_admin
+        POSTGRES_DB: rh_local
     kafka:
         image: wurstmeister/kafka
         container_name: rh-kafka
@@ -63,6 +79,24 @@ services:
           KAFKA_ADVERTISED_HOST_NAME: localhost
           KAFKA_ZOOKEEPER_CONNECT: rh-zookeeper:2181
           KAFKA_BROKER_ID: 1
+    keycloak:
+        image: quay.io/keycloak/keycloak
+        container_name: rh-keycloak
+        ports: 
+            - 8080:8080
+        expose: 
+            - 8080
+        depends_on:
+            - ldap
+        environment:
+          KEYCLOAK_ADMIN: admin
+          KEYCLOAK_ADMIN_PASSWORD: admin
+        command:
+            - "start-dev"
+        volumes:
+            - type: bind
+              source: ./server/src/test/resources/realm-export.json
+              target: /tmp/realm-export.json
     web:
         build: ./client/
         container_name: rh-web
@@ -81,4 +115,4 @@ services:
           LDAP_SERVER: ldap://rh-ldap:389/dc=rh,dc=system,dc=org
           MONGO_HOST : rh-mongo
           SPRING_KAFKA_BOOTSTRAPSERVERS : rh-kafka:9092
-          CACHE_HOSTNAME: rh-redis          
+          CACHE_HOSTNAME: rh-redis

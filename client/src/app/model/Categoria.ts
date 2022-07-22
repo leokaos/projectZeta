@@ -4,7 +4,7 @@ import { Qualificacao } from './Qualificacao';
 export class Categoria implements Deserializable {
 
     descricao: string;
-    id: string;
+    id: number;
     qualificacoes: Qualificacao[] = [];
 
     constructor() { }

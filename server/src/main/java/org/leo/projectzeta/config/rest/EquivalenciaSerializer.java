@@ -19,7 +19,7 @@ public class EquivalenciaSerializer extends JsonSerializer<Equivalencia> {
 
 		gen.writeObjectFieldStart("destino");
 		gen.writeStringField("descricao", value.getDestino().getDescricao());
-		gen.writeStringField("id", value.getDestino().getId());
+		gen.writeNumberField("id", value.getDestino().getId());
 		gen.writeStringField("versao", value.getDestino().getVersao());
 		gen.writeEndObject();
 

@@ -6,18 +6,18 @@ import org.leo.projectzeta.model.Tempo;
 
 public class ExperienciaFactory {
 
-	private ExperienciaFactory() {
-		super();
-	}
+    private ExperienciaFactory() {
+        super();
+    }
 
-	public static Experiencia criar(Qualificacao qualificacao, Tempo tempo) {
+    public static Experiencia criar(Qualificacao qualificacao, Tempo tempo) {
 
-		Experiencia exp = new Experiencia();
+        Experiencia exp = new Experiencia();
 
-		exp.setQualificacao(qualificacao);
-		exp.setTempo(tempo);
+        exp.setQualificacao(qualificacao);
+        exp.setTempo(tempo);
 
-		return exp;
-	}
+        return exp;
+    }
 
 }

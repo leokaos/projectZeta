@@ -1,35 +1,46 @@
 package org.leo.projectzeta.model;
 
-import java.io.Serializable;
+import javax.persistence.Column;
+import javax.persistence.Convert;
+import javax.persistence.EmbeddedId;
+import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
-import org.springframework.data.mongodb.core.mapping.DBRef;
+import lombok.EqualsAndHashCode;
+import org.leo.projectzeta.api.Entidade;
+import org.leo.projectzeta.config.db.TempoConverter;
 
-public class Experiencia implements Serializable {
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
-	private static final long serialVersionUID = -1381767258274041223L;
+import lombok.Getter;
+import lombok.Setter;
 
-	@DBRef
-	private Qualificacao qualificacao;
-	private Tempo tempo;
+@Getter
+@Setter
+@Entity
+@EqualsAndHashCode(of = "id")
+@Table(name = "experiencia", schema = "rh")
+public class Experiencia implements Entidade<ExperienciaPK> {
 
-	public Experiencia() {
-		super();
-	}
+    private static final long serialVersionUID = -1381767258274041223L;
 
-	public Qualificacao getQualificacao() {
-		return qualificacao;
-	}
+    @EmbeddedId
+    @JsonIgnore
+    private ExperienciaPK id;
 
-	public void setQualificacao(Qualificacao qualificacao) {
-		this.qualificacao = qualificacao;
-	}
+    @ManyToOne
+    @JoinColumn(name = "qualificacao_id", insertable = false, updatable = false)
+    private Qualificacao qualificacao;
 
-	public Tempo getTempo() {
-		return tempo;
-	}
+    @ManyToOne
+    @JoinColumn(name = "profissional_id", insertable = false, updatable = false)
+    @JsonIgnore
+    private Profissional profissional;
 
-	public void setTempo(Tempo tempo) {
-		this.tempo = tempo;
-	}
+    @Column(name = "tempo")
+    @Convert(converter = TempoConverter.class)
+    private Tempo tempo;
 
 }

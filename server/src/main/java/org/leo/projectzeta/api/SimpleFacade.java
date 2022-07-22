@@ -5,20 +5,20 @@ import java.util.Map;
 
 import org.leo.projectzeta.exception.BusinessException;
 
-public interface SimpleFacade<T extends Entidade> {
+public interface SimpleFacade<T extends Entidade<K>, K> {
 
-	T novo(T t) throws BusinessException;
+    T novo(T t) throws BusinessException;
 
-	T atualizar(T t, String id) throws BusinessException;
+    T atualizar(T t, K id) throws BusinessException;
 
-	List<T> buscarPorFiltro(Map<String, Object> filtro);
+    List<T> buscarPorFiltro(Map<String, Object> filtro);
 
-	T buscarPorId(String id) throws BusinessException;
+    T buscarPorId(K id) throws BusinessException;
 
-	List<T> listarTodos() throws BusinessException;
+    List<T> listarTodos() throws BusinessException;
 
-	void remover(T t) throws BusinessException;
+    void remover(T t) throws BusinessException;
 
-	void removerPorId(String id) throws BusinessException;
+    void removerPorId(K id) throws BusinessException;
 
 }
