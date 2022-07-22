@@ -59,4 +59,8 @@ export class ProfissionaisComponent implements OnInit, AfterContentInit {
 
   }
 
+  public getLabelForStatus(status: string) {
+    return Profissional.LABEL_STATUS[status];
+  }
+
 }

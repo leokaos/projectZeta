@@ -7,6 +7,7 @@ export class Profissional implements Deserializable {
     sobrenome: string;
     id: number;
     titulo: string;
+    status: string;
     experiencias: Experiencia[];
     dataContato: Date;
     dataComeco: Date;
@@ -80,5 +81,13 @@ export class Profissional implements Deserializable {
     fullName() {
         return this.sobrenome + ', ' + this.nome;
     }
+
+    public static LABEL_STATUS: { [key: string]: string } = {
+        'EM_CONTATO': 'Em Contato',
+        'EM_CONTRATACAO': 'Em Contratação',
+        'DISPONIVEL': 'Disponível',
+        'ALOCADO': 'Alocado',
+        'FINALIZADO': 'Finalizado'
+    };
 
 }
