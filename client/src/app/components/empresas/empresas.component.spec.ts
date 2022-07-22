@@ -50,9 +50,9 @@ describe('EmpresasComponent', () => {
 
     defaultLoad();
 
-    let event: InputEvent = new InputEvent('test');
+    component.query = ''
 
-    component.onFiltroChange(event);
+    component.onFiltroChange();
 
     expect(component.dataSource.data.length).toBe(2);
 
@@ -62,9 +62,9 @@ describe('EmpresasComponent', () => {
 
     defaultLoad();
 
-    let event: InputEvent = new InputEvent('test', {data: 'name'});
+    component.query = 'name'
 
-    component.onFiltroChange(event)
+    component.onFiltroChange();
 
     expect(component.dataSource.data.length).toBe(1);
 
@@ -74,9 +74,9 @@ describe('EmpresasComponent', () => {
 
     defaultLoad();
 
-    let event: InputEvent = new InputEvent('test', {data: 'test'});
+    component.query = 'test'
 
-    component.onFiltroChange(event)
+    component.onFiltroChange();
 
     expect(component.dataSource.data.length).toBe(0);
 
