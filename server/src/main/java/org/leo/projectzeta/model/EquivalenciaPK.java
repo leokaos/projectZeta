@@ -1,51 +1,27 @@
 package org.leo.projectzeta.model;
 
-import java.io.Serializable;
-
-import javax.persistence.Embeddable;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import javax.persistence.Column;
+import javax.persistence.Embeddable;
+import java.io.Serializable;
 
 @Embeddable
 @Getter
 @Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class EquivalenciaPK implements Serializable {
 
     private static final long serialVersionUID = 431458135783565558L;
 
-    @ManyToOne
-    @JoinColumn(name = "destino_id")
-    private Qualificacao destino;
+    @Column(name = "destino_id")
+    private Long destino;
 
-    @ManyToOne
-    @JoinColumn(name = "origem_id")
-    private Qualificacao origem;
+    @Column(name = "origem_id")
+    private Long origem;
 
-    public EquivalenciaPK(Qualificacao destino, Qualificacao origem) {
-        this.destino = destino;
-        this.origem = origem;
-    }
-
-    public EquivalenciaPK() {
-        super();
-    }
-
-    public Qualificacao getDestino() {
-        return destino;
-    }
-
-    public void setDestino(Qualificacao destino) {
-        this.destino = destino;
-    }
-
-    public Qualificacao getOrigem() {
-        return origem;
-    }
-
-    public void setOrigem(Qualificacao origem) {
-        this.origem = origem;
-    }
 }

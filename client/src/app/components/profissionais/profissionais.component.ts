@@ -20,9 +20,12 @@ export class ProfissionaisComponent implements OnInit, AfterContentInit {
   profissinais: Profissional[] = [];
   originalProfissionais: Profissional[] = [];
 
-  constructor(private mediaObserver: MediaObserver, private profissionalService: ProfissionalService, private router: Router) {
+  query: string;
 
-  }
+  constructor(
+    private mediaObserver: MediaObserver,
+    private profissionalService: ProfissionalService,
+    private router: Router) { }
 
   ngAfterContentInit(): void {
     this.mediaObserver.media$.subscribe((change: MediaChange) => {
@@ -43,23 +46,17 @@ export class ProfissionaisComponent implements OnInit, AfterContentInit {
     this.router.navigate(['/profissional']);
   }
 
-  public onFiltroChange(event: Event): void {
+  public onFiltroChange(): void {
 
-    let filtro = event as InputEvent;
+    if (this.query) {
 
-    if (filtro.data) {
+      let itens = this.query.split(' ').filter(x => x.trim() != '');
+      this.profissinais = this.originalProfissionais.filter((profissional: Profissional) => profissional.contemNomes(itens));
 
-      this.profissinais = this.originalProfissionais.filter(
-        (profissional: Profissional) => {
-          let itens = filtro.data!.split(' ').filter(x => x.trim() != '');
-          return profissional.contemNomes(itens);
-        }
-      );
-
-    }
-    else {
+    } else {
       this.profissinais = this.originalProfissionais;
     }
+
   }
 
 }

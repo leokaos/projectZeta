@@ -74,6 +74,7 @@ public class GraphQLComponent {
 		builder.type(newTypeWiring("Query").dataFetcher("todasAsEmpresas", graphQLDataFetchers.todasAsEmpresas()));
 		builder.type(newTypeWiring("Query").dataFetcher("vagasPorCandidato", graphQLDataFetchers.vagasPorCandidato()));
 		builder.type(newTypeWiring("Query").dataFetcher("qualificacaoPorId", graphQLDataFetchers.getQualificacaoPorId()));
+		builder.type(newTypeWiring("Query").dataFetcher("qualificacaoPorQuery", graphQLDataFetchers.getQualificacaoPorQuery()));
 
 		builder.type(newTypeWiring("Mutation").dataFetcher("selecionarCandidatos", graphQLDataFetchers.selecionarCandidatos()));
 		builder.type(newTypeWiring("Mutation").dataFetcher("iniciarEntrevistas", graphQLDataFetchers.iniciarEntrevistas()));

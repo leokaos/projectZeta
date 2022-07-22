@@ -1,15 +1,11 @@
 package org.leo.projectzeta.model;
 
-import java.io.Serializable;
+import lombok.*;
 
-import javax.persistence.Column;
 import javax.persistence.Embeddable;
-
-import lombok.AllArgsConstructor;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import java.io.Serializable;
 
 @Embeddable
 @Getter
@@ -19,12 +15,14 @@ import lombok.Setter;
 @NoArgsConstructor
 public class ExperienciaPK implements Serializable {
 
-	private static final long serialVersionUID = 1577375438678405665L;
+    private static final long serialVersionUID = 1577375438678405665L;
 
-	@Column(name = "qualificacao_id")
-	private Long qualificacao;
+    @ManyToOne
+    @JoinColumn(name = "qualificacao_id")
+    private Qualificacao qualificacao;
 
-	@Column(name = "profissional_id")
-	private Long profissional;
+    @ManyToOne
+    @JoinColumn(name = "profissional_id")
+    private Profissional profissional;
 
 }

@@ -1,14 +1,19 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, ViewChild } from "@angular/core";
 import { FormControl } from "@angular/forms";
 import { MatChipInputEvent } from "@angular/material/chips";
 import { MatSnackBar } from "@angular/material/snack-bar";
 import { ActivatedRoute, Router } from "@angular/router";
 import { Empresa } from "@app/model/Empresa";
+import { Qualificacao } from "@app/model/Qualificacao";
 import { Vaga } from "@app/model/Vaga";
 import { EmpresaService } from "@app/services/empresa.service";
 import { VagaService } from "@app/services/vaga.service";
 import { Observable } from "rxjs";
 import { map } from 'rxjs/operators';
+import { gql } from 'graphql-tag';
+import { Apollo } from "apollo-angular";
+import { QualificacaoService } from "@app/services/qualificacao.service";
+import { MatTable, MatTableDataSource } from "@angular/material/table";
 
 @Component({
   selector: 'app-vaga',
@@ -21,15 +26,24 @@ export class VagaComponent implements OnInit {
 
   carregado: boolean = false;
 
+  @ViewChild(MatTable) 
+  table: MatTable<Qualificacao>;
+
   empresas: Empresa[] = [];
   filteredEmpresas: Observable<Empresa[]>;
+  
+  qualificacoes: Qualificacao[] = [];
+  colunasExigencias = ['nome'];
 
-  editVagaFormControl: FormControl = new FormControl();
+  empresaFormControl: FormControl = new FormControl();
+  exigenciaFormControl: FormControl = new FormControl();
 
   constructor(private vagaService: VagaService, 
     private empresaService: EmpresaService, 
+    private qualificacaoService: QualificacaoService,
     private route: ActivatedRoute, 
     private router: Router, 
+    private apollo: Apollo,
     private snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
@@ -44,7 +58,7 @@ export class VagaComponent implements OnInit {
 
         this.vagaService.buscarPorId(id).subscribe(vaga => {
           this.vaga = new Vaga().deserialize(vaga);
-          this.editVagaFormControl.setValue(this.vaga.empresa);
+          this.empresaFormControl.setValue(this.vaga.empresa);
           this.carregado = true;
         });
 
@@ -52,11 +66,13 @@ export class VagaComponent implements OnInit {
         this.carregado = true;
     });
 
-    this.filteredEmpresas = this.editVagaFormControl.valueChanges.pipe(map(value => this.buscarEmpresa(value)));
+    this.filteredEmpresas = this.empresaFormControl.valueChanges.pipe(map(value => this.buscarEmpresa(value)));
+
+    this.exigenciaFormControl.valueChanges.subscribe(value => this.buscarQualificacao(value));
   }
 
   public selectEmpresa() {
-    this.vaga.empresa = this.editVagaFormControl.value;
+    this.vaga.empresa = this.empresaFormControl.value;
   }
 
   public displayEmpresa(empresa: Empresa) {
@@ -93,6 +109,31 @@ export class VagaComponent implements OnInit {
     this.vaga.tags = this.vaga.tags.filter(x => x !== tag);
   }
 
+  public displayQualificacao(qualificacao: Qualificacao) {
+    return qualificacao ? qualificacao.fullName() : '';
+  }
+
+  public selectQualificacao() {
+    this.vaga.exigencias.push(this.exigenciaFormControl.value);
+    this.exigenciaFormControl.reset();
+    this.table.dataSource = new MatTableDataSource(this.vaga.exigencias);
+  }
+
+  public buscarQualificacao(query: string) {
+
+    this.apollo.watchQuery<any>({
+      query: BUSCAR_QUALIFICACAO,
+      variables: {
+        query: query,
+      },
+    })
+    .valueChanges
+    .subscribe( ({data}) => {
+      this.qualificacoes = this.qualificacaoService.assemble(data['qualificacaoPorQuery']);
+    });
+
+  }
+
   public salvar() {
 
     this.vagaService.salvar(this.vaga).subscribe(
@@ -107,3 +148,13 @@ export class VagaComponent implements OnInit {
   }
 
 }
+
+export const BUSCAR_QUALIFICACAO = gql`
+  query buscarQualificacaoPorQuery($query: String) {
+    qualificacaoPorQuery(query: $query){
+      descricao,
+      versao,
+      id
+    }
+  }
+`

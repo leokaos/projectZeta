@@ -7,6 +7,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import lombok.EqualsAndHashCode;
 import org.leo.projectzeta.api.Entidade;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -20,38 +21,39 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @Table(name = "candidato", schema = "rh")
+@EqualsAndHashCode(of = "id")
 public class Candidato implements Entidade<CandidatoPK> {
 
-	private static final long serialVersionUID = -2041826426408185887L;
+    private static final long serialVersionUID = -2041826426408185887L;
 
-	@EmbeddedId
-	@JsonIgnore
-	private CandidatoPK id;
+    @EmbeddedId
+    @JsonIgnore
+    private CandidatoPK id;
 
-	@ManyToOne
-	@JoinColumn(name = "profissional_id", insertable = false, updatable = false)
-	private Profissional profissional;
+    @ManyToOne
+    @JoinColumn(name = "profissional_id", insertable = false, updatable = false)
+    private Profissional profissional;
 
-	@ManyToOne
-	@JsonIgnore
-	@JoinColumn(name = "vaga_id", insertable = false, updatable = false)
-	private Vaga vaga;
+    @ManyToOne
+    @JsonIgnore
+    @JoinColumn(name = "vaga_id", insertable = false, updatable = false)
+    private Vaga vaga;
 
-	@Column(name = "pontuacao")
-	private Integer pontuacao;
+    @Column(name = "pontuacao")
+    private Integer pontuacao;
 
-	public static Candidato createFrom(Vaga vaga, Profissional profissional, Integer pontuacao) {
+    public static Candidato createFrom(Vaga vaga, Profissional profissional, Integer pontuacao) {
 
-		CandidatoPK pk = new CandidatoPK();
-		pk.setProfissional(profissional.getId());
-		pk.setVaga(vaga.getId());
+        CandidatoPK pk = new CandidatoPK();
+        pk.setProfissional(profissional.getId());
+        pk.setVaga(vaga.getId());
 
-		Candidato candidato = new Candidato();
+        Candidato candidato = new Candidato();
 
-		candidato.setPontuacao(pontuacao);
-		candidato.setId(pk);
+        candidato.setPontuacao(pontuacao);
+        candidato.setId(pk);
 
-		return candidato;
-	}
+        return candidato;
+    }
 
 }

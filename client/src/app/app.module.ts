@@ -30,6 +30,7 @@ import { VagaComponent } from './components/vaga/vaga.component';
 import { ShowVagaComponent } from './components/show-vaga/show-vaga.component';
 import { EventoEntidadeComponent } from './components/evento-entidade/evento-entidade.component';
 import { MAT_DATE_LOCALE } from '@angular/material/core';
+import { CandidatosComponent } from './components/candidatos/candidatos.component';
 
 @NgModule({
   declarations: [
@@ -50,7 +51,8 @@ import { MAT_DATE_LOCALE } from '@angular/material/core';
     VagasComponent,
     VagaComponent,
     ShowVagaComponent,
-    DashComponent
+    DashComponent,
+    CandidatosComponent
   ],
   imports: [
     BrowserModule,

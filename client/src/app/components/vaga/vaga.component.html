@@ -54,7 +54,7 @@
                         </div>
 
                         <mat-form-field class="default-form-field">
-                            <input type="text" placeholder="Empresa" matInput [formControl]="editVagaFormControl" [matAutocomplete]="autocompleteEmpresa" name="vaga_empresa">
+                            <input type="text" placeholder="Empresa" matInput [formControl]="empresaFormControl" [matAutocomplete]="autocompleteEmpresa" name="vaga_empresa">
                             <mat-autocomplete #autocompleteEmpresa="matAutocomplete" [displayWith]="displayEmpresa" (optionSelected)="selectEmpresa()">
                                 <mat-option *ngFor="let empresa of filteredEmpresas | async" [value]="empresa">
                                     {{empresa.nome}}
@@ -68,7 +68,7 @@
                         </mat-form-field>
 
                         <div fxLayout>
-                        
+
                             <mat-form-field>
                                 <mat-label>Telefone</mat-label>
                                 <mat-icon matPrefix>perm_phone_msg</mat-icon>
@@ -76,20 +76,46 @@
                             </mat-form-field>
 
                             <div fxFlex></div>
-                        
+
                             <mat-form-field>
                                 <mat-label>E-mail</mat-label>
                                 <mat-icon matPrefix>email</mat-icon>
                                 <input matInput [(ngModel)]="vaga.contatoEmail" name="vaga_contatoEmail" />
                             </mat-form-field>
-                        
+
                         </div>
 
                     </div>
 
-                    <div fxFlex="40%" fxFlexAlign="top" fxFlexFill>
+                    <div fxFlex="30%" fxFlexAlign="top" fxFlexFill>
 
-                        <h3 class="mat-h3"><b>Exigências</b></h3>
+                        <div style="min-height: 250px;">
+
+                            <mat-form-field class="default-form-field">
+                                <input type="text" placeholder="Adicionar Exigência..." matInput [formControl]="exigenciaFormControl" [matAutocomplete]="autocompleteExigencia" name="vaga_exigencia">
+                                <mat-autocomplete #autocompleteExigencia="matAutocomplete" [displayWith]="displayQualificacao" (optionSelected)="selectQualificacao()">
+                                    <mat-option *ngFor="let qualificacao of qualificacoes" [value]="qualificacao">
+                                        {{qualificacao.fullName()}}
+                                    </mat-option>
+                                </mat-autocomplete>
+                            </mat-form-field>
+
+                            <table mat-table [dataSource]="vaga.exigencias">
+
+                                <ng-container matColumnDef="nome">
+                                    <th mat-header-cell *matHeaderCellDef></th>
+                                    <td mat-cell *matCellDef="let qualificacao"> {{qualificacao.fullName()}} </td>
+                                </ng-container>
+
+                                <tr mat-row *matRowDef="let row; columns: colunasExigencias;"></tr>
+
+                            </table>
+
+                        </div>
+
+                        <mat-divider></mat-divider>
+
+                        <app-candidatos [candidatos]="vaga.candidatos"></app-candidatos>
 
                     </div>
 

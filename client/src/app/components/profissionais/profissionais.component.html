@@ -10,7 +10,7 @@
 
   <div class="mat-elevation-z8 panel-filtro">
     <mat-form-field class="default-form-field">
-      <input matInput placeholder="Filtrar..." autocomplete="off" (input)="onFiltroChange($event)" />
+      <input matInput placeholder="Filtrar..." autocomplete="off" (keyup)="onFiltroChange()" [(ngModel)]="query"/>
     </mat-form-field>
   </div>
 

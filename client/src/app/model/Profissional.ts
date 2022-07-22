@@ -77,4 +77,8 @@ export class Profissional implements Deserializable {
         return true;
     }
 
+    fullName() {
+        return this.sobrenome + ', ' + this.nome;
+    }
+
 }

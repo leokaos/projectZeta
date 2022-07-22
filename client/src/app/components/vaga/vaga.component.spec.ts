@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterTestingModule } from '@angular/router/testing';
 import { MaterialComponentsModule } from '@app/modules/material-components.module';
+import { ApolloTestingModule } from 'apollo-angular/testing';
 import { VagaComponent } from './vaga.component';
 
 describe('VagaComponent', () => {
@@ -16,7 +17,7 @@ describe('VagaComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [VagaComponent],
-      imports: [HttpClientTestingModule, BrowserAnimationsModule, RouterTestingModule, MaterialComponentsModule, FormsModule],
+      imports: [HttpClientTestingModule, BrowserAnimationsModule, RouterTestingModule, MaterialComponentsModule, FormsModule, ApolloTestingModule],
       schemas: [CUSTOM_ELEMENTS_SCHEMA]
     }).compileComponents();
   }));

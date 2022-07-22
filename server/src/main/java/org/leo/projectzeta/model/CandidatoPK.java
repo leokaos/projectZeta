@@ -21,7 +21,6 @@ public class CandidatoPK implements Serializable {
 	@Column(name = "profissional_id")
 	private Long profissional;
 
-	@JoinColumn(name = "")
 	@Column(name = "vaga_id")
 	private Long vaga;
 

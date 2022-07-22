@@ -7,10 +7,7 @@ import static org.leo.projectzeta.util.Mensagens.QUALIFICACAO_JA_EXISTE;
 import java.util.List;
 
 import org.leo.projectzeta.exception.BusinessException;
-import org.leo.projectzeta.model.Categoria;
-import org.leo.projectzeta.model.Equivalencia;
-import org.leo.projectzeta.model.EquivalenciaPK;
-import org.leo.projectzeta.model.Qualificacao;
+import org.leo.projectzeta.model.*;
 import org.leo.projectzeta.repository.CategoriaRepository;
 import org.leo.projectzeta.repository.QualificacaoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -65,7 +62,7 @@ public class QualificacaoFacade extends AbstractSimpleFacade<Qualificacao, Long>
                     throw new BusinessException(EQUIVALENCIA_INVALIDA, "equivalencia", "");
                 }
 
-                eq.setId(new EquivalenciaPK(eq.getDestino(), t));
+                eq.setId(new EquivalenciaPK(eq.getDestino().getId(), t.getId()));
             }
 
         }
@@ -82,4 +79,7 @@ public class QualificacaoFacade extends AbstractSimpleFacade<Qualificacao, Long>
         t.setCategoria(listaPorDescricao.iterator().next());
     }
 
+    public List<Qualificacao> listarPorNome(String query) {
+        return repository.findByDescricaoContainingIgnoreCase(query);
+    }
 }

@@ -48,9 +48,9 @@ describe('ProfissionaisComponent', () => {
 
     defaultLoad();
 
-    let event: InputEvent = new InputEvent('test', {data: 'test'});
+    component.query = 'test';
 
-    component.onFiltroChange(event);
+    component.onFiltroChange();
 
     expect(component.profissinais.length).toBe(1);
   });

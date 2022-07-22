@@ -9,6 +9,8 @@ type Query {
   
   todasAsQualificacoes: [Qualificacao]
 
+  qualificacaoPorQuery(query: String): [Qualificacao]
+
   todasAsCategorias: [Categoria]
   
   candidatoPorId(id: Int): Candidato

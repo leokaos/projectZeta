@@ -73,6 +73,13 @@ public class GraphQLDataFetchers {
 		};
 	}
 
+	public DataFetcher<List<Qualificacao>> getQualificacaoPorQuery() {
+		return dataFetchingEnvironment -> {
+			String query = dataFetchingEnvironment.getArgument("query");
+			return qualificacaoFacade.listarPorNome(query);
+		};
+	}
+
 	public DataFetcher<List<Profissional>> getTodosOsCandidatos() {
 		return dataFetchingEnvironment -> {
 			return profissionalFacade.listarTodos();

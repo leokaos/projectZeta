@@ -19,19 +19,19 @@ import javax.validation.Valid;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
+import lombok.EqualsAndHashCode;
 import org.leo.projectzeta.api.Entidade;
 
 import com.google.common.collect.Sets;
 
-import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
 @Entity
 @Getter
 @Setter
-@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Table(name = "qualificacao", schema = "rh")
+@EqualsAndHashCode(of = "id")
 public class Qualificacao implements Entidade<Long> {
 
     private static final long serialVersionUID = -8953603121364594301L;
@@ -39,7 +39,6 @@ public class Qualificacao implements Entidade<Long> {
     @Id
     @GeneratedValue(generator = "profissional_seq")
     @SequenceGenerator(name = "profissional_seq", sequenceName = "profissional_seq", allocationSize = 1, schema = "rh")
-    @EqualsAndHashCode.Include
     private Long id;
 
     @NotEmpty

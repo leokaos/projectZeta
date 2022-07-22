@@ -1,0 +1,14 @@
+<div class="container">
+
+    <mat-list>
+
+        <mat-list-item *ngFor="let candidato of candidatos">
+            <img matListAvatar [src]="candidato.profissional.avatar">
+            <h3 matLine> {{candidato.profissional.fullName()}} </h3>
+            <p matLine>
+                <span>Pontuação: {{candidato.pontuacao}}</span>
+            </p>
+        </mat-list-item>
+    </mat-list>
+
+</div>

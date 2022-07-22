@@ -29,7 +29,7 @@ public class ProfissionalFacade extends AbstractSimpleFacade<Profissional, Long>
 	protected void antesSalvar(Profissional profissional) throws BusinessException {
 
 		for (Experiencia experiencia : profissional.getExperiencias()) {
-			experiencia.setId(new ExperienciaPK(experiencia.getQualificacao().getId(), profissional.getId()));
+			experiencia.setId(new ExperienciaPK(experiencia.getQualificacao(), profissional));
 		}
 
 	}
