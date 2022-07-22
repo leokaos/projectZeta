@@ -10,10 +10,10 @@ describe('Categoria', () => {
   it('adicionar categoria e remover', () => {
 
     cy.get('#adicionar-categoria').click();
-    cy.get('#categoria-descricao').type('Database');
+    cy.get('#categoria-descricao').type('TESTE');
     cy.get('#btn-criar-categoria').click();
 
-    cy.contains('Database');
+    cy.contains('TESTE');
 
     cy.get('[id^="remover-categoria-"]').last().click();
   })

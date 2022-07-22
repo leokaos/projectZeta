@@ -3,14 +3,14 @@
     <div class="panel-button">
         <h1 class="mat-h1">Empresas</h1>
 
-        <button mat-fab color="primary" id="adicionarEmpresa" (click)="adicionarEmpresa()">
+        <button mat-fab color="primary" id="adicionar-empresa" (click)="adicionarEmpresa()">
             <mat-icon>add</mat-icon>
         </button>
     </div>
 
     <div class="mat-elevation-z8 panel-filtro">
         <mat-form-field class="default-form-field">
-            <input matInput placeholder="Filtrar..." autocomplete="off" (input)="onFiltroChange($event)" />
+            <input matInput id="search-empresa" placeholder="Filtrar..." autocomplete="off" (input)="onFiltroChange()" [(ngModel)]="query" />
         </mat-form-field>
     </div>
 
@@ -18,7 +18,7 @@
 
     <div class="mat-elevation-z8" *ngIf="empresas">
 
-        <table mat-table [dataSource]="dataSource" matSort>
+        <table mat-table id="table-empresas" [dataSource]="dataSource" matSort>
 
             <ng-container matColumnDef="nome">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header>Nome </th>
@@ -42,7 +42,7 @@
                         <mat-icon>delete</mat-icon>
                     </button>
 
-                    <button mat-icon-button color="primary" (click)="save(i);" *ngIf="!element.id && indexLoading != i" id="adicionar-empresa">
+                    <button mat-icon-button color="primary" (click)="save(i);" *ngIf="!element.id && indexLoading != i" id="save-empresa">
                         <mat-icon>done</mat-icon>
                     </button>
 

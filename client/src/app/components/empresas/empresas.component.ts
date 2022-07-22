@@ -26,6 +26,7 @@ export class EmpresasComponent implements OnInit {
   empresas: Empresa[];
 
   indexLoading?: number;
+  query: string;
 
   constructor(private empresaService: EmpresaService, public snackBar: MatSnackBar) {
 
@@ -47,12 +48,10 @@ export class EmpresasComponent implements OnInit {
     this.dataSource.data = this.dataSource.data.concat(new Empresa());
   }
 
-  public onFiltroChange(event: Event): void {
+  public onFiltroChange(): void {
 
-    let filtro = event as InputEvent;
-
-    if (filtro.data) {
-      this.dataSource.data = this.empresas.filter(empresa => empresa.nome.toLowerCase().indexOf(filtro.data!.toLowerCase()) != -1);
+    if (this.query) {
+      this.dataSource.data = this.empresas.filter(empresa => empresa.nome.toLowerCase().indexOf(this.query.toLowerCase()) != -1);
     }
     else {
       this.dataSource.data = this.empresas;
