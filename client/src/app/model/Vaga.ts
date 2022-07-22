@@ -2,7 +2,6 @@ import { Deserializable } from './Deserializable';
 import { Periodo } from './Periodo';
 import { Empresa } from './Empresa';
 import { Qualificacao } from './Qualificacao';
-import { Profissional } from './Profissional';
 import { Candidato } from './Candidato';
 
 export class Vaga implements Deserializable {

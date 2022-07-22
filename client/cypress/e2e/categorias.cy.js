@@ -17,5 +17,13 @@ describe('Categoria', () => {
 
     cy.get('[id^="remover-categoria-"]').last().click();
   })
+
+  it('remover uma existente', () => {
+
+    cy.get('[id^="remover-categoria-"]').first().click();
+
+    cy.contains('categoria.ja.tem.qualificacoes.associadas');
+
+  })
  
 })

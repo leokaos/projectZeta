@@ -57,14 +57,13 @@ export class QualificacaoComponent implements AfterViewInit {
   }
 
   public salvar(): void {
+
     this.qualificacaoService.salvar(this.qualificacao).subscribe(
       (data: any) => {
         this.router.navigate(['qualificacoes']);
         this.snackBar.open('Qualificação salva com sucesso!', 'Fechar');
       },
-      (err: any) => {
-        this.snackBar.open(err.error.message, 'Fechar');
-      });
+      (err: any) => this.snackBar.open(err.error.message, 'Fechar'));
   }
 
   public adicionarEquivalencia(): void {

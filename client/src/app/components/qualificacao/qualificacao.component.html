@@ -21,18 +21,18 @@
           <h3 class="mat-h3">Dados Básicos</h3>
 
           <mat-form-field class="default-form-field">
-            <input matInput placeholder="Descricao" [(ngModel)]="qualificacao.descricao" name="descricao" autocomplete="off" />
+            <input matInput id="descricao" placeholder="Descricao" [(ngModel)]="qualificacao.descricao" name="descricao" autocomplete="off" />
           </mat-form-field>
 
           <mat-form-field class="default-form-field">
-            <input matInput placeholder="Versao" [(ngModel)]="qualificacao.versao" name="versao" autocomplete="off" />
+            <input matInput id="versao" placeholder="Versao" [(ngModel)]="qualificacao.versao" name="versao" autocomplete="off" />
           </mat-form-field>
 
           <mat-form-field class="default-form-field">
             <mat-label>Categoria</mat-label>
-            <mat-select 
+            <mat-select id="categoria"
                   [(ngModel)]="qualificacao.categoria" 
-                  name="categoria" 
+                  name="categoria"
                   (selectionChange)="onChangeCategoria(qualificacao.categoria)" 
                   [compareWith]="idComparator" 
                   [hidden]="!(categorias.length > 0)">
@@ -50,7 +50,7 @@
 
             <h3 class="mat-h3">Equivalências</h3>
 
-            <button mat-raised-button (click)="adicionarEquivalencia();" color="primary">
+            <button mat-raised-button (click)="adicionarEquivalencia();" color="primary" id="adicionar-equivalencia" [disabled]="qualificacao.categoria.id == null">
               <mat-icon class="icon-display">add</mat-icon>
             </button>
 
@@ -58,7 +58,7 @@
 
           <div>
 
-            <table mat-table [dataSource]="dataSource" *ngIf="qualificacao.equivalencias.length > 0">
+            <table id="table-equivalencia" mat-table [dataSource]="dataSource" *ngIf="qualificacao.equivalencias.length > 0">
 
               <ng-container matColumnDef="qualificacao">
                 <th mat-header-cell *matHeaderCellDef>Qualificação</th>

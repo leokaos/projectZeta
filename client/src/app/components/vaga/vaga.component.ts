@@ -26,23 +26,23 @@ export class VagaComponent implements OnInit {
 
   carregado: boolean = false;
 
-  @ViewChild(MatTable) 
+  @ViewChild(MatTable)
   table: MatTable<Qualificacao>;
 
   empresas: Empresa[] = [];
   filteredEmpresas: Observable<Empresa[]>;
-  
+
   qualificacoes: Qualificacao[] = [];
-  colunasExigencias = ['nome'];
+  colunasExigencias = ['nome', 'remover'];
 
   empresaFormControl: FormControl = new FormControl();
   exigenciaFormControl: FormControl = new FormControl();
 
-  constructor(private vagaService: VagaService, 
-    private empresaService: EmpresaService, 
+  constructor(private vagaService: VagaService,
+    private empresaService: EmpresaService,
     private qualificacaoService: QualificacaoService,
-    private route: ActivatedRoute, 
-    private router: Router, 
+    private route: ActivatedRoute,
+    private router: Router,
     private apollo: Apollo,
     private snackBar: MatSnackBar) { }
 
@@ -79,17 +79,17 @@ export class VagaComponent implements OnInit {
     return empresa ? empresa.nome : '';
   }
 
+  public getStatusLabel(status: string) {
+    return Vaga.LABEL_STATUS[status];
+  }
+
   public buscarEmpresa(busca: String) {
 
     if (!busca || typeof busca !== 'string') {
       return this.empresas;
     }
 
-    return this.empresas.filter(
-      (empresa: Empresa) => {
-        return empresa.nome.toLowerCase().indexOf(busca.toLowerCase()) != -1;
-      }
-    );
+    return this.empresas.filter((empresa: Empresa) => empresa.search(busca));
   }
 
   public addTag(event: MatChipInputEvent): void {
@@ -119,16 +119,18 @@ export class VagaComponent implements OnInit {
     this.table.dataSource = new MatTableDataSource(this.vaga.exigencias);
   }
 
+  public removerExigencia(index: number) {
+    this.vaga.exigencias.splice(index, 1);
+    this.exigenciaFormControl.reset();
+    this.table.dataSource = new MatTableDataSource(this.vaga.exigencias);
+  }
+
   public buscarQualificacao(query: string) {
 
     this.apollo.watchQuery<any>({
       query: BUSCAR_QUALIFICACAO,
-      variables: {
-        query: query,
-      },
-    })
-    .valueChanges
-    .subscribe( ({data}) => {
+      variables: { query: query }
+    }).valueChanges.subscribe(({ data }) => {
       this.qualificacoes = this.qualificacaoService.assemble(data['qualificacaoPorQuery']);
     });
 
@@ -141,10 +143,7 @@ export class VagaComponent implements OnInit {
         this.router.navigate(['vagas']);
         this.snackBar.open('Vaga salva com sucesso!', 'Fechar');
       },
-      (err: any) => {
-        this.snackBar.open(err.error.message, 'Fechar');
-      });
-
+      (err: any) => { this.snackBar.open(err.error.message, 'Fechar'); });
   }
 
 }
