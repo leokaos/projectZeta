@@ -18,7 +18,7 @@ docker-compose up -d mongo db zookeeper ldap keycloak redis kafka
 2. Execute o plugin flyway para iniciar sua base de dados:
  
 ```sh
-./gradlew flyway:baseline flyway:migrate
+./gradlew flywayBaseline flywayMigrate
 ```
 
 3. Construa o projeto:
