@@ -23,6 +23,11 @@
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.app.json",
             "inlineStyleLanguage": "scss",
+            "allowedCommonJsDependencies": [
+              "angular2-uuid",
+              "base64-js",
+              "js-sha256"
+            ],
             "assets": [
               "src/favicon.ico",
               "src/assets"
