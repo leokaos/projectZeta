@@ -7,6 +7,7 @@ import { ProfissionaisComponent } from '@app/components/profissionais/profission
 import { ProfissionalComponent } from '@app/components/profissional/profissional.component';
 import { QualificacaoComponent } from '@app/components/qualificacao/qualificacao.component';
 import { QualificacoesComponent } from '@app/components/qualificacoes/qualificacoes.component';
+import { UserComponent } from '@app/components/user/user.component';
 import { VagaComponent } from '@app/components/vaga/vaga.component';
 import { VagasComponent } from '@app/components/vagas/vagas.component';
 import { AuthGuard } from '@app/guard/auth.guard';
@@ -24,6 +25,7 @@ const routes: Routes = [
   { path: 'vaga/:id', component: VagaComponent, canActivate: [AuthGuard] },
   { path: 'vaga', component: VagaComponent, canActivate: [AuthGuard] },
   { path: 'empresas', component: EmpresasComponent, canActivate: [AuthGuard] },
+  { path: 'user', component: UserComponent, canActivate: [AuthGuard] },
   { path: '', component: DashComponent, canActivate: [AuthGuard] },
   { path: '**', redirectTo: '' }
 ];

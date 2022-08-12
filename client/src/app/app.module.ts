@@ -31,6 +31,12 @@ import { ShowVagaComponent } from './components/show-vaga/show-vaga.component';
 import { EventoEntidadeComponent } from './components/evento-entidade/evento-entidade.component';
 import { MAT_DATE_LOCALE } from '@angular/material/core';
 import { CandidatosComponent } from './components/candidatos/candidatos.component';
+import { UserComponent } from './components/user/user.component';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
+import { MatSelectModule } from '@angular/material/select';
+import { MatRadioModule } from '@angular/material/radio';
+import { MatCardModule } from '@angular/material/card';
 
 @NgModule({
   declarations: [
@@ -52,7 +58,8 @@ import { CandidatosComponent } from './components/candidatos/candidatos.componen
     VagaComponent,
     ShowVagaComponent,
     DashComponent,
-    CandidatosComponent
+    CandidatosComponent,
+    UserComponent
   ],
   imports: [
     BrowserModule,
@@ -64,7 +71,12 @@ import { CandidatosComponent } from './components/candidatos/candidatos.componen
     GraphQLModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    MatInputModule,
+    MatButtonModule,
+    MatSelectModule,
+    MatRadioModule,
+    MatCardModule
   ],
   providers: [
     {

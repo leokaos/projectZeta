@@ -1,5 +1,18 @@
 package org.leo.projectzeta.facade;
 
+import static org.leo.projectzeta.util.Mensagens.ENTIDADE_INEXISTENTE;
+import static org.leo.projectzeta.util.Mensagens.ID_INVALIDO;
+import static org.leo.projectzeta.util.Mensagens.OBJECT_NULO;
+
+import java.util.List;
+import java.util.Map;
+
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
+
+import org.keycloak.KeycloakPrincipal;
+import org.keycloak.adapters.springsecurity.token.KeycloakAuthenticationToken;
 import org.leo.projectzeta.api.Entidade;
 import org.leo.projectzeta.api.SimpleFacade;
 import org.leo.projectzeta.aspect.LogEvent;
@@ -10,14 +23,7 @@ import org.leo.projectzeta.util.QueryUtil;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.jpa.repository.JpaRepository;
-
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.persistence.TypedQuery;
-import java.util.List;
-import java.util.Map;
-
-import static org.leo.projectzeta.util.Mensagens.*;
+import org.springframework.security.core.context.SecurityContextHolder;
 
 public abstract class AbstractSimpleFacade<T extends Entidade<K>, K> implements SimpleFacade<T, K> {
 
@@ -179,6 +185,15 @@ public abstract class AbstractSimpleFacade<T extends Entidade<K>, K> implements 
 
     protected void depoisRemover(T t) {
 
+    }
+
+    protected String getCurrentUserName() {
+
+        KeycloakAuthenticationToken token = (KeycloakAuthenticationToken) SecurityContextHolder.getContext().getAuthentication();
+
+        KeycloakPrincipal<?> principal = (KeycloakPrincipal<?>) token.getPrincipal();
+
+        return principal.getKeycloakSecurityContext().getToken().getOtherClaims().get("uid").toString();
     }
 
     protected abstract JpaRepository<T, K> getRepository();

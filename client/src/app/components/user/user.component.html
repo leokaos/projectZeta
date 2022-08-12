@@ -1,0 +1,42 @@
+<div class="container">
+
+    <mat-card>
+
+        <mat-card-header>
+            <mat-card-title>
+                <h2 class="mat-h2">Configurações</h2>
+            </mat-card-title>
+        </mat-card-header>
+
+        <mat-card-content style="margin-top: 40px; margin-left: 20px;">
+
+            <form>
+
+                <div class="container" fxLayout fxLayout.xs="column" fxLayoutAlign="center" fxLayoutGap="60px" fxLayoutGap.xs="0">
+
+                    <div fxFlex="30%">
+                        <mat-form-field class="default-form-field">
+                            <input matInput placeholder="E-Mail" [(ngModel)]="user.email" name="user_email" autocomplete="off" />
+                        </mat-form-field>
+                    </div>
+
+                    <span class="spacer"></span>
+
+                    <div fxFlex="25%">
+                        <app-avatar [(imagem)]="user.avatar"></app-avatar>
+                    </div>
+
+                </div>
+
+            </form>
+
+        </mat-card-content>
+
+        <mat-card-actions>
+            <div fxFlex></div>
+            <button mat-stroked-button color="primary" (click)="salvar()">Salvar</button>
+        </mat-card-actions>
+
+    </mat-card>
+
+</div>

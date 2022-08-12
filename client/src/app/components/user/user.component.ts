@@ -1,19 +1,19 @@
 import { Component, OnInit } from '@angular/core';
+import { UserService } from '@app/services/user.service';
 import { KeycloakService } from 'keycloak-angular';
 import jwt_decode from 'jwt-decode';
-import { UserService } from './services/user.service';
-import { User } from './model/User';
+import { User } from '@app/model/User';
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  selector: 'app-user',
+  templateUrl: './user.component.html',
+  styleUrls: ['./user.component.scss']
 })
-export class AppComponent implements OnInit {
+export class UserComponent implements OnInit {
 
-  user: User;
+  user: User = new User();
 
-  constructor(private keycloakService: KeycloakService, private userService: UserService) { }
+  constructor(private userService: UserService, private keycloakService: KeycloakService) { }
 
   ngOnInit(): void {
 
@@ -24,6 +24,10 @@ export class AppComponent implements OnInit {
       this.userService.buscarPorId(claims['uid']).subscribe(user => this.user = new User().deserialize(user));
 
     });
+
+  }
+
+  public salvar() {
 
   }
 
