@@ -116,7 +116,7 @@ describe('QualificacaoComponent', () => {
     let searchByCategoria = httpMock.expectOne('http://localhost:8090/secured/qualificacao?categoria.id=789');
     expect(searchByCategoria.request.method).toBe('GET');
 
-    searchByCategoria.flush({});
+    searchByCategoria.flush([]);
 
     expect(component.qualificacao.equivalencias.length).toBe(0);
 

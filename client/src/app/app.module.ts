@@ -6,7 +6,7 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { KeycloakAngularModule, KeycloakService } from 'keycloak-angular';
 import { initializer } from '@config/keycloak-init';
-import { GraphQLModule } from './modules/graphql.module';
+import { GraphQLModule } from '@modules/graphql.module';
 import { HttpClientModule } from '@angular/common/http';
 import { StompService } from '@services/stomp.service';
 import { stompServiceFactory } from '@config/stomp.config';

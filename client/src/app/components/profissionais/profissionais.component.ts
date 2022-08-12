@@ -28,8 +28,8 @@ export class ProfissionaisComponent implements OnInit, AfterContentInit {
     private router: Router) { }
 
   ngAfterContentInit(): void {
-    this.mediaObserver.media$.subscribe((change: MediaChange) => {
-      this.grid.cols = this.gridByBreakpoint[change.mqAlias];
+    this.mediaObserver.asObservable().subscribe((change: MediaChange[]) => {
+      this.grid.cols = this.gridByBreakpoint[change[0].mqAlias];
     });
   }
 
