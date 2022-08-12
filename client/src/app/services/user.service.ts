@@ -20,15 +20,21 @@ export class UserService {
   public assemble(data: User[]): User[] {
     let innerUsers: User[] = [];
     data.map((user: User) => { innerUsers.push(new User().deserialize(user)); });
-    return innerUsers; 
+    return innerUsers;
   }
 
-  public buscarPorId(id: string){
+  public buscarPorId(id: string) {
     return this.http.get<User>(endpoint + "/" + id);
   }
 
-  public criar(user: User): Observable<User> {
-    return this.http.post<User>(endpoint, user);
+  public salvar(user: User): Observable<User> {
+
+    if (user.id != null) {
+      return this.http.put<User>(endpoint + '/' + user.id, user);
+    } else {
+      return this.http.post<User>(endpoint, user);
+    }
+
   }
 
   public remove(id: number) {

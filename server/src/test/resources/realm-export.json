@@ -520,7 +520,8 @@
       "clientAuthenticatorType": "client-secret",
       "redirectUris": [
         "http://localhost:8081/*",
-        "http://localhost:4200/*"
+        "http://localhost:4200/*",
+        "https://oauth.pstmn.io/v1/callback"
       ],
       "webOrigins": [
         "+"
