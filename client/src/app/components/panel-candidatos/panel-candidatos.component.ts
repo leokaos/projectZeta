@@ -5,17 +5,11 @@ import { AfterContentInit, Component, OnInit } from '@angular/core';
   templateUrl: './panel-candidatos.component.html',
   styleUrls: ['./panel-candidatos.component.scss']
 })
-export class PanelCandidatosComponent implements AfterContentInit, OnInit {
-
-  nome: String;
+export class PanelCandidatosComponent implements OnInit {
 
   constructor() { }
 
   ngOnInit(): void {
-    this.nome = 'Candidatos';
   }
-
-  ngAfterContentInit(): void { }
-
 
 }

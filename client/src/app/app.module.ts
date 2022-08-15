@@ -37,13 +37,14 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatSelectModule } from '@angular/material/select';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatCardModule } from '@angular/material/card';
+import { PanelVagasComponent } from './components/panel-vagas/panel-vagas.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     PanelCandidatosComponent,
     PanelQualificacoesComponent,
-    PanelQualificacoesComponent,
+    PanelVagasComponent,
     EmpresasComponent,
     CategoriasComponent,
     CategoriaComponent,

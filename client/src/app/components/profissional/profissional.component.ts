@@ -6,7 +6,6 @@ import { Experiencia } from '@app/model/Experiencia';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Component, OnInit } from '@angular/core';
-import { forkJoin } from 'rxjs';
 import { Profissional } from '@app/model/Profissional';
 import { ProfissionalService } from '@app/services/profissional.service';
 

@@ -63,6 +63,9 @@
       ],
       "@environment/*": [
         "src/environments/*"
+      ],
+      "@ui/*": [
+        "src/app/ui/*"
       ]
     }
   },

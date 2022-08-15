@@ -11,8 +11,8 @@ import { PanelVagasComponent } from '../panel-vagas/panel-vagas.component';
 export class DashComponent implements AfterViewInit {
 
   cards: any = [
-    { title: 'Vagas', cols: 1, rows: 1, class: PanelVagasComponent },
-    { title: 'Candidatos', cols: 1, rows: 1, class: PanelCandidatosComponent },
+    { title: 'Vagas em Aberto', cols: 1, rows: 1, class: PanelVagasComponent },
+    { title: 'Candidatos Aguardando', cols: 1, rows: 1, class: PanelCandidatosComponent },
     { title: 'Hot Skills', cols: 1, rows: 1, class: PanelQualificacoesComponent },
     { title: 'Card 4', cols: 3, rows: 1, class: null }
   ];
