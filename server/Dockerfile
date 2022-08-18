@@ -1,4 +1,10 @@
-FROM openjdk:8-jdk-alpine
+FROM alpine:latest
+
+RUN apk update 
+
+RUN apk upgrade
+
+RUN apk add openjdk8-jre
 
 VOLUME /tmp
 

@@ -1,0 +1,20 @@
+<div style=" margin-top: 10px; max-height: 300px; overflow: auto;">
+
+    <table mat-table [dataSource]="vagas" *ngIf="vagas.length > 0">
+
+        <ng-container matColumnDef="titulo">
+            <th mat-header-cell *matHeaderCellDef>Título</th>
+            <td mat-cell *matCellDef="let vaga" class="first-column" (dblclick)="showVaga(vaga)"> {{vaga.titulo}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="diasDesdeEntrada">
+            <th mat-header-cell *matHeaderCellDef class="coluna-dias-desde-entrada">Dias Desde Entrada</th>
+            <td mat-cell *matCellDef="let vaga"> {{vaga.diasDesdeEntrada()}} </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+
+    <h3 *ngIf="vagas.length < 1" style="margin-top: 50px;">Sem vagas NOVAS!</h3>
+</div>

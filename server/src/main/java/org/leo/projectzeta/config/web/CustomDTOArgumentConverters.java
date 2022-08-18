@@ -6,19 +6,30 @@ import java.util.function.Function;
 
 public final class CustomDTOArgumentConverters {
 
-    private static final Map<Class<?>, Function<String, Object>> CONVERTERS = new HashMap<>();
+	private static final Map<Class<?>, Function<String, Object>> CONVERTERS = new HashMap<>();
 
-    static {
+	static {
 
-        CONVERTERS.put(String.class, (String source) -> source);
-        CONVERTERS.put(Long.class, Long::valueOf);
-    }
+		CONVERTERS.put(String.class, String::toString);
+		CONVERTERS.put(Long.class, Long::valueOf);
+	}
 
-    private CustomDTOArgumentConverters() {
-        super();
-    }
+	private CustomDTOArgumentConverters() {
+		super();
+	}
 
-    public static Object convert(Class<?> clazz, String source){
-        return CONVERTERS.get(clazz).apply(source);
-    }
+	@SuppressWarnings("rawtypes")
+	public static Object convert(Class clazz, String source) {
+
+		if (clazz.isEnum()) {
+			return convertEnum(clazz, source);
+		}
+
+		return CONVERTERS.get(clazz).apply(source);
+	}
+
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	private static Object convertEnum(Class clazz, String source) {
+		return Enum.valueOf(clazz, source);
+	}
 }

@@ -12,7 +12,6 @@ import { StompService } from '@services/stomp.service';
 import { stompServiceFactory } from '@config/stomp.config';
 import { MaterialComponentsModule } from './modules/material-components.module';
 import { TagCloudModule } from 'angular-tag-cloud-module';
-import { PanelCandidatosComponent } from './components/panel-candidatos/panel-candidatos.component';
 import { PanelQualificacoesComponent } from './components/panel-qualificacoes/panel-qualificacoes.component';
 import { DashComponent } from './components/dashboard/dash.component';
 import { EmpresasComponent } from './components/empresas/empresas.component';
@@ -38,11 +37,12 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatCardModule } from '@angular/material/card';
 import { PanelVagasComponent } from './components/panel-vagas/panel-vagas.component';
+import { PanelProfissionaisComponent } from './components/panel-profissionais/panel-profissionais.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    PanelCandidatosComponent,
+    PanelProfissionaisComponent,
     PanelQualificacoesComponent,
     PanelVagasComponent,
     EmpresasComponent,

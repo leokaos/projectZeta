@@ -1,7 +1,6 @@
 package org.leo.projectzeta.facade;
 
 import static org.easymock.EasyMock.capture;
-import static org.easymock.EasyMock.eq;
 import static org.easymock.EasyMock.expect;
 import static org.easymock.EasyMock.newCapture;
 import static org.easymock.EasyMock.replay;
@@ -16,6 +15,9 @@ import static org.leo.projectzeta.util.Mensagens.OBJECT_NULO;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+
+import javax.persistence.EntityManager;
+import javax.persistence.TypedQuery;
 
 import org.easymock.Capture;
 import org.easymock.EasyMock;
@@ -33,11 +35,6 @@ import org.springframework.data.mongodb.core.MongoTemplate;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 
-import javax.persistence.EntityManager;
-import javax.persistence.Parameter;
-import javax.persistence.Query;
-import javax.persistence.TypedQuery;
-
 @RunWith(EasyMockRunner.class)
 public class AbstractSimpleFacadeTest {
 
@@ -51,7 +48,7 @@ public class AbstractSimpleFacadeTest {
 	private EntityManager mockEntityManager;
 
 	@Mock(type = MockType.STRICT)
-	private TypedQuery mockQuery;
+	private TypedQuery<?> mockQuery;
 
 	@TestSubject
 	private TestAbstractSimpleFacade facade = new TestAbstractSimpleFacade(mockRepository, mockEntityManager);
@@ -194,7 +191,7 @@ public class AbstractSimpleFacadeTest {
 
 		replay(mockRepository);
 
-		facade.buscarPorFiltro( (Map<String, Object>) null);
+		facade.buscarPorFiltro((Map<String, Object>) null);
 
 		facade.buscarPorFiltro(Maps.newHashMap());
 

@@ -2,7 +2,7 @@
 
   <h1 class="mat-h1">Dashboard</h1>
 
-  <mat-grid-list cols="3" rowHeight="350px">
+  <mat-grid-list cols="3" rowHeight="400px">
 
     <mat-grid-tile *ngFor="let card of cards" [colspan]="card.cols" [rowspan]="card.rows">
 
@@ -28,9 +28,7 @@
         </mat-card-header>
 
         <mat-card-content class="dashboard-card-content">
-          <div>
-            <ng-template #dynamic></ng-template>
-          </div>
+          <ng-template #dynamic></ng-template>
         </mat-card-content>
 
       </mat-card>
