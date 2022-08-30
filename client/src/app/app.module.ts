@@ -7,7 +7,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { KeycloakAngularModule, KeycloakService } from 'keycloak-angular';
 import { initializer } from '@config/keycloak-init';
 import { GraphQLModule } from '@modules/graphql.module';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { StompService } from '@services/stomp.service';
 import { stompServiceFactory } from '@config/stomp.config';
 import { MaterialComponentsModule } from './modules/material-components.module';
@@ -38,6 +38,8 @@ import { MatRadioModule } from '@angular/material/radio';
 import { MatCardModule } from '@angular/material/card';
 import { PanelVagasComponent } from './components/panel-vagas/panel-vagas.component';
 import { PanelProfissionaisComponent } from './components/panel-profissionais/panel-profissionais.component';
+import { AuthInterceptor } from './interceptor/auth.interceptor';
+import { PanelSumarioComponent } from './components/panel-sumario/panel-sumario.component';
 
 @NgModule({
   declarations: [
@@ -60,7 +62,8 @@ import { PanelProfissionaisComponent } from './components/panel-profissionais/pa
     ShowVagaComponent,
     DashComponent,
     CandidatosComponent,
-    UserComponent
+    UserComponent,
+    PanelSumarioComponent
   ],
   imports: [
     BrowserModule,
@@ -93,6 +96,11 @@ import { PanelProfissionaisComponent } from './components/panel-profissionais/pa
     {
       provide: MAT_DATE_LOCALE,
       useValue: 'en-GB'
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true
     }
   ],
   bootstrap: [AppComponent]

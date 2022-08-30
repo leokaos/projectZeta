@@ -1,0 +1,14 @@
+<div style="margin: 10px">
+
+    <mat-grid-list cols="4" rowHeight="300px" gutterSize="100px">
+
+        <mat-grid-tile *ngFor="let item of indices">
+            <div class="big-picture-item">
+                <span class="big-picture-number">{{item.value}}</span>
+                <span class="big-picture-text">{{item.text}}</span>
+            </div>
+        </mat-grid-tile>
+
+    </mat-grid-list>
+
+</div>

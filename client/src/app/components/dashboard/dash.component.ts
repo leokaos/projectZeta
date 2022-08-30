@@ -1,6 +1,7 @@
 import { AfterViewInit, Component, ComponentFactoryResolver, QueryList, ViewChildren, ViewContainerRef } from '@angular/core';
 import { PanelProfissionaisComponent } from '../panel-profissionais/panel-profissionais.component';
 import { PanelQualificacoesComponent } from '../panel-qualificacoes/panel-qualificacoes.component';
+import { PanelSumarioComponent } from '../panel-sumario/panel-sumario.component';
 import { PanelVagasComponent } from '../panel-vagas/panel-vagas.component';
 
 @Component({
@@ -14,7 +15,7 @@ export class DashComponent implements AfterViewInit {
     { title: 'Vagas em Aberto', cols: 1, rows: 1, class: PanelVagasComponent },
     { title: 'Profissionais Aguardando', cols: 1, rows: 1, class: PanelProfissionaisComponent },
     { title: 'Hot Skills', cols: 1, rows: 1, class: PanelQualificacoesComponent },
-    { title: 'Card 4', cols: 3, rows: 1, class: null }
+    { title: 'Big Picture', cols: 3, rows: 1, class: PanelSumarioComponent }
   ];
 
   @ViewChildren('dynamic', { read: ViewContainerRef })

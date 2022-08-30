@@ -1,0 +1,6 @@
+<mat-list>
+    <mat-list-item *ngFor="let profissional of profissionais">
+        <img matListAvatar [src]="profissional.avatar">
+        <h3 matLine> {{profissional.fullName()}} </h3>
+    </mat-list-item>
+</mat-list>

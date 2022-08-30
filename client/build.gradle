@@ -15,3 +15,4 @@ task testUnit(type: NpmTask) {
 }
 
 test.dependsOn testUnit
+npmSetup.finalizedBy npmInstall

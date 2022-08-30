@@ -33,7 +33,7 @@ export class PanelQualificacoesComponent implements OnInit {
           return c
         }, {});
 
-      this.options = { width: 1, height: 200, overflow: false, };
+      this.options = { width: 1, height: 300, overflow: false, };
 
       let data = [];
 

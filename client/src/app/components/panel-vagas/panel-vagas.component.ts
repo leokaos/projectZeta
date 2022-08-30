@@ -22,7 +22,6 @@ export class PanelVagasComponent implements OnInit {
       (innerVagas: Vaga[]) => {
         this.vagas = this.vagaService.assemble(innerVagas);
       });
-
   }
 
   showVaga(vaga: Vaga) {

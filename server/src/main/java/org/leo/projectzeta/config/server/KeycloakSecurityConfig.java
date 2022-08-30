@@ -25,7 +25,6 @@ public class KeycloakSecurityConfig extends KeycloakWebSecurityConfigurerAdapter
 	protected void configure(HttpSecurity http) throws Exception {
 		super.configure(http);
 		http.authorizeRequests().antMatchers("/ws").permitAll();
-		http.authorizeRequests().antMatchers("/graphql").permitAll();
 		http.authorizeRequests().antMatchers("/actuator/prometheus").permitAll();
 		http.authorizeRequests().antMatchers("/api/swagger-ui.html").permitAll();
 		http.authorizeRequests().anyRequest().authenticated();
