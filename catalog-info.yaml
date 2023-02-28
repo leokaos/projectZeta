@@ -1,0 +1,9 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: projectZeta
+  annotations:
+    github.com/project-slug: leokaos/projectZeta
+spec:
+  type: other
+  lifecycle: unknown
