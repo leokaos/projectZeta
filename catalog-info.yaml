@@ -2,6 +2,10 @@ apiVersion: backstage.io/v1alpha1
 kind: Component
 metadata:
   name: projectZeta
+  links:
+  - url: https://dashboard.example.com
+    title: My Dashboard
+    icon: dashboard
   annotations:
     github.com/project-slug: leokaos/projectZeta
 spec:
