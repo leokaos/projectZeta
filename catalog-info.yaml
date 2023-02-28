@@ -6,4 +6,5 @@ metadata:
     github.com/project-slug: leokaos/projectZeta
 spec:
   type: other
+  owner: user:leokaos
   lifecycle: unknown
