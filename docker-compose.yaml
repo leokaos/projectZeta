@@ -80,7 +80,7 @@ services:
           KAFKA_ZOOKEEPER_CONNECT: rh-zookeeper:2181
           KAFKA_BROKER_ID: 1
     keycloak:
-        image: quay.io/keycloak/keycloak
+        image: quay.io/keycloak/keycloak:17.0.0
         container_name: rh-keycloak
         ports: 
             - 8080:8080
