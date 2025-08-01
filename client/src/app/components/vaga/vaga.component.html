@@ -16,90 +16,79 @@
 
         <mat-card-content>
 
-            <mat-tab-group>
+            <form>
 
-                <mat-tab label="Geral">
-                    
-                    <form>
+                <div fxLayout fxLayoutGap="50px">
 
-                        <div fxLayout fxLayoutGap="50px" style="padding-top: 20px;">
-        
-                            <div fxFlex="60%">
-        
-                                <mat-form-field appearance="fill">
-                                    <mat-label>Status</mat-label>
-                                    <input matInput placeholder="Status" disabled value="{{getStatusLabel(vaga.status)}}" name="vaga_status" />
-                                </mat-form-field>
-        
-                                <mat-form-field class="default-form-field">
-                                    <mat-chip-list #tags>
-                                        <mat-chip *ngFor="let tag of vaga.tags" selectable="true" removable="true" (removed)="removeTag(tag)">
-                                            {{tag}}
-                                            <mat-icon matChipRemove>cancel</mat-icon>
-                                        </mat-chip>
-                                        <input placeholder="Tags" [matChipInputFor]="tags" matChipInputAddOnBlur="true" (matChipInputTokenEnd)="addTag($event)" autocomplete="off" name="vaga_tags">
-                                    </mat-chip-list>
-                                </mat-form-field>
-        
-                                <div fxLayout fxLayoutGap="25px">
-        
-                                    <mat-form-field>
-                                        <input matInput [matDatepicker]="inicio" placeholder="Inicio" [(ngModel)]="vaga.periodo.dataInicial" name="vaga_periodo_dataInicial">
-                                        <mat-datepicker-toggle matSuffix [for]="inicio"></mat-datepicker-toggle>
-                                        <mat-datepicker #inicio></mat-datepicker>
-                                    </mat-form-field>
-        
-                                    <mat-form-field>
-                                        <input matInput [matDatepicker]="fim" placeholder="Fim" [(ngModel)]="vaga.periodo.dataFinal" name="vaga_periodo_dataFinal">
-                                        <mat-datepicker-toggle matSuffix [for]="fim"></mat-datepicker-toggle>
-                                        <mat-datepicker #fim></mat-datepicker>
-                                    </mat-form-field>
-        
-                                </div>
-        
-                                <mat-form-field class="default-form-field">
-                                    <input type="text" placeholder="Empresa" matInput [formControl]="empresaFormControl" [matAutocomplete]="autocompleteEmpresa" name="vaga_empresa">
-                                    <mat-autocomplete #autocompleteEmpresa="matAutocomplete" [displayWith]="displayEmpresa" (optionSelected)="selectEmpresa()">
-                                        <mat-option *ngFor="let empresa of filteredEmpresas | async" [value]="empresa">
-                                            {{empresa.nome}}
-                                        </mat-option>
-                                    </mat-autocomplete>
-                                </mat-form-field>
-        
-                                <mat-form-field class="default-form-field" style="margin-top: 20px;">
-                                    <mat-label>Descrição</mat-label>
-                                    <textarea matInput rows="7" placeholder="Descrição" [(ngModel)]="vaga.descricao" name="vaga_descricao"></textarea>
-                                </mat-form-field>
-        
-                                <div fxLayout>
-        
-                                    <mat-form-field>
-                                        <mat-label>Telefone</mat-label>
-                                        <mat-icon matPrefix>perm_phone_msg</mat-icon>
-                                        <input matInput [(ngModel)]="vaga.contatoTelefone" name="vaga_contatoTelefone" />
-                                    </mat-form-field>
-        
-                                    <div fxFlex></div>
-        
-                                    <mat-form-field>
-                                        <mat-label>E-mail</mat-label>
-                                        <mat-icon matPrefix>email</mat-icon>
-                                        <input matInput [(ngModel)]="vaga.contatoEmail" name="vaga_contatoEmail" />
-                                    </mat-form-field>
-        
-                                </div>
-        
-                            </div>
-        
+                    <div fxFlex="60%" style="padding-left: 15px">
+
+                        <mat-form-field appearance="fill">
+                            <mat-label>Status</mat-label>
+                            <input matInput placeholder="Status" disabled value="{{getStatusLabel(vaga.status)}}" name="vaga_status" />
+                        </mat-form-field>
+
+                        <mat-form-field class="default-form-field">
+                            <mat-chip-list #tags>
+                                <mat-chip *ngFor="let tag of vaga.tags" selectable="true" removable="true" (removed)="removeTag(tag)">
+                                    {{tag}}
+                                    <mat-icon matChipRemove>cancel</mat-icon>
+                                </mat-chip>
+                                <input placeholder="Tags" [matChipInputFor]="tags" matChipInputAddOnBlur="true" (matChipInputTokenEnd)="addTag($event)" autocomplete="off" name="vaga_tags">
+                            </mat-chip-list>
+                        </mat-form-field>
+
+                        <div fxLayout fxLayoutGap="25px">
+
+                            <mat-form-field>
+                                <input matInput [matDatepicker]="inicio" placeholder="Inicio" [(ngModel)]="vaga.periodo.dataInicial" name="vaga_periodo_dataInicial">
+                                <mat-datepicker-toggle matSuffix [for]="inicio"></mat-datepicker-toggle>
+                                <mat-datepicker #inicio></mat-datepicker>
+                            </mat-form-field>
+
+                            <mat-form-field>
+                                <input matInput [matDatepicker]="fim" placeholder="Fim" [(ngModel)]="vaga.periodo.dataFinal" name="vaga_periodo_dataFinal">
+                                <mat-datepicker-toggle matSuffix [for]="fim"></mat-datepicker-toggle>
+                                <mat-datepicker #fim></mat-datepicker>
+                            </mat-form-field>
+
                         </div>
-        
-                    </form>
-                </mat-tab>
 
-                <mat-tab label="Exigências">
+                        <mat-form-field class="default-form-field">
+                            <input type="text" placeholder="Empresa" matInput [formControl]="empresaFormControl" [matAutocomplete]="autocompleteEmpresa" name="vaga_empresa">
+                            <mat-autocomplete #autocompleteEmpresa="matAutocomplete" [displayWith]="displayEmpresa" (optionSelected)="selectEmpresa()">
+                                <mat-option *ngFor="let empresa of filteredEmpresas | async" [value]="empresa">
+                                    {{empresa.nome}}
+                                </mat-option>
+                            </mat-autocomplete>
+                        </mat-form-field>
 
-                    <div fxFlex="30%" fxFlexAlign="top" fxFlexFill  style="padding-top: 20px;">
-        
+                        <mat-form-field class="default-form-field" style="margin-top: 20px;">
+                            <mat-label>Descrição</mat-label>
+                            <textarea matInput rows="7" placeholder="Descrição" [(ngModel)]="vaga.descricao" name="vaga_descricao"></textarea>
+                        </mat-form-field>
+
+                        <div fxLayout>
+
+                            <mat-form-field>
+                                <mat-label>Telefone</mat-label>
+                                <mat-icon matPrefix>perm_phone_msg</mat-icon>
+                                <input matInput [(ngModel)]="vaga.contatoTelefone" name="vaga_contatoTelefone" />
+                            </mat-form-field>
+
+                            <div fxFlex></div>
+
+                            <mat-form-field>
+                                <mat-label>E-mail</mat-label>
+                                <mat-icon matPrefix>email</mat-icon>
+                                <input matInput [(ngModel)]="vaga.contatoEmail" name="vaga_contatoEmail" />
+                            </mat-form-field>
+
+                        </div>
+
+                    </div>
+
+                    <div fxFlex="30%" fxFlexAlign="top" fxFlexFill>
+
                         <div style="min-height: 250px;">
 
                             <mat-form-field class="default-form-field">
@@ -134,13 +123,10 @@
                         </div>
 
                     </div>
-                </mat-tab>
 
-                <mat-tab label="Candidatos">
-                    <app-candidatos [candidatos]="vaga.candidatos"></app-candidatos>
-                </mat-tab>
+                </div>
 
-              </mat-tab-group>
+            </form>
 
         </mat-card-content>
 
